@@ -1,3 +1,43 @@
-theme: jekyll-theme-architect
-title: riff
-description: riff is for functions
+remote_theme: "mmistakes/minimal-mistakes"
+plugins:
+  - jekyll-remote-theme
+
+title: riff is for functions
+icon-image: "/images/riff.png"
+url: "https://projectriff.io"
+repository: "projectriff/projectriff.io"
+description: "riff is for functions"
+
+twitter:
+  username: projectriff
+
+author:
+  name: "riff"
+  github: projectriff/riff
+  twitter: projectriff
+
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+defaults:
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      sidebar:
+        nav: "docs"
+
+include:
+  - _pages
+
+exclude:
+  - README.md
+  - CNAME

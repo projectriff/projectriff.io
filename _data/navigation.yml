@@ -1,0 +1,14 @@
+main:
+  - title: "Docs"
+    url: /docs/getting-started/
+  - title: "Video"
+    url: /video/
+
+# documentation links
+docs:
+  - title: Getting Started
+    children:
+      - title: "minikube"
+        url: /docs/getting-started/
+      - title: "GKE"
+        url: /docs/installing-on-gke/
