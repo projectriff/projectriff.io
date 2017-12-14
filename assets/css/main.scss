@@ -6,6 +6,10 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
+body {
+  font-weight: 300;
+}
+
 .icon-image {
   max-width: 100px
 }
