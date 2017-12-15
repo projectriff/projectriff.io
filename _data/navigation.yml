@@ -10,5 +10,3 @@ docs:
     children:
       - title: "minikube"
         url: /docs/getting-started/
-      - title: "GKE"
-        url: /docs/installing-on-gke/
