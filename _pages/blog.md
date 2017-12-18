@@ -2,6 +2,8 @@
 layout: single
 title: "Introducing riff"
 permalink: /blog/first-post-announcing-riff-0-0-2-release/
+redirect_from:
+  - /blog/
 ---
 
 Welcome to the riff blog! With this first post, we are pleased to announce the 0.0.2 release of riff. The 0.0.2 release includes the code as shown in demos at SpringOne Platform, along with a handful of issues we were able to address over the past few days. 
