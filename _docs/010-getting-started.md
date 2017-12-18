@@ -24,27 +24,103 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 ```
 minikube start --memory=4096
 ```
+Once minikube is running you can open a browser-based dashboard with `minikube dashboard`.
+
+### configure docker to build containers in minikube
+This is only reqired once per terminal session. See [here](https://kubernetes.io/docs/getting-started-guides/minikube/#reusing-the-docker-daemon) for more details.
+```
+eval $(minikube docker-env)
+```
+Use `docker ps` to see the containers running in minikube.
 
 ### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After installing the helm CLI, `helm init` will install the helm server (aka "tiller") in minikube. You will also need point helm to the repo with the latest riff helm charts.
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, point helm to the riff-charts repo.
 ```
 helm repo add riffrepo https://riff-charts.storage.googleapis.com
 helm repo update
 ```
 
 ### install riff
+Use `helm init` to install the helm server (aka "tiller") in minikube, then, after waiting a minute, install riff with service type `NodePort`.
 ```
 helm init
 helm install riffrepo/riff --name demo --set httpGateway.service.type=NodePort
 ```
 
-### clone the riff repo to access one of the samples
+### monitor your minikube
+At this point it is useful to monitor your minikube using a utility like `watch` to refresh a separate terminal window every one or two seconds. After a minute or so you should see all the deployments `AVAILABLE` in minikube.
 ```
-git clone git@github.com:projectriff/riff.git
-cd riff/samples/node/square
+brew install watch
+watch -n 1 kubectl get functions,topics,pods,services,deploy
 ```
 
-### inspect the square.yaml
+```
+Every 1.0s: kubectl get functions,topics,pods,services,deploy
+
+NAME                                                READY     STATUS    RESTARTS   AGE
+po/demo-riff-function-controller-6975dbdc7d-ccgxq   1/1       Running   0          5m
+po/demo-riff-http-gateway-64fc56bd96-kk45j          1/1       Running   3          5m
+po/demo-riff-kafka-c7f456685-jj9t9                  1/1       Running   2          5m
+po/demo-riff-topic-controller-58694bb5bf-njspv      1/1       Running   0          5m
+po/demo-riff-zookeeper-6fd5c5bd54-lmqk9             1/1       Running   0          5m
+
+NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+svc/demo-riff-function-controller   ClusterIP   10.96.60.96     <none>        80/TCP         5m
+svc/demo-riff-http-gateway          NodePort    10.98.119.212   <none>        80:30462/TCP   5m
+svc/demo-riff-kafka                 ClusterIP   10.99.22.48     <none>        9092/TCP       5m
+svc/demo-riff-zookeeper             ClusterIP   10.98.103.213   <none>        2181/TCP       5m
+svc/kubernetes                      ClusterIP   10.96.0.1       <none>        443/TCP        6m
+
+NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/demo-riff-function-controller   1         1         1            1           5m
+deploy/demo-riff-http-gateway          1         1         1            1           5m
+deploy/demo-riff-kafka                 1         1         1            1           5m
+deploy/demo-riff-topic-controller      1         1         1            1           5m
+deploy/demo-riff-zookeeper             1         1         1            1           5m
+```
+
+On slower network connections it make take longer to stabilize the system after pulling down all the images. Instead of waiting you can try to "purge" the riff components (without deleting the images from the cache) and then reinstall the chart as with the same command as before.
+
+```
+helm delete --purge demo
+helm install riffrepo/riff --name demo --set httpGateway.service.type=NodePort
+```
+
+
+## new function using node.js
+The steps below will create a JavaScript function from scratch. The same files are also available in the `square` [sample](https://github.com/projectriff/riff/blob/master/samples/node/square/) on GitHub.
+
+### write the function
+Create `square.js` in an empty directory.
+```js
+module.exports = (x) => x ** 2
+```
+
+### Dockerfile
+Create a new file called `Dockerfile` in the same directory.
+This container will be built on the `node-function-invoker` base image.
+```
+FROM projectriff/node-function-invoker:0.0.2
+ENV FUNCTION_URI /functions/function.js
+ADD square.js ${FUNCTION_URI}
+```
+
+### Docker build
+Use the docker CLI to build the function container image.
+Note the image name and tag: `projectriff/square:v0001`.
+```bash
+docker build -t projectriff/square:v0001 .
+```
+
+After performing the build you can run the following to validate that your image was built.
+```bash
+docker images | grep square
+```
+
+
+### function and topic resource definitions
+Create a single `square.yaml` file for both resource definitions.
+Use the same image name and tag as the docker build step above.
 
 ```yaml
 apiVersion: projectriff.io/v1
@@ -63,20 +139,6 @@ spec:
   container:
     image: projectriff/square:v0001
 ```
-
-### configure docker to build containers in minikube
-This is only reqired once per terminal session.
-```
-eval $(minikube docker-env)
-```
-
-
-### build the docker image in minikube
-```
-docker build -t projectriff/square:v0001 .
-```
-
-Make sure that the `-t tag` matches the container image tag in the yaml above
 
 ### apply the yaml to kubernetes
 ```
