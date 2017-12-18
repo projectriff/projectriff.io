@@ -2,8 +2,8 @@
 layout: splash
 permalink: /
 header:
-  overlay_image: /images/sunrise.jpg
-excerpt: 'a service for executing Functions <br />in response to Events. <small><a href="https://github.com/projectriff/riff"> <br />https://github.com/projectriff/riff</a></small>'
+  overlay_image: /images/playriff.png
+excerpt: '<a href="https://github.com/projectriff/riff">https://github.com/projectriff/riff</a>'
 feature_row:
   - image_path: "/images/container.png"
     alt: "containers"
