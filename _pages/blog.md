@@ -4,6 +4,7 @@ title: "Introducing riff"
 header:
   overlay_image: /images/sunrise.jpg
   overlay_filter: 0.3
+  overlay_color: "#333"
 excerpt: '<a href="/video/mark-fisher-at-springone-platform-2017/">/video/mark-fisher-at-springone-platform-2017/</a>'
 permalink: /blog/first-post-announcing-riff-0-0-2-release/
 redirect_from:
