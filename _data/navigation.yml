@@ -1,14 +1,14 @@
 main:
   - title: "Blog"
-    url: /blog/
+    url: /blog/first-post-announcing-riff-0-0-2-release/
   - title: "Docs"
-    url: /docs/getting-started/
+    url: /docs/getting-started-on-minikube/
   - title: "Video"
-    url: /video/
+    url: /video/mark-fisher-at-springone-platform-2017/
 
 # documentation links
 docs:
   - title: Getting Started
     children:
       - title: "minikube"
-        url: /docs/getting-started/
+        url: /docs/getting-started-on-minikube/

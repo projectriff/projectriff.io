@@ -1,6 +1,6 @@
 ---
 layout: splash
-permalink: /video/
+permalink: /video/mark-fisher-at-springone-platform-2017/
 header:
   video:
     id: mlRSp9Z3zwY

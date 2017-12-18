@@ -1,6 +1,6 @@
 ---
 title: "Getting started on minikube"
-permalink: /docs/getting-started/
+permalink: /docs/getting-started-on-minikube/
 excerpt: "Quick tutorial for running riff and building a function on minikube."
 ---
 
