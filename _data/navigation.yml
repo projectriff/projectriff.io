@@ -10,5 +10,7 @@ main:
 docs:
   - title: Getting Started
     children:
-      - title: "minikube"
+      - title: "on minikube"
         url: /docs/getting-started-on-minikube/
+      - title: "on GKE"
+        url: /docs/getting-started-on-gke/

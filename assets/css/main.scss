@@ -47,3 +47,9 @@ body {
 div.highlighter-rouge:before, figure.highlight:before {
   content: none;
 }
+
+.page__content img {
+  display:block;
+  border: 1px solid #eee;
+  margin: 0 auto;
+}
