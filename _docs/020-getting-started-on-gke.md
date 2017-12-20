@@ -19,7 +19,7 @@ redirect_from:
 10. send an event to the topic to trigger the function
 
 ### create a Google Cloud project
-A project is required to consume any Google Cloud services, including GKE clusters, When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top.
+A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top.
 
 ![google cloud console](/images/gcp-project.png)
 
@@ -110,7 +110,8 @@ ADD square.js ${FUNCTION_URI}
 ```
 
 ### Docker build
-Use the docker CLI to build the function container image. Prefix the image name by replacing `<your-Docker-ID>` below with your own Docker ID. Don't forget the `.` at the end of the `docker build...` command to indicate that you are building with the Dockerfile in the current directory. 
+Use the docker CLI to build the function container image. Prefix the image name by replacing `<your-Docker-ID>` below with your own Docker ID.  
+_Don't forget the `.` at the end of the `docker build...` command to indicate that you are building with the Dockerfile in the current directory._
 
 ```bash
 docker build -t <your-Docker-ID>/square:v0001 .
