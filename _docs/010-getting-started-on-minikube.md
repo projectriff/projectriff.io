@@ -157,3 +157,4 @@ GATEWAY=`minikube service --url demo-riff-http-gateway`
 HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```
+If `10` is the input to the square function, the response should be `100`.

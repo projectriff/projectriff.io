@@ -52,11 +52,11 @@ Once the cluster has been created, you will see a `Connect` button in the consol
 kubectl config current-context
 ```
 
-### (optional) remove CPU request limit
+### remove CPU request limit
 Remove the GKE default request of 0.1 CPU's per container which limits how many containers your cluster is allowed to schedule (effectively 10 per vCPU).
 
 ```
-kc delete limitrange limits
+kubectl delete limitrange limits
 ```
 
 ### install helm
