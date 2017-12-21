@@ -1,7 +1,11 @@
 ---
 title: "Getting started on GKE"
 permalink: /docs/getting-started-on-gke/
-excerpt: "Quick tutorial for running riff and building a function on Google Kubernetes Engine."
+excerpt: "How to run **riff** on Google Kubernetes Engine."
+header:
+  overlay_image: /images/gke.png
+  overlay_filter: 0.4
+  overlay_color: "#555"
 redirect_from:
   - /docs/
 ---
@@ -20,8 +24,6 @@ redirect_from:
 
 ### create a Google Cloud project
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top.
-
-![google cloud console](/images/gcp-project.png)
 
 ### install gcloud
 Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project. Afterwards your browser will end up on this [helpful page](https://cloud.google.com/sdk/auth_success).
@@ -110,8 +112,7 @@ ADD square.js ${FUNCTION_URI}
 ```
 
 ### Docker build
-Use the docker CLI to build the function container image. Prefix the image name by replacing `<your-Docker-ID>` below with your own Docker ID.  
-_Don't forget the `.` at the end of the `docker build...` command to indicate that you are building with the Dockerfile in the current directory._
+Use the docker CLI to build the function container image. Prefix the image name by replacing `<your-Docker-ID>` below with your own Docker ID. Note the `.` at the end of the `docker build...` command.
 
 ```bash
 docker build -t <your-Docker-ID>/square:v0001 .
@@ -125,7 +126,7 @@ docker push <your-Docker-ID>/square:v0001
 
 ### function and topic resource definitions
 Create a single `square.yaml` file for both resource definitions.
-Use the same image name and tag as the Docker build step above (with your own Docker ID prefix).
+Use the same image name and tag as the Docker build, replacing `<your-Docker-ID>` as before.
 
 ```yaml
 apiVersion: projectriff.io/v1
@@ -157,3 +158,4 @@ GATEWAY=`kubectl get service -l component=http-gateway -o jsonpath='{.items[0].s
 HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```
+If `10` is the input to the square function, the response should be `100`.

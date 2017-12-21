@@ -1,7 +1,11 @@
 ---
 title: "Getting started on minikube"
 permalink: /docs/getting-started-on-minikube/
-excerpt: "Quick tutorial for running riff and building a function on minikube."
+excerpt: "How to run **riff** on Minikube."
+header:
+  overlay_image: /images/minikube2.png
+  overlay_filter: 0.4
+  overlay_color: "#555"
 redirect_from:
   - /docs/
 ---
