@@ -56,7 +56,7 @@ kubectl config current-context
 Remove the GKE default request of 0.1 CPU's per container which limits how many containers your cluster is allowed to schedule (effectively 10 per vCPU).
 
 ```
-kc delete limitrange limits
+kubectl delete limitrange limits
 ```
 
 ### install helm
