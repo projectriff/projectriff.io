@@ -31,9 +31,9 @@ in the details page of your cluster.
 
 ![Show credentials in console](/images/show-credentials.png)
 
-Issue the following command, replacing `*****` with the admin password.:
+Issue the following command, replacing `*****` with the admin password.
 ```
-kubectl --username=admin --password=H4ioiWRqoIdn30nM create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=jleschner@pivotal.io
+kubectl --username=admin --password=***** create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 ```
 
 ### start the helm server (tiller) with RBAC
