@@ -1,7 +1,7 @@
 ---
 title: "Getting started on GKE"
 permalink: /docs/getting-started-on-gke/
-excerpt: "How to run **riff** on Google Kubernetes Engine."
+excerpt: "How to run **riff** on Google Kubernetes Engine"
 header:
   overlay_image: /images/gke.png
   overlay_filter: 0.4
@@ -154,8 +154,8 @@ kubectl apply -f square.yaml
 
 ### trigger the function
 ```
-GATEWAY=`kubectl get service -l component=http-gateway -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}'`
-HEADER="Content-Type: text/plain"
+export GATEWAY=`kubectl get service -l component=http-gateway -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}'`
+export HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```
 If `10` is the input to the square function, the response should be `100`.

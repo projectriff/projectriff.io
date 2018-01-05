@@ -1,7 +1,7 @@
 ---
 title: "Getting started on minikube"
 permalink: /docs/getting-started-on-minikube/
-excerpt: "How to run **riff** on Minikube."
+excerpt: "How to run **riff** on Minikube"
 header:
   overlay_image: /images/minikube2.png
   overlay_filter: 0.4
@@ -153,8 +153,8 @@ kubectl apply -f square.yaml
 
 ### trigger the function
 ```
-GATEWAY=`minikube service --url demo-riff-http-gateway`
-HEADER="Content-Type: text/plain"
+export GATEWAY=`minikube service --url demo-riff-http-gateway`
+export HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```
 If `10` is the input to the square function, the response should be `100`.
