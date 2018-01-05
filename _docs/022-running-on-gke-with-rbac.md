@@ -10,8 +10,8 @@ header:
 
 
 ## Getting started on GKE with RBAC
-The following steps will allow you to follow the instructions for [getting started on GKE](../getting-started-on-gke/)
-with the addition of [Kubernetes role-based access control](https://kubernetes.io/docs/admin/authorization/rbac/). Only the steps which are new or different are included below. 
+The steps below extend the instructions for [getting started on GKE](../getting-started-on-gke/)
+with the addition of [Kubernetes role-based access control](https://kubernetes.io/docs/admin/authorization/rbac/). Only the steps which are new or different for RBAC are included. 
 
 ### TL;DR
 1. create a GKE cluster with Kubernetes v1.8+ (defaults to RBAC)
