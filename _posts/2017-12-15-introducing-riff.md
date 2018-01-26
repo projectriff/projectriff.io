@@ -67,7 +67,7 @@ public Flux<Map<String, Object>> windows(Flux<String> words) {
 ```
 ## Roadmap
 
-Here are some highlights of our plans for the upcoming 0.0.3 iteration:
+Here are some highlights of our plans for the upcoming iterations:
 
 - Port the Function Controller to Go.
 - Abstractions to make the event broker pluggable (not just Kafka).

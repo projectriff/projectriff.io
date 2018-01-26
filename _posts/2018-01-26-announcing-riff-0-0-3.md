@@ -49,4 +49,11 @@ Highlights of the 0.0.3 release include the following:
 
 - Improved message headers and gRPC support.
 
+## Roadmap
 
+Work planned for upcoming iterations includes:
+- Contract between the sidecar and function containers
+- Emit event metrics from the sidecar
+- Improve function scaling based on published metrics
+- JavaScript streaming
+- Functions for event sources
