@@ -1,6 +1,6 @@
 main:
   - title: "Blog"
-    url: /blog/first-post-announcing-riff-0-0-2-release/
+    url: /blog/
   - title: "Docs"
     url: /docs/getting-started-on-minikube/
   - title: "Video"

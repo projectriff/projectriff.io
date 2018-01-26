@@ -14,16 +14,16 @@ body {
   max-width: 100px
 }
 
-.archive__item {
+.feature__wrapper .archive__item {
   text-align: center;
 }
 
-.archive__item-teaser img {
+.feature__wrapper .archive__item-teaser img {
   width: 75%;
   max-width: 220px;
 }
 
-.archive__item-excerpt {
+.feature__wrapper .archive__item-excerpt {
   margin-top: 1em;
   font-size: 1em;
 }

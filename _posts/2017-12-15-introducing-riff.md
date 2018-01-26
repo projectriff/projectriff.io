@@ -5,10 +5,9 @@ header:
   overlay_image: /images/sunrise.jpg
   overlay_filter: 0.3
   overlay_color: "#333"
-excerpt: '<a href="/video/mark-fisher-at-springone-platform-2017/">/video/mark-fisher-at-springone-platform-2017/</a>'
+excerpt:
+  riff is designed for running Functions in response to Events.
 permalink: /blog/first-post-announcing-riff-0-0-2-release/
-redirect_from:
-  - /blog/
 ---
 
 Welcome to the riff blog! With this first post, we are pleased to announce the 0.0.2 release of riff. The 0.0.2 release includes the code as shown in demos at SpringOne Platform, along with a handful of issues we were able to address over the past few days. 

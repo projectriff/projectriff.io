@@ -85,7 +85,7 @@ deploy/demo-riff-topic-controller      1         1         1            1       
 deploy/demo-riff-zookeeper             1         1         1            1           5m
 ```
 
-On slower network connections it make take longer to stabilize the system after pulling down all the images. Instead of waiting you can try to "purge" the riff components (without deleting the images from the cache) and then reinstall the chart as with the same command as before.
+On slower network connections it may take longer to stabilize the system after pulling down all the images. Instead of waiting you can try to "purge" the riff components (without deleting the images from the cache) and then reinstall the chart as with the same command as before.
 
 ```
 helm delete --purge demo

@@ -22,11 +22,12 @@ feature_row:
 
 {% include feature_row %}
 
-## What is riff?
-riff is a function service designed to run on Kubernetes.
-- Developers write functions.
-- Functions are packaged as containers.
-- Kubernetes custom resources keep track of functions and event topics.
-- riff watches event topics to autoscale functions.
-- Sidecars handle connections to event brokers.
-- This enables first class event stream processing with riff.
+{% for post in site.posts reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
+---
+
+{% for post in site.docs %}
+  {% include archive-single.html %}
+{% endfor %}
