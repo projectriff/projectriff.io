@@ -13,7 +13,7 @@ who contributed to make this happen.
 
 Highlights of the 0.0.3 release include the following:
 
-- A rewrite of the [function controller](https://github.com/projectriff/function-controller) written in go.
+- Ported the [function controller](https://github.com/projectriff/function-controller) to go.
 
 - A much improved `riff` command line script, supporting the following commands.
   ```
