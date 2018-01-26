@@ -28,6 +28,8 @@ Highlights of the 0.0.3 release include the following:
     publish      Publish data to a topic using the http-gateway
     version      Display the riff version
   ``` 
+  `riff init` will generate a new Dockerfile as well as yaml files for Function and Topic
+  resource defintions. `riff create` is a combination of `riff init` and `riff build` and `riff apply`.
 
 - Windows support for the same commands via a new `riff.bat`.
 
@@ -46,3 +48,5 @@ Highlights of the 0.0.3 release include the following:
 - A quicker cold start for the java function invoker.
 
 - Improved message headers and gRPC support.
+
+
