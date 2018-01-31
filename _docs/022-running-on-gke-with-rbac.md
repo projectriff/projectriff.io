@@ -37,7 +37,9 @@ kubectl --username=admin --password=***** create clusterrolebinding cluster-admi
 ```
 
 ### start the helm server (tiller) with RBAC
-Using helm with RBAC requires that the helm server run with cluster-admin privileges. The following commands come from the Helm getting started doc in the [riff repo](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#install-helm) on GitHub.
+Using helm with RBAC requires that the helm server run with cluster-admin privileges using a service account in the `kube-system` namespace. 
+
+The following commands come from the Helm getting started doc in the [riff repo](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#install-helm) on GitHub.
 
 ```
 kubectl -n kube-system create serviceaccount tiller
@@ -46,10 +48,26 @@ helm init --service-account=tiller
 ```
 
 ### install riff with RBAC
-After adding the riff Helm chart repo and setting up tiller with RBAC, you should be able to isssue the following command.
+After adding the riff Helm chart repo and setting up tiller with RBAC, you should be able to isssue the following command to install riff 0.0.3.
 
 ``` 
-helm install riffrepo/riff --name demo --set create.rbac=true
+helm install riffrepo/riff --version 0.0.3-rbac --name demo
+```
+
+To deploy other versions of riff, use helm search to list the available version numbers and also set `create.rbac=true`. 
+
+```
+helm search riff -l 
+helm install riffrepo/riff  --version <x.x.x> --name demo --set create.rbac=true
 ```
 
 At this point everything else should work the same as [getting started on GKE](../getting-started-on-gke/) without RBAC.
+
+### to access the Kubernetes dashboard
+Recent releases of the Kubernetes dashboard require a bearer token in order to login. The easiest way to do this, is to lookup the token associated with the `tiller` account created above and paste it into the login form.
+
+```
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep tiller | awk '{print $1}')
+```
+
+For more details see the dashboard [wiki](https://github.com/kubernetes/dashboard/wiki/Access-control#introduction) and [issue #2474](https://github.com/kubernetes/dashboard/issues/2474).
