@@ -12,35 +12,25 @@ We are happy to announce another new release of riff. Thank you, once again, eve
 who contributed to this effort. Here are some of the highlights.
 
 ## a new riff CLI written in go
+The [riff CLI](https://github.com/projectriff/riff-cli/blob/master/docs/riff.md) is now a go binary, available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go dev environment, you can install the `riff` command on in your `$GOPATH/bin`.
 
-```sh
-$ riff
-riff is for functions
-
-version 0.0.4
-
-the riff tool is used to create and manage function resources for the riff FaaS platform https://projectriff.io/
-
-Usage:
-  riff [command]
-
-Available Commands:
-  apply       Apply function resource definitions
-  build       Build a function container
-  create      Create a function
-  delete      Delete function resources
-  help        Help about any command
-  init        Initialize a function
-  list        List function resources
-  logs        Display the logs for a running function
-  publish     Publish data to a topic using the http-gateway
-  update      Update a function
-  version     Display the riff version
-
-Flags:
-      --config string   config file (default is $HOME/.riff.yaml)
-  -h, --help            help for riff
 ```
+go get github.com/projectriff/riff-cli/cmd/riff
+```
+
+This version of the CLI provides more infomation about what's happening.
+```
+~/riff/riff/samples/shell/echo (master)$ riff create
+Initializing /Users/jleschner/riff/riff/samples/shell/echo/echo-topics.yaml
+Initializing /Users/jleschner/riff/riff/samples/shell/echo/echo-function.yaml
+Initializing /Users/jleschner/riff/riff/samples/shell/echo/Dockerfile
+Building image ...
+```
+
+A `--dry-run` option displays the content of the Dockerfile and k8s resource .yaml files without
+generating them.
+
+NOTE that some of the riff [CLI configuration](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#riff-cli-configuration) options have changed.
 
 ## gRPC under the hood
 For this iteration we decided to introduce a gRPC interface between the function sidecar
