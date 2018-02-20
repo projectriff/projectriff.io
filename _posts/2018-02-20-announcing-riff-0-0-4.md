@@ -40,7 +40,7 @@ While HTTP works well for invoking functions one event at a time, it was not des
 
 gRPC will allow us to extend streaming semantics, which already exist for [Java functions](https://github.com/projectriff/java-function-invoker/tree/master/src/test/java/io/projectriff/functions) using the reactive Flux interface, to functions written in JavaScript and other languages.
 
-Rest assured that we are not changing the existing invoker-function contract for simple (non-streaming) functions. E.g. Javascript functions which were written to use the `http` protocol should keep working just like before.
+Function code provided by users should not be impacted by the underlying changes between sidecar and invoker, in fact, we expect the invoker protocol to be hidden from function developers in future releases.
 
 ### gRPC proto
 Here is the gRPC function.proto definition which we are using for the 0.0.4 release. Please note that we are still experimenting with this and other streaming protocols. Developers who are experimenting with writing new invokers should expect changes to this layer in future releases. 
