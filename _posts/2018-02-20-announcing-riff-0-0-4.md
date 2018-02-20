@@ -8,17 +8,17 @@ excerpt:
 permalink: /blog/announcing-riff-0-0-4/
 ---
 
-We are happy to announce another new release of riff. Thank you, once again, everyone
+We are happy to announce a new release of riff. Thank you, once again, everyone
 who contributed to this effort. Here are some of the highlights.
 
 ## a new riff CLI written in go
-The [riff CLI](https://github.com/projectriff/riff-cli/blob/master/docs/riff.md) is now a go binary, available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go dev environment, you can install the `riff` command on in your `$GOPATH/bin`.
+The [riff CLI](https://github.com/projectriff/riff-cli/blob/master/docs/riff.md) is now a go binary, available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go development environment, you can install the `riff` command in $GOPATH/bin as follows.
 
 ```
 go get github.com/projectriff/riff-cli/cmd/riff
 ```
 
-This version of the CLI provides more infomation about what's happening.
+This version of the CLI provides more infomation about what's happening E.g.
 ```
 ~/riff/riff/samples/shell/echo (master)$ riff create
 Initializing /Users/jleschner/riff/riff/samples/shell/echo/echo-topics.yaml
@@ -33,17 +33,17 @@ generating them.
 NOTE that some of the riff [CLI configuration](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#riff-cli-configuration) options have changed.
 
 ## gRPC under the hood
-For this iteration we decided to introduce a gRPC interface between the function sidecar
+For this iteration we have introduced a gRPC interface between the function sidecar
 container and each of the function invokers.
 
 While HTTP works well for invoking functions one event at a time, it was not designed to serve as a protocol for bidirectional streams which don't follow a strict request/reply pattern.
 
-gRPC will allow us to extend streaming semantics, which already exist for Java functions using the reative Flux interface, to functions written in JavaScript and other languages.
+gRPC will allow us to extend streaming semantics, which already exist for [Java functions](https://github.com/projectriff/java-function-invoker/tree/master/src/test/java/io/projectriff/functions) using the reactive Flux interface, to functions written in JavaScript and other languages.
 
 Rest assured that we are not changing the existing invoker-function contract for simple (non-streaming) functions. E.g. Javascript functions which were written to use the `http` protocol should keep working just like before.
 
 ### gRPC proto
-Here is the gRPC function.proto definition which we are using for the 0.0.4 release. Please note that we are still experimenting with this and other streaming protocols. Developers who are experimenting with writing new invokers should expect changes in future. 
+Here is the gRPC function.proto definition which we are using for the 0.0.4 release. Please note that we are still experimenting with this and other streaming protocols. Developers who are experimenting with writing new invokers should expect changes to this layer in future releases. 
 
 ```
 syntax = "proto3";
@@ -99,3 +99,11 @@ RUN (cd ${FUNCTION_URI} && npm install --production)
 ```
 
 Finally, the HTTP gateway will now responds with a 500 status when node functions throw an error.
+
+## next steps
+
+In addition to our pursuit of improved interfaces for event-streaming, we are continuing to invest in
+making our architecure more pluggable so that riff can connect to other message brokers. 
+
+We are also working hard to improve function and topic management in the function controller,
+and better function scaling.
