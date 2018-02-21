@@ -67,7 +67,7 @@ service MessageFunction {
 ## go shell invoker
 The shell invoker is now a go binary executable, which executes commands directly rather than running them from inside a shell. This allows the shell invoker to connect to the sidecar via gRPC just like other languages. 
 
-NOTE that the new shell invoker new requires a shebang for shell scripts, and uses `stdin` instead of a command line parameter. The echo sample has been modified to use the `cat` utility which simply copies `stdin` to `stdout`. Here is the `echo.sh` script from the sample.
+NOTE that the new shell invoker requires a shebang for shell scripts, and uses stdin instead of a command line parameter for inputs from events. The echo sample has been modified to use the 'cat' utility which simply copies stdin to stdout. Here is the `echo.sh` script from the sample.
 
 ```sh
 #!/bin/sh
