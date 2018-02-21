@@ -65,7 +65,7 @@ service MessageFunction {
 ```
 
 ## go shell invoker
-The shell invoker is now a go binary executable, which executes commands directly rather than running them from inside a shell. This allows the shell invoker to connect to the sidecar via gRPC just like other languages. 
+The [shell invoker](https://github.com/projectriff/shell-function-invoker) is now a go binary executable, which executes commands directly rather than running them from inside a shell. This allows the shell invoker to connect to the sidecar via gRPC just like other languages.
 
 NOTE that the new shell invoker requires a shebang for shell scripts, and uses stdin instead of a command line parameter for inputs from events. The echo sample has been modified to use the 'cat' utility which simply copies stdin to stdout. Here is the `echo.sh` script from the sample.
 
@@ -82,7 +82,7 @@ ENV FUNCTION_URI cat
 ```
 
 ## node invoker
-The node invoker just keeps getting better, with HTTP and gRPC protocols both implemented in this release.
+The [node invoker](https://github.com/projectriff/node-function-invoker) just keeps getting better, with HTTP and gRPC protocols both implemented in this release.
 
 For functions which need to manage connections or perform other kinds of one time setup/teardown, the invoker now calls `$init` on startup and `$destroy` before terminating the function. These functions can return promises as well. The node invoker has been fixed to respond promptly to termination signals from Kubernetes.
 
@@ -102,7 +102,10 @@ Finally, the HTTP gateway will now respond with a 500 status when node functions
 ## java invoker
 Our java invoker is still the leader in terms of supporting streaming (Flux) as well as request/response functions.
 
-In this release, the java invoker is talking to the sidecar over the same gRPC interface described above. Support for the `pipes` protocol has been removed, so please modify your function yaml to use `grpc` if you upgrade to 0.0.4 and rebuild your functions with the new invoker.
+In this release, the [java invoker](https://github.com/projectriff/java-function-invoker/commit/60d675c48817cc75f17af76178afe588a5cd8b42) is talking to the sidecar over the same gRPC interface described above. Support for the `pipes` protocol has been removed, so please modify your function yaml to use `grpc` if you upgrade to 0.0.4 and rebuild your functions with the new invoker.
+
+## separate Kafka install
+Starting with the 0.0.4 release, we have separated the Kafka installation from the riff Helm chart. You can still use the single-node Kafka chart provided by riff, or the dynamically scalable, multi-node [incubator/kafka](https://github.com/kubernetes/charts/tree/master/incubator/kafka) service. For details see the [Getting Started](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc) guide on GitHub or the [docs](/docs) on this site.
 
 ## next steps
 
