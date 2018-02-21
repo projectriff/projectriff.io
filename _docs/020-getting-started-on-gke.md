@@ -68,11 +68,13 @@ helm repo update
 ```
 
 ### install riff on GKE
-Use `helm init` to install the helm server (aka "tiller") in your GKE cluster, then install riff.
+Use `helm init` to install the helm server (aka "tiller") in your GKE cluster, install kafka on the `riff-system` namespace, and then install riff (command below assumes without RBAC).
 
-```
+```sh
 helm init
-helm install riffrepo/riff --name demo
+kubectl create namespace riff-system
+helm install --name transport --namespace riff-system riffrepo/kafka
+helm install riffrepo/riff --version 0.0.4 --set rbac.create=false --name demo
 ```
 
 ### monitor your cluster
