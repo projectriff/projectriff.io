@@ -12,7 +12,7 @@ redirect_from:
 
 ### TL;DR
 1. install docker, kubectl, minikube, and helm
-2. install riff using a helm chart
+2. install kafka and riff using two helm charts
 3. build one of the sample functions
 4. apply the function and topic resource definitions to Kubernetes
 5. send an event to the topic to trigger the function
@@ -46,11 +46,13 @@ helm repo add riffrepo https://riff-charts.storage.googleapis.com
 helm repo update
 ```
 
-### install riff
-Use `helm init` to install the helm server (aka "tiller") in minikube, then, after waiting a minute, install riff with service type `NodePort`.
+### install kafka and riff
+Use `helm init` to install the helm server (aka "tiller") in minikube, then, after waiting a minute, install kafka on the `riff-system` namespace, and then riff with service type `NodePort`.
 ```
 helm init
-helm install riffrepo/riff --name demo --set httpGateway.service.type=NodePort
+kubectl create namespace riff-system
+helm install --name transport --namespace riff-system riffrepo/kafka
+helm install riffrepo/riff --name demo  --version 0.0.4 --set rbac.create=false --set httpGateway.service.type=NodePort
 ```
 
 ### monitor your minikube

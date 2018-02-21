@@ -18,12 +18,12 @@ The [riff CLI](https://github.com/projectriff/riff-cli/blob/master/docs/riff.md)
 go get github.com/projectriff/riff-cli/cmd/riff
 ```
 
-This version of the CLI provides more infomation about what's happening E.g.
+The new CLI provides a lot more infomation about what it's doing. E.g.
 ```
 ~/riff/riff/samples/shell/echo (master)$ riff create
-Initializing /Users/jleschner/riff/riff/samples/shell/echo/echo-topics.yaml
-Initializing /Users/jleschner/riff/riff/samples/shell/echo/echo-function.yaml
-Initializing /Users/jleschner/riff/riff/samples/shell/echo/Dockerfile
+Initializing ~/riff/riff/samples/shell/echo/echo-topics.yaml
+Initializing ~/riff/riff/samples/shell/echo/echo-function.yaml
+Initializing ~/riff/riff/samples/shell/echo/Dockerfile
 Building image ...
 ```
 
@@ -45,7 +45,7 @@ Function code provided by users should not be impacted by the underlying changes
 ### gRPC proto
 Here is the gRPC function.proto definition which we are using for the 0.0.4 release. Please note that we are still experimenting with this and other streaming protocols. Developers who are experimenting with writing new invokers should expect changes to this layer in future releases. 
 
-```
+```protobuf
 syntax = "proto3";
 
 package function;
@@ -71,7 +71,6 @@ NOTE that the new shell invoker new requires a shebang for shell scripts, and us
 
 ```sh
 #!/bin/sh
-
 cat
 ```
 
@@ -83,7 +82,7 @@ ENV FUNCTION_URI cat
 ```
 
 ## node invoker
-The node invoker just keeps getting better.
+The node invoker just keeps getting better, with HTTP and gRPC protocols both implemented in this release.
 
 For functions which need to manage connections or perform other kinds of one time setup/teardown, the invoker now calls `$init` on startup and `$destroy` before terminating the function. These functions can return promises as well. The node invoker has been fixed to respond promptly to termination signals from Kubernetes.
 
@@ -91,19 +90,24 @@ To help you create functions with npm dependencies, the CLI will now recognize a
 
 E.g. `riff init node --dry-run -a package.json` will produce:
 
-```Dockerfile
+```docker
 FROM projectriff/node-function-invoker:0.0.4
 ENV FUNCTION_URI /functions/
 COPY . ${FUNCTION_URI}
 RUN (cd ${FUNCTION_URI} && npm install --production)
 ```
 
-Finally, the HTTP gateway will now responds with a 500 status when node functions throw an error.
+Finally, the HTTP gateway will now respond with a 500 status when node functions throw an error.
+
+## java invoker
+Our java invoker is still the leader in terms of supporting streaming (Flux) as well as request/response functions.
+
+In this release, the java invoker is talking to the sidecar over the same gRPC interface described above. Support for the `pipes` protocol has been removed, so please modify your function yaml to use `grpc` if you upgrade to 0.0.4 and rebuild your functions with the new invoker.
 
 ## next steps
 
 In addition to our pursuit of improved interfaces for event-streaming, we are continuing to invest in
 making our architecure more pluggable so that riff can connect to other message brokers. 
 
-We are also working hard to improve function and topic management in the function controller,
-and better function scaling.
+We are also targeting better function and topic management in the function controller,
+and smoother function scaling using event metrics and lifecycle information from our sidecars.

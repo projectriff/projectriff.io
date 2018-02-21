@@ -48,10 +48,12 @@ helm init --service-account=tiller
 ```
 
 ### install riff with RBAC
-After adding the riff Helm chart repo and setting up tiller with RBAC, you should be able to isssue the following command to install riff 0.0.3.
+After adding the riff Helm chart repo and setting up tiller with RBAC, you should be able to isssue the following commands to install kafka and riff 0.0.4.
 
 ``` 
-helm install riffrepo/riff --version 0.0.3-rbac --name demo
+kubectl create namespace riff-system
+helm install --name transport --namespace riff-system riffrepo/kafka
+helm install riffrepo/riff --version 0.0.4 --name demo
 ```
 
 To deploy other versions of riff, use helm search to list the available version numbers and also set `create.rbac=true`. 
