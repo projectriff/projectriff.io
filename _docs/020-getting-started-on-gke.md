@@ -108,7 +108,7 @@ Create a new file called `Dockerfile` in the same directory.
 This container will be built on the `node-function-invoker` base image.
 
 ```
-FROM projectriff/node-function-invoker:0.0.3
+FROM projectriff/node-function-invoker:0.0.4
 ENV FUNCTION_URI /functions/function.js
 ADD square.js ${FUNCTION_URI}
 ```
