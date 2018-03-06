@@ -11,12 +11,12 @@ redirect_from:
 ---
 
 ### TL;DR
-1. select or create a Project in the Google Cloud console
-2. install the gcloud CLI and kubectl
-3. create a GKE cluster
-4. configure credentials to target the GKE cluster from kubectl
+1. select a Project in the Google Cloud console, install gcloud and kubectl
+2. create a GKE cluster
+3. configure credentials to target the GKE cluster from kubectl
+4. remove the CPU request limit for containers in the new cluster
 5. install helm
-6. install riff on the GKE cluster using a helm chart
+6. install kafka and riff on the GKE cluster using helm charts
 7. install Docker and create a Docker ID
 8. build one of the sample functions
 9. apply the function and topic resource definitions to Kubernetes
@@ -26,11 +26,10 @@ redirect_from:
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top.
 
 ### install gcloud
-Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project. Afterwards your browser will end up on this [helpful page](https://cloud.google.com/sdk/auth_success).
+Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project.
 
 ```
 gcloud init
-gcloud container clusters list # will show all the clusters in your project
 ```
 
 ### install kubectl
