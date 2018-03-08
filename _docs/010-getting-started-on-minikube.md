@@ -15,9 +15,8 @@ redirect_from:
 2. monitor your riff cluster with watch and kubectl
 3. install kafka using a helm chart
 4. install riff using a helm chart
-5. install the riff CLI
-6. create a sample function
-7. publish an event to trigger the sample function
+5. create a sample function
+6. publish an event to trigger the sample function
 
 ### install docker
 Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
