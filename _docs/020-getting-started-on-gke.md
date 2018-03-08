@@ -69,7 +69,7 @@ watch -n 1 kubectl get pods,deployments --all-namespaces
 ```
 
 ### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller") in minikube, and point helm to the riff-charts repo.
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller"), and point helm to the riff-charts repo.
 ```
 helm init
 helm repo add riffrepo https://riff-charts.storage.googleapis.com

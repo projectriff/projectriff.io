@@ -74,8 +74,8 @@ Alternatively, lookup the admin password for the cluster in the console, and the
 read -rsp "password: " APW && echo && kubectl --username=admin --password="$APW" create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$GCP_USER
 ```
 
-### monitor your minikube
-At this point it is useful to monitor your minikube using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
+### monitor resources in your kubernetes cluster
+At this point it is useful to monitor your kubernetes cluster using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
 ```
 brew install watch
 watch -n 1 kubectl get pods,deployments --all-namespaces
