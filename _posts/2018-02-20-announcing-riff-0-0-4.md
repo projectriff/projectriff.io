@@ -12,10 +12,10 @@ We are happy to announce a new release of riff. Thank you, once again, everyone
 who contributed to this effort. Here are some of the highlights.
 
 ## a new riff CLI written in go
-The [riff CLI](https://github.com/projectriff/riff-cli/blob/master/docs/riff.md) is now a go binary, available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go development environment, you can install the `riff` command in $GOPATH/bin as follows.
+The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is now a go binary, available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go development environment, you can use 'go get' to build and install into $GOPATH/bin as follows.
 
 ```
-go get github.com/projectriff/riff-cli/cmd/riff
+go get github.com/projectriff/riff
 ```
 
 The new CLI provides a lot more infomation about what it's doing. E.g.

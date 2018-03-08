@@ -10,6 +10,9 @@ redirect_from:
   - /docs/
 ---
 
+The following will help you get started on GKE without [RBAC](https://kubernetes.io/docs/admin/authorization/rbac/).  
+See [here](/docs/running-on-gke-with-rbac/) for instructions with RBAC.
+
 ### TL;DR
 1. select a Project in the Google Cloud console, install gcloud and kubectl
 2. create a GKE cluster
@@ -58,38 +61,62 @@ Remove the GKE default request of 0.1 CPU's per container which limits how many 
 kubectl delete limitrange limits
 ```
 
-### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, point helm to the riff-charts repo.
-
+### monitor resources in your kubernetes cluster
+At this point it is useful to monitor your kubernetes cluster using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
 ```
+brew install watch
+watch -n 1 kubectl get pods,deployments --all-namespaces
+```
+
+### install helm
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller") in minikube, and point helm to the riff-charts repo.
+```
+helm init
 helm repo add riffrepo https://riff-charts.storage.googleapis.com
 helm repo update
 ```
+Watch kubectl for tiller to start running.
 
-### install riff on GKE
-Use `helm init` to install the helm server (aka "tiller") in your GKE cluster, install kafka on the `riff-system` namespace, and then install riff (command below assumes without RBAC).
+### install kafka
+Install kafka on the `riff-system` namespace, with the release name `transport`.
 
 ```sh
-helm init
 kubectl create namespace riff-system
-helm install --name transport --namespace riff-system riffrepo/kafka
-helm install riffrepo/riff --version 0.0.4 --set rbac.create=false --name demo
+helm install riffrepo/kafka \
+  --name transport \
+  --namespace riff-system
+```
+Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
+
+### install riff
+Install riff on the same `riff-system` namespace, with the release name `demo`. In this case we are deploying without RBAC.
+```sh
+helm install riffrepo/riff \
+  --version 0.0.4 \
+  --set rbac.create=false \
+  --name demo \
+  --namespace riff-system
+```
+Watch the riff-system namespace with kubectl, and wait for the riff http-gateway, topic-controller, and function-controller to start running.
+
+```
+watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
-### monitor your cluster
-At this point it is useful to monitor your cluster using a utility like `watch` to refresh a separate terminal window which is running `kubectl get` every one or two seconds.
-
 ```
-brew install watch
-watch -n 1 kubectl get functions,topics,pods,services,deploy
-```
+NAME                                                READY     STATUS    RESTARTS   AGE
+po/demo-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
+po/demo-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
+po/demo-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
+po/transport-kafka-68b986865b-6tsbk                 1/1       Running   3          11m
+po/transport-zookeeper-85fc6df85c-v6kxx             1/1       Running   0          11m
 
-### install Docker and create a Docker ID
-Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker.
-Visit https://hub.docker.com/ to create a new Docker ID. You will push your function container to a repo under this ID, so use your Docker ID credentals to login.
-
-```
-docker login
+NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/demo-riff-function-controller   1         1         1            1           5m
+deploy/demo-riff-http-gateway          1         1         1            1           5m
+deploy/demo-riff-topic-controller      1         1         1            1           5m
+deploy/transport-kafka                 1         1         1            1           11m
+deploy/transport-zookeeper             1         1         1            1           11m
 ```
 
 ## new function using node.js
@@ -102,11 +129,19 @@ Create `square.js` in an empty directory.
 module.exports = (x) => x ** 2
 ```
 
+### install Docker and create a Docker ID
+Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker.
+Visit https://hub.docker.com/ to create a new Docker ID. You will push your function container to a repo under this ID, so use your Docker ID credentals to login.
+
+```
+docker login
+```
+
 ### Dockerfile
 Create a new file called `Dockerfile` in the same directory.
 This container will be built on the `node-function-invoker` base image.
 
-```
+```docker
 FROM projectriff/node-function-invoker:0.0.4
 ENV FUNCTION_URI /functions/function.js
 ADD square.js ${FUNCTION_URI}
@@ -115,13 +150,13 @@ ADD square.js ${FUNCTION_URI}
 ### Docker build
 Use the docker CLI to build the function container image. Prefix the image name by replacing `<your-Docker-ID>` below with your own Docker ID. Note the `.` at the end of the `docker build...` command.
 
-```bash
+```sh
 docker build -t <your-Docker-ID>/square:v0001 .
 ```
 
 After performing the build push the image to your own Docker Hub repo.
 
-```bash
+```sh
 docker push <your-Docker-ID>/square:v0001
 ```
 
@@ -147,15 +182,22 @@ spec:
     image: <your-Docker-ID>/square:v0001
 ```
 
+### watch for functions and topics
+Use kubectl to watch the default namespace.
+
+```sh
+watch -n 1 kubectl get functions,topics,pods,deployments
+```
+
 ### apply the yaml to kubernetes
 
-```
+```sh
 kubectl apply -f square.yaml
 ```
 
 ### trigger the function
-```
-export GATEWAY=`kubectl get service -l component=http-gateway -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}'`
+```sh
+export GATEWAY=`kubectl get service -l component=http-gateway -n riff-system -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}'`
 export HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```

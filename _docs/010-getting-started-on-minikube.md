@@ -12,10 +12,12 @@ redirect_from:
 
 ### TL;DR
 1. install docker, kubectl, minikube, and helm
-2. install kafka and riff using two helm charts
-3. build one of the sample functions
-4. apply the function and topic resource definitions to Kubernetes
-5. send an event to the topic to trigger the function
+2. monitor your riff cluster with watch and kubectl
+3. install kafka using a helm chart
+4. install riff using a helm chart
+5. install the riff CLI
+6. create a sample function
+7. publish an event to trigger the sample function
 
 ### install docker
 Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
@@ -27,73 +29,77 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
 ### start your minikube cluster
-```
+```sh
 minikube start --memory=4096
 ```
 Once minikube is running you can open a browser-based dashboard with `minikube dashboard`.
 
 ### configure docker to build containers in minikube
 This is only reqired once per terminal session. See [here](https://kubernetes.io/docs/getting-started-guides/minikube/#reusing-the-docker-daemon) for more details.
-```
+
+```sh
 eval $(minikube docker-env)
-```
-Use `docker ps` to see the containers running in minikube.
-
-### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, point helm to the riff-charts repo.
-```
-helm repo add riffrepo https://riff-charts.storage.googleapis.com
-helm repo update
-```
-
-### install kafka and riff
-Use `helm init` to install the helm server (aka "tiller") in minikube, then, after waiting a minute, install kafka on the `riff-system` namespace, and then riff with service type `NodePort`.
-```
-helm init
-kubectl create namespace riff-system
-helm install --name transport --namespace riff-system riffrepo/kafka
-helm install riffrepo/riff --name demo  --version 0.0.4 --set rbac.create=false --set httpGateway.service.type=NodePort
 ```
 
 ### monitor your minikube
-At this point it is useful to monitor your minikube using a utility like `watch` to refresh a separate terminal window every one or two seconds. After a minute or so you should see all the deployments `AVAILABLE` in minikube.
+At this point it is useful to monitor your minikube using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
 ```
 brew install watch
-watch -n 1 kubectl get functions,topics,pods,services,deploy
+watch -n 1 kubectl get pods,deployments --all-namespaces
+```
+
+### install helm
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller") in minikube, and point helm to the riff-charts repo.
+```sh
+helm init
+helm repo add riffrepo https://riff-charts.storage.googleapis.com
+helm repo update
+```
+Watch kubectl for tiller to start running.
+
+### install kafka
+Install kafka on the `riff-system` namespace, with the release name `transport`.
+
+```sh
+kubectl create namespace riff-system
+helm install riffrepo/kafka \
+  --name transport \
+  --namespace riff-system
+```
+Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
+
+### install riff
+Install riff on the same `riff-system` namespace, with the release name `demo`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
+
+```sh
+helm install riffrepo/riff \
+  --name demo \
+  --namespace riff-system \
+  --version 0.0.4 \
+  --set rbac.create=false \
+  --set httpGateway.service.type=NodePort
+```
+Watch the riff-system namespace with kubectl, and wait for the riff http-gateway, topic-controller, and function-controller to start running.
+
+```
+watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
 ```
-Every 1.0s: kubectl get functions,topics,pods,services,deploy
-
 NAME                                                READY     STATUS    RESTARTS   AGE
-po/demo-riff-function-controller-6975dbdc7d-ccgxq   1/1       Running   0          5m
-po/demo-riff-http-gateway-64fc56bd96-kk45j          1/1       Running   3          5m
-po/demo-riff-kafka-c7f456685-jj9t9                  1/1       Running   2          5m
-po/demo-riff-topic-controller-58694bb5bf-njspv      1/1       Running   0          5m
-po/demo-riff-zookeeper-6fd5c5bd54-lmqk9             1/1       Running   0          5m
-
-NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-svc/demo-riff-function-controller   ClusterIP   10.96.60.96     <none>        80/TCP         5m
-svc/demo-riff-http-gateway          NodePort    10.98.119.212   <none>        80:30462/TCP   5m
-svc/demo-riff-kafka                 ClusterIP   10.99.22.48     <none>        9092/TCP       5m
-svc/demo-riff-zookeeper             ClusterIP   10.98.103.213   <none>        2181/TCP       5m
-svc/kubernetes                      ClusterIP   10.96.0.1       <none>        443/TCP        6m
+po/demo-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
+po/demo-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
+po/demo-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
+po/transport-kafka-68b986865b-6tsbk                 1/1       Running   3          11m
+po/transport-zookeeper-85fc6df85c-v6kxx             1/1       Running   0          11m
 
 NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 deploy/demo-riff-function-controller   1         1         1            1           5m
 deploy/demo-riff-http-gateway          1         1         1            1           5m
-deploy/demo-riff-kafka                 1         1         1            1           5m
 deploy/demo-riff-topic-controller      1         1         1            1           5m
-deploy/demo-riff-zookeeper             1         1         1            1           5m
+deploy/transport-kafka                 1         1         1            1           11m
+deploy/transport-zookeeper             1         1         1            1           11m
 ```
-
-On slower network connections it may take longer to stabilize the system after pulling down all the images. Instead of waiting you can try to "purge" the riff components (without deleting the images from the cache) and then reinstall the chart as with the same command as before.
-
-```
-helm delete --purge demo
-helm install riffrepo/riff --name demo --set httpGateway.service.type=NodePort
-```
-
 
 ## new function using node.js
 The steps below will create a JavaScript function from scratch. The same files are also available in the `square` [sample](https://github.com/projectriff/riff/blob/master/samples/node/square/) on GitHub.
@@ -107,7 +113,8 @@ module.exports = (x) => x ** 2
 ### Dockerfile
 Create a new file called `Dockerfile` in the same directory.
 This container will be built on the `node-function-invoker` base image.
-```
+
+```docker
 FROM projectriff/node-function-invoker:0.0.4
 ENV FUNCTION_URI /functions/function.js
 ADD square.js ${FUNCTION_URI}
@@ -148,14 +155,22 @@ spec:
     image: projectriff/square:v0001
 ```
 
-### apply the yaml to kubernetes
+### watch for functions and topics in the default namespace
+
 ```
+watch -n 1 kubectl get functions,topics,pods,deployments
+```
+
+### apply the yaml to kubernetes
+
+```sh
 kubectl apply -f square.yaml
 ```
 
 ### trigger the function
-```
-export GATEWAY=`minikube service --url demo-riff-http-gateway`
+
+```sh
+export GATEWAY=`minikube service --namespace riff-system --url demo-riff-http-gateway`
 export HEADER="Content-Type: text/plain"
 curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
 ```
