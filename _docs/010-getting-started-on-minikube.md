@@ -132,12 +132,16 @@ watch -n 1 kubectl get functions,topics,pods,deployments
 ```
 
 ### trigger the function
+```bash
+riff publish --namespace riff-system --input numbers --data 10 --reply
+```
+If `10` is the input to the square function, the response should be `100`.
+You can also abbreviate parameters as follows:
 
 ```bash
-riff publish --input numbers --data 10 --reply
+riff publish --namespace riff-system -i numbers -d 10 -r
 ```
-
-If `10` is the input to the square function, the response should be `100`.
+With the latest riff CLI (after 0.0.4), omit `--namespace riff-system`.
 
 ### delete the function and topic
 
