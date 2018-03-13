@@ -13,7 +13,7 @@ These instructions describe getting started on GKE if you are using Kubernetes w
 
 ### TL;DR
 1. select a Project in the Google Cloud console, install gcloud and kubectl
-2. create a GKE cluster with Kubernetes v1.8.x or v1.9.x  (defaults to RBAC)
+2. create a GKE cluster with Kubernetes v1.8.x or v1.9.x  (defaults to RBAC with "Legacy Authorization" disabled)
 3. configure credentials to target the GKE cluster from kubectl
 4. remove the CPU request limit for containers in the new cluster
 5. grant yourself cluster-admin permissions
@@ -41,7 +41,7 @@ gcloud components install kubectl
 ```
 
 ### create a GKE cluster
-Look for [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) in the console, and create a new cluster. Select a Cluster Version of 1.8+ or later in the console to enable RBAC. The minimum configuration for riff on GKE is single node cluster with 2 vCPUs and 7.5GB memory.
+Look for [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) in the console, and create a new cluster. Select a Cluster Version of 1.8+ or later with "Legacy Authorization" disabled to enable RBAC. The minimum configuration for riff on GKE is single node cluster with 2 vCPUs and 7.5GB memory.
 
 
 ### configure credentials to target the GKE cluster
@@ -89,7 +89,7 @@ helm repo update
 ```
 
 ### start the helm server (tiller) with RBAC
-Using helm with RBAC requires that the helm server also runs with cluster-admin privileges using a service account in the `kube-system` namespace.
+The Helm project describes the [Best Practices for Securing Helm and Tiller](https://docs.helm.sh/using_helm/#best-practices-for-securing-helm-and-tiller) in their documentation. This can be fairly involved and for less critical development clusters it is easier to configure the Helm tiller server to run with cluster-admin privileges using a service account in the `kube-system` namespace.
 
 The following commands come from the Helm getting started doc in the [riff repo](https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#install-helm) on GitHub.
 
