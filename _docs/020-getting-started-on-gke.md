@@ -72,7 +72,7 @@ watch -n 1 kubectl get pods,deployments --all-namespaces
 [Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller"), and point helm to the riff-charts repo.
 ```
 helm init
-helm repo add riffrepo https://riff-charts.storage.googleapis.com
+helm repo add projectriff https://riff-charts.storage.googleapis.com
 helm repo update
 ```
 Watch kubectl for tiller to start running.
@@ -82,7 +82,7 @@ Install kafka on the `riff-system` namespace, with the release name `transport`.
 
 ```sh
 kubectl create namespace riff-system
-helm install riffrepo/kafka \
+helm install projectriff/kafka \
   --name transport \
   --namespace riff-system
 ```
@@ -91,7 +91,7 @@ Watch kubectl for kafka to start running. You may need to wait a minute for the 
 ### install riff
 Install riff on the same `riff-system` namespace, with the release name `demo`. In this case we are deploying without RBAC.
 ```sh
-helm install riffrepo/riff \
+helm install projectriff/riff \
   --version 0.0.4 \
   --set rbac.create=false \
   --name demo \
