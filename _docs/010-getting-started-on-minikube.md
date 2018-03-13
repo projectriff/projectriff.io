@@ -17,6 +17,7 @@ redirect_from:
 4. install riff using a helm chart
 5. create a sample function
 6. publish an event to trigger the sample function
+7. delete the sample function
 
 ### install docker
 Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
@@ -100,59 +101,29 @@ deploy/transport-kafka                 1         1         1            1       
 deploy/transport-zookeeper             1         1         1            1           11m
 ```
 
+### install the current riff CLI tool
+
+Starting with the 0.0.4 version we provide a CLI tool written in Go that makes it easy to create and deploy functions.
+Install the CLI by following the instructions on the [riff release page](https://github.com/projectriff/riff/releases).
+
+
 ## new function using node.js
 The steps below will create a JavaScript function from scratch. The same files are also available in the `square` [sample](https://github.com/projectriff/riff/blob/master/samples/node/square/) on GitHub.
 
-### write the function
+### write the function source
 Create `square.js` in an empty directory.
 ```js
 module.exports = (x) => x ** 2
 ```
 
-### Dockerfile
-Create a new file called `Dockerfile` in the same directory.
-This container will be built on the `node-function-invoker` base image.
+### create the function deployment
+Run the following command from the same directory where the above function file is created:
 
-```docker
-FROM projectriff/node-function-invoker:0.0.4
-ENV FUNCTION_URI /functions/function.js
-ADD square.js ${FUNCTION_URI}
-```
-
-### Docker build
-Use the docker CLI to build the function container image.
-Note the image name and tag: `projectriff/square:v0001`.
 ```bash
-docker build -t projectriff/square:v0001 .
+riff create --name square --input numbers --filepath .
 ```
-
-After performing the build you can run the following to validate that your image was built.
-```bash
-docker images | grep square
-```
-
-
-### function and topic resource definitions
-Create a single `square.yaml` file for both resource definitions.
-Use the same image name and tag as the docker build step above.
-
-```yaml
-apiVersion: projectriff.io/v1
-kind: Topic
-metadata:
-  name: numbers
----
-
-apiVersion: projectriff.io/v1
-kind: Function
-metadata:
-  name: square
-spec:
-  protocol: http
-  input: numbers
-  container:
-    image: projectriff/square:v0001
-```
+This command will initialize the function, creating a `Dockerfile` and YAML files `square-function.yaml` and `square-topics.yaml` 
+defining the Kubernetes resources for the function and topics respectively. It will also build the docker image and apply the Kubernetes function and topics resources to the cluster.
 
 ### watch for functions and topics in the default namespace
 
@@ -160,17 +131,16 @@ spec:
 watch -n 1 kubectl get functions,topics,pods,deployments
 ```
 
-### apply the yaml to kubernetes
-
-```sh
-kubectl apply -f square.yaml
-```
-
 ### trigger the function
 
-```sh
-export GATEWAY=`minikube service --namespace riff-system --url demo-riff-http-gateway`
-export HEADER="Content-Type: text/plain"
-curl $GATEWAY/requests/numbers -H "$HEADER" -w "\n" -d 10
+```bash
+riff publish --input numbers --data 10 --reply
 ```
+
 If `10` is the input to the square function, the response should be `100`.
+
+### delete the function and topic
+
+```bash
+riff delete --name square --all
+```
