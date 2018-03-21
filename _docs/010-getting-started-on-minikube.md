@@ -69,13 +69,12 @@ helm install projectriff/kafka \
 Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
 
 ### install riff
-Install riff on the same `riff-system` namespace, with the release name `demo`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
+Install riff on the same `riff-system` namespace, with the release name `control`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
 
 ```sh
 helm install projectriff/riff \
-  --name demo \
+  --name control \
   --namespace riff-system \
-  --version 0.0.4 \
   --set rbac.create=false \
   --set httpGateway.service.type=NodePort
 ```
@@ -86,26 +85,25 @@ watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
 ```
-NAME                                                READY     STATUS    RESTARTS   AGE
-po/demo-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
-po/demo-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
-po/demo-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
-po/transport-kafka-68b986865b-6tsbk                 1/1       Running   3          11m
-po/transport-zookeeper-85fc6df85c-v6kxx             1/1       Running   0          11m
+NAME                                                   READY     STATUS    RESTARTS   AGE
+po/control-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
+po/control-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
+po/control-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
+po/transport-kafka-68b986865b-6tsbk                    1/1       Running   3          11m
+po/transport-zookeeper-85fc6df85c-v6kxx                1/1       Running   0          11m
 
-NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deploy/demo-riff-function-controller   1         1         1            1           5m
-deploy/demo-riff-http-gateway          1         1         1            1           5m
-deploy/demo-riff-topic-controller      1         1         1            1           5m
-deploy/transport-kafka                 1         1         1            1           11m
-deploy/transport-zookeeper             1         1         1            1           11m
+NAME                                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/control-riff-function-controller   1         1         1            1           5m
+deploy/control-riff-http-gateway          1         1         1            1           5m
+deploy/control-riff-topic-controller      1         1         1            1           5m
+deploy/transport-kafka                    1         1         1            1           11m
+deploy/transport-zookeeper                1         1         1            1           11m
 ```
 
 ### install the current riff CLI tool
 
 Starting with the 0.0.4 version we provide a CLI tool written in Go that makes it easy to create and deploy functions.
 Install the CLI by following the instructions on the [riff release page](https://github.com/projectriff/riff/releases).
-
 
 ## new function using node.js
 The steps below will create a JavaScript function from scratch. The same files are also available in the `square` [sample](https://github.com/projectriff/riff/blob/master/samples/node/square/) on GitHub.
@@ -133,15 +131,14 @@ watch -n 1 kubectl get functions,topics,pods,deployments
 
 ### trigger the function
 ```bash
-riff publish --namespace riff-system --input numbers --data 10 --reply
+riff publish --input numbers --data 10 --reply
 ```
 If `10` is the input to the square function, the response should be `100`.
 You can also abbreviate parameters as follows:
 
 ```bash
-riff publish --namespace riff-system -i numbers -d 10 -r
+riff publish -i numbers -d 10 -r
 ```
-With the latest riff CLI (after 0.0.4), omit `--namespace riff-system`.
 
 ### delete the function and topic
 
