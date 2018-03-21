@@ -112,12 +112,11 @@ helm install projectriff/kafka \
 Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
 
 ### install riff with RBAC
-Install the riff 0.0.4 helm chart on the `riff-system` namespace, with the release name `demo`.
+Install the riff 0.0.4 helm chart on the `riff-system` namespace, with the release name `control`.
 
 ```sh
 helm install projectriff/riff \
-  --version 0.0.4 \
-  --name demo \
+  --name control \
   --namespace riff-system
 ```
 
@@ -128,19 +127,19 @@ watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
 ```
-NAME                                                READY     STATUS    RESTARTS   AGE
-po/demo-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
-po/demo-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
-po/demo-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
-po/transport-kafka-68b986865b-6tsbk                 1/1       Running   3          11m
-po/transport-zookeeper-85fc6df85c-v6kxx             1/1       Running   0          11m
+NAME                                                   READY     STATUS    RESTARTS   AGE
+po/control-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
+po/control-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
+po/control-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
+po/transport-kafka-68b986865b-6tsbk                    1/1       Running   3          11m
+po/transport-zookeeper-85fc6df85c-v6kxx                1/1       Running   0          11m
 
-NAME                                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deploy/demo-riff-function-controller   1         1         1            1           5m
-deploy/demo-riff-http-gateway          1         1         1            1           5m
-deploy/demo-riff-topic-controller      1         1         1            1           5m
-deploy/transport-kafka                 1         1         1            1           11m
-deploy/transport-zookeeper             1         1         1            1           11m
+NAME                                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/control-riff-function-controller   1         1         1            1           5m
+deploy/control-riff-http-gateway          1         1         1            1           5m
+deploy/control-riff-topic-controller      1         1         1            1           5m
+deploy/transport-kafka                    1         1         1            1           11m
+deploy/transport-zookeeper                1         1         1            1           11m
 ```
 
 At this point you can continue creating your function as described in [getting started on GKE](../getting-started-on-gke/#new-function-using-nodejs) (without RBAC).
