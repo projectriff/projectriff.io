@@ -112,7 +112,7 @@ helm install projectriff/kafka \
 Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
 
 ### install riff with RBAC
-Install the riff 0.0.4 helm chart on the `riff-system` namespace, with the release name `control`.
+Install the riff helm chart on the `riff-system` namespace, with the release name `control`.
 
 ```sh
 helm install projectriff/riff \

@@ -102,8 +102,11 @@ deploy/transport-zookeeper                1         1         1            1    
 
 ### install the current riff CLI tool
 
-Starting with the 0.0.4 version we provide a CLI tool written in Go that makes it easy to create and deploy functions.
-Install the CLI by following the instructions on the [riff release page](https://github.com/projectriff/riff/releases).
+The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go development environment, you can use 'go get' to build and install into $GOPATH/bin as follows.
+
+```
+go get github.com/projectriff/riff
+```
 
 ## new function using node.js
 The steps below will create a JavaScript function from scratch. The same files are also available in the `square` [sample](https://github.com/projectriff/riff/blob/master/samples/node/square/) on GitHub.
