@@ -22,7 +22,7 @@ feature_row:
 
 {% include feature_row %}
 
-{% for post in site.posts reversed %}
+{% for post in site.posts %}
   {% include archive-single.html %}
 {% endfor %}
 
