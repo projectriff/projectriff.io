@@ -1,0 +1,25 @@
+---
+layout: archive
+permalink: /invokers/
+title: "Invokers"
+---
+
+<ul>
+{% for invoker in site.invokers %}
+  
+  {% assign release = invoker.releases | sort: 'date', 'last' | first %}
+  {% if release %}
+  {% else %}
+    {% assign release = invoker.development %}
+  {% endif %}
+
+  <li>
+    <h3><a href="{{ invoker.url }}">{{ invoker.title }}</a></h3>
+    <div>{{ invoker.name }} by {{ invoker.author }}</div>
+    {% include invoker_release.html release=release %}
+    <div>
+      {{ invoker.excerpt }}
+    </div>
+  </li>
+{% endfor %}
+</ul>

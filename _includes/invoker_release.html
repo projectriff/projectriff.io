@@ -1,0 +1,18 @@
+
+{% assign release = include.release %}
+
+{% if release %}
+  <div>
+    <h4>
+      {% if release.version %}
+        <strong>{{ release.version }}</strong>
+      {% else %}
+        Development
+      {% endif %}
+      {% if release.date %}
+        released {{ release.date }}
+      {% endif %}
+    </h4>
+    <code style="white-space: pre;">riff invokers apply -f {{ release.href }}</code>
+  </div>
+{% endif %}

@@ -5,6 +5,8 @@ main:
     url: /docs/getting-started-on-minikube/
   - title: "Video"
     url: /video/mark-fisher-at-springone-platform-2017/
+  - title: "Invokers"
+    url: /invokers/
 
 # documentation links
 docs:
