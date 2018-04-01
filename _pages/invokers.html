@@ -1,25 +1,16 @@
 ---
-layout: archive
+layout: single
 permalink: /invokers/
 title: "Invokers"
+header:
+  overlay_image: /images/invokers.jpg
+sidebar:
+  nav: "docs"
 ---
 
+<h1>{{ page.title }}</h1>
 <ul>
 {% for invoker in site.invokers %}
-  
-  {% assign release = invoker.releases | sort: 'date', 'last' | first %}
-  {% if release %}
-  {% else %}
-    {% assign release = invoker.development %}
-  {% endif %}
-
-  <li>
-    <h3><a href="{{ invoker.url }}">{{ invoker.title }}</a></h3>
-    <div>{{ invoker.name }} by {{ invoker.author }}</div>
-    {% include invoker_release.html release=release %}
-    <div>
-      {{ invoker.excerpt }}
-    </div>
-  </li>
+  <li><a href="{{ invoker.url }}">{{ invoker.title }}</a></li>
 {% endfor %}
 </ul>

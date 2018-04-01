@@ -25,7 +25,6 @@ collections:
     permalink: /:collection/:path/
   invokers:
     output: true
-    layout: invoker
     permalink: /:collection/:name/
 
 defaults:
@@ -45,7 +44,13 @@ defaults:
       path: ""
       type: invokers
     values:
-      layout: invoker
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      sidebar:
+        nav: "docs"
 
 include:
   - _pages
