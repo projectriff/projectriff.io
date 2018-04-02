@@ -7,8 +7,8 @@ plugins:
 
 title: riff is for functions
 icon-image: "/images/riff.png"
-url: "https://projectriff.io"
-repository: "projectriff/projectriff.io"
+url: "https://jldec.projectriff.io"
+repository: "jldec/invokers"
 description: "riff is for functions"
 
 twitter:
