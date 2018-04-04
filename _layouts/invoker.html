@@ -3,7 +3,10 @@ layout: single
 ---
 
 {% assign invoker = page %}
-{% assign latest = invoker.releases | sort: 'date', 'last' | first %}
+
+{% if invoker.releases %}
+  {% assign latest = invoker.releases | sort: 'date', 'last' | first %}
+{% endif %}
 {% assign development = invoker.development %}
 
 <h2>Install {{ invoker.name }}</h2>
