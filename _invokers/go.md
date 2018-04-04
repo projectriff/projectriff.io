@@ -1,6 +1,6 @@
 ---
 name: go
-title: "Go Function Invoker"
+title: "Go Invoker"
 author: projectriff
 href: https://github.com/projectriff/go-function-invoker
 development:
@@ -11,6 +11,8 @@ releases: [
   #   date: 2000-01-01
 ]
 ---
+
+*by [{{page.author}}]({{ page.href }})*
 
 The go function invoker provides a Docker base layer for a function built as a [Go plugin](https://golang.org/pkg/plugin/).
 It accepts gRPC requests, invokes the command for each request in the input stream,

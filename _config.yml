@@ -49,6 +49,8 @@ defaults:
       author_profile: false
       share: false
       comments: false
+      header:
+        overlay_image: /images/invokers.jpg
       sidebar:
         nav: "docs"
 

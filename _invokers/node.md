@@ -1,6 +1,6 @@
 ---
 name: node
-title: "Node Function Invoker"
+title: "Node Invoker"
 author: projectriff
 href: https://github.com/projectriff/node-function-invoker
 development:
@@ -11,6 +11,8 @@ releases: [
 #     date: 2000-01-01
 ]
 ---
+
+*by [{{page.author}}]({{ page.href }})*
 
 The node function invoker provides a Docker base layer for a function consisting of a single NodeJS module.
 It accepts gRPC requests, invokes the command for each request in the input stream, and sends the command's output to the stream of gRPC responses.

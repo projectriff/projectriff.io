@@ -1,6 +1,6 @@
 ---
 name: java
-title: "Java Function Invoker"
+title: "Java Invoker"
 author: projectriff
 href: https://github.com/projectriff/java-function-invoker
 development:
@@ -11,6 +11,8 @@ releases: [
   #   date: 2000-01-01
 ]
 ---
+
+*by [{{page.author}}]({{ page.href }})*
 
 With the `riff` CLI you need to provide an archive location with `-a`
 and a handler specification with `--handler`. The archive is a jar

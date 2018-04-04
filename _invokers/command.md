@@ -1,6 +1,6 @@
 ---
 name: command
-title: "Command Function Invoker"
+title: "Command Invoker"
 author: projectriff
 href: https://github.com/projectriff/command-function-invoker
 development:
@@ -11,6 +11,8 @@ releases: [
   #   date: 2000-01-01
 ]
 ---
+
+*by [{{page.author}}]({{ page.href }})*
 
 The command function invoker provides a Docker base layer for a function consisting of a single command.
 

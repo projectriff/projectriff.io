@@ -29,7 +29,7 @@ docs:
         url: /invokers/java/
       - title: "Node"
         url: /invokers/node/
-      - title: "Python2"
+      - title: "Python 2"
         url: /invokers/python2/
-      - title: "Python3"
+      - title: "Python 3"
         url: /invokers/python3/

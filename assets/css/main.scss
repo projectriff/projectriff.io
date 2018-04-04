@@ -53,3 +53,7 @@ div.highlighter-rouge:before, figure.highlight:before {
   border: 1px solid #eee;
   margin: 0 auto;
 }
+
+.hide-excerpt :first-child {
+  display: none !important;
+}
