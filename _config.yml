@@ -44,7 +44,7 @@ defaults:
       path: ""
       type: invokers
     values:
-      layout: single
+      layout: invoker
       read_time: false
       author_profile: false
       share: false

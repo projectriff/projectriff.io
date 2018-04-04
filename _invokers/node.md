@@ -6,32 +6,14 @@ href: https://github.com/projectriff/node-function-invoker
 development:
   href: https://github.com/projectriff/node-function-invoker/raw/master/node-invoker.yaml
 releases: [
-  # - version: v0.0.6
-  #   href: https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
-  #   date: 2000-01-01
+#   - version: v0.0.6
+#     href: https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
+#     date: 2000-01-01
 ]
 ---
 
 The node function invoker provides a Docker base layer for a function consisting of a single NodeJS module.
 It accepts gRPC requests, invokes the command for each request in the input stream, and sends the command's output to the stream of gRPC responses.
-
-## Install
-
-To install as a riff invoker:
-
-```sh
-riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/master/node-invoker.yaml
-```
-
-> To install a specific version replace `master` in the URL with the version tag, like `v0.0.6`.
-
-or, after getting the source:
-
-```sh
-riff invokers apply -f ./node-invoker.yaml
-```
-
-See [riff invokers apply](https://github.com/projectriff/riff/blob/master/riff-cli/docs/riff_invokers_apply.md) command docs for detail.
 
 ## Functions
 

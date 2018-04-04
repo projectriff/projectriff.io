@@ -12,14 +12,6 @@ releases: [
 ]
 ---
 
-## Install as a riff invoker
-
-```bash
-riff invokers apply https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
-```
-
-## Usage
-
 With the `riff` CLI you need to provide an archive location with `-a`
 and a handler specification with `--handler`. The archive is a jar
 file, which can be shaded with all required dependencies, or it can be

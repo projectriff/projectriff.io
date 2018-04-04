@@ -15,9 +15,3 @@ releases: [
 The go function invoker provides a Docker base layer for a function built as a [Go plugin](https://golang.org/pkg/plugin/).
 It accepts gRPC requests, invokes the command for each request in the input stream,
 and sends the command's output to the stream of gRPC responses.
-
-## Install as a riff invoker
-
-```bash
-riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/master/go-invoker.yaml
-```

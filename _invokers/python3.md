@@ -16,10 +16,3 @@ The Python 3 function invoker, as the name implies, supports functions written i
 For messages containing `Content-Type:application/json`, the bytes payload is converted to a dict. Reflection is used to convert the return value. Currently only UTF-8 encoding is supported.
 
 Supported Python Version: 3.6.x
-
-## Install as a riff invoker
-
-```bash
-riff invokers apply -f https://github.com/projectriff/python3-function-invoker/raw/master/python3-invoker.yaml
-```
-

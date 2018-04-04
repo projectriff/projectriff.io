@@ -16,9 +16,3 @@ The command function invoker provides a Docker base layer for a function consist
 
 It accepts gRPC requests, invokes the command for each request in the input stream,
 and sends the command's output to the stream of gRPC responses.
-
-## Install as a riff invoker
-
-```bash
-riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/master/command-invoker.yaml
-```

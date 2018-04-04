@@ -3,23 +3,12 @@ layout: single
 ---
 
 {% assign invoker = page %}
-{% assign release = invoker.releases | sort: 'date', 'last' | first %}
-{% assign previous_releases = invoker.releases | sort: 'date', 'last' | slice: 1 %}
+{% assign latest = invoker.releases | sort: 'date', 'last' | first %}
+{% assign development = invoker.development %}
 
-<div>{{ invoker.name }} by {{ invoker.author }}</div>
-{% include invoker_release.html release=release %}
-{% include invoker_release.html release=invoker.development %}
-<div>
-  {{ content }}
-  <p>
-    <a href="{{ invoker.href }}">Read more</a>
-  </p>
-</div>
-{% if previous_releases != empty %}
-  <h3>Previous releases</h3>
-  {% for release in previous_releases %}
-    {% include invoker_release.html release=release %}
-  {% endfor %}
-{% endif %}
+<h2>Install {{ invoker.name }} as a riff invoker</h2>
+{% include invoker_release.html release=latest %}
+{% include invoker_release.html release=development %}
 
-
+<h2>Overview</h2>
+{{ content }}

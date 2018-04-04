@@ -5,14 +5,19 @@
   <div>
     <h4>
       {% if release.version %}
-        <strong>{{ release.version }}</strong>
+        {{ release.version }}
       {% else %}
         Development
       {% endif %}
       {% if release.date %}
-        released {{ release.date }}
+        - {{ release.date | date: '%B %d, %Y' }}
       {% endif %}
     </h4>
-    <code style="white-space: pre;">riff invokers apply -f {{ release.href }}</code>
+
+    <div class="language-bash highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight"><code>riff invokers apply -f {{ release.href }}</code></pre>
+      </div>
+    </div>
   </div>
 {% endif %}
