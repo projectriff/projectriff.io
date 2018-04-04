@@ -8,9 +8,7 @@ sidebar:
   nav: "docs"
 ---
 
-<h1>{{ page.title }}</h1>
-<ul>
+# {{ page.title }}
+
 {% for invoker in site.invokers %}
-  <li><a href="{{ invoker.url }}">{{ invoker.title }}</a></li>
-{% endfor %}
-</ul>
+- [{{ invoker.title }}]({{ invoker.url }}){% endfor %}
