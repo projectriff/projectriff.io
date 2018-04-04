@@ -6,6 +6,8 @@ layout: single
 {% assign latest = invoker.releases | sort: 'date', 'last' | first %}
 {% assign development = invoker.development %}
 
+<em>by <a href="{{ invoker.href }}">{{invoker.author}}</a></em>
+
 <h2>Install {{ invoker.name }} as a riff invoker</h2>
 {% include invoker_release.html release=latest %}
 {% include invoker_release.html release=development %}
