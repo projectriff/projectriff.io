@@ -23,6 +23,9 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path/
+  invokers:
+    output: true
+    permalink: /:collection/:name/
 
 defaults:
   # _docs
@@ -35,6 +38,19 @@ defaults:
       author_profile: false
       share: false
       comments: false
+      sidebar:
+        nav: "docs"
+  - scope:
+      path: ""
+      type: invokers
+    values:
+      layout: invoker
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      header:
+        overlay_image: /images/invokers.jpg
       sidebar:
         nav: "docs"
 

@@ -5,6 +5,7 @@ To make changes, please submit a pull request. Merged changes will automatically
 
 - Docs live under `_docs`.
 - Blog posts live under `_posts`.
+- Invokers live under `_invokers`.
 - Other pages like the home page live under `_pages`
 
 ### to build and preview the site locally

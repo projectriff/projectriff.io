@@ -1,0 +1,23 @@
+
+{% assign release = include.release %}
+
+{% if release %}
+  <div>
+    <h4>
+      {% if release.version %}
+        {{ release.version }}
+      {% else %}
+        Development
+      {% endif %}
+      {% if release.date %}
+        - {{ release.date | date: '%B %d, %Y' }}
+      {% endif %}
+    </h4>
+
+    <div class="language-bash highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight"><code>riff invokers apply -f {{ release.href }}</code></pre>
+      </div>
+    </div>
+  </div>
+{% endif %}

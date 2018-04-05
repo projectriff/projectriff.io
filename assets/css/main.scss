@@ -20,12 +20,12 @@ body {
 
 .feature__wrapper .archive__item-teaser img {
   width: 75%;
-  max-width: 220px;
+  max-width: 200px;
 }
 
 .feature__wrapper .archive__item-excerpt {
   margin-top: 1em;
-  font-size: 1em;
+  font-size: 0.8em;
 }
 
 .masthead {
@@ -52,4 +52,8 @@ div.highlighter-rouge:before, figure.highlight:before {
   display:block;
   border: 1px solid #eee;
   margin: 0 auto;
+}
+
+.hide-excerpt :first-child {
+  display: none !important;
 }

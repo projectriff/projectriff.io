@@ -1,0 +1,19 @@
+---
+layout: single
+---
+
+{% assign invoker = page %}
+
+{% if invoker.releases %}
+  {% assign latest = invoker.releases | sort: 'date', 'last' | first %}
+{% endif %}
+{% assign development = invoker.development %}
+
+<h2>Install {{ invoker.name }}</h2>
+{% include invoker_release.html release=latest %}
+{% include invoker_release.html release=development %}
+
+<h2>Overview</h2>
+<div class="hide-excerpt">
+  {{ content }}
+</div>

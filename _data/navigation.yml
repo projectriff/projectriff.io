@@ -1,8 +1,10 @@
 main:
+  - title: "Getting Started"
+    url: /docs/getting-started-on-minikube/
+  - title: "Invokers"
+    url: /invokers/
   - title: "Blog"
     url: /blog/
-  - title: "Docs"
-    url: /docs/getting-started-on-minikube/
   - title: "Video"
     url: /video/mark-fisher-at-springone-platform-2017/
 
@@ -16,3 +18,18 @@ docs:
         url: /docs/getting-started-on-gke/
       - title: "with RBAC"
         url: /docs/running-on-gke-with-rbac/
+  - title: Invokers
+    url: /invokers/
+    children:
+      - title: "Command"
+        url: /invokers/command/
+      - title: "Go"
+        url: /invokers/go/
+      - title: "Java"
+        url: /invokers/java/
+      - title: "Node"
+        url: /invokers/node/
+      - title: "Python 2"
+        url: /invokers/python2/
+      - title: "Python 3"
+        url: /invokers/python3/
