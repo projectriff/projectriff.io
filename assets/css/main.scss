@@ -54,6 +54,6 @@ div.highlighter-rouge:before, figure.highlight:before {
   margin: 0 auto;
 }
 
-.hide-excerpt :first-child {
+.hide-excerpt > :first-child {
   display: none !important;
 }
