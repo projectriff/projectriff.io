@@ -57,47 +57,37 @@ helm repo update
 ```
 Watch kubectl for tiller to start running.
 
-### install kafka
-Install kafka on the `riff-system` namespace, with the release name `transport`.
-
-```sh
-kubectl create namespace riff-system
-helm install projectriff/kafka \
-  --name transport \
-  --namespace riff-system
-```
-Watch kubectl for kafka to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start first.
-
-### install riff
-Install riff on the same `riff-system` namespace, with the release name `control`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
+### install riff and kafka
+Install riff and kafka together on the same `riff-system` namespace, with the release name `projectriff`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
 
 ```sh
 helm install projectriff/riff \
-  --name control \
+  --name projectriff \
   --namespace riff-system \
+  --set kafka.create=true \
   --set rbac.create=false \
   --set httpGateway.service.type=NodePort
 ```
-Watch the riff-system namespace with kubectl, and wait for the riff http-gateway, topic-controller, and function-controller to start running.
+Watch the riff-system namespace with kubectl, and wait for zookeeper, kafka, the riff http-gateway, topic-controller, and function-controller to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start. It is normal for the kafka broker and the other riff components to fail and re-start while waiting.
 
 ```
 watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
 ```
-NAME                                                   READY     STATUS    RESTARTS   AGE
-po/control-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
-po/control-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
-po/control-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
-po/transport-kafka-68b986865b-6tsbk                    1/1       Running   3          11m
-po/transport-zookeeper-85fc6df85c-v6kxx                1/1       Running   0          11m
+NAME                                                       READY     STATUS    RESTARTS   AGE
+po/projectriff-riff-function-controller-7d959dbf4f-p7pnz   1/1       Running   0          5m
+po/projectriff-riff-http-gateway-666bb96d6c-hzmvn          1/1       Running   0          5m
+po/projectriff-riff-topic-controller-dcf76d565-mw6th       1/1       Running   0          5m
+po/projectriff-kafka-68b986865b-6tsbk                      1/1       Running   3          11m
+po/projectriff-zookeeper-85fc6df85c-v6kxx                  1/1       Running   0          11m
 
-NAME                                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deploy/control-riff-function-controller   1         1         1            1           5m
-deploy/control-riff-http-gateway          1         1         1            1           5m
-deploy/control-riff-topic-controller      1         1         1            1           5m
-deploy/transport-kafka                    1         1         1            1           11m
-deploy/transport-zookeeper                1         1         1            1           11m
+NAME                                          DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/projectriff-riff-function-controller   1         1         1            1           5m
+deploy/projectriff-riff-http-gateway          1         1         1            1           5m
+deploy/projectriff-riff-topic-controller      1         1         1            1           5m
+deploy/projectriff-kafka                      1         1         1            1           11m
+deploy/projectriff-zookeeper                  1         1         1            1           11m
 ```
 
 ### install the current riff CLI tool
@@ -106,6 +96,18 @@ The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is avai
 
 ```
 go get github.com/projectriff/riff
+```
+
+## install invokers
+Starting in v0.0.6, riff invoker resources are installed separately from riff.
+
+```bash
+riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.6/go-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/python2-function-invoker/raw/v0.0.6/python2-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/python3-function-invoker/raw/v0.0.6/python3-invoker.yaml
 ```
 
 ## new function using node.js
@@ -121,7 +123,7 @@ module.exports = (x) => x ** 2
 Run the following command from the same directory where the above function file is created:
 
 ```bash
-riff create --name square --input numbers --filepath .
+riff create node --name square --input numbers --filepath .
 ```
 This command will initialize the function, creating a `Dockerfile` and YAML files `square-function.yaml` and `square-topics.yaml` 
 defining the Kubernetes resources for the function and topics respectively. It will also build the docker image and apply the Kubernetes function and topics resources to the cluster.
