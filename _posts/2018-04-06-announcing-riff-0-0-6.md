@@ -4,7 +4,7 @@ title: "Announcing riff v0.0.6"
 header:
   overlay_image: /images/boathouse.jpg
 excerpt:
-  Installable invokers, resource yaml API version change!
+  Installable invokers, node message type, resource yaml API version change!
 permalink: /blog/announcing-riff-0-0-6/
 ---
 
@@ -59,7 +59,7 @@ To install the latest available invokers, run the following CLI commands or refe
 ```bash
 riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.2/go-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/0.0.5-sr.1/java-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/python2-function-invoker/raw/v0.0.6/python2-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/python3-function-invoker/raw/v0.0.6/python3-invoker.yaml
@@ -71,7 +71,7 @@ To generate a Dockerfile and yaml resources for an invoker, specify the invoker 
 riff create node
 ```
 
-## node invoker 'message' type
+## node 'message' type
 
 JavaScript functions that need to interact with headers can now opt to receive and/or produce messages. A message is an object that contains both headers and a payload. Message headers are a map with case-insensitive keys and multiple string values.
 
@@ -81,7 +81,7 @@ Since JavaScript and Node have no built-in type for messages or headers, riff us
 npm install --save @projectriff/message
 ```
 
-### Receiving messages
+### receiving messages
 
 ```js
 const { Message } = require('@projectriff/message');
@@ -99,7 +99,7 @@ module.exports.$argumentType = 'message';
 Message.install();
 ```
 
-### Producing messages
+### producing messages
 
 ```js
 const { Message } = require('@projectriff/message');
@@ -136,7 +136,7 @@ could not find Riff topic 'nosuchrifftopic'
 
 Note that, for now, Functions will run only in the 'default' k8s namespace.
 
-## foundations for a new autoscaler
+## foundations for new autoscaler
 
 Prior to v0.0.6, the function-controller scaled up the number of replicas of a function pod in response to changes in producer and consumer offsets in the input topic. The 0.0.6 autoscaler reproduces this behaviour but, instead of using offsets, uses the queue length together with production and consumption metrics from the topic. This is a step towards enabling riff to support message brokers other than Kafka. We also factored out the autoscaler subcomponent in the code, and introduced a workload simulator to measure the autoscaler behaviour as a baseline for future improvements.
 
