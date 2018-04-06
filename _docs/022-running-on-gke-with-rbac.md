@@ -109,7 +109,7 @@ helm install projectriff/riff \
   --namespace riff-system \
   --set kafka.create=true
 ```
-Watch the riff-system namespace with kubectl, and wait for zookeeper, kafka, the riff http-gateway, topic-controller, and function-controller to start running. You may need to wait a minute for the container images to be pulled, and for zookeeper to start. It is normal for the kafka broker and the other riff components to fail and re-start while waiting.
+Watch the riff-system namespace with kubectl. You may need to wait a minute for the container images to be pulled, and for zookeeper to start. It is normal for the kafka broker and the other riff components to fail and re-start while waiting.
 
 ```
 watch -n 1 kubectl get po,deploy --namespace riff-system
@@ -137,7 +137,7 @@ Starting in v0.0.6, riff invoker resources are installed separately from riff.
 
 ```bash
 riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.6/go-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.2/go-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/python2-function-invoker/raw/v0.0.6/python2-invoker.yaml

@@ -15,8 +15,8 @@ who contributed on this effort.
 
 We recommend [installing](/docs/) riff v0.0.6 on a fresh Kubernetes cluster. The latest Helm chart has an option to deploy riff together with Kafka. If you played with previous riff releases, remember to install the [latest riff CLI](https://github.com/projectriff/riff/releases) as well.
 
-## api Version change
-If you have existing functions and topics, and prefer not to regenerate the yaml for these using the latest CLI, you will need to set the `apiVersion` in the yaml to `projectriff.io/v1alpha1`. E.g.
+## api version change
+If you have existing functions and topics, and prefer not to regenerate the yaml for these using the latest CLI, you will need to change the `apiVersion` in the yaml to `projectriff.io/v1alpha1`. E.g.
 
 ```yaml
 ---
@@ -35,7 +35,11 @@ Dockerfiles should not require any changes for this release.
 
 
 ## installable invokers
-Starting in v0.0.6, riff [invokers](/invokers/) are installable Kubernetes resources. The yaml file for an invoker can come from a file on disk or from a URL. This allows users to add new invokers without changes to the CLI. The riff CLI has been extended with `riff invokers` sub-commands. 
+Starting in v0.0.6, riff [invokers](/invokers/) are installable Kubernetes resources.
+
+This invoker separation is the first step toward future enhancements such as invoker-specific configuration, validation, and, dynamic loading of functions into pre-warmed invoker containers.
+
+The yaml file for an invoker can come from a file on disk or from a URL. This allows users to add new invokers without changes to the CLI. The riff CLI has been extended with `riff invokers` sub-commands.
 
 ```
 $ riff invokers --help
@@ -48,34 +52,77 @@ Available Commands:
   apply       Install or update an invoker in the cluster
   delete      Remove an invoker from the cluster
   list        List invokers in the cluster
-
-Flags:
-  -h, --help   help for invokers
-
-Global Flags:
-      --config string   config file (default is $HOME/.riff.yaml)
-
-Use "riff invokers [command] --help" for more information about a command.
 ```
 
 To install the latest available invokers, run the following CLI commands or refer to the [invoker docs](/invokers/).
 
 ```bash
 riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.6/go-invoker.yaml
+riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.2/go-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/v0.0.6/node-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/python2-function-invoker/raw/v0.0.6/python2-invoker.yaml
 riff invokers apply -f https://github.com/projectriff/python3-function-invoker/raw/v0.0.6/python3-invoker.yaml
 ```
 
-This invoker separation is also the first step toward future enhancements such as invoker-specific configuration, validation, and, dynamic loading of functions into pre-warmed invoker containers. 
+To generate a Dockerfile and yaml resources for an invoker, specify the invoker with 'riff init' or 'riff create' E.g.
+
+```bash
+riff create node
+```
+
+## node invoker 'message' type
+
+JavaScript functions that need to interact with headers can now opt to receive and/or produce messages. A message is an object that contains both headers and a payload. Message headers are a map with case-insensitive keys and multiple string values.
+
+Since JavaScript and Node have no built-in type for messages or headers, riff uses the [@projectriff/message](https://github.com/projectriff/node-message/) npm module. To use messages, functions should install the `@projectriff/message` package:
+
+```bash
+npm install --save @projectriff/message
+```
+
+### Receiving messages
+
+```js
+const { Message } = require('@projectriff/message');
+
+// a function that accepts a message, which is an instance of Message
+module.exports = message => {
+    const authorization = message.headers.getValue('Authorization');
+    ...
+};
+
+// tell the invoker the function wants to receive messages
+module.exports.$argumentType = 'message';
+
+// tell the invoker to produce this particular type of message
+Message.install();
+```
+
+### Producing messages
+
+```js
+const { Message } = require('@projectriff/message');
+
+const instanceId = Math.round(Math.random() * 10000);
+let invocationCount = 0;
+
+// a function that produces a Message
+module.exports = name => {
+    return Message.builder()
+        .addHeader('X-Riff-Instance', instanceId)
+        .addHeader('X-Riff-Count', invocationCount++)
+        .payload(`Hello ${name}!`)
+        .build();
+};
+
+// even if the function receives payloads, it can still produce a message
+module.exports.$argumentType = 'payload';
+```
 
 
-## node function invoker access to header and payload with Message type
-
-## improved error handling on the http-gateway
-We’ve updated the http-gateway to validate the existence of riff topics before sending messages (as distinct from Kafka topics). You will now see 404s if you try to send a message or request which refers to an unknown topic:
+## http-gateway topic validation
+We’ve updated the http-gateway to validate topics and return an HTTP 404 error when it receives a message or request on an unknown topic endpoint.
 
 ```
 $ riff publish --input nosuchrifftopic --data "404 From Message"
@@ -86,6 +133,8 @@ riff publish --input nosuchrifftopic --data "404 From Request" --reply
 Posting to http://192.168.39.148:32508/requests/nosuchrifftopic
 could not find Riff topic 'nosuchrifftopic'
 ```
+
+Note that, for now, Functions will run only in the 'default' k8s namespace.
 
 ## foundations for a new autoscaler
 
