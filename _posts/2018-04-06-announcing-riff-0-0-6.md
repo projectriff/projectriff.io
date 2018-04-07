@@ -4,7 +4,7 @@ title: "Announcing riff v0.0.6"
 header:
   overlay_image: /images/boathouse.jpg
 excerpt:
-  Installable invokers, node message type, resource yaml API version change!
+  With installable invokers, node message type, and more.
 permalink: /blog/announcing-riff-0-0-6/
 ---
 
