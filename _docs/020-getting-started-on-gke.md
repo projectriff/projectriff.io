@@ -150,7 +150,7 @@ docker login
 Run the following command from the same directory where the above function file is created:
 
 ```bash
-riff create --name square --input numbers --filepath .  --push
+riff create node --name square --input numbers --filepath .  --push
 ```
 This command will initialize the function, creating a `Dockerfile` and YAML files `square-function.yaml` and `square-topics.yaml` 
 defining the Kubernetes resources for the function and topics respectively. It will also build the docker image, push it to DockerHub and then apply the Kubernetes function and topics resources to the cluster.
