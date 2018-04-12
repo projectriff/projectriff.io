@@ -92,11 +92,7 @@ deploy/projectriff-zookeeper                  1         1         1            1
 
 ### install the current riff CLI tool
 
-The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page or, if you have a go development environment, you can use 'go get' to build and install into $GOPATH/bin as follows.
-
-```
-go get github.com/projectriff/riff
-```
+The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page.
 
 ## install invokers
 Starting in v0.0.6, riff invoker resources are installed separately from riff.
@@ -125,7 +121,7 @@ Run the following command from the same directory where the above function file 
 ```bash
 riff create node --name square --input numbers --filepath .
 ```
-This command will initialize the function, creating a `Dockerfile` and YAML files `square-function.yaml` and `square-topics.yaml` 
+This command will initialize the function, creating a `Dockerfile` and YAML files `square-function.yaml` and `square-topics.yaml`
 defining the Kubernetes resources for the function and topics respectively. It will also build the docker image and apply the Kubernetes function and topics resources to the cluster.
 
 ### watch for functions and topics in the default namespace
