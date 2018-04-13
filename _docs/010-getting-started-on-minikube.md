@@ -31,7 +31,7 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 ### start your minikube cluster
 
 **NOTE:** _Beginning with Minikube v0.26.0 the default bootstrapper has changed to kubeadm which enables RBAC.
-Since our instructions currently depends on RBAC not beeing enabled you should use the localkube bootstrapper
+Since our instructions currently depend on RBAC not being enabled you should use the localkube bootstrapper
 when creating the cluster._
 
 ```sh
