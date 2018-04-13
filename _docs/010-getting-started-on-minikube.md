@@ -29,9 +29,15 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
 ### start your minikube cluster
+
+**NOTE:** _Beginning with Minikube v0.26.0 the default bootstrapper has changed to kubeadm which enables RBAC.
+Since our instructions currently depend on RBAC not being enabled you should use the localkube bootstrapper
+when creating the cluster._
+
 ```sh
-minikube start --memory=4096
+minikube start --memory=4096 --bootstrapper=localkube
 ```
+
 Once minikube is running you can open a browser-based dashboard with `minikube dashboard`.
 
 ### configure docker to build containers in minikube
