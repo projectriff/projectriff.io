@@ -13,11 +13,16 @@ redirect_from:
 ### TL;DR
 1. install docker, kubectl, minikube, and helm
 2. monitor your riff cluster with watch and kubectl
-3. install kafka using a helm chart
-4. install riff using a helm chart
-5. create a sample function
-6. publish an event to trigger the sample function
-7. delete the sample function
+3. install riff and kafka using a helm chart
+4. create a sample function
+5. publish an event to trigger the sample function
+6. delete the sample function
+
+> **NOTE**: The Kubernetes community is promoting the use of RBAC for all clusters.
+Starting with with Minikube v0.26.0 the default for Minikube is to use the kubeadm bootstrapper which enables RBAC.
+The older localkube bootstrapper is now deprecated.
+The following instructions assume that your cluster is running with RBAC enabled.
+It is still possible to install riff without RBAC roles by adding a `--set rbac.create=false` option when installing the riff chart.
 
 ### install docker
 Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
@@ -30,12 +35,8 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 
 ### start your minikube cluster
 
-**NOTE:** _Beginning with Minikube v0.26.0 the default bootstrapper has changed to kubeadm which enables RBAC.
-Since our instructions currently depend on RBAC not being enabled you should use the localkube bootstrapper
-when creating the cluster._
-
 ```sh
-minikube start --memory=4096 --bootstrapper=localkube
+minikube start --memory=4096 --bootstrapper=kubeadm
 ```
 
 Once minikube is running you can open a browser-based dashboard with `minikube dashboard`.
@@ -49,34 +50,47 @@ eval $(minikube docker-env)
 
 ### monitor your minikube
 At this point it is useful to monitor your minikube using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
-```
+```sh
 brew install watch
 watch -n 1 kubectl get pods,deployments --all-namespaces
 ```
 
 ### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller") in minikube, and point helm to the riff-charts repo.
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, point helm to the riff-charts repo.
+
 ```sh
-helm init
 helm repo add projectriff https://riff-charts.storage.googleapis.com
 helm repo update
 ```
+
+### start the helm server (tiller) with RBAC
+
+The Helm project describes the [Best Practices for Securing Helm and Tiller](https://docs.helm.sh/using_helm/#best-practices-for-securing-helm-and-tiller) in their documentation. This can be fairly involved and for less critical development clusters it is easier to configure the Helm tiller server to run with cluster-admin privileges using a service account in the `kube-system` namespace.
+
+The following commands will install the Helm tiller server to run with cluster-admin privileges.
+
+```sh
+kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account=tiller
+```
+
 Watch kubectl for tiller to start running.
 
 ### install riff and kafka
-Install riff and kafka together on the same `riff-system` namespace, with the release name `projectriff`. For minikube you can turn off RBAC, and use a NodePort for the HTTP gateway.
+Install riff and kafka together on the same `riff-system` namespace, with the release name `projectriff`. For minikube you should use a NodePort for the HTTP gateway.
 
 ```sh
 helm install projectriff/riff \
   --name projectriff \
   --namespace riff-system \
   --set kafka.create=true \
-  --set rbac.create=false \
   --set httpGateway.service.type=NodePort
 ```
+
 Watch the riff-system namespace with kubectl. You may need to wait a minute for the container images to be pulled, and for zookeeper to start. It is normal for the kafka broker and the other riff components to fail and re-start while waiting.
 
-```
+```sh
 watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 

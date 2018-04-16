@@ -10,8 +10,7 @@ redirect_from:
   - /docs/
 ---
 
-The following will help you get started on GKE without [RBAC](https://kubernetes.io/docs/admin/authorization/rbac/).  
-See [here](/docs/running-on-gke-with-rbac/) for instructions with RBAC.
+The following will help you get started on GKE with [RBAC](https://kubernetes.io/docs/admin/authorization/rbac/).  
 
 ### TL;DR
 1. select a Project in the Google Cloud console, install gcloud and kubectl
@@ -19,11 +18,16 @@ See [here](/docs/running-on-gke-with-rbac/) for instructions with RBAC.
 3. configure credentials to target the GKE cluster from kubectl
 4. remove the CPU request limit for containers in the new cluster
 5. install helm
-6. install kafka and riff on the GKE cluster using helm charts
+6. install kafka and riff on the GKE cluster using a helm chart
 7. install Docker and create a Docker ID
 8. build one of the sample functions
 9. apply the function and topic resource definitions to Kubernetes
 10. send an event to the topic to trigger the function
+
+> **NOTE**: The Kubernetes community is promoting the use of RBAC for all clusters.
+Starting with with Kubernetes v1.8.x the default for GKE is to run with RBAC enabled.
+The following instructions assume that your cluster is running with RBAC enabled.
+It is still possible to install riff without RBAC roles by adding a `--set rbac.create=false` option when installing the riff chart.
 
 ### create a Google Cloud project
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top.
@@ -31,64 +35,95 @@ A project is required to consume any Google Cloud services, including GKE cluste
 ### install gcloud
 Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project.
 
-```
+```sh
 gcloud init
 ```
 
 ### install kubectl
 [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters like GKE. If you don't already have kubectl on your machine, you can use gcloud to install it.
 
-```
+```sh
 gcloud components install kubectl
 ```
 
 ### create a GKE cluster
-Look for [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) in the console, and create a new cluster. The minimum configuration for riff on GKE is single node cluster with 2 vCPUs and 7.5GB memory. Using the default 1.7x version of Kubernetes without RBAC will simplify the configuration.
+Look for [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) in the console, and create a new cluster. Select a Cluster Version of 1.8+ or later with "Legacy Authorization" disabled to enable RBAC. The minimum configuration for riff on GKE is single node cluster with 2 vCPUs and 7.5GB memory.
 
 ![small GKE cluster in console](/images/gke-small-cluster.png)
 
 ### configure credentials to target the GKE cluster
 Once the cluster has been created, you will see a `Connect` button in the console. Run the first command `gcloud container clusters get-credentials ...` to fetch the credentials and add a new context for kubectl. Your kubectl context will be switched to the new cluster.
 
-```
+```sh
 kubectl config current-context
 ```
 
 ### remove CPU request limit
 Remove the GKE default request of 0.1 CPU's per container which limits how many containers your cluster is allowed to schedule (effectively 10 per vCPU).
 
-```
+```sh
 kubectl delete limitrange limits
+```
+
+### grant yourself cluster-admin permissions
+This looks up your account name (usually your email address) and then creates a new cluster role binding, to make you a cluster-admin.
+
+```sh
+export GCP_USER=$(gcloud config get-value account | head -n 1)
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$GCP_USER
+```
+
+If you encounter "Error from server (Forbidden)...", ask your GKE project admin to grant you `container.clusterRoleBindings.create` permissions.
+
+Alternatively, lookup the admin password for the cluster in the console, and then issue the following command, entering the admin password when prompted.
+
+```sh
+read -rsp "password: " APW && echo && kubectl --username=admin --password="$APW" create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$GCP_USER
 ```
 
 ### monitor resources in your kubernetes cluster
 At this point it is useful to monitor your kubernetes cluster using a utility like `watch` to refresh the output of `kubectl get` in a separate terminal window every one or two seconds.
-```
+
+```sh
 brew install watch
 watch -n 1 kubectl get pods,deployments --all-namespaces
 ```
 
 ### install helm
-[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, use `helm init` to install the helm server (aka "tiller"), and point helm to the riff-charts repo.
-```
-helm init
+[Helm](https://docs.helm.sh/using_helm/#installing-helm) is used to package and install resources for Kubernetes. Helm packages are called charts. After [installing](https://docs.helm.sh/using_helm/#installing-helm) the helm CLI, point helm to the riff-charts repo.
+
+```sh
 helm repo add projectriff https://riff-charts.storage.googleapis.com
 helm repo update
 ```
+
+### start the helm server (tiller) with RBAC
+
+The Helm project describes the [Best Practices for Securing Helm and Tiller](https://docs.helm.sh/using_helm/#best-practices-for-securing-helm-and-tiller) in their documentation. This can be fairly involved and for less critical development clusters it is easier to configure the Helm tiller server to run with cluster-admin privileges using a service account in the `kube-system` namespace.
+
+The following commands will install the Helm tiller server to run with cluster-admin privileges.
+
+```sh
+kubectl -n kube-system create serviceaccount tiller
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account=tiller
+```
+
 Watch kubectl for tiller to start running.
 
 ### install riff
-Install riff and kafka on the same `riff-system` namespace, with the release name `projectriff`. In this case we are deploying without RBAC.
+Install riff and kafka on the same `riff-system` namespace, with the release name `projectriff`.
+The default is to install the RBAC roles and role-bindings.
+
 ```sh
 helm install projectriff/riff \
   --name projectriff \
   --namespace riff-system \
-  --set kafka.create=true \
-  --set rbac.create=false
+  --set kafka.create=true
 ```
 Watch the riff-system namespace with kubectl. You may need to wait a minute for the container images to be pulled, and for zookeeper to start. It is normal for the kafka broker and the other riff components to fail and re-start while waiting.
 
-```
+```sh
 watch -n 1 kubectl get po,deploy --namespace riff-system
 ```
 
@@ -175,3 +210,12 @@ riff publish -i numbers -d 10 -r
 ```bash
 riff delete --name square --all
 ```
+
+### to access the Kubernetes dashboard
+Recent releases of the Kubernetes dashboard require a bearer token in order to login. The easiest way to do this, is to lookup the token associated with the `tiller` account created above and paste it into the login form.
+
+```sh
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep tiller | awk '{print $1}')
+```
+
+For more details see the dashboard [wiki](https://github.com/kubernetes/dashboard/wiki/Access-control#introduction) and [issue #2474](https://github.com/kubernetes/dashboard/issues/2474).

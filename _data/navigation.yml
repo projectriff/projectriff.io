@@ -16,8 +16,6 @@ docs:
         url: /docs/getting-started-on-minikube/
       - title: "on GKE"
         url: /docs/getting-started-on-gke/
-      - title: "with RBAC"
-        url: /docs/running-on-gke-with-rbac/
   - title: Invokers
     url: /invokers/
     children:
