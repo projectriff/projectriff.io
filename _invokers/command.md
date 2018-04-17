@@ -8,7 +8,7 @@ development:
 releases:
 - version: v0.0.6
   href: https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
-  date: 2018-04-06
+  date: '2018-04-06'
 ---
 
 *by [{{page.author}}]({{ page.href }})*
