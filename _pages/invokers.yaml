@@ -18,10 +18,10 @@ invokers:
 {%- if invoker.releases[0] %}
   releases:
 {%- for release in invoker.releases %}
-  - version: {{ release.version }}
+  - version: '{{ release.version }}'
     href: {{ release.href }}
 {%- if release.date %}
-    date: {{ release.date }}
+    date: '{{ release.date }}'
 {%- endif %}
 {%- endfor %}
 {%- endif %}

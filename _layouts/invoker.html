@@ -5,7 +5,7 @@ layout: single
 {% assign invoker = page %}
 
 {% if invoker.releases %}
-  {% assign latest = invoker.releases | sort: 'date', 'last' | first %}
+  {% assign latest = invoker.releases | sort: 'date' | last %}
 {% endif %}
 {% assign development = invoker.development %}
 

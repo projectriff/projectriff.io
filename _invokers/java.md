@@ -8,7 +8,7 @@ development:
 releases:
 - version: v0.0.5-sr.1
   href: https://github.com/projectriff/java-function-invoker/raw/v0.0.5-sr.1/java-invoker.yaml
-  date: 2018-04-06
+  date: '2018-04-06'
 ---
 
 *by [{{page.author}}]({{ page.href }})*
