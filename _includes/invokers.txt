@@ -1,0 +1,8 @@
+{%- for invoker in include.invokers -%}
+  {%- if invoker.releases -%}
+    {%- assign latest = invoker.releases | sort: 'date' | last -%}
+  {%- else -%}
+    {%- assign latest = invoker.development -%}
+  {%- endif -%}
+riff invokers apply -f {{ latest.href }}
+{% endfor -%}

@@ -118,12 +118,8 @@ The [riff CLI](https://github.com/projectriff/riff/tree/master/riff-cli) is avai
 Starting in v0.0.6, riff invoker resources are installed separately from riff.
 
 ```bash
-riff invokers apply -f https://github.com/projectriff/command-function-invoker/raw/v0.0.6/command-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/go-function-invoker/raw/v0.0.2/go-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/java-function-invoker/raw/v0.0.5-sr.1/java-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/node-function-invoker/raw/v0.0.8/node-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/python2-function-invoker/raw/v0.0.6/python2-invoker.yaml
-riff invokers apply -f https://github.com/projectriff/python3-function-invoker/raw/v0.0.6/python3-invoker.yaml
+{% assign invokers = site.invokers | sort: 'name' -%}
+{% include invokers.txt invokers=invokers -%}
 ```
 
 ## new function using node.js
