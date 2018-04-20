@@ -61,3 +61,18 @@ div.highlighter-rouge {
 .hide-excerpt > :first-child {
   display: none !important;
 }
+
+.btn[data-clipboard-snippet] {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: white;
+
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+pre.highlight:hover .btn[data-clipboard-snippet],
+.btn[data-clipboard-snippet]:focus {
+  opacity: 1;
+}

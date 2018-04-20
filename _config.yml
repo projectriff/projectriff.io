@@ -60,3 +60,8 @@ include:
 exclude:
   - README.md
   - CNAME
+
+footer_scripts:
+  - /assets/js/main.min.js
+  - /assets/js/clipboard.min.js
+  - /assets/js/copy-to-clipboard.js
