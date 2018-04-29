@@ -14,6 +14,8 @@ docs:
     children:
       - title: "on Docker for Mac"
         url: /docs/getting-started-on-docker-ce-edge-for-mac/
+      - title: "on Docker for Windows"
+        url: /docs/getting-started-on-docker-ce-edge-for-windows/
       - title: "on minikube"
         url: /docs/getting-started-on-minikube/
       - title: "on GKE"
