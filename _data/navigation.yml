@@ -12,6 +12,8 @@ main:
 docs:
   - title: Getting Started
     children:
+      - title: "on Docker for Mac"
+        url: /docs/getting-started-on-docker-ce-edge-for-mac/
       - title: "on minikube"
         url: /docs/getting-started-on-minikube/
       - title: "on GKE"
