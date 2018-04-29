@@ -11,7 +11,7 @@ redirect_from:
 ---
 
 ### TL;DR
-1. install the edge release of docker for mac 
+1. install the edge release of docker for mac
 2. configure the cluster and enable kubernetes
 3. monitor your riff cluster with watch and kubectl
 4. install helm
@@ -21,7 +21,7 @@ redirect_from:
 8. delete the sample function
 
 ### install docker edge
-Kubernetes and the kubectl CLI are now included with [Edge releases](https://store.docker.com/editions/community/docker-ce-desktop-mac) of Docker Community Edition. A single shared docker daemon and image repository make it simpler to work with, performance is decent, and frequent updates help keep your setup fresh.  
+Kubernetes and the kubectl CLI are now included with [Edge releases](https://store.docker.com/editions/community/docker-ce-desktop-mac) of Docker Community Edition. A single shared docker daemon and image repository make it simpler to work with, performance is decent, and frequent updates help keep your setup fresh.
 
 ![download Docker edge for mac](/images/docker-edge-for-mac-download.png)
 
@@ -30,10 +30,10 @@ Once Docker is installed and running, use the Preferences feature in the Docker 
 ![configure Docker VM](/images/docker-vm-config.png)
 
 ### enable Kubernetes
-Now enable Kubernetes, and wait for the Kubernetes to start running.  
+Now enable Kubernetes, and wait for the cluster to start.
 ![enable Kubernetes](/images/docker-edge-kubernetes.png)
 
-If you previously had minikube or GKE configured, use the Docker menu to switch your context to "docker-for-desktop". 
+If you previously had minikube or GKE configured, switch your kubectl context to "docker-for-desktop".
 
 ![set context to docker-for-desktop](/images/docker-edge-context.png)
 
@@ -78,9 +78,9 @@ projectriff/riff 	0.0.1         	riff is for functions - a FaaS for Kubernetes
 projectriff/kafka	0.0.2         	kafka for riff                               
 projectriff/kafka	0.0.1         	kafka for riff                               
 ```
-> Note: "snapshot" releases reflect the latest (possibly unstable) CI build from master and will not be 
-  selected in a `helm install` unless the `--devel` flag is used. Using snapshots is not recommended 
-  unless you [build riff images](https://github.com/projectriff/riff/blob/master/README.adoc#-manual-build) yourself. 
+> Note: "snapshot" releases reflect the latest (possibly unstable) CI build from master and will not be
+  selected in a `helm install` unless the `--devel` flag is used. Using snapshots is not recommended
+  unless you [build riff images](https://github.com/projectriff/riff/blob/master/README.adoc#-manual-build) yourself.
 
 ### start the helm server (tiller) with RBAC
 The following commands will install the Helm tiller server to run with cluster-admin privileges.
