@@ -9,6 +9,20 @@ layout: single
 {% endif %}
 {% assign development = invoker.development %}
 
+{% if invoker.deprecated %}
+<aside class="notice notice--warning">
+  ⚠️ The {{ invoker.title }} is deprecated.
+  {% if invoker.deprecated %}
+    {% for replacedBy in site.invokers %}
+      {% if replacedBy.name == invoker.deprecated.replacedBy %}
+        Please use the <a href="{{ replacedBy.url }}">{{ replacedBy.title }}</a> instead.
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</aside>
+{% endif %}
+
+
 <h2>Install {{ invoker.name }}</h2>
 {% include invoker_release.html release=latest %}
 {% include invoker_release.html release=development %}

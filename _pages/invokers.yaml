@@ -12,6 +12,9 @@ invokers:
 {%- if invoker.author %}
   author: {{ invoker.author }}
 {%- endif %}
+{%- if invoker.deprecated %}
+  deprecated: true
+{%- endif %}
 {%- if invoker.href %}
   href: {{ invoker.href }}
 {%- endif %}

@@ -2,6 +2,8 @@
 name: python2
 title: "Python 2 Invoker"
 author: projectriff
+deprecated:
+  replacedBy: python3
 href: https://github.com/projectriff/python2-function-invoker
 development:
   href: https://github.com/projectriff/python2-function-invoker/raw/master/python2-invoker.yaml

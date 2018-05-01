@@ -4,5 +4,7 @@
   {%- else -%}
     {%- assign latest = invoker.development -%}
   {%- endif -%}
+  {%- unless invoker.deprecated -%}
 riff invokers apply -f {{ latest.href }}
-{% endfor -%}
+{% endunless -%}
+{%- endfor -%}
