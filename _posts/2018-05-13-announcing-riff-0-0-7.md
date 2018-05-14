@@ -58,15 +58,21 @@ For another example, see this windowing [sample](https://github.com/projectriff/
 
 ## bounded gRPC calls 
 
-As a first step toward consistency with the [reactive streams](http://www.reactive-streams.org/), the riff sidecar has been modified to make bounded gRPC calls, instead of defaulting to unbounded message streams.
-
-In the case of simple request/reply functions, there should be no noticable difference in behavior, since the default is a stream with a window size of 1.
-
-Starting with the 0.0.7 release, streaming functions which expect unbounded streams (no windowing) should be configured with the following function yaml:
-
+The riff sidecar has been modified to support bounded gRPC calls. Starting with the 0.0.7 release, the CLI will generate function yaml with a default window size of 1.
 ```yaml
 spec:
   protocol: grpc
-  Windowing:
-    None: true
+  windowing:
+    size: 1
 ```   
+The `windowing.size` key can be used to control the window size.
+
+Alternatively you can use `windowing.time` to configure a time in seconds. e.g.
+```yaml
+spec:
+  protocol: grpc
+  windowing:
+    time: 10s
+```
+
+Windowing can be disabled entirely for streaming functions which expect unbounded streams by removing the  `windowing` key from the yaml. For now, this is also the recommended approach to handle sliding windows.
