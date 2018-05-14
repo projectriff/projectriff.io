@@ -8,7 +8,8 @@ excerpt:
 permalink: /blog/announcing-riff-0-0-7/
 ---
 
-The 0.0.7 release of riff is now available. Thank you all who worked on this effort.
+We are happy to announce the 0.0.7 release of riff. Thank you all who worked on this effort.
+
 
 ## go streaming
 
@@ -58,21 +59,22 @@ For another example, see this windowing [sample](https://github.com/projectriff/
 
 ## bounded gRPC calls 
 
-The riff sidecar has been modified to support bounded gRPC calls. Starting with the 0.0.7 release, the CLI will generate function yaml with a default window size of 1.
+The riff sidecar has been modified to support bounded gRPC calls. This is a first step toward moving streaming responsibilities like windowing and request/reply correlation out of the invokers. 
+
+Starting with the 0.0.7 release, the CLI will generate function yaml with a default window size of 1.
 ```yaml
 spec:
   protocol: grpc
   windowing:
     size: 1
 ```   
-The `windowing.size` key can be used to control the window size.
 
-Alternatively you can use `windowing.time` to configure a time in seconds. e.g.
+The `windowing.size` key can be used to control the window size. Alternatively you can use `windowing.time`
 ```yaml
 spec:
   protocol: grpc
   windowing:
     time: 10s
 ```
-
 Windowing can be disabled entirely for streaming functions which expect unbounded streams by removing the  `windowing` key from the yaml. For now, this is also the recommended approach to handle sliding windows.
+
