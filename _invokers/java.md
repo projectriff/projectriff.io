@@ -17,7 +17,7 @@ releases:
   date: '2018-05-23'
 ---
 
-[{{page.href}}]({{ page.href }})
+*by [{{page.author}}]({{ page.href }})*
 
 
 ## Usage

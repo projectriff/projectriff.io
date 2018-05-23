@@ -11,7 +11,7 @@ releases:
   date: '2018-04-06'
 ---
 
-[{{page.href}}]({{ page.href }})
+*by [{{page.author}}]({{ page.href }})*
 
 The go function invoker provides a Docker base layer for a function built as a [Go plugin](https://golang.org/pkg/plugin/).
 It accepts gRPC requests, invokes the command for each request in the input stream,

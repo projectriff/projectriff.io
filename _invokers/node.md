@@ -14,7 +14,7 @@ releases:
   date: '2018-04-06'
 ---
 
-[{{page.href}}]({{ page.href }})
+*by [{{page.author}}]({{ page.href }})*
 
 The node function invoker provides a Docker base layer for a function consisting of a single NodeJS module.
 It accepts gRPC requests, invokes the command for each request in the input stream, and sends the command's output to the stream of gRPC responses.
