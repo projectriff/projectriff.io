@@ -19,6 +19,7 @@ releases:
 
 *by [{{page.author}}]({{ page.href }})*
 
+The Java Invoker hosts riff functions written in Java.
 
 ## Usage
 
