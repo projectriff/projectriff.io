@@ -13,7 +13,7 @@ We are happy to announce the 0.0.7 release of riff. Thank you all who worked on 
 
 ## go streaming
 
-The [Go function invoker](https://github.com/ericbottard/go-function-invoker) now supports streaming functions.
+The [Go function invoker](https://github.com/projectriff/go-function-invoker) now supports streaming functions.
 These accept an input channel and return an output channel and an optional error channel.
 
 ```go
