@@ -40,4 +40,4 @@ This preserves the biggest differentiator of riff, which was the ability of riff
 
 Since this is an early preview, we are working hard to fill in some of the gaps and rough edges. 
 
-We are looking forward to working with the Knative community, and continuing to make contributions to the Knative project, especially [Knative/eventing](https://github.com/knative/eventing/tree/master/pkg.
+We are looking forward to working with the Knative community, and continuing to make contributions to the Knative project, especially [Knative/eventing](https://github.com/knative/eventing/tree/master/pkg).
