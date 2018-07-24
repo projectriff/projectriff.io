@@ -15,7 +15,9 @@ Invokers are the extension point in projectriff that enable different invocation
 Invokers listed here are provided by both projectriff and the community. To be included in this listing, please [send a pull request](https://github.com/projectriff/projectriff.io/pulls?q=is%3Aopen+is%3Apr+label%3Ainvoker).
 
 {% for invoker in site.invokers %}
+{%- unless invoker.deprecated %}
 - [{{ invoker.title }}]({{ invoker.url }})
+{%- endunless %}
 {%- endfor %}
 
 ### Install latest invokers
