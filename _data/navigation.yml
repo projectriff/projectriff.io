@@ -1,8 +1,6 @@
 main:
   - title: "Docs"
     url: /docs/getting-started-with-knative-riff-on-gke/
-  - title: "Invokers"
-    url: /invokers/
   - title: "Blog"
     url: /blog/
   - title: "Video"
