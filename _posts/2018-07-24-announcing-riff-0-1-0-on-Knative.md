@@ -10,7 +10,7 @@ excerpt:
 permalink: /blog/announcing-riff-0-1-0-on-Knative/
 ---
 
-We are excited to announce that the riff team has re-architected the riff core, bringing essential aspects of riff to Knative. This is the first release of riff on Knative.
+We are excited to announce that the riff team has re-architected the riff core, bringing essential aspects of riff to Knative. This is the first release of riff on Knative
 
 [Knative](https://github.com/knative/docs) is a new open source project recently announced at [Google Cloud Next '18](https://cloud.withgoogle.com/next18).
 
