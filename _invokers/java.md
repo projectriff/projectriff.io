@@ -23,8 +23,8 @@ The Java Invoker hosts riff functions written in Java.
 
 ## Usage
 
-With the `riff` CLI you need to provide an archive location with `-a`
-and a handler specification with `--handler`. The archive is a jar
+With the `riff` CLI you need to provide an archive location with `--artifact` 
+or `-a` and a handler specification with `--handler`. The archive is a jar
 file, which can be shaded with all required dependencies, or it can be
 a Spring Boot fat jar (with dependencies nested in
 `BOOT-INF/lib`). Simple functions that do not require any dependencies
@@ -46,19 +46,19 @@ include that in the archive).
 Example:
 
 ```
-riff init java -i greetings -a target/greeter-1.0.0.jar --handler=functions.Greeter
+--artifact greeter-1.0.0.jar --handler=functions.Greeter
 ```
 
 Example with Spring Boot application:
 
 ```
-riff init java -i greetings -a target/greeter-1.0.0.jar --handler=greeter
+--artifact greeter-1.0.0.jar --handler=greeter
 ```
 
 Example with Spring application context and an explicit main (Note: you need to add quotes around the handler value since it contains an `&`)
 
 ```
-riff init java -i greetings -a target/greeter-1.0.0.jar --handler='greeter&main=functions.FunctionApp'
+--artifact greeter-1.0.0.jar --handler='greeter&main=functions.FunctionApp'
 ```
 
 As long as the dependencies are included in the archive correctly, you
