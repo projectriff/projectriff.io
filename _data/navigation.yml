@@ -14,10 +14,4 @@ docs:
         url: /docs/getting-started-with-knative-riff-on-gke/
       - title: "on minikube"
         url: /docs/getting-started-with-knative-riff-on-minikube/
-  - title: Invokers
-    url: /invokers/
-    children:
-      - title: "Java"
-        url: /invokers/java/
-      - title: "Node"
-        url: /invokers/node/
+
