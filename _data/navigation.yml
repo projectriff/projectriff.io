@@ -1,6 +1,6 @@
 main:
   - title: "Docs"
-    url: /docs/getting-started-on-minikube/
+    url: /docs/getting-started-with-knative-riff-on-gke/
   - title: "Invokers"
     url: /invokers/
   - title: "Blog"
@@ -12,26 +12,14 @@ main:
 docs:
   - title: Getting Started
     children:
-      - title: "on Docker for Mac"
-        url: /docs/getting-started-on-docker-ce-edge-for-mac/
-      - title: "on Docker for Windows"
-        url: /docs/getting-started-on-docker-ce-edge-for-windows/
-      - title: "on minikube"
-        url: /docs/getting-started-on-minikube/
       - title: "on GKE"
-        url: /docs/getting-started-on-gke/
+        url: /docs/getting-started-with-knative-riff-on-gke/
+      - title: "on minikube"
+        url: /docs/getting-started-with-knative-riff-on-minikube/
   - title: Invokers
     url: /invokers/
     children:
-      - title: "Command"
-        url: /invokers/command/
-      - title: "Go"
-        url: /invokers/go/
       - title: "Java"
         url: /invokers/java/
       - title: "Node"
         url: /invokers/node/
-      - title: "Python 2"
-        url: /invokers/python2/
-      - title: "Python 3"
-        url: /invokers/python3/
