@@ -10,23 +10,23 @@ excerpt:
 permalink: /blog/announcing-riff-0-1-0-on-Knative/
 ---
 
-We are excited to announce that the riff team has re-architected the riff core, bringing essential aspects of riff to Knative. This is the first release of riff on Knative
+We are excited to announce that the riff team has re-architected the riff core, bringing essential aspects of riff to Knative. This is the first release of riff on Knative.
 
-[Knative](https://github.com/knative/docs) is a new open source project recently announced at [Google Cloud Next '18](https://cloud.withgoogle.com/next18).
+[Knative](https://github.com/knative/docs) is a new open source project announced at [Google Cloud Next '18](https://cloud.withgoogle.com/next18).
 
-Knative provides Kubernetes-native APIs for deploying serverless-style functions, applications, and containers to an auto-scaling runtime. 
+Knative provides Kubernetes-native APIs for deploying serverless-style functions, applications, and containers.
 
-## riff CLI will install Knative
+## The riff CLI will install Knative
 
-Please follow one of our new getting started guides to download the latest riff CLI and install Knative onto a Kubernetes cluster. We currently support GKE and minikube.
+Please follow one of our new [getting started](/docs/) guides to download the latest riff CLI and install Knative onto a Kubernetes cluster. We currently support GKE and minikube.
 
-## Functions build on riff Invokers, run on Knative
+## Functions build on riff Invokers and run on Knative
 
-The riff CLI creates functions using a Knative [build](https://github.com/knative/build) template based on [Kaniko](https://github.com/GoogleContainerTools/kaniko), to build container images from function source code.
+The riff CLI creates functions using a Knative [build](https://github.com/knative/build) template based on [Kaniko](https://github.com/GoogleContainerTools/kaniko).
 
 Once built, the Functions are deployed and run as Knative [Services](https://github.com/knative/serving/blob/master/docs/spec/overview.md#resource-types) with support for autoscaling, revisions, and traffic routing.
 
-The getting started guides provide step by step instructions to create a sample function.
+The getting started guides provide step by step instructions to create a sample function based on a riff invoker.
 
 ## Buses, Channels, Subscriptions
 
@@ -36,3 +36,8 @@ This preserves the biggest differentiator of riff, which was the ability of riff
 
 ![riff Knative pubsub resources](/images/riff-knative-pubsub-resources.png)
 
+## Next steps
+
+Since this is an early preview, we are working hard to fill in some of the gaps and rough edges. 
+
+We are looking forward to working with the Knative community, and continuing to make contributions to the Knative project, especially [Knative/eventing](https://github.com/knative/eventing/tree/master/pkg.
