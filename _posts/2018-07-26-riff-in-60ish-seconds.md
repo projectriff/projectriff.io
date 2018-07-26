@@ -5,8 +5,7 @@ header:
   overlay_image: /images/sunrise.jpg
   overlay_filter: 0.3
   overlay_color: "#333"
-excerpt:
-  from source to an executing function
+excerpt: "from source to an executing function"
 permalink: /blog/riff-in-60ish-seconds/
 ---
 
