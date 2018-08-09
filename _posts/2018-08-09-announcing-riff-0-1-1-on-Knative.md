@@ -15,7 +15,7 @@ If you are using the latest riff on Knative for demos, you might find it useful 
 
 ```sh
 # remove everything including istio without prompting 
-riff system uninstll --istio --force
+riff system uninstall --istio --force
 ```
 
 Istio will be left installed if you omit `--istio`. 
