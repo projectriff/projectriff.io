@@ -13,7 +13,7 @@ feature_row:
   - image_path: "/images/sidecar.png"
     alt: "sidecars"
     title:
-    excerpt: "Sidecars connect functions with event brokers."
+    excerpt: "Event brokers drive functions."
   - image_path: "/images/events.png"
     alt: "scaling"
     title:
