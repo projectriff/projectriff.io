@@ -5,7 +5,7 @@ header:
   overlay_image: /images/liverpool-st.jpg
 excerpt:
   With install manifests, verbose builds, and function chaining using channels and subscriptions
-permalink: /blog/announcing-riff-0-1-2-on-Knative/
+permalink: /blog/announcing-riff-0-1-2-on-knative/
 ---
 
 [riff v0.1.2](https://github.com/projectriff/riff/releases/tag/v0.1.2) on Knative is now available.  
@@ -19,16 +19,17 @@ We recommend installing riff v0.1.2 on a fresh Kubernetes cluster. The riff CLI 
 riff system uninstall --istio --force
 ```
 
+#### install on minikube (for GKE omit --node-port)
+```sh
+riff system install --manifest stable --node-port
+```
+
 Riff will install "stable" release builds of Knative serving, eventing, and build components. You can opt to install the latest nightly builds using the new `--manifest latest` option.
 
-#### install latest build on minikube (for GKE omit --node-port)
-```sh
-riff system install --manifest latest --node-port
-```
 Remember that after installing you also need to install credentials for builds to push to a docker registry, and configure a namespace. See the [getting started docs](/docs) for more details
 
 #### install dockerhub push credentials and initialize the default namespace
-```
+```sh
 kubectl apply -f dockerhub-push-credentials.yaml
 riff namespace init default --secret push-credentials
 ```
@@ -43,7 +44,7 @@ There are two new options to provide feedback during builds. In previous release
 For example, if you have not [initialized](/docs/getting-started-with-knative-riff-on-minikube/#initialize-the-namespace) the default namespace, creating a function with `--wait` will produce an error message.
 
 #### create square and push image to docker
-```
+```sh
 riff function create node square \
   --git-repo https://github.com/trisberg/node-fun-square.git \
   --artifact square.js \
@@ -54,12 +55,7 @@ riff function create node square \
 Error: function creation failed: RevisionMissing: Configuration "square" does not have any ready Revision.; Revision creation failed with message: "Internal error occurred: admission webhook \"webhook.build.knative.dev\" denied the request: mutation failed: serviceaccounts \"riff-build\" not found".
 ```
 
-Using `--verbose` instead of `--wait` is useful in situations where the cause of an error can  be deduced from container logs. E.g. here is the log for a missing artifact in a node build. 
-
-```
-...msg="lstat /workspace/squarexxx.js: no such file or directory"
-Error: function creation failed ...
-```
+Using `--verbose` instead of `--wait` is useful in situations where the cause of an error can be deduced from container logs.
 
 ## function chaining over channels
 
@@ -78,7 +74,7 @@ To keep things interesting, we'll build the 3 functions in 3 different ways.
 The command below runs an in-cluster build of the square function, and pushes the image to dockerhub. For gcr, replace $DOCKER_ID with your gcr.io/$GCP_PROJECT.
 
 #### create square and push image to docker
-```
+```sh
 riff function create node square \
   --git-repo https://github.com/trisberg/node-fun-square.git \
   --artifact square.js \
@@ -86,9 +82,17 @@ riff function create node square \
   --wait
 ```
 
-Once the square function is running, you should be able to invoke it.
+#### use watch to monitor pods
 ```sh
-riff service invoke square -- -H 'Content-Type: text/plain' -w '\n' -d 7
+watch -n 1 kubectl get pod --all-namespaces
+```
+For the first build, you may see the `square-00001-xxxx` build pod show a status of `Init:0/4` for several minutes. Once built, the square function will show up as a pod called `square-00001-deployment-xxxxxxxxx-xxxxx`.
+
+When the square function is running, you should be able to invoke it.
+```sh
+riff service invoke square -- -w '\n' \
+  -H 'Content-Type: text/plain' \
+  -d 7
 ```
 
 ## hello function
@@ -114,6 +118,7 @@ Build the function image, and use it create a Knative Service.
 
 #### build locally for minikube
 ```sh
+eval $(minikube docker-env)
 docker build -t dev.local/hello:v1 .
 riff service create hello --image dev.local/hello:v1
 ```
@@ -136,7 +141,9 @@ kail -d hello-00001-deployment -c user-container
 
 #### invoke hello
 ```sh
-riff service invoke hello -- -H 'Content-Type: text/plain' -w '\n' -d riff
+riff service invoke hello -- -w '\n' \
+  -H 'Content-Type: text/plain' \
+  -d riff
 ```
 
 #### kail output
@@ -154,7 +161,7 @@ riff service create random --image jldec/random:v0.0.1
 
 Invoke the function to send posts to hello.
 ```sh
-riff service invoke random -- \
+riff service invoke random -- -w '\n' \
   -H 'Content-Type:application/json' \
   -d '{"url":"http://hello.default.svc.cluster.local"}'
 ```
@@ -184,7 +191,7 @@ riff service subscribe hello --input squares
 
 #### configure the random function to post to the numbers channel.
 ```sh
-riff service invoke random -- \
+riff service invoke random -- -w '\n' \
   -H 'Content-Type:application/json' \
   -d '{"url":"http://numbers-channel.default.svc.cluster.local"}'
 ```
