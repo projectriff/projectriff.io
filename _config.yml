@@ -7,7 +7,7 @@ plugins:
 
 title: riff is for functions
 icon-image: "/images/riff.png"
-url: "https://projectriff.io/"
+url: "https://projectriff.io"
 repository: "projectriff/projectriff.io"
 description: "riff is for functions"
 
