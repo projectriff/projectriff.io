@@ -4,7 +4,7 @@ title: "Announcing riff v0.1.2 on Knative"
 header:
   overlay_image: /images/liverpool-st.jpg
 excerpt:
-  With verbose builds and function chaining using Channels and Subscriptions    
+  With install manifests, verbose builds, and function chaining using channels and subscriptions
 permalink: /blog/announcing-riff-0-1-2-on-Knative/
 ---
 
@@ -125,13 +125,7 @@ docker build -t $DOCKER_ID/hello:v1 .
 docker push $DOCKER_ID/hello:v1
 riff service create hello --image $DOCKER_ID/hello:v1
 ```
-
-#### build for gcr
-```sh
-docker build -t gcr.io/$GCP_PROJECT/hello:v1 .
-docker push gcr.io/$GCP_PROJECT/hello:v1
-riff service create hello --image gcr.io/$GCP_PROJECT/hello:v1
-```
+For gcr, replace $DOCKER_ID with your gcr.io/$GCP_PROJECT.
 
 Using a tool like kail makes it easy to watch the function container log.
 
