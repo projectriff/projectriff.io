@@ -119,6 +119,8 @@ Build the function image, and use it create a Knative Service.
 #### build locally for minikube
 ```sh
 eval $(minikube docker-env)
+```
+```sh
 docker build -t dev.local/hello:v1 .
 riff service create hello --image dev.local/hello:v1
 ```
@@ -156,7 +158,7 @@ We have published an image on [dockerhub](https://hub.docker.com/r/jldec/random/
 
 Create the random function using the image from dockerhub.
 ```sh
-riff service create random --image jldec/random:v0.0.1
+riff service create random --image jldec/random:v0.0.2
 ```
 
 Invoke the function to send posts to hello.
