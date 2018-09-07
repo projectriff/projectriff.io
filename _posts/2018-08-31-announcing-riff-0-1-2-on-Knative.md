@@ -19,7 +19,7 @@ We recommend installing riff v0.1.2 on a fresh Kubernetes cluster. The riff CLI 
 riff system uninstall --istio --force
 ```
 
-#### install on minikube (for GKE omit --node-port)
+#### install on minikube (for GKE omit `--node-port`)
 ```sh
 riff system install --manifest stable --node-port
 ```
