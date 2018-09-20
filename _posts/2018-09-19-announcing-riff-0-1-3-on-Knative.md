@@ -52,7 +52,7 @@ Builds using a --local-path run directly on your machine, not inside the Kuberne
 #### build from code on GitHub and push to DockerHub 
 ```sh
 riff function create java hello \
-    --git-repo https://github.com/jldec/java-hello.git \
+    --git-repo https://github.com/projectriff-samples/java-hello.git \
     --image $DOCKER_ID/java-hello:v1 \
     --verbose
 ```
