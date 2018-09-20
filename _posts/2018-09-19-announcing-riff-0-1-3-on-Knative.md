@@ -30,15 +30,15 @@ Initializing a namespace with your push credentials is easier now.
 riff namespace init default --gcr <path-to-json-file>
 ```
 
-#### or `export DOCKER_ID=<your-id>` and enter password when prompted
+#### or enter the password for your $DOCKER_ID when prompted
 ```sh
 riff namespace init default --dockerhub $DOCKER_ID
 ```
 
 ## riff buildpack for java
-This release supports building java functions from source, either locally or on-cluster. Both variants use a new riff buildpack for java.
+This release supports building java functions from source, either locally or on-cluster. Both variants use a new riff buildpack for java. 
 
-All you need in your directory is the java code with a maven pom, and the name of the handler class in a file called `riff.toml`. The example below uses a sample [java-hello](https://github.com/projectriff-samples/java-hello) function available on GitHub.
+All you need in your directory is the code with a maven pom, and the name of the handler class in a file called `riff.toml`. The example below uses a sample [java-hello](https://github.com/projectriff-samples/java-hello) function available on GitHub.
 
 #### build from code in a directory and push to local docker
 ```sh
@@ -46,7 +46,7 @@ riff function create java hello \
   --local-path . \
   --image dev.local/java-hello:v1
 ```
-Builds using a --local-path run directly on your machine, not inside the Kubernetes cluster. The `dev.local` prefix, sends the image to your local docker daemon.
+Builds using a `--local-path` run directly on your machine, not inside the Kubernetes cluster. The `dev.local` prefix, sends the image to your local docker daemon.
 
 
 #### build from code on GitHub and push to DockerHub 
@@ -58,9 +58,10 @@ riff function create java hello \
 ```
 Using `--verbose` shows the progress of the build as it's happening in the cluster. For GCR, replace `$DOCKER_ID` with your `gcr.io/$GCP_PROJECT`. 
 
+> NOTE: to preserve the old behavior of building containers with a pre-compiled jar file, use `riff function create jar` instead. 
 
 ## simpler riff service invoke 
-For text or json, you can now use `--text` or `--json`. You no longer have to specify the `Content-Type` as a curl header.
+You can now call `riff service invoke` with `--text` or `--json`. You no longer have to specify the `Content-Type` as a curl header.
 
 #### invoke the hello function with text input
 ```sh
@@ -73,7 +74,7 @@ Subscriptions now have their own separate CLI commands. The corresponding option
 #### create
 ```
 Usage:
-  riff subscription create SUBSCRIPTION_NAME  [flags]
+  riff subscription create [SUBSCRIPTION_NAME] [flags]
 
 Examples:
   riff subscription create --channel tweets --subscriber tweets-logger
@@ -82,8 +83,6 @@ Examples:
 
 Flags:
   -c, --channel string      the input channel of the subscription
-  -h, --help                help for create
-  -n, --namespace string    the namespace of the subscription
   -r, --reply-to string     the optional output channel of the subscription
   -s, --subscriber string   the subscriber of the subscription
 ```
@@ -93,11 +92,7 @@ Flags:
 Usage:
   riff subscription delete SUBSCRIPTION_NAME  [flags]
 
-Examples:
+Example:
   riff subscription delete my-subscription --namespace joseph-ns
-
-Flags:
-  -h, --help               help for delete
-  -n, --namespace string   the namespace of the subscription
 ```
 

@@ -114,7 +114,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 ```
 
 ## install the riff CLI
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.0 or later.
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
 ```sh
 riff version
 ```
@@ -138,42 +138,41 @@ riff system install
 
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
 ```
-NAMESPACE          NAME                                                      READY     STATUS      RESTARTS   AGE
-istio-system       istio-citadel-7bdc7775c7-h69hk                            1/1       Running     0          1m
-istio-system       istio-cleanup-old-ca-vgw8p                                0/1       Completed   0          1m
-istio-system       istio-egressgateway-795fc9b47-7bqpk                       1/1       Running     0          1m
-istio-system       istio-ingress-84659cf44c-b6krf                            1/1       Running     0          1m
-istio-system       istio-ingressgateway-7d89dbf85f-jllcx                     1/1       Running     0          1m
-istio-system       istio-mixer-post-install-4747p                            0/1       Completed   0          1m
-istio-system       istio-pilot-66f4dd866c-njqr4                              2/2       Running     0          1m
-istio-system       istio-policy-76c8896799-jfpsw                             2/2       Running     0          1m
-istio-system       istio-sidecar-injector-645c89bc64-4rrmt                   1/1       Running     0          1m
-istio-system       istio-statsd-prom-bridge-949999c4c-z4njr                  1/1       Running     0          1m
-istio-system       istio-telemetry-6554768879-pnksq                          2/2       Running     0          1m
-istio-system       knative-ingressgateway-5f5dc4b4cd-q4r7k                   1/1       Running     0          1m
-knative-build      build-controller-5cb4f5cb67-dxdkv                         1/1       Running     0          1m
-knative-build      build-webhook-6b4c65546b-khpcb                            1/1       Running     0          1m
-knative-eventing   controller-manager-7747d66d85-8s2q2                       2/2       Running     3          1m
-knative-eventing   eventing-controller-6cd984f789-gffnz                      1/1       Running     0          1m
-knative-eventing   eventing-webhook-7dfd9cfbd9-c8q5r                         1/1       Running     0          1m
-knative-eventing   stub-clusterbus-866c95f68d-v57fz                          2/2       Running     0          1m
-knative-serving    activator-7f5b67b69c-f46r9                                2/2       Running     0          1m
-knative-serving    controller-868ff6d485-2brtz                               1/1       Running     0          1m
-knative-serving    webhook-6d9976c74f-v82bk                                  1/1       Running     0          1m
-kube-system        event-exporter-v0.2.1-5f5b89fcc8-s4r7g                    2/2       Running     0          3m
-kube-system        fluentd-gcp-scaler-7c5db745fc-n65pg                       1/1       Running     0          3m
-kube-system        fluentd-gcp-v3.0.0-7v7xl                                  2/2       Running     0          2m
-kube-system        fluentd-gcp-v3.0.0-m4d65                                  2/2       Running     0          31s
-kube-system        fluentd-gcp-v3.0.0-v9fnb                                  2/2       Running     0          1m
-kube-system        heapster-v1.5.3-5b796bcfb4-grnv9                          3/3       Running     0          3m
-kube-system        kube-dns-788979dc8f-bxzcc                                 4/4       Running     0          3m
-kube-system        kube-dns-788979dc8f-m65jp                                 4/4       Running     0          3m
-kube-system        kube-dns-autoscaler-79b4b844b9-2kq85                      1/1       Running     0          3m
-kube-system        kube-proxy-gke-jldec-knative-default-pool-9782642d-1kfh   1/1       Running     0          3m
-kube-system        kube-proxy-gke-jldec-knative-default-pool-9782642d-66rf   1/1       Running     0          3m
-kube-system        kube-proxy-gke-jldec-knative-default-pool-9782642d-vpvn   1/1       Running     0          3m
-kube-system        l7-default-backend-5d5b9874d5-l45wm                       1/1       Running     0          3m
-kube-system        metrics-server-v0.2.1-7486f5bd67-znw5s                    2/2       Running     0          3m
+NAMESPACE          NAME                                           READY     STATUS      RESTARTS   AGE
+istio-system       istio-citadel-84fb7985bf-vsksm                 1/1       Running     0          1m
+istio-system       istio-cleanup-secrets-gpxr2                    0/1       Completed   0          2m
+istio-system       istio-egressgateway-bd9fb967d-46r6x            1/1       Running     0          2m
+istio-system       istio-galley-655c4f9ccd-hhtz2                  1/1       Running     0          2m
+istio-system       istio-ingressgateway-688865c5f7-gxwxc          1/1       Running     0          2m
+istio-system       istio-pilot-6cd69dc444-m8x52                   2/2       Running     0          2m
+istio-system       istio-policy-6b9f4697d-m4rjs                   2/2       Running     0          2m
+istio-system       istio-sidecar-injector-8975849b4-hjxwb         1/1       Running     0          1m
+istio-system       istio-statsd-prom-bridge-7f44bb5ddb-lt5mp      1/1       Running     0          2m
+istio-system       istio-telemetry-6b5579595f-n8r7t               2/2       Running     0          2m
+istio-system       knative-ingressgateway-77b757d468-627ck        1/1       Running     0          47s
+knative-build      build-controller-56f555c8b9-hgk4k              1/1       Running     0          53s
+knative-build      build-webhook-868b65dd9-f89t8                  1/1       Running     0          53s
+knative-eventing   eventing-controller-596c6bc4fd-2zz9x           1/1       Running     0          24s
+knative-eventing   stub-clusterbus-dispatcher-7b86b64cd-l72ng     2/2       Running     0          19s
+knative-eventing   webhook-796b574465-ctb9t                       1/1       Running     0          23s
+knative-serving    activator-7ffbdb4f46-69q7f                     2/2       Running     0          40s
+knative-serving    autoscaler-f55c76f7c-tcvs4                     2/2       Running     0          39s
+knative-serving    controller-8647f984bf-fztw4                    1/1       Running     0          35s
+knative-serving    webhook-896c797cd-nq44h                        1/1       Running     0          35s
+kube-system        event-exporter-v0.2.1-5f5b89fcc8-5h5zv         2/2       Running     0          19m
+kube-system        fluentd-gcp-scaler-7c5db745fc-2jpbq            1/1       Running     0          19m
+kube-system        fluentd-gcp-v3.1.0-8pxjg                       2/2       Running     0          19m
+kube-system        fluentd-gcp-v3.1.0-k8k5d                       2/2       Running     0          19m
+kube-system        fluentd-gcp-v3.1.0-kgncp                       2/2       Running     0          19m
+kube-system        heapster-v1.5.3-7786f77d66-vhls9               3/3       Running     0          18m
+kube-system        kube-dns-788979dc8f-hxgl8                      4/4       Running     0          19m
+kube-system        kube-dns-788979dc8f-pv9mm                      4/4       Running     0          19m
+kube-system        kube-dns-autoscaler-79b4b844b9-d6q5h           1/1       Running     0          19m
+kube-system        kube-proxy-gke-jl-default-pool-19100274-173p   1/1       Running     0          19m
+kube-system        kube-proxy-gke-jl-default-pool-19100274-26tk   1/1       Running     0          19m
+kube-system        kube-proxy-gke-jl-default-pool-19100274-brwn   1/1       Running     0          19m
+kube-system        l7-default-backend-5d5b9874d5-jp4v2            1/1       Running     0          19m
+kube-system        metrics-server-v0.2.1-7486f5bd67-fw7vl         2/2       Running     0          18m
 ```
 There should be a couple of pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
 
@@ -191,49 +190,27 @@ gcloud projects add-iam-policy-binding $GCP_PROJECT \
     --role roles/storage.admin
 ```
 
-Create a json file with a new [authentication key](https://cloud.google.com/container-registry/docs/advanced-authentication#json_key_file) for the service account.
+Create a new [authentication key](https://cloud.google.com/container-registry/docs/advanced-authentication#json_key_file) for the service account and save it in `gcr-storage-admin.json`.
+
 ```sh
 gcloud iam service-accounts keys create \
   --iam-account "push-image@$GCP_PROJECT.iam.gserviceaccount.com" \
   gcr-storage-admin.json
 ```
 
-Edit the content below replacing the entire password value (in red) with the content from `gcr-storage-admin.json`, preserving the 4-space indentation. Save the result to another file called `gcr-storage-admin.yaml`. 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: push-credentials
-  annotations:
-    build.knative.dev/docker-0: https://gcr.io
-type: kubernetes.io/basic-auth
-stringData:
-  username: _json_key
-  password: |
-    {
-    "type": "service_account",
-    "project_id": "my_project",
-    ...
-    }
-```
-
-apply the secret to Kubernetes
-```sh
-kubectl apply -f gcr-storage-admin.yaml
-```
-
 ### initialize the namespace
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount that uses your specified secret, install a buildtemplate and label the namespace for automatic Istio sidecar injection.
+Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This creates a serviceaccount that uses the secret saved above, installs a buildtemplate and labels the namespace for automatic Istio sidecar injection.
 ```sh
-riff namespace init default --secret push-credentials
+riff namespace init default --gcr gcr-storage-admin.json
 ```
 ## create a function
-This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR. Replace the ??? with your GCP project name.
+This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR.
 ```sh
 riff function create node square \
-  --git-repo https://github.com/trisberg/node-fun-square.git \
+  --git-repo https://github.com/jldec/node-fun-square.git \
   --artifact square.js \
-  --image gcr.io/$GCP_PROJECT/node-fun-square
+  --image gcr.io/$GCP_PROJECT/node-fun-square \
+  --wait
 ```
 
 If you're still watching pods, you should see something like the following
@@ -250,22 +227,15 @@ default     square-00001-jk9vj                         0/1       Completed   0  
 ```
 
 ## invoke the function
-Record the IP address for the `knative-ingressgateway`:
 ```sh
-export SERVICE_IP=`kubectl get svc knative-ingressgateway -n istio-system -o jsonpath="{.status.loadBalancer.ingress[*].ip}"`
-echo $SERVICE_IP
+riff service invoke square --text -- -w '\n' -d 8
 ```
 
-Use curl to invoke the function.
-```sh
-curl \
-     -w '\n' \
-     -H 'Host: square.default.example.com' \
-     -H 'Content-Type: text/plain' \
-     http://$SERVICE_IP \
-     -d 10
+#### result
 ```
-For the input data of 10 above, the function should return 100
+curl 35.236.212.232/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
+8 squared = 64
+```
 
 ## delete the function
 ```

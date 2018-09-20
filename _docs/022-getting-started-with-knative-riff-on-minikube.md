@@ -67,7 +67,7 @@ kubectl config current-context
 ```
 
 ## install the riff CLI
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.0 or later.
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
 
 ```sh
 riff version
@@ -93,71 +93,46 @@ riff system install --node-port
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
 
 ```
-NAMESPACE          NAME                                       READY     STATUS      RESTARTS   AGE
-default            square-00001-dg8t9                         0/1       Completed   0          1h
-istio-system       istio-citadel-7bdc7775c7-q5sbs             1/1       Running     0          2h
-istio-system       istio-cleanup-old-ca-q7m7s                 0/1       Completed   0          2h
-istio-system       istio-egressgateway-795fc9b47-mnmfv        1/1       Running     0          2h
-istio-system       istio-ingress-84659cf44c-9bs5t             1/1       Running     0          2h
-istio-system       istio-ingressgateway-7d89dbf85f-bx52h      1/1       Running     0          2h
-istio-system       istio-mixer-post-install-cc95r             0/1       Completed   0          2h
-istio-system       istio-pilot-66f4dd866c-qtcgr               2/2       Running     0          2h
-istio-system       istio-policy-76c8896799-wfv2n              2/2       Running     0          2h
-istio-system       istio-sidecar-injector-645c89bc64-p48vc    1/1       Running     0          2h
-istio-system       istio-statsd-prom-bridge-949999c4c-x6qf4   1/1       Running     0          2h
-istio-system       istio-telemetry-6554768879-zbfg4           2/2       Running     0          2h
-istio-system       knative-ingressgateway-5f5dc4b4cd-96jb7    1/1       Running     0          2h
-knative-build      build-controller-5cb4f5cb67-8l9z4          1/1       Running     0          2h
-knative-build      build-webhook-6b4c65546b-lxhsv             1/1       Running     0          2h
-knative-eventing   controller-manager-7747d66d85-l7f6d        2/2       Running     2          2h
-knative-eventing   eventing-controller-6cd984f789-vldfp       1/1       Running     0          2h
-knative-eventing   eventing-webhook-7dfd9cfbd9-76sdx          1/1       Running     0          2h
-knative-eventing   stub-clusterbus-866c95f68d-22cgp           2/2       Running     0          2h
-knative-serving    activator-7f5b67b69c-h56wb                 2/2       Running     0          2h
-knative-serving    controller-868ff6d485-qkgxp                1/1       Running     0          2h
-knative-serving    webhook-6d9976c74f-t6nz6                   1/1       Running     0          2h
-kube-system        etcd-minikube                              1/1       Running     0          2h
-kube-system        kube-addon-manager-minikube                1/1       Running     0          2h
-kube-system        kube-apiserver-minikube                    1/1       Running     2          2h
-kube-system        kube-controller-manager-minikube           1/1       Running     0          2h
-kube-system        kube-dns-86f4d74b45-5rlft                  3/3       Running     0          2h
-kube-system        kube-proxy-9lsb5                           1/1       Running     0          2h
-kube-system        kube-scheduler-minikube                    1/1       Running     0          2h
-kube-system        kubernetes-dashboard-5498ccf677-rcj2f      1/1       Running     0          2h
-kube-system        storage-provisioner                        1/1       Running     0          2h
+NAMESPACE          NAME                                         READY     STATUS      RESTARTS   AGE
+istio-system       istio-citadel-84fb7985bf-dmc58               1/1       Running     0          12m
+istio-system       istio-cleanup-secrets-bnjb9                  0/1       Completed   0          12m
+istio-system       istio-egressgateway-bd9fb967d-dr5mp          1/1       Running     1          12m
+istio-system       istio-galley-655c4f9ccd-4hr8w                1/1       Running     0          12m
+istio-system       istio-ingressgateway-688865c5f7-z9n2d        1/1       Running     1          12m
+istio-system       istio-pilot-6cd69dc444-bv9cc                 2/2       Running     0          12m
+istio-system       istio-policy-6b9f4697d-hxkqd                 2/2       Running     0          12m
+istio-system       istio-sidecar-injector-8975849b4-8mtts       1/1       Running     0          12m
+istio-system       istio-statsd-prom-bridge-7f44bb5ddb-r9c8t    1/1       Running     0          12m
+istio-system       istio-telemetry-6b5579595f-tdnln             2/2       Running     0          12m
+istio-system       knative-ingressgateway-77b757d468-wzh6b      1/1       Running     0          3m
+knative-build      build-controller-56f555c8b9-cfrnr            1/1       Running     0          3m
+knative-build      build-webhook-868b65dd9-8xddg                1/1       Running     0          3m
+knative-eventing   eventing-controller-596c6bc4fd-rshsj         1/1       Running     0          3m
+knative-eventing   stub-clusterbus-dispatcher-7b86b64cd-mnssd   2/2       Running     0          56s
+knative-eventing   webhook-796b574465-bdv7m                     1/1       Running     0          3m
+knative-serving    activator-7ffbdb4f46-lzsrj                   2/2       Running     0          3m
+knative-serving    autoscaler-f55c76f7c-pmr2x                   2/2       Running     0          3m
+knative-serving    controller-8647f984bf-9vc82                  1/1       Running     0          3m
+knative-serving    webhook-896c797cd-lfsfc                      1/1       Running     0          3m
+kube-system        etcd-minikube                                1/1       Running     0          12m
+kube-system        kube-addon-manager-minikube                  1/1       Running     0          13m
+kube-system        kube-apiserver-minikube                      1/1       Running     3          4m
+kube-system        kube-controller-manager-minikube             1/1       Running     0          12m
+kube-system        kube-dns-86f4d74b45-wxmcd                    3/3       Running     0          13m
+kube-system        kube-proxy-mhxdt                             1/1       Running     0          13m
+kube-system        kube-scheduler-minikube                      1/1       Running     0          12m
+kube-system        kubernetes-dashboard-5498ccf677-bpz7s        1/1       Running     0          13m
+kube-system        storage-provisioner                          1/1       Running     0          13m
 ```
 There should be a couple of pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
 
 ## create a Kubernetes secret for pushing images to DockerHub
-This step requires base64-encoded credentials for [DockerHub](https://hub.docker.com/). Run the following twice, replacing ??? with your docker username and password.
-
-```
-echo -n '???' | base64
-```
-
-Create a file called `dockerhub-push-credentials.yaml` using the yaml below, and inserting the two base64 values from above. 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: push-credentials
-  annotations:
-    build.knative.dev/docker-0: https://index.docker.io/v1/
-type: kubernetes.io/basic-auth
-data:
-  username: BASE64-USERNAME
-  password: BASE64-PASSWORD
-```
-
-Apply the yaml to Kubernetes
-```sh
-kubectl apply -f dockerhub-push-credentials.yaml
-```
+Since the riff v0.1.3, this step is handled automatically by `riff namespace init` below.
 
 ### initialize the namespace
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount that uses your specified secret, install a buildtemplate and label the namespace for automatic Istio sidecar injection.
+Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will prompt for your `$DOCKER_ID` password, create a serviceaccount using that secret, install a buildtemplate and label the namespace for automatic Istio sidecar injection.
 ```sh
-riff namespace init default --secret push-credentials
+riff namespace init default --dockerhub $DOCKER_ID
 ```
 ## create a function
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo. Replace the ??? with your docker username.
@@ -167,9 +142,10 @@ export DOCKER_ID=???
 ```
 ```sh
 riff function create node square \
-  --git-repo https://github.com/trisberg/node-fun-square.git \
+  --git-repo https://github.com/jldec/node-fun-square.git \
   --artifact square.js \
-  --image $DOCKER_ID/node-fun-square
+  --image $DOCKER_ID/node-fun-square \
+  --wait
 ```
 
 If you're still watching pods, you should see something like the following
@@ -187,17 +163,14 @@ default     square-00001-jk9vj                         0/1       Completed   0  
 
 ## invoke the function
 ```sh
-export MINIKUBE_IP=$(minikube ip)
+riff service invoke square --text -- -w '\n' -d 8
 ```
-```sh
-curl \
-     -w '\n' \
-     -H 'Host: square.default.example.com' \
-     -H 'Content-Type: text/plain' \
-     http://$MINIKUBE_IP:32380 \
-     -d 10
+
+#### result
 ```
-For the input data of 10 above, the function should return 100
+curl http://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
+8 squared = 64
+```
 
 ## delete the function
 ```
