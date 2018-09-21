@@ -52,7 +52,9 @@ riff function create java hello \
   --local-path . \
   --image dev.local/java-hello:v1
 ```
-Builds using a `--local-path` run directly on your machine, not inside the Kubernetes cluster. The `dev.local` prefix, sends the image to your local docker daemon.
+Using a `--local-path` builds code directly from your machine. The `dev.local` prefix keeps the image in your local docker environment instead of pushing it to a registry.
+
+> NOTE: pre-existing images with tags matching `--image` will result in an error "ANALYZING: Reading information from previous image for possible re-use" - remove those images first.
 
 You can iterate on your code, by rebuilding locally.  
 ```sh
