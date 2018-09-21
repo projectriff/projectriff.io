@@ -52,9 +52,9 @@ riff function create java hello \
   --local-path . \
   --image dev.local/java-hello:v1
 ```
-Using a `--local-path` builds code directly from your machine. The `dev.local` prefix keeps the image in your local docker environment instead of pushing it to a registry.
+Using a `--local-path` builds code directly from your machine. The `dev.local` prefix produces an image in your local docker environment.
 
-> NOTE: pre-existing images with tags matching `--image` will result in an error "ANALYZING: Reading information from previous image for possible re-use" - remove those images first.
+> NOTE: pre-existing images with tags matching `--image` will result in an error "Reading information from previous image for possible re-use". Remove those images first.
 
 You can iterate on your code, by rebuilding locally.  
 ```sh
