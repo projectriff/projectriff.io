@@ -1,26 +1,18 @@
 ---
 layout: single
-title: "Announcing riff v0.1.3 on Knative"
+title: "Announcing riff v0.1.3"
 header:
   overlay_image: /images/cam-bridge.jpg
 excerpt:
   With a riff buildpack for java, credential helpers, content-type shortcuts, and subscription commands
-permalink: /blog/announcing-riff-0-1-3-on-knative/
+permalink: /blog/announcing-riff-0-1-3/
 ---
 
-We are pleased to announce the release of [riff v0.1.3](https://github.com/projectriff/riff/releases/tag/v0.1.3) on Knative. Thank you riff and Knative contributors.
+We are pleased to announce the release of [riff v0.1.3](https://github.com/projectriff/riff/releases/tag/v0.1.3). Thank you riff and Knative contributors.
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/riff/releases/tag/v0.1.3) on GitHub. Please follow one of the [getting started](/docs) guides, to create a new cluster on GKE or minikube. This release includes new manifests for the latest Knative and Istio.
 
-#### uninstall older Knative
-```sh
-riff system uninstall --istio --force
-```
-
-#### install on minikube (for GKE omit `--node-port`)
-```sh
-riff system install --manifest stable --node-port
-```
+Here's an overview of some of the new features in riff v0.1.3:
 
 ## credential helpers
 Initializing a namespace with your push credentials is easier now. 
@@ -38,6 +30,8 @@ riff namespace init default --dockerhub $DOCKER_ID
 ## riff buildpack for java
 This release supports building java functions from source, either locally or on-cluster. Both variants use a new riff buildpack for java. 
 
+> NOTE: to preserve the old behavior of building containers with a pre-compiled jar file, use `riff function create jar`. 
+
 All you need in your directory is the code with a maven pom, and the name of the handler class in a file called `riff.toml`. The example below uses a sample [java-hello](https://github.com/projectriff-samples/java-hello) function available on GitHub.
 
 #### riff.toml
@@ -49,31 +43,29 @@ To build from code in a directory and push to local docker:
 
 ```sh
 riff function create java hello \
-  --local-path . \
-  --image dev.local/java-hello:v1
+  --local-path path/to/function/source \
+  --image dev.local/java-hello
 ```
 Using a `--local-path` builds code directly from your machine. The `dev.local` prefix exports the image to your docker environment. Remember to run `eval $(minikube docker-env)` for minikube.
 
 
 > NOTE: pre-existing images with tags matching `--image` will result in an error "Reading information from previous image for possible re-use". Remove those images first.
 
-You can iterate on your code by rebuilding locally, triggering a new Knative revision for each build.
+You can iterate on your code by rebuilding locally, triggering a new Knative Revision for each build.
 ```sh
-riff function build hello --local-path .
+riff function build hello --local-path path/to/function/source
 ```
 To build from code on GitHub and push to DockerHub: 
 ```sh
 riff function create java hello \
     --git-repo https://github.com/projectriff-samples/java-hello.git \
-    --image $DOCKER_ID/java-hello:v1 \
+    --image $DOCKER_ID/java-hello \
     --verbose
 ```
 Using `--verbose` shows the progress of the build as it's happening in the cluster. For GCR, replace `$DOCKER_ID` with your `gcr.io/$GCP_PROJECT`. 
 
-> NOTE: to preserve the old behavior of building containers with a pre-compiled jar file, use `riff function create jar`. 
-
 ## simpler riff service invoke 
-You can now call `riff service invoke` with `--text` or `--json`. You no longer have to specify the `Content-Type` as a curl header.
+You can now call `riff service invoke` with `--text` or `--json` to set the `Content-Type` header.
 
 #### invoke the hello function with text input
 ```sh

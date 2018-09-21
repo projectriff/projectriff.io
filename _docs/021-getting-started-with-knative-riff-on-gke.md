@@ -207,9 +207,9 @@ riff namespace init default --gcr gcr-storage-admin.json
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR.
 ```sh
 riff function create node square \
-  --git-repo https://github.com/jldec/node-fun-square.git \
-  --artifact square.js \
-  --image gcr.io/$GCP_PROJECT/node-fun-square \
+  --git-repo https://github.com/projectriff-samples/node-square \
+  --artifact package.json \
+  --image gcr.io/$GCP_PROJECT/square \
   --wait
 ```
 

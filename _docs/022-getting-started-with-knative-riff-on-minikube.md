@@ -142,9 +142,9 @@ export DOCKER_ID=???
 ```
 ```sh
 riff function create node square \
-  --git-repo https://github.com/jldec/node-fun-square.git \
-  --artifact square.js \
-  --image $DOCKER_ID/node-fun-square \
+  --git-repo https://github.com/projectriff-samples/node-square  \
+  --artifact package.json \
+  --image $DOCKER_ID/square \
   --wait
 ```
 
