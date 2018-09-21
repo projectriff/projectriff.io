@@ -52,11 +52,12 @@ riff function create java hello \
   --local-path . \
   --image dev.local/java-hello:v1
 ```
-Using a `--local-path` builds code directly from your machine. The `dev.local` prefix produces an image in your local docker environment.
+Using a `--local-path` builds code directly from your machine. The `dev.local` prefix exports the image to your docker environment. Remember to run `eval $(minikube docker-env)` for minikube.
+
 
 > NOTE: pre-existing images with tags matching `--image` will result in an error "Reading information from previous image for possible re-use". Remove those images first.
 
-You can iterate on your code, by rebuilding locally.  
+You can iterate on your code by rebuilding locally, triggering a new Knative revision for each build.
 ```sh
 riff function build hello --local-path .
 ```
