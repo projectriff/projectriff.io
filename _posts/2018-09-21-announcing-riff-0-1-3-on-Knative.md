@@ -40,6 +40,11 @@ This release supports building java functions from source, either locally or on-
 
 All you need in your directory is the code with a maven pom, and the name of the handler class in a file called `riff.toml`. The example below uses a sample [java-hello](https://github.com/projectriff-samples/java-hello) function available on GitHub.
 
+#### riff.toml
+```toml
+handler = "functions.Hello"
+```
+
 To build from code in a directory and push to local docker:
 
 ```sh
@@ -50,9 +55,8 @@ riff function create java hello \
 Builds using a `--local-path` run directly on your machine, not inside the Kubernetes cluster. The `dev.local` prefix, sends the image to your local docker daemon.
 
 You can iterate on your code, by rebuilding locally.  
-`-l` is the abbreviation for `--local-path`.
 ```sh
-riff function build hello -l .
+riff function build hello --local-path .
 ```
 To build from code on GitHub and push to DockerHub: 
 ```sh
@@ -95,9 +99,14 @@ Flags:
 #### delete
 ```
 Usage:
-  riff subscription delete SUBSCRIPTION_NAME  [flags]
+  riff subscription delete SUBSCRIPTION_NAME [flags]
 
 Example:
   riff subscription delete my-subscription --namespace joseph-ns
 ```
 
+#### list
+```
+Usage:
+  riff subscription list [flags]
+```
