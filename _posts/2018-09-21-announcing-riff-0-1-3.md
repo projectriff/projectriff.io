@@ -43,8 +43,8 @@ To build from code in a directory and push to local docker:
 
 ```sh
 riff function create java hello \
-  --local-path path/to/function/source \
-  --image dev.local/java-hello
+  --local-path . \
+  --image dev.local/java-hello:v1
 ```
 Using a `--local-path` builds code directly from your machine. The `dev.local` prefix exports the image to your docker environment. Remember to run `eval $(minikube docker-env)` for minikube.
 
