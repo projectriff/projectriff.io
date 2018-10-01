@@ -22,12 +22,16 @@ feature_row:
 
 {% include feature_row %}
 
-{% for post in site.posts %}
-  {% include archive-single.html %}
-{% endfor %}
+<article class="page">
+  {% for post in site.posts limit: 3 %}
+    {% include archive-single.html %}
+  {% endfor %}
+  <p><a href="/blog/">More posts</a></p>
 
----
+  <hr />
 
-{% for post in site.docs %}
-  {% include archive-single.html %}
-{% endfor %}
+  {% for post in site.docs limit: 3 %}
+    {% include archive-single.html %}
+  {% endfor %}
+  <p><a href="/docs/">More docs</a></p>
+</article>
