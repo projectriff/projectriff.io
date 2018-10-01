@@ -1,10 +1,10 @@
 main:
   - title: "Docs"
-    url: /docs/getting-started-with-knative-riff-on-gke/
+    url: /docs/
   - title: "Blog"
     url: /blog/
   - title: "Video"
-    url: /video/mark-fisher-at-springone-platform-2017/
+    url: /video/
 
 # documentation links
 docs:
