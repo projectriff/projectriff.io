@@ -9,15 +9,15 @@ feature_row:
   - image_path: "/images/container.png"
     alt: "containers"
     title:
-    excerpt: "Buildpacks compile Functions.  \nContainers are built with invokers."
+    excerpt: "Buildpacks combine functions with invokers producing runnable containers."
   - image_path: "/images/knative.png"
     alt: "sidecars"
     title:
-    excerpt: "Knative-serving runs Functions.  \nWorkloads auto-scale 0-N."
+    excerpt: "Knative-serving runs container workloads with multiple revisions and 0-to-N autoscaling."
   - image_path: "/images/events.png"
     alt: "scaling"
     title:
-    excerpt: "Knative-eventing connects Functions  \nover pub-sub channels."
+    excerpt: "Knative-eventing connects workloads and event-sources over broker-backed pub-sub channels."
 ---
 
 {% include feature_row %}
