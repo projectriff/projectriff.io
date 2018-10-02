@@ -2,7 +2,7 @@
 layout: splash
 permalink: /
 header:
-  overlay_image: /images/playriff.png
+  overlay_image: /images/playriff2.jpg
   overlay_color: "#333"
 excerpt: '<a href="https://github.com/projectriff/riff">https://github.com/projectriff/riff</a>'
 feature_row:
