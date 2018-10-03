@@ -17,7 +17,7 @@ feature_row:
   - image_path: "/images/events.png"
     alt: "scaling"
     title:
-    excerpt: "Knative-eventing connects workloads and event-sources over broker-backed pub-sub channels."
+    excerpt: "Knative-eventing connects workloads and event sources over broker-backed pub-sub channels."
 ---
 
 {% include feature_row %}
