@@ -13,9 +13,11 @@ redirect_from:
 ---
 
 # Getting started on Minikube
+
 The following will help you get started running a riff function with Knative on Minikube.
 
 ## TL;DR
+
 1. install docker, kubectl, and minikube
 2. install the latest riff CLI
 3. create a minikube cluster for Knative
@@ -24,12 +26,15 @@ The following will help you get started running a riff function with Knative on 
 6. invoke the function
 
 ### install docker
+
 Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
 
 ### install kubectl
+
 [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. If you already have the Google Cloud Platform SDK, use: `gcloud components install kubectl`.
 
 ### install minikube
+
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
 For macOS we recommend using hyperkit as the vm driver. To install Hyperkit
@@ -46,27 +51,26 @@ For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blo
 
 For additional details see the minikube [driver installation](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#hyperkit-driver) docs.
 
-
 ## create a Minikube cluster
 
 ```sh
 minikube start --memory=8192 --cpus=4 \
---kubernetes-version=v1.10.5 \
+--kubernetes-version=v1.11.3 \
 --vm-driver=hyperkit \
 --bootstrapper=kubeadm \
---extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
---extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
---extra-config=apiserver.admission-control="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+--extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
 To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
 
 Confirm that your kubectl context is pointing to the new cluster
+
 ```sh
 kubectl config current-context
 ```
 
 ## install the riff CLI
+
 The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
 
 ```sh
@@ -74,17 +78,20 @@ riff version
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
+
 ```sh
 brew install watch
 ```
 
 Watch pods in a separate terminal.
+
 ```sh
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
 ## install Knative using the riff CLI
-Install Knative, watching the pods until everything is running (this could take a couple of minutes). The `--node-port` option replaces LoadBalancer type services with NodePort. 
+
+Install Knative, watching the pods until everything is running (this could take a couple of minutes). The `--node-port` option replaces LoadBalancer type services with NodePort.
 
 ```sh
 riff system install --node-port
@@ -92,7 +99,7 @@ riff system install --node-port
 
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
 
-```
+```sh
 NAMESPACE          NAME                                         READY     STATUS      RESTARTS   AGE
 istio-system       istio-citadel-84fb7985bf-dmc58               1/1       Running     0          12m
 istio-system       istio-cleanup-secrets-bnjb9                  0/1       Completed   0          12m
@@ -124,22 +131,31 @@ kube-system        kube-scheduler-minikube                      1/1       Runnin
 kube-system        kubernetes-dashboard-5498ccf677-bpz7s        1/1       Running     0          13m
 kube-system        storage-provisioner                          1/1       Running     0          13m
 ```
-There should be a couple of pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
 
-## create a Kubernetes secret for pushing images to DockerHub
-Since the riff v0.1.3, this step is handled automatically by `riff namespace init` below.
+There should be one or more pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
 
-### initialize the namespace
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will prompt for your `$DOCKER_ID` password, create a serviceaccount using that secret, install a buildtemplate and label the namespace for automatic Istio sidecar injection.
+### initialize the namespace and provide credentials for pushing images to DockerHub
+
+Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate.
+
+```sh
+export DOCKER_ID=???
+```
+
 ```sh
 riff namespace init default --dockerhub $DOCKER_ID
 ```
+
+You will be prompted to provide the password.
+
 ## create a function
+
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo. Replace the ??? with your docker username.
 
 ```sh
 export DOCKER_ID=???
 ```
+
 ```sh
 riff function create node square \
   --git-repo https://github.com/projectriff-samples/node-square  \
@@ -149,12 +165,14 @@ riff function create node square \
 ```
 
 If you're still watching pods, you should see something like the following
+
 ```sh
 NAMESPACE    NAME                  READY     STATUS      RESTARTS   AGE
 default      square-00001-jk9vj    0/1       Init:0/4    0          24s
 ```
 
 The 4 "Init" containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.
+
 ```sh
 NAMESPACE   NAME                                       READY     STATUS      RESTARTS   AGE
 default     square-00001-deployment-679bffb58c-cpzz8   3/3       Running     0          4m
@@ -162,7 +180,9 @@ default     square-00001-jk9vj                         0/1       Completed   0  
 ```
 
 ## invoke the function
+
 ```sh
+
 riff service invoke square --text -- -w '\n' -d 8
 ```
 
@@ -173,8 +193,7 @@ curl http://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Conten
 ```
 
 ## delete the function
-```
+
+```sh
 riff service delete square
 ```
-
-
