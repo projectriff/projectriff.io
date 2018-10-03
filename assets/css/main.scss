@@ -5,6 +5,8 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
+@import "../fontawesome-free-5.3.1-web/css/fontawesome.min.css";
+@import "../fontawesome-free-5.3.1-web/css/brands.min.css";
 
 body {
   font-weight: 300;

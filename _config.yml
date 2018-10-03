@@ -11,13 +11,8 @@ url: "https://projectriff.io"
 repository: "projectriff/projectriff.io"
 description: "riff is for functions"
 
-twitter:
-  username: projectriff
-
 author:
   name: "riff"
-  github: projectriff/riff
-  twitter: projectriff
 
 collections:
   docs:
