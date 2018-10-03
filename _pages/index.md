@@ -6,7 +6,7 @@ header:
   overlay_color: "#333"
 excerpt: '<a href="https://github.com/projectriff/riff">https://github.com/projectriff/riff</a>'
 feature_row:
-  - image_path: "/images/container.png"
+  - image_path: "/images/build.png"
     alt: "containers"
     title:
     excerpt: "Buildpacks combine functions with invokers producing runnable containers."
