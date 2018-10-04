@@ -5,6 +5,12 @@ main:
     url: /blog/
   - title: "Video"
     url: /video/
+  - title: <i class="fab fa-twitter"></i>
+    description: "Twitter @projectriff"
+    url: https://twitter.com/projectriff
+  - title: <i class="fab fa-github"></i>
+    description: "GitHub @projectriff"
+    url: https://github.com/projectriff
 
 # documentation links
 docs:
