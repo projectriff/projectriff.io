@@ -132,11 +132,9 @@ kube-system        kubernetes-dashboard-5498ccf677-bpz7s        1/1       Runnin
 kube-system        storage-provisioner                          1/1       Running     0          13m
 ```
 
-There should be one or more pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
-
 ### initialize the namespace and provide credentials for pushing images to DockerHub
 
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate.
+Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.
 
 ```sh
 export DOCKER_ID=???
@@ -150,11 +148,7 @@ You will be prompted to provide the password.
 
 ## create a function
 
-This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo. Replace the ??? with your docker username.
-
-```sh
-export DOCKER_ID=???
-```
+This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
 
 ```sh
 riff function create node square \
@@ -189,7 +183,7 @@ riff service invoke square --text -- -w '\n' -d 8
 #### result
 ```
 curl http://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
-8 squared = 64
+64
 ```
 
 ## delete the function
