@@ -1,15 +1,20 @@
 ---
+layout: doc
 title: "Getting started running on Minikube"
-permalink: /docs/getting-started-with-knative-riff-on-minikube/
+short_title: on Minikube
+permalink: /docs/getting-started/minikube/
 excerpt: "How to run Knative using **riff** on Minikube"
 header:
   overlay_image: /images/minikube2.png
   overlay_filter: 0.4
   overlay_color: "#555"
 redirect_from:
-  - /docs/getting-started-on-minikube/
-  - /docs/getting-started-on-docker-ce-edge-for-mac/
-  - /docs/getting-started-on-docker-ce-edge-for-windows/
+- /docs/getting-started-on-minikube/
+- /docs/getting-started-with-knative-riff-on-minikube/
+- /docs/getting-started-on-docker-ce-edge-for-mac/
+- /docs/getting-started-on-docker-ce-edge-for-windows/
+categories:
+- getting-started
 ---
 
 # Getting started on Minikube

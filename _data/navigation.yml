@@ -15,9 +15,9 @@ main:
 # documentation links
 docs:
   - title: Getting Started
+    url: /docs/getting-started/
     children:
       - title: "on GKE"
-        url: /docs/getting-started-with-knative-riff-on-gke/
+        url: /docs/getting-started/gke/
       - title: "on minikube"
-        url: /docs/getting-started-with-knative-riff-on-minikube/
-
+        url: /docs/getting-started/minikube/

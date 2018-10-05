@@ -1,14 +1,18 @@
 ---
+layout: doc
 title: "Getting started on GKE"
-permalink: /docs/getting-started-with-knative-riff-on-gke/
+short_title: on GKE
+permalink: /docs/getting-started/gke/
 excerpt: "How to run Knative using **riff** on Google Kubernetes Engine"
 header:
   overlay_image: /images/gke.png
   overlay_filter: 0.4
   overlay_color: "#555"
 redirect_from:
-  - /docs/
-  - /docs/getting-started-on-gke/
+- /docs/getting-started-on-gke/
+- /docs/getting-started-with-knative-riff-on-gke/
+categories:
+- getting-started
 ---
 
 # Getting started on GKE
