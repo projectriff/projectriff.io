@@ -1,7 +1,14 @@
 {% comment %}
   from https://github.com/mmistakes/minimal-mistakes/blob/dcdbba835ccec00303cef87cbc1efe5c89cf5ed6/_includes/archive-single.html
-  modified to allow for youtube video embeds
+  modified to allow for:
+  - youtube video embeds
+  - custom post inlucde arg
+  - custom title
 {% endcomment %}
+
+{% if include.post %}
+  {% assign post = include.post %}
+{% endif %}
 
 {% if post.header.teaser %}
   {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
@@ -9,7 +16,9 @@
   {% assign teaser = site.teaser %}
 {% endif %}
 
-{% if post.id %}
+{% if include.title %}
+  {% assign title = include.title %}
+{% elsif post.id %}
   {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
 {% else %}
   {% assign title = post.title %}
