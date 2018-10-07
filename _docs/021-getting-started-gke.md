@@ -238,7 +238,7 @@ riff service invoke square --text -- -w '\n' -d 8
 #### result
 ```
 curl 35.236.212.232/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
-8 squared = 64
+64
 ```
 
 ## delete the function
