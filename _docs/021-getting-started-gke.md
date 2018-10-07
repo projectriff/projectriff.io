@@ -178,7 +178,6 @@ kube-system        kube-proxy-gke-jl-default-pool-19100274-brwn   1/1       Runn
 kube-system        l7-default-backend-5d5b9874d5-jp4v2            1/1       Running     0          19m
 kube-system        metrics-server-v0.2.1-7486f5bd67-fw7vl         2/2       Running     0          18m
 ```
-There should be a couple of pods in the istio-system that have a "Completed" status. If there are pods with an "Error" status, as long as there is one pod with the same prefix with a "Completed" status, then everything should be fine.
 
 ## create a Kubernetes secret for pushing images to GCR
 Create a [GCP Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) in the GCP console or using the gcloud CLI
