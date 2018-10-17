@@ -21,3 +21,5 @@ docs:
         url: /docs/getting-started/gke/
       - title: "on minikube"
         url: /docs/getting-started/minikube/
+      - title: "on Docker for Mac"
+        url: /docs/getting-started/docker-for-mac/

@@ -11,8 +11,6 @@ header:
 redirect_from:
 - /docs/getting-started-on-minikube/
 - /docs/getting-started-with-knative-riff-on-minikube/
-- /docs/getting-started-on-docker-ce-edge-for-mac/
-- /docs/getting-started-on-docker-ce-edge-for-windows/
 categories:
 - getting-started
 ---
