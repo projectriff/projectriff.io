@@ -171,7 +171,7 @@ riff service delete square
 ```
 
 ## uninstalling and reinstalling istio
-One caveat with Docker for Mac is that it handles Kubernetes NodePorts differently from minikube. If you need to upgrade Knative and Istio, we recommend resetting the Kubernetes cluster first, and then reinstalling Knative with Istio from scratch. Uninstalling and reinstalling without resetting Kubernetes can result in the knative-ingress becoming unreachable.
+One caveat with Docker for Mac is that it handles Kubernetes NodePorts differently from minikube. If you need to upgrade Knative, we recommend resetting the Kubernetes cluster first, and then reinstalling Knative. Not resetting Kubernetes can result in the knative-ingress becoming unreachable after a reinstall. Fortunately cached docker images are preserved when you reset Kubernetes.  
 
 ![reset Kubernetes using Preferences/Reset](/images/docker-for-mac-reset-kubernetes.png)
 
