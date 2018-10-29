@@ -3,18 +3,6 @@ name: java
 title: "Java Invoker"
 author: projectriff
 href: https://github.com/projectriff/java-function-invoker
-development:
-  href: https://github.com/projectriff/java-function-invoker/raw/master/java-invoker.yaml
-releases:
-- version: v0.0.5-sr.1
-  href: https://github.com/projectriff/java-function-invoker/raw/v0.0.5-sr.1/java-invoker.yaml
-  date: '2018-04-06'
-- version: v0.0.6
-  href: https://github.com/projectriff/java-function-invoker/raw/v0.0.6/java-invoker.yaml
-  date: '2018-04-18'
-- version: v0.0.7
-  href: https://github.com/projectriff/java-function-invoker/raw/v0.0.7/java-invoker.yaml
-  date: '2018-05-23'
 ---
 
 *by [{{page.author}}]({{ page.href }})*
