@@ -2,17 +2,8 @@
 name: go
 title: "Go Invoker"
 author: projectriff
-deprecated: true
 href: https://github.com/projectriff/go-function-invoker
-development:
-  href: https://github.com/projectriff/go-function-invoker/raw/master/go-invoker.yaml
-releases:
-- version: v0.0.2
-  href: https://github.com/projectriff/go-function-invoker/raw/v0.0.2/go-invoker.yaml
-  date: '2018-04-06'
-- version: v0.0.3
-  href: https://github.com/projectriff/go-function-invoker/raw/v0.0.3/go-invoker.yaml
-  date: '2018-05-24'
+deprecated: true
 ---
 
 *by [{{page.author}}]({{ page.href }})*
