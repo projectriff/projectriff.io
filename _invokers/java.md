@@ -9,45 +9,179 @@ href: https://github.com/projectriff/java-function-invoker
 
 The Java Invoker hosts riff functions written in Java.
 
-## Usage
+## What It Does
 
-With the `riff` CLI you need to provide an archive location with `--artifact` 
-or `-a` and a handler specification with `--handler`. The archive is a jar
-file, which can be shaded with all required dependencies, or it can be
-a Spring Boot fat jar (with dependencies nested in
-`BOOT-INF/lib`). Simple functions that do not require any dependencies
-work just fine. The simplest form of the handler is a class name that
-can be instantiated (with a default constructor). More complex creation 
-scenarios can be handled by giving the handler in the form `<bean>[&main=<main>]` where
+The "Java Function Invoker" let's you concentrate on writing your business logic as a Java function while the invoker takes care of the rest that is needed to run your functions in a Kubernetes cluster with riff and Knative installed.
+The invoker is a [Spring Boot](https://projects.spring.io/spring-boot) application that will locate your function in the JAR file you provide based on some configuration settings.
+It will then invoke the function for each request.
+When used in a function service like [riff on Knative](https://projectriff.io/), the invoker boot application is provided by the platform when functions are built.
+
+## How To Use It
+
+### Function source
+
+You need to configure a Maven or Gradle project for your function.
+If you use Spring Boot then we recommend using [Spring Initializr](https://start.spring.io/) to bootstrap your project.
+If you are not using Spring Boot for your function code then you need to create your own build configuration.
+There are no required dependencies from the Java Function Invoker, it only requires that your function implements the `java.util.function.Function` interface.
+
+The [Spring Cloud Function](https://cloud.spring.io/spring-cloud-function/) project provides support for writing functions as part of a Spring Boot app.
+The Java Function Invoker uses Spring Cloud Function to invoke your functions, so most features available with Spring Cloud Function are also available with the Java Function Invoker.
+
+Example of a plain Java function:
+
+```java
+package functions;
+
+import java.util.function.Function;
+
+public class Upper implements Function<String, String> {
+
+    public String apply(String name) {
+        return name.toUpperCase();
+    }
+}
+```
+
+Example of a Spring Boot app with a function bean:
+
+```java
+package com.example.uppercase;
+
+import java.util.function.Function;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class UppercaseApplication {
+
+	@Bean
+	Function<String, String> uppercase() {
+		return s -> s.toUpperCase();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(UppercaseApplication.class, args);
+	}
+}
+```
+
+#### Function handler
+
+The simplest form of the handler is a bean name or a class name that can be instantiated (with a default constructor).
+More complex creation scenarios can be handled by giving the handler in the form `<bean>[&main=<main>]` where
 
 * `<bean>` is a class name or bean name, and
 * `<main` is a Spring `@Configuration` class to create an application context
 
-If you provide a `main` parameter you need to include Spring Boot and
-all the other dependencies of the context in your archive. A Spring
-Boot jar file does not need an explicit `main` (there is one in the
-`MANIFEST.MF`), but if you supply one it will be used. If the
-`Function` has POJO (i.e. not generic JDK classes) as parameter types,
-then you also need to depend on `spring-cloud-function-context` (and
-include that in the archive).
+If you provide a `main` parameter you need to include Spring Boot and all the other dependencies of the context in your archive.
+A Spring Boot jar file does not need an explicit `main` (there is one in the `MANIFEST.MF`), but if you supply one it will be used.
+If the `Function` has POJO (i.e. not generic JDK classes) as parameter types, then you also need to depend on `spring-cloud-function-context` (and include that in the archive).
 
 Example:
 
 ```
---artifact greeter-1.0.0.jar --handler=functions.Greeter
+handler=functions.Greeter
 ```
 
 Example with Spring Boot application:
 
 ```
---artifact greeter-1.0.0.jar --handler=greeter
+handler=greeter
 ```
 
-Example with Spring application context and an explicit main (Note: you need to add quotes around the handler value since it contains an `&`)
+Example with Spring application context and an explicit main
 
 ```
---artifact greeter-1.0.0.jar --handler='greeter&main=functions.FunctionApp'
+handler='greeter&main=functions.FunctionApp'
 ```
+
+#### Function samples
+
+We have sample application for [plain Java function](https://github.com/projectriff/java-function-invoker/tree/master/samples/greeter) and for [Spring Boot app with a function bean](https://github.com/projectriff/java-function-invoker/tree/master/samples/uppercase).
+
+### Cloud Native Buildpacks
+
+[Buildpacks](https://buildpacks.io/) provide a higher-level abstraction for building apps compared to Dockerfiles.
+
+The [riff project](https://github.com/projectriff/riff) provides its own [buildpack](https://github.com/projectriff/riff-buildpack) that specifically targets building functions using the riff function invokers.
+
+For the remainder of this document we will be using the riff buildpack to build and package our functions.
+
+### Building and deploying functions to local cluster
+
+To build and deploy your function locally you can use the `riff` CLI which can be installed following the instructions on the [riff Release page](https://github.com/projectriff/riff/releases).
+
+You also need to have riff and Knative installed on a local [Minikube](https://projectriff.io/docs/getting-started/minikube/) or [Docker for Mac](https://projectriff.io/docs/getting-started/docker-for-mac/) cluster, just follow the instructions we linked to.
+
+If you are using Minikube then you should configure Docker to use the Docker environment running in Minikube:
+
+```sh
+eval $(minikube docker-env)
+```
+
+Now you can build and deploy your function from the base directory of your app source. You need to provide the `--handler` option (see above for different handler types).
+To build a Boot app with a function bean, use:
+
+```sh
+riff function create java upper --handler upper --local-path . --image dev.local/upper:v1
+```
+> NOTE: If your Spring Boot application contains a single function bean, then you can omit the `--handler` options since the invoker is able to automatically detect it.
+
+> NOTE: You need to provide a tag for the image to avoid Kubernetes trying to download the latest version of the image.
+If the specified image tag already exists in the Docker daemon then Kubernetes will use it since `IfNotPresent` is the default pull policy.
+
+Once the function is up and running you can invoke it using:
+
+```sh
+riff service invoke upper --text -- -w '\n' -d "hello world"
+```
+
+To delete the function use:
+
+```sh
+riff service delete upper
+```
+
+### Building and deploying functions to remote cluster
+
+To build and deploy your function to a remote cluster you can use the `riff` CLI which can be installed following the instructions on the [riff Release page](https://github.com/projectriff/riff/releases).
+
+You also need to have riff and Knative installed on a Kubernetes cluster.
+We provide instructions for Google Cloud Platform's Kubernetes Engine (GKE)](https://projectriff.io/docs/getting-started/gke/), just follow the instructions we linked to.
+
+Make sure that you initialize the default namespace with the JSON key file (gcr-storage-admin.json) you created during the riff installation:
+
+```sh
+riff namespace init default --gcr gcr-storage-admin.json
+```
+
+You need to push your function source to a Git repo and provide the URL for the command that creates the function.
+
+Now you can build and deploy your function from this Git repo. You need to provide the `--handler` option (see above for different handler types). To build a Boot app with a function bean, use:
+
+```sh
+export GCP_PROJECT=$(gcloud config get-value core/project)
+export GIT_REPO=https://github.com/trisberg/upper.git
+riff function create java upper --git-repo $GIT_REPO --handler upper --image gcr.io/$GCP_PROJECT/upper-new --verbose
+```
+> NOTE: If your Spring Boot application contains a single function bean, then you can omit the `--handler` options since the invoker is able to automatically detect it. It is possible to have multiple function beans in the same source repository and just refer to the one you want to use when creating the riff function using the `--handler` option.
+
+Once the function is up and running you can invoke it using:
+
+```sh
+riff service invoke upper --text -- -w '\n' -d "hello world"
+```
+
+To delete the function use:
+
+```sh
+riff service delete upper
+```
+
+## How it Works
 
 As long as the dependencies are included in the archive correctly, you
 can supply a `Function` with a wide range of input and output
@@ -61,8 +195,6 @@ then both input and output must be in the same form, with possibly
 different payload types, obviously. POJOs are converted from incoming
 messages assuming the payload is JSON ans using the GSON library.
 
-## How it Works
-
 The invoker is a [Spring Boot](https://projects.spring.io/spring-boot)
 application with a configuration key `function.uri` that can be used
 to point to a `java.util.function.Function`. Because of the way Spring
@@ -72,8 +204,7 @@ System property `function.uri` or a command line argument
 classpath archive, which can be a jar file or a directory, together
 with parameters:
 
-* `handler`: the class name of a `Function` to execute, or (when
-  `main` is also used) a bean name of a `Function`. Can also be a
+* `handler`: the class name of a `Function` to execute, or a bean name of a `Function`. Can also be a
   comma, or pipe-separated list of functions, which are composed
   together at runtime.
 * `main`: (optional) the class name of a Spring `@Configuration` that
