@@ -13,15 +13,16 @@ To make changes, please submit a pull request. Merged changes will automatically
 - make sure you have ruby v2.3 or better and bundler
 ```sh
 ruby --version
+bundler --version
 ```
 
-- on MacOS you can get [rbenv](http://rbenv.org/) to manage your ruby versions.
+- on MacOS you can use [rbenv](http://rbenv.org/) to manage your ruby versions.
 ```sh
 brew install rbenv
 eval "$(rbenv init -)"  # put this line in your .bash_profile
 rbenv install 2.5.3
 rbenv global 2.5.3
-gem install bundler
+gem install bundler -N
 rbenv rehash
 ```
 
