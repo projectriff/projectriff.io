@@ -28,9 +28,9 @@ This release extends the use of buildpacks across all of our currently supported
 
 Here is a map of the buildpack-related repos on Github.
 
-![](/images/buildrepos.png)
+![](/images/builders.svg)
 
-- [riff builder](https://github.com/projectriff/riff-buildpack-group) creates the **projectriff/builder** container. 
+- [riff builder](https://github.com/projectriff/riff-buildpack-group) creates the `projectriff/builder` container. 
 - [riff buildpack](https://github.com/projectriff/riff-buildpack) contributes invokers for running functions
   - [Node invoker](https://github.com/projectriff/node-function-invoker) runs JavaScript functions 
   - [Java invoker](https://github.com/projectriff/java-function-invoker) runs Java functions
