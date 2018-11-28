@@ -14,6 +14,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 
 Notable changes in this release include:
 - All builds now use [Buildpacks](https://buildpacks.io/)
+- No more special case builds of images starting with `dev.local`
 - `riff function create`
   - no `<invoker>` argument before the `<name>` argument
   - new optional `--invoker` flag
