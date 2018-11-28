@@ -118,7 +118,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 ```
 
 ## install the riff CLI
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.2.0 or later.
 ```sh
 riff version
 ```
