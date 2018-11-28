@@ -12,6 +12,16 @@ We are happy to announce the release of [riff v0.2.0](https://github.com/project
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/riff/releases/tag/v0.2.0) on GitHub. Please follow one of the [getting started](/docs) guides, to create a new cluster on GKE or minikube.
 
+Notable changes in this release include:
+- All builds now use [Buildpacks](https://buildpacks.io/)
+- `riff function create`
+  - no `<invoker>` argument before the `<name>` argument
+  - new optional `--invoker` flag
+  - `--builder` flag removed
+- `riff function build` has been renamed `riff function update`
+- `riff service revise` has been renamed `riff service update`
+- `riff namespace init` has a new `--no-secret` flag
+
 ### Buildpacks everywhere!
 This release extends the use of buildpacks across all of our currently supported invokers: Java, JavaScript, and Command. 
 
