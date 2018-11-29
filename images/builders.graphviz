@@ -1,16 +1,16 @@
 digraph G {
 node [shape=box fontname="sans-serif" style="filled"]
 edge [arrowhead=none]
-"riff" [color="#333333" fillcolor="#000000"]
-"riff-builder" [color="#333333" fillcolor="#000000"]
-"riff-buildpack" [color="#ffdddd" fillcolor="#ffdddd"]
-"OpenJDK buildpack" [color="#ffdddd" fillcolor="#ffdddd"]
-"Build System buildpack" [color="#ffdddd" fillcolor="#ffdddd"]
-"NodeJS buildpack" [color="#ffdddd" fillcolor="#ffdddd"]
-"NPM buildpack" [color="#ffdddd" fillcolor="#ffdddd"]
-"Java invoker" [color="#ffddff" fillcolor="#ffddff"]
-"Node invoker" [color="#ffddff" fillcolor="#ffddff"]
-"Command invoker" [color="#ffddff" fillcolor="#ffddff"]
+"riff" [color="#333333" fillcolor="#ffffff"]
+"riff-builder" [color="#333333" fillcolor="#ffffdd"]
+"riff-buildpack" [color="#333333" fillcolor="#ffdddd"]
+"OpenJDK buildpack" [color="#333333" fillcolor="#ffdddd"]
+"Build System buildpack" [color="#333333" fillcolor="#ffdddd"]
+"NodeJS buildpack" [color="#333333" fillcolor="#ffdddd"]
+"NPM buildpack" [color="#333333" fillcolor="#ffdddd"]
+"Java invoker" [color="#333333" fillcolor="#ddffff"]
+"Node invoker" [color="#333333" fillcolor="#ddffff"]
+"Command invoker" [color="#333333" fillcolor="#ddffff"]
 
   "riff" -> "riff-builder"
   "riff-builder" -> "riff-buildpack"

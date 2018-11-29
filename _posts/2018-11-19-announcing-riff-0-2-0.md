@@ -18,7 +18,6 @@ Notable changes in this release include:
 - `riff function create`
   - no `<invoker>` argument before the `<name>` argument
   - new optional `--invoker` flag
-  - `--builder` flag removed
 - `riff function build` has been renamed `riff function update`
 - `riff service revise` has been renamed `riff service update`
 - `riff namespace init` has a new `--no-secret` flag
