@@ -129,7 +129,7 @@ You will be prompted to provide the password.
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
 
 ```sh
-riff function create node square \
+riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
   --artifact package.json \
   --image $DOCKER_ID/square \
