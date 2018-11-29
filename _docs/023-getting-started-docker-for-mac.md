@@ -46,14 +46,14 @@ If you previously had minikube or GKE configured, switch your kubectl context to
 
 ## install the riff CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.2.0 or later.
 
 ```sh
 riff version
 ```
 ```
 Version
-  riff cli: 0.1.3 (a216005db0d50056c41b45fdc3384b09ad24381d)
+  riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac

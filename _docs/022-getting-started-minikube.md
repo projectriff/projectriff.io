@@ -44,10 +44,7 @@ For macOS we recommend using hyperkit as the vm driver. To install Hyperkit
 
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
-&& chmod +x docker-machine-driver-hyperkit \
-&& sudo mv docker-machine-driver-hyperkit /usr/local/bin/ \
-&& sudo chown root:wheel /usr/local/bin/docker-machine-driver-hyperkit \
-&& sudo chmod u+s /usr/local/bin/docker-machine-driver-hyperkit
+&& sudo install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
 ```
 
 For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver) driver.
@@ -58,7 +55,7 @@ For additional details see the minikube [driver installation](https://github.com
 
 ```sh
 minikube start --memory=8192 --cpus=4 \
---kubernetes-version=v1.11.3 \
+--kubernetes-version=v1.12.2 \
 --vm-driver=hyperkit \
 --bootstrapper=kubeadm \
 --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -74,7 +71,7 @@ kubectl config current-context
 
 ## install the riff CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.1.3 or later.
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.2.0 or later.
 
 ```sh
 riff version
