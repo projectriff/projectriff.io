@@ -53,7 +53,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.2.0 (...sha...)
+  riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
