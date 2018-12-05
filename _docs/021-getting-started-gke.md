@@ -16,9 +16,11 @@ categories:
 ---
 
 # Getting started on GKE
+
 The following will help you get started running a riff function with Knative on GKE.
 
 ## TL;DR
+
 1. select a Project, install and configure gcloud and kubectl
 1. create a GKE cluster for Knative
 1. install the latest riff CLI
@@ -28,14 +30,17 @@ The following will help you get started running a riff function with Knative on 
 
 
 ## create a Google Cloud project
+
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top. 
 
 Create an environment variable, replacing ??? with your project name. 
-```
+
+```sh
 export GCP_PROJECT=???
 ```
 
 ### install gcloud
+
 Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project.
 
 ```sh
@@ -50,6 +55,7 @@ gcloud components install kubectl
 ```
 
 ### configure gcloud
+
 Check your default project, region, and zone.
 
 ```sh
@@ -57,16 +63,19 @@ gcloud config list
 ```
 
 If necessary change the default project.
+
 ```sh
 gcloud config set project $GCP_PROJECT
 ```
 
 To list the available compute regions and zones:
+
 ```sh
 gcloud compute zones list
 ```
 
 To change the default region and zone:
+
 ```sh
 gcloud config set compute/region us-east4
 gcloud config set compute/zone us-east4-c
@@ -74,6 +83,7 @@ gcloud config list compute/
 ```
 
 Enable the necessary APIs for gcloud. You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account) for your new project.
+
 ```sh
 gcloud services enable \
   cloudapis.googleapis.com \
@@ -82,11 +92,14 @@ gcloud services enable \
 ```
 
 ## create a GKE cluster
+
 Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient.
+
 ```sh
 # replace ??? below with your own cluster name
 export CLUSTER_NAME=???
 ```
+
 ```sh
 gcloud container clusters create $CLUSTER_NAME \
   --cluster-version=latest \
@@ -100,17 +113,21 @@ gcloud container clusters create $CLUSTER_NAME \
 For additional details see [Knative Install on Google Kubernetes Engine](https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md).
 
 Confirm that your kubectl context is pointing to the new cluster
+
 ```sh
 kubectl config current-context
 ```
 
 To list contexts:
+
 ```sh
 kubectl config get-contexts
 ```
+
 You should also be able to find the cluster the [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) console.
 
 ## grant yourself cluster-admin permissions
+
 ```sh
 kubectl create clusterrolebinding cluster-admin-binding \
 --clusterrole=cluster-admin \
@@ -118,22 +135,27 @@ kubectl create clusterrolebinding cluster-admin-binding \
 ```
 
 ## install the riff CLI
+
 The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.2.0 or later.
+
 ```sh
 riff version
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
+
 ```sh
 brew install watch
 ```
 
 Watch pods in a separate terminal.
+
 ```sh
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
 ## install Knative using the riff CLI
+
 Install Knative, watching the pods until everything is running (this could take a couple of minutes).
 
 ```sh
@@ -141,6 +163,7 @@ riff system install
 ```
 
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
+
 ```
 NAMESPACE          NAME                                           READY     STATUS      RESTARTS   AGE
 istio-system       istio-citadel-84fb7985bf-vsksm                 1/1       Running     0          1m
@@ -180,7 +203,9 @@ kube-system        metrics-server-v0.2.1-7486f5bd67-fw7vl         2/2       Runn
 ```
 
 ## create a Kubernetes secret for pushing images to GCR
+
 Create a [GCP Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) in the GCP console or using the gcloud CLI
+
 ```sh
 gcloud iam service-accounts create push-image
 ```
@@ -202,12 +227,17 @@ gcloud iam service-accounts keys create \
 ```
 
 ### initialize the namespace
+
 Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This creates a serviceaccount that uses the secret saved above, installs a buildtemplate and labels the namespace for automatic Istio sidecar injection.
+
 ```sh
 riff namespace init default --gcr gcr-storage-admin.json
 ```
+
 ## create a function
+
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR.
+
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
@@ -216,30 +246,35 @@ riff function create square \
 ```
 
 If you're still watching pods, you should see something like the following
-```sh
+
+```
 NAMESPACE    NAME                  READY     STATUS      RESTARTS   AGE
 default      square-00001-jk9vj    0/1       Init:0/4    0          24s
 ```
 
 The 4 "Init" containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.
-```sh
+
+```
 NAMESPACE   NAME                                       READY     STATUS      RESTARTS   AGE
 default     square-00001-deployment-679bffb58c-cpzz8   3/3       Running     0          4m
 default     square-00001-jk9vj                         0/1       Completed   0          5m
 ```
 
 ## invoke the function
+
 ```sh
 riff service invoke square --text -- -w '\n' -d 8
 ```
 
 #### result
+
 ```
 curl 35.236.212.232/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
 64
 ```
 
 ## delete the function
-```
+
+```sh
 riff service delete square
 ```
