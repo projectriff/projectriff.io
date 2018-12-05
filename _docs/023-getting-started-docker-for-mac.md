@@ -20,6 +20,7 @@ categories:
 The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
 
 ### TL;DR
+
 1. install the latest release of docker for mac
 2. configure the cluster and enable kubernetes
 4. install Knative using the riff CLI
@@ -33,10 +34,12 @@ Kubernetes and the kubectl CLI are now included with [Docker Community Edition f
 ![download Docker edge for mac](/images/docker-for-mac-download.png)
 
 ### configure the VM
+
 Once Docker is installed and running, use the Preferences feature in the Docker menu to open advanced settings and configure your VM with 8GB of memory. Click on Apply & Restart.
 ![configure Docker VM](/images/docker-for-mac-vm-config.png)
 
 ### enable Kubernetes
+
 Now enable Kubernetes, and wait for the cluster to start.
 ![enable Kubernetes](/images/docker-for-mac-kubernetes.png)
 
@@ -51,6 +54,7 @@ The [riff CLI](https://github.com/projectriff/riff/) is available to download fr
 ```sh
 riff version
 ```
+
 ```
 Version
   riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
@@ -153,11 +157,11 @@ default            square-00001-deployment-5f68cff465-dxfcj      3/3       Runni
 ## invoke the function
 
 ```sh
-
 riff service invoke square --text -- -w '\n' -d 8
 ```
 
 #### result
+
 ```
 curl http://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
 64
