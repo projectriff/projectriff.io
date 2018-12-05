@@ -153,7 +153,6 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
-  --artifact package.json \
   --image $DOCKER_ID/square \
   --wait
 ```
