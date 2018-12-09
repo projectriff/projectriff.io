@@ -55,7 +55,7 @@ For additional details see the minikube [driver installation](https://github.com
 
 ```sh
 minikube start --memory=8192 --cpus=4 \
---kubernetes-version=v1.12.2 \
+--kubernetes-version=v1.13.0 \
 --vm-driver=hyperkit \
 --bootstrapper=kubeadm \
 --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
