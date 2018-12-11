@@ -141,6 +141,10 @@ The [riff CLI](https://github.com/projectriff/riff/) is available to download fr
 ```sh
 riff version
 ```
+```
+Version
+  riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
+```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
 
@@ -241,8 +245,8 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
-  --image gcr.io/$GCP_PROJECT/square \
-  --wait
+  --image gcr.io/$GCP_PROJECT/square:v2 \
+  --verbose
 ```
 
 If you're still watching pods, you should see something like the following
