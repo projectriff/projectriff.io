@@ -30,7 +30,7 @@ The following will help you get started running a riff function with Knative on 
 
 ### install docker
 
-Installing [Docker Community Edition](https://www.docker.com/community-edition) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
+Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
 
 ### install kubectl
 
@@ -40,7 +40,7 @@ Installing [Docker Community Edition](https://www.docker.com/community-edition) 
 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
-For macOS we recommend using hyperkit as the vm driver. To install Hyperkit
+For macOS we recommend using Hyperkit as the vm driver. To install Hyperkit, first install [Docker Desktop (Mac)](https://store.docker.com/editions/community/docker-ce-desktop-mac), then run:
 
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
@@ -76,6 +76,10 @@ The [riff CLI](https://github.com/projectriff/riff/) is available to download fr
 ```sh
 riff version
 ```
+```
+Version
+  riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
+```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
 
@@ -100,36 +104,38 @@ riff system install --node-port
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
 
 ```sh
-NAMESPACE          NAME                                         READY     STATUS      RESTARTS   AGE
-istio-system       istio-citadel-84fb7985bf-dmc58               1/1       Running     0          12m
-istio-system       istio-cleanup-secrets-bnjb9                  0/1       Completed   0          12m
-istio-system       istio-egressgateway-bd9fb967d-dr5mp          1/1       Running     1          12m
-istio-system       istio-galley-655c4f9ccd-4hr8w                1/1       Running     0          12m
-istio-system       istio-ingressgateway-688865c5f7-z9n2d        1/1       Running     1          12m
-istio-system       istio-pilot-6cd69dc444-bv9cc                 2/2       Running     0          12m
-istio-system       istio-policy-6b9f4697d-hxkqd                 2/2       Running     0          12m
-istio-system       istio-sidecar-injector-8975849b4-8mtts       1/1       Running     0          12m
-istio-system       istio-statsd-prom-bridge-7f44bb5ddb-r9c8t    1/1       Running     0          12m
-istio-system       istio-telemetry-6b5579595f-tdnln             2/2       Running     0          12m
-istio-system       knative-ingressgateway-77b757d468-wzh6b      1/1       Running     0          3m
-knative-build      build-controller-56f555c8b9-cfrnr            1/1       Running     0          3m
-knative-build      build-webhook-868b65dd9-8xddg                1/1       Running     0          3m
-knative-eventing   eventing-controller-596c6bc4fd-rshsj         1/1       Running     0          3m
-knative-eventing   stub-clusterbus-dispatcher-7b86b64cd-mnssd   2/2       Running     0          56s
-knative-eventing   webhook-796b574465-bdv7m                     1/1       Running     0          3m
-knative-serving    activator-7ffbdb4f46-lzsrj                   2/2       Running     0          3m
-knative-serving    autoscaler-f55c76f7c-pmr2x                   2/2       Running     0          3m
-knative-serving    controller-8647f984bf-9vc82                  1/1       Running     0          3m
-knative-serving    webhook-896c797cd-lfsfc                      1/1       Running     0          3m
-kube-system        etcd-minikube                                1/1       Running     0          12m
-kube-system        kube-addon-manager-minikube                  1/1       Running     0          13m
-kube-system        kube-apiserver-minikube                      1/1       Running     3          4m
-kube-system        kube-controller-manager-minikube             1/1       Running     0          12m
-kube-system        kube-dns-86f4d74b45-wxmcd                    3/3       Running     0          13m
-kube-system        kube-proxy-mhxdt                             1/1       Running     0          13m
-kube-system        kube-scheduler-minikube                      1/1       Running     0          12m
-kube-system        kubernetes-dashboard-5498ccf677-bpz7s        1/1       Running     0          13m
-kube-system        storage-provisioner                          1/1       Running     0          13m
+NAMESPACE          NAME                                          READY     STATUS      RESTARTS   AGE
+istio-system       istio-citadel-7d64db8bcf-bfn5p                1/1       Running     0          4m
+istio-system       istio-cleanup-secrets-2bpg4                   0/1       Completed   0          4m
+istio-system       istio-egressgateway-6ddf4c8bd6-kf562          1/1       Running     0          4m
+istio-system       istio-galley-7dd996474-mchgb                  1/1       Running     0          4m
+istio-system       istio-ingressgateway-84b89d647f-l5jjv         1/1       Running     0          4m
+istio-system       istio-pilot-86bb4fcbbd-b4jwz                  2/2       Running     0          4m
+istio-system       istio-policy-5c4d9ff96b-xcltw                 2/2       Running     0          4m
+istio-system       istio-sidecar-injector-6977b5cf5b-kpmdf       1/1       Running     0          4m
+istio-system       istio-statsd-prom-bridge-b44b96d7b-nd5bv      1/1       Running     0          4m
+istio-system       istio-telemetry-7676df547f-d76z6              2/2       Running     0          4m
+istio-system       knative-ingressgateway-75644679c7-2dkm6       1/1       Running     0          2m
+knative-build      build-controller-5bdf899f56-79lpr             1/1       Running     0          2m
+knative-build      build-webhook-5cc5698f5d-zjh84                1/1       Running     0          2m
+knative-eventing   eventing-controller-5557745944-rs9gx          1/1       Running     0          2m
+knative-eventing   stub-clusterbus-dispatcher-55779cb455-kfmtj   2/2       Running     0          1m
+knative-eventing   webhook-6f486f9cb-wp96h                       1/1       Running     0          2m
+knative-serving    activator-c47879875-7llg5                     2/2       Running     0          2m
+knative-serving    activator-c47879875-7rz7n                     2/2       Running     0          2m
+knative-serving    activator-c47879875-mgds4                     2/2       Running     0          2m
+knative-serving    autoscaler-5fc89645cd-7mmvj                   2/2       Running     0          2m
+knative-serving    controller-64cfb4859f-bvz7n                   1/1       Running     0          2m
+knative-serving    webhook-74dff4f764-xjq6z                      1/1       Running     0          2m
+kube-system        coredns-869f847d58-hcdnm                      1/1       Running     0          6m
+kube-system        etcd-minikube                                 1/1       Running     0          5m
+kube-system        kube-addon-manager-minikube                   1/1       Running     0          5m
+kube-system        kube-apiserver-minikube                       1/1       Running     0          5m
+kube-system        kube-controller-manager-minikube              1/1       Running     0          5m
+kube-system        kube-proxy-bfvt6                              1/1       Running     0          6m
+kube-system        kube-scheduler-minikube                       1/1       Running     0          5m
+kube-system        kubernetes-dashboard-fb9d74ff-g96gz           1/1       Running     0          6m
+kube-system        storage-provisioner                           1/1       Running     0          6m
 ```
 
 ### initialize the namespace and provide credentials for pushing images to DockerHub
@@ -153,8 +159,8 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
-  --image $DOCKER_ID/square \
-  --wait
+  --image $DOCKER_ID/square:v2 \
+  --verbose
 ```
 
 If you're still watching pods, you should see something like the following
