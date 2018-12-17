@@ -33,12 +33,6 @@ The following will help you get started running a riff function with Knative on 
 
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top. 
 
-Create an environment variable, replacing ??? with your project name. 
-
-```sh
-export GCP_PROJECT=???
-```
-
 ### install gcloud
 
 Follow the [quickstart instructions](https://cloud.google.com/sdk/docs/quickstarts) to install the [Google Cloud SDK](https://cloud.google.com/sdk/) which includes the `gcloud` CLI. You may need to add the `google-cloud-sdk/bin` directory to your path. Once installed, `gcloud init` will open a browser to start an oauth flow and configure gcloud to use your project.
@@ -56,6 +50,12 @@ gcloud components install kubectl
 
 ### configure gcloud
 
+Create an environment variable, replacing ??? with your project ID (not to be confused with your project name; use `gcloud projects list` to find your project ID). 
+
+```sh
+export GCP_PROJECT_ID=???
+```
+
 Check your default project, region, and zone.
 
 ```sh
@@ -65,7 +65,7 @@ gcloud config list
 If necessary change the default project.
 
 ```sh
-gcloud config set project $GCP_PROJECT
+gcloud config set project $GCP_PROJECT_ID
 ```
 
 To list the available compute regions and zones:
@@ -217,8 +217,8 @@ gcloud iam service-accounts create push-image
 Grant the service account a "storage.admin" role using the [IAM manager](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts) or using gcloud.
 
 ```sh
-gcloud projects add-iam-policy-binding $GCP_PROJECT \
-    --member serviceAccount:push-image@$GCP_PROJECT.iam.gserviceaccount.com \
+gcloud projects add-iam-policy-binding $GCP_PROJECT_ID \
+    --member serviceAccount:push-image@$GCP_PROJECT_ID.iam.gserviceaccount.com \
     --role roles/storage.admin
 ```
 
@@ -226,7 +226,7 @@ Create a new [authentication key](https://cloud.google.com/container-registry/do
 
 ```sh
 gcloud iam service-accounts keys create \
-  --iam-account "push-image@$GCP_PROJECT.iam.gserviceaccount.com" \
+  --iam-account "push-image@$GCP_PROJECT_ID.iam.gserviceaccount.com" \
   gcr-storage-admin.json
 ```
 
@@ -245,7 +245,7 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
-  --image gcr.io/$GCP_PROJECT/square:v2 \
+  --image gcr.io/$GCP_PROJECT_ID/square:v2 \
   --verbose
 ```
 
