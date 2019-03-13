@@ -246,6 +246,7 @@ This step will pull the source code for a function from a GitHub repo, build a c
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
   --image gcr.io/$GCP_PROJECT_ID/square:v2 \
+  --artifact square.js \
   --verbose
 ```
 
