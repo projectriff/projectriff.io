@@ -126,11 +126,11 @@ We’ve updated the http-gateway to validate topics and return an HTTP 404 error
 
 ```
 $ riff publish --input nosuchrifftopic --data "404 From Message"
-Posting to http://192.168.39.148:32508/messages/nosuchrifftopic
+Posting to https://192.168.39.148:32508/messages/nosuchrifftopic
 could not find Riff topic 'nosuchrifftopic'
 
 riff publish --input nosuchrifftopic --data "404 From Request" --reply
-Posting to http://192.168.39.148:32508/requests/nosuchrifftopic
+Posting to https://192.168.39.148:32508/requests/nosuchrifftopic
 could not find Riff topic 'nosuchrifftopic'
 ```
 
