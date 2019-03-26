@@ -23,3 +23,5 @@ docs:
         url: /docs/getting-started/minikube/
       - title: "on Docker for Mac"
         url: /docs/getting-started/docker-for-mac/
+      - title: "on Docker for Windows"
+        url: /docs/getting-started/docker-for-windows/

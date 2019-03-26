@@ -56,7 +56,7 @@ Create an environment variable, replacing ??? with your project ID (not to be co
 export GCP_PROJECT_ID=???
 ```
 
-Check your default project, region, and zone.
+Check your default project.
 
 ```sh
 gcloud config list
@@ -68,17 +68,16 @@ If necessary change the default project.
 gcloud config set project $GCP_PROJECT_ID
 ```
 
-To list the available compute regions and zones:
+List the available compute regions and CPU quotas in each.
 
 ```sh
-gcloud compute zones list
+gcloud compute regions list
 ```
 
-To change the default region and zone:
+Choose a default region with at least 36 CPUS available, and set that to your default.
 
 ```sh
 gcloud config set compute/region us-east4
-gcloud config set compute/zone us-east4-c
 gcloud config list compute/
 ```
 
@@ -107,7 +106,8 @@ gcloud container clusters create $CLUSTER_NAME \
   --enable-autoscaling --min-nodes=1 --max-nodes=3 \
   --enable-autorepair \
   --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
-  --num-nodes=3
+  --num-nodes=3 \
+  --region=$(gcloud config get-value compute/region)
 ```
 
 For additional details see [Knative Install on Google Kubernetes Engine](https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md).
