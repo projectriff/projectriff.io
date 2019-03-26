@@ -49,6 +49,6 @@ riff service invoke hello -- -w '\n' -d stranger
 The output should look something like this:
 
 ```
-curl http://192.168.64.31:32380 -H 'Host: hello.default.example.com' -w '\n' -d stranger
+curl https://192.168.64.31:32380 -H 'Host: hello.default.example.com' -w '\n' -d stranger
 hello stranger
 ```

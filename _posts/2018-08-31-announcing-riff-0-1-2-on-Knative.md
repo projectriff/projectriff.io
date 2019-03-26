@@ -165,7 +165,7 @@ Invoke the function to send posts to hello.
 ```sh
 riff service invoke random -- -w '\n' \
   -H 'Content-Type:application/json' \
-  -d '{"url":"http://hello.default.svc.cluster.local"}'
+  -d '{"url":"https://hello.default.svc.cluster.local"}'
 ```
 
 The kail log of the hello function from above should show the numbers as they are generated
@@ -195,7 +195,7 @@ riff service subscribe hello --input squares
 ```sh
 riff service invoke random -- -w '\n' \
   -H 'Content-Type:application/json' \
-  -d '{"url":"http://numbers-channel.default.svc.cluster.local"}'
+  -d '{"url":"https://numbers-channel.default.svc.cluster.local"}'
 ```
 
 Now the hello function should show the output of square and hello chained together.
