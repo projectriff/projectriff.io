@@ -187,7 +187,7 @@ riff service invoke square --json -- -w '\n' -d 8
 #### result
 
 ```
-curl http://192.168.64.46:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
+curl https://192.168.64.46:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
 64
 ```
 
