@@ -182,7 +182,7 @@ riff service invoke square --text -- -w '\n' -d 8
 
 #### result
 ```
-curl http://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
+curl https://192.168.64.6:32380/ -H 'Host: square.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d 8
 64
 ```
 
