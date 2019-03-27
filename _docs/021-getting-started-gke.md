@@ -74,11 +74,10 @@ List the available compute regions and CPU quotas in each.
 gcloud compute regions list
 ```
 
-Choose a default region with at least 36 CPUS available, and set that to your default.
+Choose a default region with at least 36 CPUS available.
 
 ```sh
-gcloud config set compute/region us-east4
-gcloud config list compute/
+export GCP_REGION=us-central1
 ```
 
 Enable the necessary APIs for gcloud. You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account) for your new project.
@@ -107,7 +106,7 @@ gcloud container clusters create $CLUSTER_NAME \
   --enable-autorepair \
   --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
   --num-nodes=3 \
-  --region=$(gcloud config get-value compute/region)
+  --region=$GCP_REGION
 ```
 
 For additional details see [Knative Install on Google Kubernetes Engine](https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md).
