@@ -268,7 +268,7 @@ default     square-00001-jk9vj                         0/1       Completed   0  
 ## invoke the function
 
 ```sh
-riff service invoke square --text -- -w '\n' -d 8
+riff service invoke square --json -- -w '\n' -d 8
 ```
 
 #### result
