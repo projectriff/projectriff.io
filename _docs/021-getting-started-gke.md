@@ -68,16 +68,17 @@ If necessary change the default project.
 gcloud config set project $GCP_PROJECT_ID
 ```
 
-List the available compute regions and CPU quotas in each.
+List the available compute zones and also regions with quotas.
 
 ```sh
+gcloud compute zones list
 gcloud compute regions list
 ```
 
-Choose a default region with at least 36 CPUS available.
+Choose a zone, preferably in a region with higher CPU quota.
 
 ```sh
-export GCP_REGION=us-central1
+export GCP_ZONE=us-central1-b
 ```
 
 Enable the necessary APIs for gcloud. You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account) for your new project.
@@ -101,12 +102,12 @@ export CLUSTER_NAME=???
 ```sh
 gcloud container clusters create $CLUSTER_NAME \
   --cluster-version=latest \
-  --machine-type=n1-standard-4 \
+  --machine-type=n1-standard-2 \
   --enable-autoscaling --min-nodes=1 --max-nodes=3 \
   --enable-autorepair \
   --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
   --num-nodes=3 \
-  --region=$GCP_REGION
+  --zone=$GCP_ZONE
 ```
 
 For additional details see [Knative Install on Google Kubernetes Engine](https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md).
@@ -142,7 +143,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.2.0 (1ae190ff3c7edf4b375ee935f746ebfd1d8eaf5c)
+  riff cli: 0.3.0-snapshot (9dcaac3dc228adcedc15df435af28471614d0d7c)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -168,41 +169,42 @@ riff system install
 You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
 
 ```
-NAMESPACE          NAME                                           READY     STATUS      RESTARTS   AGE
-istio-system       istio-citadel-84fb7985bf-vsksm                 1/1       Running     0          1m
-istio-system       istio-cleanup-secrets-gpxr2                    0/1       Completed   0          2m
-istio-system       istio-egressgateway-bd9fb967d-46r6x            1/1       Running     0          2m
-istio-system       istio-galley-655c4f9ccd-hhtz2                  1/1       Running     0          2m
-istio-system       istio-ingressgateway-688865c5f7-gxwxc          1/1       Running     0          2m
-istio-system       istio-pilot-6cd69dc444-m8x52                   2/2       Running     0          2m
-istio-system       istio-policy-6b9f4697d-m4rjs                   2/2       Running     0          2m
-istio-system       istio-sidecar-injector-8975849b4-hjxwb         1/1       Running     0          1m
-istio-system       istio-statsd-prom-bridge-7f44bb5ddb-lt5mp      1/1       Running     0          2m
-istio-system       istio-telemetry-6b5579595f-n8r7t               2/2       Running     0          2m
-istio-system       knative-ingressgateway-77b757d468-627ck        1/1       Running     0          47s
-knative-build      build-controller-56f555c8b9-hgk4k              1/1       Running     0          53s
-knative-build      build-webhook-868b65dd9-f89t8                  1/1       Running     0          53s
-knative-eventing   eventing-controller-596c6bc4fd-2zz9x           1/1       Running     0          24s
-knative-eventing   stub-clusterbus-dispatcher-7b86b64cd-l72ng     2/2       Running     0          19s
-knative-eventing   webhook-796b574465-ctb9t                       1/1       Running     0          23s
-knative-serving    activator-7ffbdb4f46-69q7f                     2/2       Running     0          40s
-knative-serving    autoscaler-f55c76f7c-tcvs4                     2/2       Running     0          39s
-knative-serving    controller-8647f984bf-fztw4                    1/1       Running     0          35s
-knative-serving    webhook-896c797cd-nq44h                        1/1       Running     0          35s
-kube-system        event-exporter-v0.2.1-5f5b89fcc8-5h5zv         2/2       Running     0          19m
-kube-system        fluentd-gcp-scaler-7c5db745fc-2jpbq            1/1       Running     0          19m
-kube-system        fluentd-gcp-v3.1.0-8pxjg                       2/2       Running     0          19m
-kube-system        fluentd-gcp-v3.1.0-k8k5d                       2/2       Running     0          19m
-kube-system        fluentd-gcp-v3.1.0-kgncp                       2/2       Running     0          19m
-kube-system        heapster-v1.5.3-7786f77d66-vhls9               3/3       Running     0          18m
-kube-system        kube-dns-788979dc8f-hxgl8                      4/4       Running     0          19m
-kube-system        kube-dns-788979dc8f-pv9mm                      4/4       Running     0          19m
-kube-system        kube-dns-autoscaler-79b4b844b9-d6q5h           1/1       Running     0          19m
-kube-system        kube-proxy-gke-jl-default-pool-19100274-173p   1/1       Running     0          19m
-kube-system        kube-proxy-gke-jl-default-pool-19100274-26tk   1/1       Running     0          19m
-kube-system        kube-proxy-gke-jl-default-pool-19100274-brwn   1/1       Running     0          19m
-kube-system        l7-default-backend-5d5b9874d5-jp4v2            1/1       Running     0          19m
-kube-system        metrics-server-v0.2.1-7486f5bd67-fw7vl         2/2       Running     0          18m
+NAMESPACE          NAME                                                             READY   STATUS      RESTARTS   AGE
+istio-system       cluster-local-gateway-6c785b8db7-nrfdp                           1/1     Running     0          7m11s
+istio-system       istio-citadel-6959fcfb88-rrrw5                                   1/1     Running     0          7m28s
+istio-system       istio-cleanup-secrets-ns7tp                                      0/1     Completed   0          7m54s
+istio-system       istio-egressgateway-5b765869bf-dmf2j                             1/1     Running     0          7m30s
+istio-system       istio-galley-7fccb9bbd9-wpbtm                                    1/1     Running     0          7m30s
+istio-system       istio-ingressgateway-69b597b6bd-7qmgp                            1/1     Running     0          7m30s
+istio-system       istio-pilot-78679fcc74-bf6zn                                     2/2     Running     0          7m4s
+istio-system       istio-policy-59b7f4ccd5-9cwmv                                    2/2     Running     0          7m29s
+istio-system       istio-sidecar-injector-5c4b6cb6bc-b8kwt                          1/1     Running     0          7m28s
+istio-system       istio-statsd-prom-bridge-67bbcc746c-mqhvj                        1/1     Running     0          7m32s
+istio-system       istio-telemetry-7686cd76bd-c622z                                 2/2     Running     0          7m29s
+knative-build      build-controller-755f6dd8b4-knjzx                                1/1     Running     0          6m31s
+knative-build      build-webhook-588dcc4f7f-hhmvb                                   1/1     Running     0          6m31s
+knative-eventing   eventing-controller-6554f9cbcf-4mcsm                             1/1     Running     0          6m15s
+knative-eventing   in-memory-channel-controller-7888dfffd7-klx5d                    1/1     Running     0          6m6s
+knative-eventing   in-memory-channel-dispatcher-56d6f99dc6-mlgkv                    2/2     Running     2          6m5s
+knative-eventing   webhook-654b696b9b-hj89q                                         1/1     Running     0          6m14s
+knative-serving    activator-5f8c9678bd-qc49k                                       2/2     Running     2          6m24s
+knative-serving    autoscaler-7486469d84-7l4lp                                      2/2     Running     1          6m24s
+knative-serving    controller-677598fdff-q56wf                                      1/1     Running     0          6m20s
+knative-serving    webhook-5bb858fc5-mls79                                          1/1     Running     0          6m20s
+kube-system        event-exporter-v0.2.3-f9c896d75-7hs5v                            2/2     Running     0          87m
+kube-system        fluentd-gcp-scaler-69d79984cb-f4qp6                              1/1     Running     0          87m
+kube-system        fluentd-gcp-v3.2.0-cttdq                                         2/2     Running     0          86m
+kube-system        fluentd-gcp-v3.2.0-x7xmk                                         2/2     Running     0          86m
+kube-system        heapster-v1.6.0-beta.1-577d766b74-97wzl                          3/3     Running     0          86m
+kube-system        kube-dns-5d8cd9fcb6-hkgrf                                        4/4     Running     0          87m
+kube-system        kube-dns-5d8cd9fcb6-zvqck                                        4/4     Running     0          86m
+kube-system        kube-dns-autoscaler-76fcd5f658-h65gx                             1/1     Running     0          87m
+kube-system        kube-proxy-gke-jldec-riff-030-us-ea-default-pool-4b303b9f-dz56   1/1     Running     0          87m
+kube-system        kube-proxy-gke-jldec-riff-030-us-ea-default-pool-4b303b9f-fpm4   1/1     Running     0          87m
+kube-system        l7-default-backend-6f8697844f-8wfn5                              1/1     Running     0          87m
+kube-system        metrics-server-v0.3.1-54699c9cc8-fl2n9                           2/2     Running     0          86m
+kube-system        prometheus-to-sd-bdbnk                                           1/1     Running     0          87m
+kube-system        prometheus-to-sd-gb9nf                                           1/1     Running     0          87m
 ```
 
 ## create a Kubernetes secret for pushing images to GCR
@@ -244,7 +246,6 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
-  --image gcr.io/$GCP_PROJECT_ID/square:v2 \
   --artifact square.js \
   --verbose
 ```

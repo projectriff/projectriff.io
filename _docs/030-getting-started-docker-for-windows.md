@@ -36,8 +36,14 @@ Once Docker is installed and running, open Settings by right-clicking the Docker
 
 ![configure Docker VM](/images/docker-vm-config-windows.png)
 
+### allow sharing of the C: drive
+
+In the Shared Drives settings, enable sharing for the C drive, and enter your Windows password when prompted. This will be used for persistent volume claims to provide cache storage during function builds.
+
+![configure Docker VM](/images/docker-edge-windows-shared-drives.png)
+
 ### enable Kubernetes
-Now go to the Kubernetes tab in Settings to enable Kubernetes, and wait for the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
+Enable Kubernetes in Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
 
 ![enable Kubernetes](/images/docker-edge-kubernetes-windows.png)
 
@@ -78,10 +84,9 @@ A zip with the riff CLI for Windows is available to download from our GitHub [re
 ```powershell
 riff version
 ```
-
 ```
 Version
-  riff cli: 0.3.0-snapshot (b07ffe0366ce7474a99db484c95ab245cbfb9cd1)
+  riff cli: 0.3.0-snapshot (9dcaac3dc228adcedc15df435af28471614d0d7c)
 ```
 
 
@@ -133,17 +138,13 @@ kube-system        kube-scheduler-docker-desktop                   1/1     Runni
 
 Use the riff CLI in Windows PowerShell to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use).
 
-This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.
+This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username. You will be prompted to provide the password.
 
 ```powershell
-$Env:DOCKER_ID='???'
-```
-```powershell
-riff namespace init default --dockerhub $Env:DOCKER_ID
+riff namespace init default --dockerhub ???
 ```
 
-You will be prompted to provide the password.
-
+#### output
 ```
 Initializing namespace "default"
 
@@ -162,16 +163,9 @@ This PowerShell command will pull the source code for a function from a GitHub r
 ```powershell
 riff function create square `
   --git-repo https://github.com/projectriff-samples/node-square `
-  --image $Env:DOCKER_ID/square `
   --artifact square.js `
   --verbose
 ```
-
-### allow sharing of the C: drive
-
-The first time you build a function, Docker Desktop will prompt you for access to the C: drive. Click on `Share it` and then provide your Windows user credentials when prompted. This will be used for persistent volume claims to provide cache storage during function builds.
-
-![prompt to share windows storage](/images/docker-edge-windows-share-storage.png)
 
 ## invoke the function
 ```powershell

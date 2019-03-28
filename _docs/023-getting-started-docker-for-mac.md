@@ -34,8 +34,8 @@ Kubernetes and the kubectl CLI are now included with [Docker Community Edition f
 
 ### configure the VM
 
-Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 8GB of memory. Click on Apply & Restart.
-![configure Docker VM](/images/docker-for-mac-vm-config-edge.png)
+Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply & Restart.
+![configure Docker VM](/images/docker-for-mac-vm-config-edge-4gb.png)
 
 ### enable Kubernetes
 
@@ -53,10 +53,9 @@ The [riff CLI](https://github.com/projectriff/riff/) is available to download fr
 ```sh
 riff version
 ```
-
 ```
 Version
-  riff cli: 0.3.0-snapshot (2b9744c899ce79bcd1e6e68b7f9859c816dcabae)
+  riff cli: 0.3.0-snapshot (9dcaac3dc228adcedc15df435af28471614d0d7c)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -136,7 +135,6 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
-  --image $DOCKER_ID/square \
   --artifact square.js \
   --verbose
 ```

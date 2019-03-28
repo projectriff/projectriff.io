@@ -54,8 +54,8 @@ For additional details see the minikube [driver installation](https://github.com
 ## create a Minikube cluster
 
 ```sh
-minikube start --memory=8192 --cpus=4 \
---kubernetes-version=v1.13.4 \
+minikube start --memory=4096 --cpus=4 \
+--kubernetes-version=v1.14.0 \
 --vm-driver=hyperkit \
 --bootstrapper=kubeadm \
 --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
@@ -78,7 +78,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0-snapshot (2b9744c899ce79bcd1e6e68b7f9859c816dcabae)
+  riff cli: 0.3.0-snapshot (9dcaac3dc228adcedc15df435af28471614d0d7c)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -158,7 +158,6 @@ This step will pull the source code for a function from a GitHub repo, build a c
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
-  --image $DOCKER_ID/square \
   --artifact square.js \
   --verbose
 ```
