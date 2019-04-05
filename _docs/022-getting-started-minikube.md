@@ -146,7 +146,7 @@ export DOCKER_ID=???
 ```
 
 ```sh
-riff namespace init default --dockerhub $DOCKER_ID
+riff namespace init default --docker-hub $DOCKER_ID
 ```
 
 You will be prompted to provide the password.

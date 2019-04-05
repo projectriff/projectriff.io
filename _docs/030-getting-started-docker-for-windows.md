@@ -141,7 +141,7 @@ Use the riff CLI in Windows PowerShell to initialize your namespace (if you plan
 This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username. You will be prompted to provide the password.
 
 ```powershell
-riff namespace init default --dockerhub ???
+riff namespace init default --docker-hub ???
 ```
 
 #### output
@@ -156,9 +156,9 @@ Setting default image prefix to "docker.io/???" for namespace "default"
 riff namespace init completed successfully
 ```
 
-## create a function
+## create a function from a GitHub repo
 
-This PowerShell command will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
+This riff command (formatted for PowerShell) will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
 
 ```powershell
 riff function create square `
@@ -176,6 +176,64 @@ riff service invoke square --json -- -w '\n' -d 8
 ```
 curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
 64
+```
+
+## create a function from code in a local directory
+
+You can use riff to build functions from source in a local directory, instead of first committing the code to a repo on GitHub.
+
+For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be named.
+
+Create a temporary file called `dockerhub.json` using your own docker credentials
+
+```json
+{
+  "ServerURL": "https://index.docker.io",
+  "Username": "YOUR_USERNAME",
+  "Secret": "YOUR_PASSWORD"
+}
+```
+
+You should see 2 credential entries for DockerHub in PowerShell after running the following:
+
+```powershell
+cat dockerhub.json | docker-credential-wincred store
+docker-credential-wincred list
+```
+
+#### result
+```
+{"https://index.docker.io":"YOUR_USERNAME","https://index.docker.io/v1/":"YOUR_USERNAME"}
+```
+
+Delete the temporary file `dockerhub.json`.
+
+### create the function
+
+Using PowerShell in a new directory with a single file called `square.js`
+
+#### square.js
+```js
+module.exports = (x) => `the square of ${x} is ${x**2}`
+```
+
+#### command
+```powershell
+riff function create square `
+  --local-path . `
+  --artifact square.js `
+  --verbose
+```
+
+### invoke the function
+```powershell
+riff service invoke square --json -- -w '\n' -d 8
+```
+
+#### result
+```
+curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
+the square of 8 is 64
 ```
 
 ## uninstalling and reinstalling
