@@ -180,6 +180,10 @@ curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-T
 
 ## create a function from code in a local directory
 
+<aside class="notice notice--warning">
+  ⚠️ Due do differences between Windows and Linux file permissions, local builds that depend on file permissions may not work. Building from a git repository is recommended.
+</aside>
+
 You can use riff to build functions from source in a local directory, instead of first committing the code to a repo on GitHub.
 
 For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be referenced.
