@@ -24,7 +24,7 @@ riff namespace init default --gcr <path-to-json-file>
 
 #### or enter the password for your $DOCKER_ID when prompted
 ```sh
-riff namespace init default --docker-hub $DOCKER_ID
+riff namespace init default --dockerhub $DOCKER_ID
 ```
 
 ## riff buildpack for java
