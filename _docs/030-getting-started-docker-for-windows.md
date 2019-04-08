@@ -182,7 +182,7 @@ curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-T
 
 You can use riff to build functions from source in a local directory, instead of first committing the code to a repo on GitHub.
 
-For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be named.
+For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be referenced.
 
 Create a temporary file called `dockerhub.json` using your own docker credentials
 
