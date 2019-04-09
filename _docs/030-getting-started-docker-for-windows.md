@@ -134,27 +134,15 @@ kube-system        kube-proxy-7n5v8                                1/1     Runni
 kube-system        kube-scheduler-docker-desktop                   1/1     Running     0          4m54s
 ```
 
-### initialize the namespace and provide credentials for pushing images to DockerHub
+## initialize the namespace and provide credentials for pushing images to DockerHub
 
-Use the riff CLI in Windows PowerShell to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use).
-
-This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username. You will be prompted to provide the password.
+Use the riff CLI in Windows PowerShell to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.
 
 ```powershell
 riff namespace init default --docker-hub ???
 ```
 
-#### output
-```
-Initializing namespace "default"
-
-Enter password for user "???"
-Creating secret "push-credentials" with basic authentication to server "https://index.docker.io/v1/" for user "???"
-Creating serviceaccount "riff-build" using secret "push-credentials" in namespace "default"
-Setting default image prefix to "docker.io/???" for namespace "default"
-
-riff namespace init completed successfully
-```
+You will be prompted to provide the password.
 
 ## create a function from a GitHub repo
 
