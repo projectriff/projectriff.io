@@ -24,6 +24,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
   ```xml
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   ```
 
