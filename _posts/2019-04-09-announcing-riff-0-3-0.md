@@ -79,4 +79,4 @@ Here is an updated map of the buildpack-related repos on Github.
 
 Since we anticipate replacing the existing Channels and Subscriptions with new Stream and Processor resources, aligned with stream-oriented Function Invokers, we are [deprecating](https://github.com/projectriff/riff/pull/1237) the use of Channel and Subscription resources in this release.
 
-You can follow our roadmap for serverless stream processing in [riff issue #1159](https://github.com/projectriff/riff/issues/1159).
+You can follow our [roadmap for serverless stream processing](https://github.com/projectriff/riff/issues/1159).
