@@ -17,7 +17,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 ### Cloud Native Buildpacks
 
 - update to [pack v0.1.0](https://github.com/buildpack/pack/releases/tag/v0.1.0)
-- [builder](https://github.com/projectriff/builder/blob/master/builder.toml) uses separate buildpack per function invoker 
+- [builder](https://github.com/projectriff/builder/blob/v0.2.0/builder.toml) uses separate buildpack per function invoker 
 - The Java buildpack includes support for Java 11.  Please add a `compiler.source` to your Maven pom or Gradle config.
 
   #### Maven
