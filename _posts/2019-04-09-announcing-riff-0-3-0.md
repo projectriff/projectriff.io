@@ -55,7 +55,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 - `riff channel create` will default to using a default channel provisioner
 
 ## More modular Buildpacks
-This release introduces a new buildpacks structure with a buildpack per language. 
+This release introduces a new buildpacks structure with a buildpack per language. The modular approach will help restore support for [custom language invokers](https://github.com/projectriff/riff/issues/1093) in a future riff release.
 Here is an updated map of the buildpack-related repos on Github.
 
 ![](/images/builders2.svg)
