@@ -8,7 +8,7 @@ excerpt:
 permalink: /blog/announcing-riff-0-3-0/
 ---
 
-We are happy to announce the release of [riff v0.3.0](https://github.com/projectriff/riff/tree/v0.3.x). Thank you all  riff, Buildpacks, and Knative contributors.
+We are happy to announce the release of [riff v0.3.0](https://github.com/projectriff/riff/releases/tag/v0.3.0). Thank you all riff, Buildpacks, and Knative contributors.
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/riff/releases/tag/v0.3.0) on GitHub. Please follow one of the [getting started](/docs) guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.
 
