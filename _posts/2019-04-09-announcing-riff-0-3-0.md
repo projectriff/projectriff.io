@@ -18,13 +18,13 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 
 - update to [pack v0.1.0](https://github.com/buildpack/pack/releases/tag/v0.1.0)
 - [builder](https://github.com/projectriff/builder/blob/v0.2.0/builder.toml) uses separate buildpack per function invoker 
-- The Java buildpack includes support for Java 11.  Please add a `compiler.source` to your Maven pom or Gradle config.
+- The Java buildpack includes support for Java 11.  Please add a source version of Java 8 or later to your Maven pom or Gradle build.
 
   #### Maven
   ```xml
-    <properties>
-      <maven.compiler.source>1.8</maven.compiler.source>
-    </properties>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+  </properties>
   ```
 
   #### Gradle
@@ -42,11 +42,10 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 
 - support for Windows
 - easy install via [brew](https://formulae.brew.sh/formula/riff) and [chocolatey](https://chocolatey.org/packages/riff/0.3.0)
-- `riff system install` and `riff system uninstall` with improved robustness and cleanup
-- `riff namespace init`
-    - with basic auth for other registries
+- `riff system install` and `riff system uninstall` with improved robustness
+- `riff namespace init` with basic auth for alternative registries
 - `riff namespace cleanup` similar to system uninstall, but for a namespace
-- `riff function build` builds an image without creating a service
+- `riff function build` to build an image without creating a service
 - `riff function create`
     - `--sub-path` for `--git-repo` builds from a subdirectory
     - `--image` auto-inferred from registry prefix and function name
@@ -76,18 +75,8 @@ Here is an updated map of the buildpack-related repos on Github.
 - [Command function buildpack](https://github.com/projectriff/command-function-buildpack): contributes the [Command invoker](https://github.com/projectriff/command-function-invoker) for running Linux commands.
 
 
-## Our plans for eventing
- 
-In pre-Knative riff we had support for streaming messages between Functions mediated by Topics backed by Kafka. With the transition to Knative, we gave up the ability to stream messages from a Channel to a function and were limited to item-at-a-time request-reply semantics.
+## Our plans for stream processing
 
-We still care deeply about the potential of stateful stream processing in a polyglot, FaaS environment.
+Since we anticipate replacing the existing Channels and Subscriptions with new Stream and Processor resources, aligned with stream-oriented Function Invokers, we are [deprecating](https://github.com/projectriff/riff/pull/1237) the use of Channel and Subscription resources from Knative Eventing in this release.
 
-Fortunately, Knative serving is no longer restricted to http/1.1, which unlocks support for streaming protocols like h2, WebSockets, gRPC and RSocket. We have started working on a PoC that includes the following components:
-
-1. Stream CRD with "name" and "provider" (other properties will be added, e.g. "partitions")
-2. Processor CRD with "inputs", "outputs", and "function"
-3. Stream Gateway providing a generic API that can be backed by different event-log based messaging systems (such as Kafka or Kinesis); initially exploring [liiklus](https://github.com/bsideup/liiklus)
-4. Processor will connect to the Stream Gateway(s) for the input/output Streams and interact with the target Function (with which it's colocated in a Pod) via its Invoker layer using gRPC for bidirectional streaming
-
-NOTE: Existing eventing interfaces are deprecated and will be removed/replaced in riff v0.4.0.
-
+You can follow our roadmap for serverless stream processing in [riff issue #1159](https://github.com/projectriff/riff/issues/1159).
