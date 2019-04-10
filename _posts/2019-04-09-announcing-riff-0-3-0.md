@@ -87,7 +87,7 @@ Fortunately, Knative serving is no longer restricted to http/1.1, which unlocks 
 1. Stream CRD with "name" and "provider" (other properties will be added, e.g. "partitions")
 2. Processor CRD with "inputs", "outputs", and "function"
 3. Stream Gateway providing a generic API that can be backed by different event-log based messaging systems (such as Kafka or Kinesis); initially exploring [liiklus](https://github.com/bsideup/liiklus)
-3. Processor will connect to the Stream Gateway(s) for the input/output Streams and interact with the target Function (with which it's colocated in a Pod) via its Invoker layer using gRPC for bidirectional streaming
+4. Processor will connect to the Stream Gateway(s) for the input/output Streams and interact with the target Function (with which it's colocated in a Pod) via its Invoker layer using gRPC for bidirectional streaming
 
 NOTE: Existing eventing interfaces are deprecated and will be removed/replaced in riff v0.4.0.
 
