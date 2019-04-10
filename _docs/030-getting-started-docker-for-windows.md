@@ -86,7 +86,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0-snapshot (9dcaac3dc228adcedc15df435af28471614d0d7c)
+  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
 ```
 
 
