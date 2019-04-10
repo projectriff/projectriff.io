@@ -34,7 +34,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 
 ### Knative
 
-- update to [Knative Serving v0.5.0](https://github.com/knative/serving/releases/tag/v0.5.0) and Istio [v1.0.7](https://github.com/knative/serving/pull/3668/files)
+- update to [Knative Serving v0.5.1](https://github.com/knative/serving/releases/tag/v0.5.1) and Istio [v1.0.7](https://github.com/istio/istio/releases/tag/1.0.7)
 - update to [Knative Build v0.5.0](https://github.com/knative/build/releases/tag/v0.5.0)
 - update to [Knative Eventing v0.4.0](https://github.com/knative/eventing/releases/tag/v0.4.0)
 
