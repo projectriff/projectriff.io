@@ -172,20 +172,12 @@ You can use riff to build functions from source in a local directory, instead of
 
 For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be referenced.
 
-Create a temporary file called `dockerhub.json` using your own docker credentials
-
-```json
-{
-  "ServerURL": "https://index.docker.io",
-  "Username": "YOUR_USERNAME",
-  "Secret": "YOUR_PASSWORD"
-}
-```
-
-You should see 2 credential entries for DockerHub in PowerShell after running the following:
+After being prompted for you docker credentials you should see 2 entries for docker.io:
 
 ```powershell
-cat dockerhub.json | docker-credential-wincred store
+$dockerid = Read-Host "Please enter your Docker ID: "
+$password = Read-Host -assecurestring "Please enter your password: "
+echo $('{"ServerURL": "https://index.docker.io", "Username": "' +  $dockerid + '", "Secret": "' + [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)) + '"}') | docker-credential-wincred store
 docker-credential-wincred list
 ```
 
@@ -193,8 +185,6 @@ docker-credential-wincred list
 ```
 {"https://index.docker.io":"YOUR_USERNAME","https://index.docker.io/v1/":"YOUR_USERNAME"}
 ```
-
-Delete the temporary file `dockerhub.json`.
 
 ### create the function
 
@@ -205,15 +195,17 @@ Using PowerShell in a new directory with a single file called `square.js`
 module.exports = (x) => `the square of ${x} is ${x**2}`
 ```
 
-#### command
+#### delete the old square function and create a new one
 ```powershell
+riff service delete square
+
 riff function create square `
   --local-path . `
   --artifact square.js `
   --verbose
 ```
 
-### invoke the function
+#### invoke the function
 ```powershell
 riff service invoke square --json -- -w '\n' -d 8
 ```
