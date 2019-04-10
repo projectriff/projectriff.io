@@ -168,10 +168,6 @@ curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-T
 
 ## create a function from code in a local directory
 
-<aside class="notice notice--warning">
-  ⚠️ Due do differences between Windows and Linux file permissions, local builds that depend on file permissions may not work. Building from a git repository is recommended.
-</aside>
-
 You can use riff to build functions from source in a local directory, instead of first committing the code to a repo on GitHub.
 
 For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be referenced.
@@ -227,6 +223,9 @@ riff service invoke square --json -- -w '\n' -d 8
 curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
 the square of 8 is 64
 ```
+
+### Note
+Due to differences between Windows and Linux file permissions, **Command invoker** functions which depend on file permissions will not work when built locally on Windows. We suggest building from a git repository as a workaround.
 
 ## uninstalling and reinstalling
 If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.
