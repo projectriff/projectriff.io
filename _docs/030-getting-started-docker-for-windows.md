@@ -43,7 +43,7 @@ In the Shared Drives settings, enable sharing for the C drive, and enter your Wi
 ![configure Docker VM](/images/docker-edge-windows-shared-drives.png)
 
 ### enable Kubernetes
-Enable Kubernetes in Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
+Enable Kubernetes in the Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
 
 ![enable Kubernetes](/images/docker-edge-kubernetes-windows.png)
 

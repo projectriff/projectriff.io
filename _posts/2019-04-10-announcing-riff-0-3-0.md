@@ -52,7 +52,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
     - `--image` auto-inferred from registry prefix and function name
     - `riff.toml` optional alternative to CLI parameters
 - `riff service invoke` with improved error handling
-- `riff channel create` will default to using a default channel provisioner
+- `riff channel create` will automatically use a default channel provisioner
 
 ## More modular Buildpacks
 This release introduces a new buildpacks structure with a buildpack per language. The modular approach will help restore support for [custom language invokers](https://github.com/projectriff/riff/issues/1093) in a future riff release.
