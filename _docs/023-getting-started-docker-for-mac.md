@@ -55,7 +55,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+  riff cli: 0.3.1 (1ff6c6d7a708e52eb6843e89f9a618fcbfebbb9f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
