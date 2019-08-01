@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting started on GKE · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The following will help you get started running a riff function with Knative on GKE."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting started on GKE · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/"/><meta property="og:description" content="The following will help you get started running a riff function with Knative on GKE."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/versions" target="_self">v0.4.x</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/0-4/getting-started-on-gke" target="_self">Docs</a></li><li class=""><a href="/docs/0-4/riff" target="_self">CLI</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0-4/getting-started-on-gke">GKE</a></li><li class="navListItem"><a class="navItem" href="/docs/0-4/getting-started-on-minikube">Minikube</a></li><li class="navListItem"><a class="navItem" href="/docs/0-4/getting-started-on-docker-for-mac">Docker for Mac</a></li><li class="navListItem"><a class="navItem" href="/docs/0-4/getting-started-on-docker-for-windows">Docker for Windows</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Getting started on GKE</h1></header><article><div><span><p>The following will help you get started running a riff function with Knative on GKE.</p>
+<h2><a class="anchor" aria-hidden="true" id="tl-dr"></a><a href="#tl-dr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TL;DR</h2>
+<ol>
+<li>select a Project, install and configure gcloud and kubectl</li>
+<li>create a GKE cluster for Knative</li>
+<li>install the latest riff CLI</li>
+<li>install Knative using the riff CLI</li>
+<li>create a function</li>
+<li>invoke the function</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="create-a-google-cloud-project"></a><a href="#create-a-google-cloud-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a Google Cloud project</h2>
+<p>A project is required to consume any Google Cloud services, including GKE clusters. When you log into the <a href="https://console.cloud.google.com/">console</a> you can select or create a project from the dropdown at the top.</p>
+<h3><a class="anchor" aria-hidden="true" id="install-gcloud"></a><a href="#install-gcloud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install gcloud</h3>
+<p>Follow the <a href="https://cloud.google.com/sdk/docs/quickstarts">quickstart instructions</a> to install the <a href="https://cloud.google.com/sdk/">Google Cloud SDK</a> which includes the <code>gcloud</code> CLI. You may need to add the <code>google-cloud-sdk/bin</code> directory to your path. Once installed, <code>gcloud init</code> will open a browser to start an oauth flow and configure gcloud to use your project.</p>
+<pre><code class="hljs css language-sh">gcloud init
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-kubectl"></a><a href="#install-kubectl" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install kubectl</h3>
+<p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters like GKE. If you don't already have kubectl on your machine, you can use gcloud to install it.</p>
+<pre><code class="hljs css language-sh">gcloud components install kubectl
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="configure-gcloud"></a><a href="#configure-gcloud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>configure gcloud</h3>
+<p>Create an environment variable, replacing ??? with your project ID (not to be confused with your project name; use <code>gcloud projects list</code> to find your project ID).</p>
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">export</span> GCP_PROJECT_ID=???
+</code></pre>
+<p>Check your default project.</p>
+<pre><code class="hljs css language-sh">gcloud config list
+</code></pre>
+<p>If necessary change the default project.</p>
+<pre><code class="hljs css language-sh">gcloud config <span class="hljs-built_in">set</span> project <span class="hljs-variable">$GCP_PROJECT_ID</span>
+</code></pre>
+<p>List the available compute zones and also regions with quotas.</p>
+<pre><code class="hljs css language-sh">gcloud compute zones list
+gcloud compute regions list
+</code></pre>
+<p>Choose a zone, preferably in a region with higher CPU quota.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">export</span> GCP_ZONE=us-central1-b
+</code></pre>
+<p>Enable the necessary APIs for gcloud. You also need to <a href="https://cloud.google.com/billing/docs/how-to/manage-billing-account">enable billing</a> for your new project.</p>
+<pre><code class="hljs css language-sh">gcloud services <span class="hljs-built_in">enable</span> \
+  cloudapis.googleapis.com \
+  container.googleapis.com \
+  containerregistry.googleapis.com
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-gke-cluster"></a><a href="#create-a-gke-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a GKE cluster</h2>
+<p>Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># replace ??? below with your own cluster name</span>
+<span class="hljs-built_in">export</span> CLUSTER_NAME=???
+</code></pre>
+<pre><code class="hljs css language-sh">gcloud container clusters create <span class="hljs-variable">$CLUSTER_NAME</span> \
+  --cluster-version=latest \
+  --machine-type=n1-standard-2 \
+  --<span class="hljs-built_in">enable</span>-autoscaling --min-nodes=1 --max-nodes=3 \
+  --<span class="hljs-built_in">enable</span>-autorepair \
+  --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
+  --num-nodes=3 \
+  --zone=<span class="hljs-variable">$GCP_ZONE</span>
+</code></pre>
+<p>For additional details see <a href="https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md">Knative Install on Google Kubernetes Engine</a>.</p>
+<p>Confirm that your kubectl context is pointing to the new cluster</p>
+<pre><code class="hljs css language-sh">kubectl config current-context
+</code></pre>
+<p>To list contexts:</p>
+<pre><code class="hljs css language-sh">kubectl config get-contexts
+</code></pre>
+<p>You should also be able to find the cluster the <a href="https://console.cloud.google.com/kubernetes/">Kubernetes Engine</a> console.</p>
+<h2><a class="anchor" aria-hidden="true" id="grant-yourself-cluster-admin-permissions"></a><a href="#grant-yourself-cluster-admin-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>grant yourself cluster-admin permissions</h2>
+<pre><code class="hljs css language-sh">kubectl create clusterrolebinding cluster-admin-binding \
+--clusterrole=cluster-admin \
+--user=$(gcloud config get-value core/account)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-the-riff-cli"></a><a href="#install-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install the riff CLI</h2>
+<p>The <a href="https://github.com/projectriff/riff/">riff CLI</a> is available to download from our GitHub <a href="https://github.com/projectriff/riff/releases">releases</a> page. Once installed, check that the riff CLI version is 0.3.0 or later.</p>
+<pre><code class="hljs css language-sh">riff version
+</code></pre>
+<pre><code class="hljs">Version
+  riff cli: <span class="hljs-number">0.3</span><span class="hljs-number">.0</span> (<span class="hljs-number">4e474f</span>57a463d4d2c1159af64d562532fcb3ac1b)
+</code></pre>
+<p>At this point it is useful to monitor your cluster using a utility like <code>watch</code>. To install on a Mac</p>
+<pre><code class="hljs css language-sh">brew install watch
+</code></pre>
+<p>Watch pods in a separate terminal.</p>
+<pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-knative-using-the-riff-cli"></a><a href="#install-knative-using-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install Knative using the riff CLI</h2>
+<p>Install Knative, watching the pods until everything is running (this could take a couple of minutes).</p>
+<pre><code class="hljs css language-sh">riff system install
+</code></pre>
+<p>You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational.</p>
+<pre><code class="hljs">NAMESPACE          NAME                                                             READY   STATUS      RESTARTS   AGE
+istio-system       cluster-local-gateway<span class="hljs-number">-6</span>c785b8db7-nrfdp                           <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m11s
+istio-system       istio-citadel<span class="hljs-number">-6959f</span>cfb88-rrrw5                                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m28s
+istio-system       istio-cleanup-secrets-ns7tp                                      <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m54s
+istio-system       istio-egressgateway<span class="hljs-number">-5</span>b765869bf-dmf2j                             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m30s
+istio-system       istio-galley<span class="hljs-number">-7f</span>ccb9bbd9-wpbtm                                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m30s
+istio-system       istio-ingressgateway<span class="hljs-number">-69</span>b597b6bd<span class="hljs-number">-7</span>qmgp                            <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m30s
+istio-system       istio-pilot<span class="hljs-number">-78679f</span>cc74-bf6zn                                     <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m4s
+istio-system       istio-policy<span class="hljs-number">-59</span>b7f4ccd5<span class="hljs-number">-9</span>cwmv                                    <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m29s
+istio-system       istio-sidecar-injector<span class="hljs-number">-5</span>c4b6cb6bc-b8kwt                          <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m28s
+istio-system       istio-statsd-prom-bridge<span class="hljs-number">-67</span>bbcc746c-mqhvj                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m32s
+istio-system       istio-telemetry<span class="hljs-number">-7686</span>cd76bd-c622z                                 <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">7</span>m29s
+knative-build      build-controller<span class="hljs-number">-755f</span>6dd8b4-knjzx                                <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m31s
+knative-build      build-webhook<span class="hljs-number">-588</span>dcc4f7f-hhmvb                                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m31s
+knative-eventing   eventing-controller<span class="hljs-number">-6554f</span>9cbcf<span class="hljs-number">-4</span>mcsm                             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m15s
+knative-eventing   <span class="hljs-keyword">in</span>-memory-channel-controller<span class="hljs-number">-7888</span>dfffd7-klx5d                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m6s
+knative-eventing   <span class="hljs-keyword">in</span>-memory-channel-dispatcher<span class="hljs-number">-56</span>d6f99dc6-mlgkv                    <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">2</span>          <span class="hljs-number">6</span>m5s
+knative-eventing   webhook<span class="hljs-number">-654</span>b696b9b-hj89q                                         <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m14s
+knative-serving    activator<span class="hljs-number">-5f</span>8c9678bd-qc49k                                       <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">2</span>          <span class="hljs-number">6</span>m24s
+knative-serving    <span class="hljs-built_in">auto</span>scaler<span class="hljs-number">-7486469</span>d84<span class="hljs-number">-7</span>l4lp                                      <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">1</span>          <span class="hljs-number">6</span>m24s
+knative-serving    controller<span class="hljs-number">-677598f</span>dff-q56wf                                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m20s
+knative-serving    webhook<span class="hljs-number">-5</span>bb858fc5-mls79                                          <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m20s
+kube-system        event-exporter-v0<span class="hljs-number">.2</span><span class="hljs-number">.3</span>-f9c896d75<span class="hljs-number">-7</span>hs5v                            <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        fluentd-gcp-scaler<span class="hljs-number">-69</span>d79984cb-f4qp6                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        fluentd-gcp-v3<span class="hljs-number">.2</span><span class="hljs-number">.0</span>-cttdq                                         <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">86</span>m
+kube-system        fluentd-gcp-v3<span class="hljs-number">.2</span><span class="hljs-number">.0</span>-x7xmk                                         <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">86</span>m
+kube-system        heapster-v1<span class="hljs-number">.6</span><span class="hljs-number">.0</span>-beta<span class="hljs-number">.1</span><span class="hljs-number">-577</span>d766b74<span class="hljs-number">-97</span>wzl                          <span class="hljs-number">3</span>/<span class="hljs-number">3</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">86</span>m
+kube-system        kube-dns<span class="hljs-number">-5</span>d8cd9fcb6-hkgrf                                        <span class="hljs-number">4</span>/<span class="hljs-number">4</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        kube-dns<span class="hljs-number">-5</span>d8cd9fcb6-zvqck                                        <span class="hljs-number">4</span>/<span class="hljs-number">4</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">86</span>m
+kube-system        kube-dns-<span class="hljs-built_in">auto</span>scaler<span class="hljs-number">-76f</span>cd5f658-h65gx                             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        kube-proxy-gke-jldec-riff<span class="hljs-number">-030</span>-us-ea-<span class="hljs-keyword">default</span>-pool<span class="hljs-number">-4</span>b303b9f-dz56   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        kube-proxy-gke-jldec-riff<span class="hljs-number">-030</span>-us-ea-<span class="hljs-keyword">default</span>-pool<span class="hljs-number">-4</span>b303b9f-fpm4   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        l7-<span class="hljs-keyword">default</span>-backend<span class="hljs-number">-6f</span>8697844f<span class="hljs-number">-8</span>wfn5                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        metrics-server-v0<span class="hljs-number">.3</span><span class="hljs-number">.1</span><span class="hljs-number">-54699</span>c9cc8-fl2n9                           <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">86</span>m
+kube-system        prometheus-to-sd-bdbnk                                           <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+kube-system        prometheus-to-sd-gb9nf                                           <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">87</span>m
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-kubernetes-secret-for-pushing-images-to-gcr"></a><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a Kubernetes secret for pushing images to GCR</h2>
+<p>Create a <a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts">GCP Service Account</a> in the GCP console or using the gcloud CLI</p>
+<pre><code class="hljs css language-sh">gcloud iam service-accounts create push-image
+</code></pre>
+<p>Grant the service account a &quot;storage.admin&quot; role using the <a href="https://cloud.google.com/iam/docs/granting-roles-to-service-accounts">IAM manager</a> or using gcloud.</p>
+<pre><code class="hljs css language-sh">gcloud projects add-iam-policy-binding <span class="hljs-variable">$GCP_PROJECT_ID</span> \
+    --member serviceAccount:push-image@<span class="hljs-variable">$GCP_PROJECT_ID</span>.iam.gserviceaccount.com \
+    --role roles/storage.admin
+</code></pre>
+<p>Create a new <a href="https://cloud.google.com/container-registry/docs/advanced-authentication#json_key_file">authentication key</a> for the service account and save it in <code>gcr-storage-admin.json</code>.</p>
+<pre><code class="hljs css language-sh">gcloud iam service-accounts keys create \
+  --iam-account <span class="hljs-string">"push-image@<span class="hljs-variable">$GCP_PROJECT_ID</span>.iam.gserviceaccount.com"</span> \
+  gcr-storage-admin.json
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="initialize-the-namespace"></a><a href="#initialize-the-namespace" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>initialize the namespace</h3>
+<p>Use the riff CLI to initialize your namespace (if you plan on using a namespace other than <code>default</code> then substitute the name you want to use). This creates a serviceaccount that uses the secret saved above, installs a buildtemplate and labels the namespace for automatic Istio sidecar injection.</p>
+<pre><code class="hljs css language-sh">riff namespace init default --gcr gcr-storage-admin.json
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-function"></a><a href="#create-a-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a function</h2>
+<p>This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create square \
+  --git-repo https://github.com/projectriff-samples/node-square \
+  --artifact square.js \
+  --verbose
+</code></pre>
+<p>If you're still watching pods, you should see something like the following</p>
+<pre><code class="hljs">NAMESPACE    NAME                  READY     STATUS      RESTARTS   AGE<span class="hljs-built_in">
+default </span>     square-00001-jk9vj    0/1       Init:0/4    0          24s
+</code></pre>
+<p>The 4 &quot;Init&quot; containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.</p>
+<pre><code class="hljs">NAMESPACE   NAME                                       READY     STATUS      RESTARTS   AGE<span class="hljs-built_in">
+default </span>    square-00001-deployment-679bffb58c-cpzz8   3/3       Running     0          4m<span class="hljs-built_in">
+default </span>    square-00001-jk9vj                         0/1       Completed   0          5m
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="invoke-the-function"></a><a href="#invoke-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke the function</h2>
+<pre><code class="hljs css language-sh">riff service invoke square --json -- -w <span class="hljs-string">'\n'</span> -d 8
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="result"></a><a href="#result" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>result</h4>
+<pre><code class="hljs">curl <span class="hljs-number">35.236</span><span class="hljs-number">.212</span><span class="hljs-number">.232</span>/ -H <span class="hljs-string">'Host: square.default.example.com'</span> -H <span class="hljs-string">'Content-Type: text/plain'</span> -w <span class="hljs-string">'\n'</span> -d <span class="hljs-number">8</span>
+<span class="hljs-number">64</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="delete-the-function"></a><a href="#delete-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>delete the function</h2>
+<pre><code class="hljs css language-sh">riff service delete square
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/docs/0-4/getting-started-on-minikube"><span>Minikube</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tl-dr">TL;DR</a></li><li><a href="#create-a-google-cloud-project">create a Google Cloud project</a><ul class="toc-headings"><li><a href="#install-gcloud">install gcloud</a></li><li><a href="#install-kubectl">install kubectl</a></li><li><a href="#configure-gcloud">configure gcloud</a></li></ul></li><li><a href="#create-a-gke-cluster">create a GKE cluster</a></li><li><a href="#grant-yourself-cluster-admin-permissions">grant yourself cluster-admin permissions</a></li><li><a href="#install-the-riff-cli">install the riff CLI</a></li><li><a href="#install-knative-using-the-riff-cli">install Knative using the riff CLI</a></li><li><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr">create a Kubernetes secret for pushing images to GCR</a><ul class="toc-headings"><li><a href="#initialize-the-namespace">initialize the namespace</a></li></ul></li><li><a href="#create-a-function">create a function</a></li><li><a href="#invoke-the-function">invoke the function</a></li><li><a href="#delete-the-function">delete the function</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/0-4/en/getting-started-on-gke.html">Getting Started</a><a href="/docs/0-4/en/riff">CLI</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright">Copyright © $2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting started on Docker for Mac · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The following will help you get started running a riff function with Knative on Docker Community Edition for Mac."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting started on Docker for Mac · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/"/><meta property="og:description" content="The following will help you get started running a riff function with Knative on Docker Community Edition for Mac."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/versions" target="_self">v0.3.x</a></li><li class="siteNavGroupActive"><a href="/docs/0-3/getting-started-on-gke" target="_self">Docs</a></li><li class=""><a href="/docs/0-3/riff" target="_self">CLI</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/0-3/getting-started-on-gke">GKE</a></li><li class="navListItem"><a class="navItem" href="/docs/0-3/getting-started-on-minikube">Minikube</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/0-3/getting-started-on-docker-for-mac">Docker for Mac</a></li><li class="navListItem"><a class="navItem" href="/docs/0-3/getting-started-on-docker-for-windows">Docker for Windows</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Getting started on Docker for Mac</h1></header><article><div><span><p>The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.</p>
+<h3><a class="anchor" aria-hidden="true" id="tl-dr"></a><a href="#tl-dr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TL;DR</h3>
+<ol>
+<li>Install the latest release of Docker for Mac (Edge)</li>
+<li>Configure the cluster and enable Kubernetes</li>
+<li>Install Knative using the riff CLI</li>
+<li>Create a function</li>
+<li>Invoke the function</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="install-docker"></a><a href="#install-docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install Docker</h3>
+<p>Kubernetes and the kubectl CLI are now included with <a href="https://store.docker.com/editions/community/docker-ce-desktop-mac">Docker Community Edition for Mac</a>. We recommend downloading the latest Edge version which comes with a more recent release of Kubernetes.</p>
+<p><img src="/img/docker-for-mac-download-edge.png" alt="download Docker edge for mac"></p>
+<h3><a class="anchor" aria-hidden="true" id="configure-the-vm"></a><a href="#configure-the-vm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>configure the VM</h3>
+<p>Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply &amp; Restart.
+<img src="/img/docker-for-mac-vm-config-edge-4gb.png" alt="configure Docker VM"></p>
+<h3><a class="anchor" aria-hidden="true" id="enable-kubernetes"></a><a href="#enable-kubernetes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>enable Kubernetes</h3>
+<p>Now enable Kubernetes, and wait for the cluster to start.
+<img src="/img/docker-for-mac-kubernetes-edge.png" alt="enable Kubernetes"></p>
+<p>If you previously had minikube or GKE configured, switch your kubectl context to &quot;docker-desktop&quot;.</p>
+<p><img src="/img/docker-for-mac-context-edge.png" alt="set context to docker-for-desktop"></p>
+<h2><a class="anchor" aria-hidden="true" id="install-the-riff-cli"></a><a href="#install-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install the riff CLI</h2>
+<p>The <a href="https://github.com/projectriff/riff/">riff CLI</a> is available to download from our GitHub <a href="https://github.com/projectriff/riff/releases">releases</a> page. Once installed, check that the riff CLI version is 0.3.0 or later.</p>
+<pre><code class="hljs css language-sh">riff version
+</code></pre>
+<pre><code class="hljs">Version
+  riff cli: <span class="hljs-number">0.3</span><span class="hljs-number">.0</span> (<span class="hljs-number">4e474f</span>57a463d4d2c1159af64d562532fcb3ac1b)
+</code></pre>
+<p>At this point it is useful to monitor your cluster using a utility like <code>watch</code>. To install on a Mac</p>
+<pre><code class="hljs css language-sh">brew install watch
+</code></pre>
+<p>Watch pods in a separate terminal.</p>
+<pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-knative-using-the-riff-cli"></a><a href="#install-knative-using-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install Knative using the riff CLI</h2>
+<p>Install Knative, watching the pods until everything is running (this could take a couple of minutes). The <code>--node-port</code> option replaces LoadBalancer type services with NodePort.</p>
+<pre><code class="hljs css language-sh">riff system install --node-port
+</code></pre>
+<p>You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational.</p>
+<pre><code class="hljs">NAMESPACE          NAME                                            READY   STATUS      RESTARTS   AGE
+docker             compose<span class="hljs-number">-7</span>cf768cb84-dm5ch                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+docker             compose-api<span class="hljs-number">-579965</span>d67f-m4hzk                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+istio-system       cluster-local-gateway<span class="hljs-number">-547467</span>ccf6-f7lnz          <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m7s
+istio-system       istio-citadel<span class="hljs-number">-7</span>d64db8bcf<span class="hljs-number">-9</span>hg6r                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+istio-system       istio-cleanup-secrets-kq74p                     <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m17s
+istio-system       istio-egressgateway<span class="hljs-number">-6</span>ddf4c8bd6-hm298            <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+istio-system       istio-galley<span class="hljs-number">-7</span>dd996474<span class="hljs-number">-94</span>nwm                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m9s
+istio-system       istio-ingressgateway<span class="hljs-number">-84</span>b89d647f<span class="hljs-number">-9</span>lgpm           <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+istio-system       istio-pilot<span class="hljs-number">-54</span>b76645df-fb7fv                    <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m2s
+istio-system       istio-policy<span class="hljs-number">-5</span>c4d9ff96b-w6tpb                   <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+istio-system       istio-sidecar-injector<span class="hljs-number">-6977</span>b5cf5b-plf8x         <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+istio-system       istio-statsd-prom-bridge-b44b96d7b-fzd4l        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m9s
+istio-system       istio-telemetry<span class="hljs-number">-7676</span>df547f-hx7zh                <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m8s
+knative-build      build-controller<span class="hljs-number">-7</span>b8987d675<span class="hljs-number">-9</span>ch5q               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">81</span>s
+knative-build      build-webhook<span class="hljs-number">-74795</span>c8696-sbg9g                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">81</span>s
+knative-eventing   eventing-controller<span class="hljs-number">-864657</span>d8d4-l666c            <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">78</span>s
+knative-eventing   <span class="hljs-keyword">in</span>-memory-channel-controller-f794cc9d8-f4hml    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">77</span>s
+knative-eventing   <span class="hljs-keyword">in</span>-memory-channel-dispatcher<span class="hljs-number">-8595</span>c7f8d7-s7xc6   <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">1</span>          <span class="hljs-number">77</span>s
+knative-eventing   webhook<span class="hljs-number">-5</span>d76776d55-r7qzm                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">78</span>s
+knative-serving    activator<span class="hljs-number">-7</span>c8b59d78-nf6qq                       <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">1</span>          <span class="hljs-number">79</span>s
+knative-serving    <span class="hljs-built_in">auto</span>scaler<span class="hljs-number">-666</span>c9bfcc6-vwg49                     <span class="hljs-number">2</span>/<span class="hljs-number">2</span>     Running     <span class="hljs-number">1</span>          <span class="hljs-number">79</span>s
+knative-serving    controller<span class="hljs-number">-799</span>cd5c6dc-zj6lw                     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">79</span>s
+knative-serving    webhook<span class="hljs-number">-5</span>b66fdf6b9-xtcsn                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">79</span>s
+kube-system        coredns<span class="hljs-number">-86</span>c58d9df4-ldzk2                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">37</span>m
+kube-system        coredns<span class="hljs-number">-86</span>c58d9df4-psg2l                        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">37</span>m
+kube-system        etcd-docker-desktop                             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+kube-system        kube-apiserver-docker-desktop                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+kube-system        kube-controller-manager-docker-desktop          <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+kube-system        kube-proxy<span class="hljs-number">-2</span>gb2c                                <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">37</span>m
+kube-system        kube-scheduler-docker-desktop                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">36</span>m
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="initialize-the-namespace-and-provide-credentials-for-pushing-images-to-dockerhub"></a><a href="#initialize-the-namespace-and-provide-credentials-for-pushing-images-to-dockerhub" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>initialize the namespace and provide credentials for pushing images to DockerHub</h3>
+<p>Use the riff CLI to initialize your namespace (if you plan on using a namespace other than <code>default</code> then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">export</span> DOCKER_ID=???
+</code></pre>
+<pre><code class="hljs css language-sh">riff namespace init default --docker-hub <span class="hljs-variable">$DOCKER_ID</span>
+</code></pre>
+<p>You will be prompted to provide the password.</p>
+<h2><a class="anchor" aria-hidden="true" id="create-a-function"></a><a href="#create-a-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a function</h2>
+<p>This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create square \
+  --git-repo https://github.com/projectriff-samples/node-square  \
+  --artifact square.js \
+  --verbose
+</code></pre>
+<p>If you're still watching pods, you should see something like the following</p>
+<pre><code class="hljs css language-sh">NAMESPACE       NAME                        READY   STATUS        RESTARTS   AGE
+default         square-jhtmf-pod-23a291     0/1     Init:1/7      0          16s
+</code></pre>
+<p>The 7 &quot;Init&quot; containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.</p>
+<pre><code class="hljs css language-sh">NAMESPACE       NAME                                            READY   STATUS      RESTARTS   AGE
+default         square-jhtmf-pod-23a291                         0/1     Completed   0          101s
+default         square-pb9nf-deployment-849689c559-jg87j        3/3     Running     0          44s
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="invoke-the-function"></a><a href="#invoke-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke the function</h2>
+<pre><code class="hljs css language-sh">riff service invoke square --json -- -w <span class="hljs-string">'\n'</span> -d 8
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="result"></a><a href="#result" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>result</h4>
+<pre><code class="hljs"><span class="hljs-attribute">curl</span> http://localhost:31380/ -H <span class="hljs-string">'Host: square.default.example.com'</span> -H <span class="hljs-string">'Content-Type: application/json'</span> -w <span class="hljs-string">'\n'</span> -d <span class="hljs-number">8</span>
+<span class="hljs-number">64</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="delete-the-function"></a><a href="#delete-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>delete the function</h2>
+<pre><code class="hljs css language-sh">riff service delete square
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="uninstalling-and-reinstalling"></a><a href="#uninstalling-and-reinstalling" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>uninstalling and reinstalling</h2>
+<p>If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.</p>
+<p><img src="/img/docker-for-mac-reset-kubernetes-edge.png" alt="reset Kubernetes using Preferences/Reset"></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/0-3/getting-started-on-minikube"><span class="arrow-prev">← </span><span>Minikube</span></a><a class="docs-next button" href="/docs/0-3/getting-started-on-docker-for-windows"><span>Docker for Windows</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-the-riff-cli">install the riff CLI</a></li><li><a href="#install-knative-using-the-riff-cli">install Knative using the riff CLI</a><ul class="toc-headings"><li><a href="#initialize-the-namespace-and-provide-credentials-for-pushing-images-to-dockerhub">initialize the namespace and provide credentials for pushing images to DockerHub</a></li></ul></li><li><a href="#create-a-function">create a function</a></li><li><a href="#invoke-the-function">invoke the function</a></li><li><a href="#delete-the-function">delete the function</a></li><li><a href="#uninstalling-and-reinstalling">uninstalling and reinstalling</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/0-3/en/getting-started-on-gke.html">Getting Started</a><a href="/docs/0-3/en/riff">CLI</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright">Copyright © $2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>

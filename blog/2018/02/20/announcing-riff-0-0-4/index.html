@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Announcing riff 0.0.4 · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We are happy to announce a new release of riff. Thank you, once again, everyone"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Announcing riff 0.0.4 · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/blog/2018/02/20/announcing-riff-0-0-4"/><meta property="og:description" content="We are happy to announce a new release of riff. Thank you, once again, everyone"/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/versions" target="_self">v0.3.x</a></li><li class=""><a href="/docs/0-3/getting-started-on-gke" target="_self">Docs</a></li><li class=""><a href="/docs/0-3/riff" target="_self">CLI</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>All Blog Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">All Blog Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/04/10/announcing-riff-0-3-0">Announcing riff v0.3.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/announcing-riff-0-2-0">Announcing riff v0.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/27/riffing-on-knative">riffing on Knative at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/26/knative-and-riff-for-spring-developers">Knative and riff for Spring Developers at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/26/introduction-to-knative">Introduction to Knative at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/25/springone-platform-keynote-2018-mark-fisher">Mark Fisher&#x27;s Keynote at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/25/springone-platform-keynote-2018-mark-chmarny">Mark Chmarny&#x27;s Keynote at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/25/springone-platform-keynote-2018-dave-syer">Dave Syer&#x27;s Keynote at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/21/announcing-riff-0-1-3">Announcing riff v0.1.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/08/31/announcing-riff-0-1-2-on-Knative">Announcing riff v0.1.2 on Knative</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/08/09/announcing-riff-0-1-1-on-Knative">Announcing riff v0.1.1 on Knative</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/26/riff-in-60ish-seconds">riff in 60ish seconds</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/24/announcing-riff-0-1-0-on-Knative">Announcing riff v0.1.0 on Knative</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/13/announcing-riff-0-0-7">Announcing riff v0.0.7</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/04/06/announcing-riff-0-0-6">Announcing riff v0.0.6</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/03/21/announcing-riff-0-0-5">riff 0.0.5</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/02/20/announcing-riff-0-0-4">Announcing riff 0.0.4</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/01/26/announcing-riff-0-0-3">Announcing the 0.0.3 release of riff</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/15/introducing-riff">Introducing riff</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/07/springone-platform-keynote-2017">Mark Fisher&#x27;s Keynote at SpringOne Platform 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/02/20/announcing-riff-0-0-4">Announcing riff 0.0.4</a></h1><p class="post-meta">February 20, 2018</p><div class="authorBlock"></div></header><div><span><p>We are happy to announce a new release of riff. Thank you, once again, everyone
+who contributed to this effort. Here are some of the highlights.</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="a-new-riff-cli-written-in-go"></a><a href="#a-new-riff-cli-written-in-go" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>a new riff CLI written in go</h2>
+<p>The <a href="https://github.com/projectriff/riff/tree/master/riff-cli">riff CLI</a> is now a go binary, available to download from our GitHub <a href="https://github.com/projectriff/riff/releases">releases</a> page or, if you have a go development environment, you can use 'go get' to build and install into $GOPATH/bin as follows.</p>
+<pre><code class="hljs"><span class="hljs-keyword">go</span> <span class="hljs-built_in">get</span> github.<span class="hljs-keyword">com</span>/projectriff/riff
+</code></pre>
+<p>The new CLI provides a lot more infomation about what it's doing. E.g.</p>
+<pre><code class="hljs">~/riff/riff/samples/<span class="hljs-keyword">shell</span><span class="bash">/<span class="hljs-built_in">echo</span> (master)$ riff create</span>
+Initializing ~/riff/riff/samples/<span class="hljs-keyword">shell</span><span class="bash">/<span class="hljs-built_in">echo</span>/<span class="hljs-built_in">echo</span>-topics.yaml</span>
+Initializing ~/riff/riff/samples/<span class="hljs-keyword">shell</span><span class="bash">/<span class="hljs-built_in">echo</span>/<span class="hljs-built_in">echo</span>-function.yaml</span>
+Initializing ~/riff/riff/samples/<span class="hljs-keyword">shell</span><span class="bash">/<span class="hljs-built_in">echo</span>/Dockerfile</span>
+Building image ...
+</code></pre>
+<p>A <code>--dry-run</code> option displays the content of the Dockerfile and k8s resource .yaml files without
+generating them.</p>
+<p>NOTE that some of the riff <a href="https://github.com/projectriff/riff/blob/master/Getting-Started.adoc#riff-cli-configuration">CLI configuration</a> options have changed.</p>
+<h2><a class="anchor" aria-hidden="true" id="grpc-under-the-hood"></a><a href="#grpc-under-the-hood" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>gRPC under the hood</h2>
+<p>For this iteration we have introduced a gRPC interface between the function sidecar
+container and each of the function invokers.</p>
+<p>While HTTP works well for invoking functions one event at a time, it was not designed to serve as a protocol for bidirectional streams which don't follow a strict request/reply pattern.</p>
+<p>gRPC will allow us to extend streaming semantics, which already exist for <a href="https://github.com/projectriff/java-function-invoker/tree/master/src/test/java/io/projectriff/functions">Java functions</a> using the reactive Flux interface, to functions written in JavaScript and other languages.</p>
+<p>Function code provided by users should not be impacted by the underlying changes between sidecar and invoker, in fact, we expect the invoker protocol to be hidden from function developers in future releases.</p>
+<h3><a class="anchor" aria-hidden="true" id="grpc-proto"></a><a href="#grpc-proto" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>gRPC proto</h3>
+<p>Here is the gRPC function.proto definition which we are using for the 0.0.4 release. Please note that we are still experimenting with this and other streaming protocols. Developers who are experimenting with writing new invokers should expect changes to this layer in future releases.</p>
+<pre><code class="hljs css language-protobuf">syntax = <span class="hljs-string">"proto3"</span>;
+
+<span class="hljs-keyword">package</span> function;
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">Message</span> </span>{
+    <span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">HeaderValue</span> </span>{
+        <span class="hljs-keyword">repeated</span> <span class="hljs-built_in">string</span> values = <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-built_in">bytes</span> payload = <span class="hljs-number">1</span>;
+    map&lt;<span class="hljs-built_in">string</span>, HeaderValue&gt; headers = <span class="hljs-number">2</span>;
+}
+
+<span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">MessageFunction</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">rpc</span> Call(stream Message) <span class="hljs-keyword">returns</span> (stream Message) {}
+}
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="go-shell-invoker"></a><a href="#go-shell-invoker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>go shell invoker</h2>
+<p>The <a href="https://github.com/projectriff/shell-function-invoker">shell invoker</a> is now a go binary executable, which executes commands directly rather than running them from inside a shell. This allows the shell invoker to connect to the sidecar via gRPC just like other languages.</p>
+<p>NOTE that the new shell invoker requires a shebang for shell scripts, and uses stdin instead of a command line parameter for inputs from events. The echo sample has been modified to use the 'cat' utility which simply copies stdin to stdout. Here is the <code>echo.sh</code> script from the sample.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-meta">#!/bin/sh</span>
+cat
+</code></pre>
+<p>Alternatively, you could specify the <code>cat</code> command directly in the Dockerfile - no shell script required!</p>
+<pre><code class="hljs css language-docker"><span class="hljs-keyword">FROM</span> projectriff/<span class="hljs-keyword">shell</span><span class="bash">-<span class="hljs-keyword">function</span>-invoker:0.0.4</span>
+<span class="hljs-keyword">ENV</span> FUNCTION_URI cat
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="node-invoker"></a><a href="#node-invoker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>node invoker</h2>
+<p>The <a href="https://github.com/projectriff/node-function-invoker">node invoker</a> just keeps getting better, with HTTP and gRPC protocols both implemented in this release.</p>
+<p>For functions which need to manage connections or perform other kinds of one time setup/teardown, the invoker now calls <code>$init</code> on startup and <code>$destroy</code> before terminating the function. These functions can return promises as well. The node invoker has been fixed to respond promptly to termination signals from Kubernetes.</p>
+<p>To help you create functions with npm dependencies, the CLI will now recognize a <code>package.json</code> file, and generate a Dockerfile which copies the whole directory into the image and installs dependencies during the build.</p>
+<p>E.g. <code>riff init node --dry-run -a package.json</code> will produce:</p>
+<pre><code class="hljs css language-docker"><span class="hljs-keyword">FROM</span> projectriff/node-function-invoker:<span class="hljs-number">0.0</span>.<span class="hljs-number">4</span>
+<span class="hljs-keyword">ENV</span> FUNCTION_URI /functions/
+<span class="hljs-keyword">COPY</span><span class="bash"> . <span class="hljs-variable">${FUNCTION_URI}</span></span>
+<span class="hljs-keyword">RUN</span><span class="bash"> (<span class="hljs-built_in">cd</span> <span class="hljs-variable">${FUNCTION_URI}</span> &amp;&amp; npm install --production)</span>
+</code></pre>
+<p>Finally, the HTTP gateway will now respond with a 500 status when node functions throw an error.</p>
+<h2><a class="anchor" aria-hidden="true" id="java-invoker"></a><a href="#java-invoker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>java invoker</h2>
+<p>Our java invoker is still the leader in terms of supporting streaming (Flux) as well as request/response functions.</p>
+<p>In this release, the <a href="https://github.com/projectriff/java-function-invoker/commit/60d675c48817cc75f17af76178afe588a5cd8b42">java invoker</a> is talking to the sidecar over the same gRPC interface described above. Support for the <code>pipes</code> protocol has been removed, so please modify your function yaml to use <code>grpc</code> if you upgrade to 0.0.4 and rebuild your functions with the new invoker.</p>
+<h2><a class="anchor" aria-hidden="true" id="separate-kafka-install"></a><a href="#separate-kafka-install" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>separate Kafka install</h2>
+<p>Starting with the 0.0.4 release, we have separated the Kafka installation from the riff Helm chart. You can still use the single-node Kafka chart provided by riff, or the dynamically scalable, multi-node <a href="https://github.com/kubernetes/charts/tree/master/incubator/kafka">incubator/kafka</a> service. For details see the <a href="https://github.com/projectriff/riff/blob/master/Getting-Started.adoc">Getting Started</a> guide on GitHub or the <a href="/docs">docs</a> on this site.</p>
+<h2><a class="anchor" aria-hidden="true" id="next-steps"></a><a href="#next-steps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>next steps</h2>
+<p>In addition to our pursuit of improved interfaces for event-streaming, we are continuing to invest in
+making our architecure more pluggable so that riff can connect to other message brokers.</p>
+<p>We are also targeting better function and topic management in the function controller,
+and smoother function scaling using event metrics and lifecycle information from our sidecars.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#a-new-riff-cli-written-in-go">a new riff CLI written in go</a></li><li><a href="#grpc-under-the-hood">gRPC under the hood</a><ul class="toc-headings"><li><a href="#grpc-proto">gRPC proto</a></li></ul></li><li><a href="#go-shell-invoker">go shell invoker</a></li><li><a href="#node-invoker">node invoker</a></li><li><a href="#java-invoker">java invoker</a></li><li><a href="#separate-kafka-install">separate Kafka install</a></li><li><a href="#next-steps">next steps</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/0-3/en/getting-started-on-gke.html">Getting Started</a><a href="/docs/0-3/en/riff">CLI</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright">Copyright © $2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
