@@ -173,53 +173,54 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install Knative using the riff CLI
+## install riff using Helm
 
-Install Knative, watching the pods until everything is running (this could take a couple of minutes).
+Load the projectriff charts
+
+```ah
+helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+helm repo update
+```
+
+riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
+Knative is installed.
+
+To install riff with Knative and Istio:
 
 ```sh
-riff system install
+helm install projectriff/istio --name istio --namespace istio-system --wait
+helm install projectriff/riff --name riff --set knative.enabled=true
 ```
 
-You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
+Install riff without Knative or Istio:
+
+```sh
+helm install projectriff/riff --name riff
+```
+
+Verify the riff install. 
+
+```sh
+riff doctor
+```
 
 ```
-NAMESPACE          NAME                                                             READY   STATUS      RESTARTS   AGE
-istio-system       cluster-local-gateway-6c785b8db7-nrfdp                           1/1     Running     0          7m11s
-istio-system       istio-citadel-6959fcfb88-rrrw5                                   1/1     Running     0          7m28s
-istio-system       istio-cleanup-secrets-ns7tp                                      0/1     Completed   0          7m54s
-istio-system       istio-egressgateway-5b765869bf-dmf2j                             1/1     Running     0          7m30s
-istio-system       istio-galley-7fccb9bbd9-wpbtm                                    1/1     Running     0          7m30s
-istio-system       istio-ingressgateway-69b597b6bd-7qmgp                            1/1     Running     0          7m30s
-istio-system       istio-pilot-78679fcc74-bf6zn                                     2/2     Running     0          7m4s
-istio-system       istio-policy-59b7f4ccd5-9cwmv                                    2/2     Running     0          7m29s
-istio-system       istio-sidecar-injector-5c4b6cb6bc-b8kwt                          1/1     Running     0          7m28s
-istio-system       istio-statsd-prom-bridge-67bbcc746c-mqhvj                        1/1     Running     0          7m32s
-istio-system       istio-telemetry-7686cd76bd-c622z                                 2/2     Running     0          7m29s
-knative-build      build-controller-755f6dd8b4-knjzx                                1/1     Running     0          6m31s
-knative-build      build-webhook-588dcc4f7f-hhmvb                                   1/1     Running     0          6m31s
-knative-eventing   eventing-controller-6554f9cbcf-4mcsm                             1/1     Running     0          6m15s
-knative-eventing   in-memory-channel-controller-7888dfffd7-klx5d                    1/1     Running     0          6m6s
-knative-eventing   in-memory-channel-dispatcher-56d6f99dc6-mlgkv                    2/2     Running     2          6m5s
-knative-eventing   webhook-654b696b9b-hj89q                                         1/1     Running     0          6m14s
-knative-serving    activator-5f8c9678bd-qc49k                                       2/2     Running     2          6m24s
-knative-serving    autoscaler-7486469d84-7l4lp                                      2/2     Running     1          6m24s
-knative-serving    controller-677598fdff-q56wf                                      1/1     Running     0          6m20s
-knative-serving    webhook-5bb858fc5-mls79                                          1/1     Running     0          6m20s
-kube-system        event-exporter-v0.2.3-f9c896d75-7hs5v                            2/2     Running     0          87m
-kube-system        fluentd-gcp-scaler-69d79984cb-f4qp6                              1/1     Running     0          87m
-kube-system        fluentd-gcp-v3.2.0-cttdq                                         2/2     Running     0          86m
-kube-system        fluentd-gcp-v3.2.0-x7xmk                                         2/2     Running     0          86m
-kube-system        heapster-v1.6.0-beta.1-577d766b74-97wzl                          3/3     Running     0          86m
-kube-system        kube-dns-5d8cd9fcb6-hkgrf                                        4/4     Running     0          87m
-kube-system        kube-dns-5d8cd9fcb6-zvqck                                        4/4     Running     0          86m
-kube-system        kube-dns-autoscaler-76fcd5f658-h65gx                             1/1     Running     0          87m
-kube-system        kube-proxy-gke-jldec-riff-030-us-ea-default-pool-4b303b9f-dz56   1/1     Running     0          87m
-kube-system        kube-proxy-gke-jldec-riff-030-us-ea-default-pool-4b303b9f-fpm4   1/1     Running     0          87m
-kube-system        l7-default-backend-6f8697844f-8wfn5                              1/1     Running     0          87m
-kube-system        metrics-server-v0.3.1-54699c9cc8-fl2n9                           2/2     Running     0          86m
-kube-system        prometheus-to-sd-bdbnk                                           1/1     Running     0          87m
-kube-system        prometheus-to-sd-gb9nf                                           1/1     Running     0          87m
+NAMESPACE     STATUS
+riff-system   ok
+
+RESOURCE                              READ      WRITE
+configmaps                            allowed   allowed
+secrets                               allowed   allowed
+pods                                  allowed   n/a
+pods/log                              allowed   n/a
+applications.build.projectriff.io     allowed   allowed
+containers.build.projectriff.io       allowed   allowed
+functions.build.projectriff.io        allowed   allowed
+deployers.core.projectriff.io         allowed   allowed
+processors.streaming.projectriff.io   allowed   allowed
+streams.streaming.projectriff.io      allowed   allowed
+adapters.knative.projectriff.io       allowed   allowed
+deployers.knative.projectriff.io      allowed   allowed
 ```
 
 ## create a Kubernetes secret for pushing images to GCR

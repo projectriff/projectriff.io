@@ -104,48 +104,54 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install Knative using the riff CLI
+## install riff using Helm
 
-Install Knative, watching the pods until everything is running (this could take a couple of minutes). The `--node-port` option replaces LoadBalancer type services with NodePort.
+Load the projectriff charts
 
-```sh
-riff system install --node-port
+```ah
+helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+helm repo update
 ```
 
-You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
+riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
+Knative is installed.
+
+To install riff with Knative and Istio:
 
 ```sh
-NAMESPACE          NAME                                            READY   STATUS      RESTARTS   AGE
-istio-system       cluster-local-gateway-547467ccf6-xbh9m          1/1     Running     0          3m34s
-istio-system       istio-citadel-7d64db8bcf-ljd5r                  1/1     Running     0          3m35s
-istio-system       istio-cleanup-secrets-pw842                     0/1     Completed   0          3m36s
-istio-system       istio-egressgateway-6ddf4c8bd6-k7bjr            1/1     Running     0          3m35s
-istio-system       istio-galley-7dd996474-467xc                    1/1     Running     0          3m35s
-istio-system       istio-ingressgateway-84b89d647f-76z5g           1/1     Running     0          3m35s
-istio-system       istio-pilot-54b76645df-xdszt                    2/2     Running     0          3m21s
-istio-system       istio-policy-5c4d9ff96b-htd5h                   2/2     Running     0          3m35s
-istio-system       istio-sidecar-injector-6977b5cf5b-fh7mr         1/1     Running     0          3m35s
-istio-system       istio-statsd-prom-bridge-b44b96d7b-htrgk        1/1     Running     0          3m35s
-istio-system       istio-telemetry-7676df547f-b4vdw                2/2     Running     0          3m35s
-knative-build      build-controller-7b8987d675-8vph5               1/1     Running     0          59s
-knative-build      build-webhook-74795c8696-xwwld                  1/1     Running     0          59s
-knative-eventing   eventing-controller-864657d8d4-hj7xz            1/1     Running     0          57s
-knative-eventing   in-memory-channel-controller-f794cc9d8-nb59s    1/1     Running     0          56s
-knative-eventing   in-memory-channel-dispatcher-8595c7f8d7-qzn9c   2/2     Running     1          56s
-knative-eventing   webhook-5d76776d55-jb56d                        1/1     Running     0          57s
-knative-serving    activator-7c8b59d78-2jrpk                       2/2     Running     1          58s
-knative-serving    autoscaler-666c9bfcc6-vwcrq                     2/2     Running     1          58s
-knative-serving    controller-799cd5c6dc-sbpzr                     1/1     Running     0          58s
-knative-serving    webhook-5b66fdf6b9-kqvjh                        1/1     Running     0          58s
-kube-system        coredns-86c58d9df4-dtf4v                        1/1     Running     0          9m17s
-kube-system        coredns-86c58d9df4-hpzlx                        1/1     Running     0          9m17s
-kube-system        etcd-minikube                                   1/1     Running     0          8m30s
-kube-system        kube-addon-manager-minikube                     1/1     Running     0          8m15s
-kube-system        kube-apiserver-minikube                         1/1     Running     0          8m20s
-kube-system        kube-controller-manager-minikube                1/1     Running     0          8m29s
-kube-system        kube-proxy-fcbqc                                1/1     Running     0          9m17s
-kube-system        kube-scheduler-minikube                         1/1     Running     0          8m9s
-kube-system        storage-provisioner                             1/1     Running     0          9m16s
+helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
+helm install projectriff/riff --name riff --set knative.enabled=true
+```
+
+Install riff without Knative or Istio:
+
+```sh
+helm install projectriff/riff --name riff
+```
+
+Verify the riff install. 
+
+```sh
+riff doctor
+```
+
+```
+NAMESPACE     STATUS
+riff-system   ok
+
+RESOURCE                              READ      WRITE
+configmaps                            allowed   allowed
+secrets                               allowed   allowed
+pods                                  allowed   n/a
+pods/log                              allowed   n/a
+applications.build.projectriff.io     allowed   allowed
+containers.build.projectriff.io       allowed   allowed
+functions.build.projectriff.io        allowed   allowed
+deployers.core.projectriff.io         allowed   allowed
+processors.streaming.projectriff.io   allowed   allowed
+streams.streaming.projectriff.io      allowed   allowed
+adapters.knative.projectriff.io       allowed   allowed
+deployers.knative.projectriff.io      allowed   allowed
 ```
 
 ### initialize the namespace and provide credentials for pushing images to DockerHub

@@ -106,48 +106,54 @@ riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 ```
 
 
-## install Knative using the riff CLI
+## install riff using Helm
 
-Install Knative, watching the pods until everything is running (this could take a couple of minutes). The `--node-port` option replaces LoadBalancer type services with NodePort.
+Load the projectriff charts
 
-```powershell
-riff system install --node-port
+```ah
+helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+helm repo update
 ```
 
-You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
+riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
+Knative is installed.
+
+To install riff with Knative and Istio:
+
+```sh
+helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
+helm install projectriff/riff --name riff --set knative.enabled=true
+```
+
+Install riff without Knative or Istio:
+
+```sh
+helm install projectriff/riff --name riff
+```
+
+Verify the riff install. 
+
+```sh
+riff doctor
+```
 
 ```
-NAMESPACE          NAME                                            READY   STATUS      RESTARTS   AGE
-docker             compose-7cf768cb84-nhl49                        1/1     Running     0          4m49s
-docker             compose-api-579965d67f-j7nzj                    1/1     Running     0          4m49s
-istio-system       cluster-local-gateway-547467ccf6-mpjh4          1/1     Running     0          2m24s
-istio-system       istio-citadel-7d64db8bcf-hflr5                  1/1     Running     0          2m25s
-istio-system       istio-cleanup-secrets-6s6vj                     0/1     Completed   0          2m35s
-istio-system       istio-egressgateway-6ddf4c8bd6-h8v24            1/1     Running     0          2m25s
-istio-system       istio-galley-7dd996474-54h46                    1/1     Running     0          2m25s
-istio-system       istio-ingressgateway-84b89d647f-dz929           1/1     Running     0          2m25s
-istio-system       istio-pilot-54b76645df-qpmr5                    2/2     Running     0          2m10s
-istio-system       istio-policy-5c4d9ff96b-djrjn                   2/2     Running     0          2m25s
-istio-system       istio-sidecar-injector-6977b5cf5b-9b8qm         1/1     Running     0          2m25s
-istio-system       istio-statsd-prom-bridge-b44b96d7b-vlbk2        1/1     Running     0          2m25s
-istio-system       istio-telemetry-7676df547f-g578v                2/2     Running     0          2m25s
-knative-build      build-controller-7b8987d675-7pqrd               1/1     Running     0          99s
-knative-build      build-webhook-74795c8696-mstpv                  1/1     Running     0          99s
-knative-eventing   eventing-controller-864657d8d4-bvzl2            1/1     Running     0          94s
-knative-eventing   in-memory-channel-controller-f794cc9d8-hkb4m    1/1     Running     0          92s
-knative-eventing   in-memory-channel-dispatcher-8595c7f8d7-4s7cx   2/2     Running     2          92s
-knative-eventing   webhook-5d76776d55-p95tf                        1/1     Running     0          94s
-knative-serving    activator-bf6bffbc5-ntcv2                       2/2     Running     1          97s
-knative-serving    autoscaler-86dfc64d87-jdhm9                     2/2     Running     1          97s
-knative-serving    controller-b9c5d7fb8-tsqhq                      1/1     Running     0          96s
-knative-serving    webhook-787c95f8bd-bh757                        1/1     Running     0          96s
-kube-system        coredns-86c58d9df4-bxmr9                        1/1     Running     0          5m53s
-kube-system        coredns-86c58d9df4-wqldh                        1/1     Running     0          5m53s
-kube-system        etcd-docker-desktop                             1/1     Running     0          5m8s
-kube-system        kube-apiserver-docker-desktop                   1/1     Running     0          4m49s
-kube-system        kube-controller-manager-docker-desktop          1/1     Running     0          5m
-kube-system        kube-proxy-7n5v8                                1/1     Running     0          5m53s
-kube-system        kube-scheduler-docker-desktop                   1/1     Running     0          4m54s
+NAMESPACE     STATUS
+riff-system   ok
+
+RESOURCE                              READ      WRITE
+configmaps                            allowed   allowed
+secrets                               allowed   allowed
+pods                                  allowed   n/a
+pods/log                              allowed   n/a
+applications.build.projectriff.io     allowed   allowed
+containers.build.projectriff.io       allowed   allowed
+functions.build.projectriff.io        allowed   allowed
+deployers.core.projectriff.io         allowed   allowed
+processors.streaming.projectriff.io   allowed   allowed
+streams.streaming.projectriff.io      allowed   allowed
+adapters.knative.projectriff.io       allowed   allowed
+deployers.knative.projectriff.io      allowed   allowed
 ```
 
 ## initialize the namespace and provide credentials for pushing images to DockerHub
