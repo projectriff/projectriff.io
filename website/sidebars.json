@@ -1,0 +1,191 @@
+{
+  "docs/0-4": {
+    "Getting Started v0.4": [
+      {
+        "type": "subcategory",
+        "label": "Install",
+        "ids": [
+          "0-4/getting-started",
+          "0-4/getting-started/gke",
+          "0-4/getting-started/minikube",
+          "0-4/getting-started/docker-for-mac",
+          "0-4/getting-started/docker-for-windows"
+        ]
+      }
+    ],
+    "CLI": [
+      {
+        "type": "subcategory",
+        "label": "CLI Usage",
+        "ids": [
+          "0-4/cli/riff",
+          "0-4/cli/riff-version",
+          "0-4/cli/riff-doctor"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Credentials",
+        "ids": [
+          "riff-credential",
+          "riff-credential-apply",
+          "riff-credential-delete",
+          "riff-credential-list"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Functions",
+        "ids": [
+          "0-4/cli/riff-function",
+          "0-4/cli/riff-function-create",
+          "0-4/cli/riff-function-delete",
+          "0-4/cli/riff-function-list",
+          "0-4/cli/riff-function-status",
+          "0-4/cli/riff-function-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Applications",
+        "ids": [
+          "0-4/cli/riff-application",
+          "0-4/cli/riff-application-create",
+          "0-4/cli/riff-application-delete",
+          "0-4/cli/riff-application-list",
+          "0-4/cli/riff-application-status",
+          "0-4/cli/riff-application-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Containers",
+        "ids": [
+          "0-4/cli/riff-container",
+          "0-4/cli/riff-container-create",
+          "0-4/cli/riff-container-delete",
+          "0-4/cli/riff-container-list",
+          "0-4/cli/riff-container-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Core Runtime",
+        "ids": [
+          "0-4/cli/riff-core",
+          "0-4/cli/riff-core-deployer",
+          "0-4/cli/riff-core-deployer-create",
+          "0-4/cli/riff-core-deployer-delete",
+          "0-4/cli/riff-core-deployer-list",
+          "0-4/cli/riff-core-deployer-status",
+          "0-4/cli/riff-core-deployer-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Knative Runtime",
+        "ids": [
+          "0-4/cli/riff-knative",
+          "0-4/cli/riff-knative-adapter",
+          "0-4/cli/riff-knative-adapter-create",
+          "0-4/cli/riff-knative-adapter-delete",
+          "0-4/cli/riff-knative-adapter-list",
+          "0-4/cli/riff-knative-adapter-status",
+          "0-4/cli/riff-knative-deployer",
+          "0-4/cli/riff-knative-deployer-create",
+          "0-4/cli/riff-knative-deployer-delete",
+          "0-4/cli/riff-knative-deployer-list",
+          "0-4/cli/riff-knative-deployer-status",
+          "0-4/cli/riff-knative-deployer-tail"
+        ]
+      }
+    ]
+  },
+  "docs/0-3": {
+    "Getting Started v0.3": [
+      {
+        "type": "subcategory",
+        "label": "Install",
+        "ids": [
+          "0-3/getting-started",
+          "0-3/getting-started/gke",
+          "0-3/getting-started/minikube",
+          "0-3/getting-started/docker-for-mac",
+          "0-3/getting-started/docker-for-windows"
+        ]
+      }
+    ],
+    "CLI": [
+      {
+        "type": "subcategory",
+        "label": "CLI Usage",
+        "ids": [
+          "0-3/cli/riff",
+          "0-3/cli/riff-version",
+          "0-3/cli/riff-completion"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "System",
+        "ids": [
+          "0-3/cli/riff-system",
+          "0-3/cli/riff-system-install",
+          "0-3/cli/riff-system-uninstall"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Namespace",
+        "ids": [
+          "0-3/cli/riff-namespace",
+          "0-3/cli/riff-namespace-cleanup",
+          "0-3/cli/riff-namespace-init"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Functions",
+        "ids": [
+          "0-3/cli/riff-function",
+          "0-3/cli/riff-function-build",
+          "0-3/cli/riff-function-create",
+          "0-3/cli/riff-function-update"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Services",
+        "ids": [
+          "0-3/cli/riff-service",
+          "0-3/cli/riff-service-create",
+          "0-3/cli/riff-service-delete",
+          "0-3/cli/riff-service-invoke",
+          "0-3/cli/riff-service-list",
+          "0-3/cli/riff-service-status",
+          "0-3/cli/riff-service-update"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Subscriptions",
+        "ids": [
+          "0-3/cli/riff-subscription",
+          "0-3/cli/riff-subscription-create",
+          "0-3/cli/riff-subscription-delete",
+          "0-3/cli/riff-subscription-list"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Channels",
+        "ids": [
+          "0-3/cli/riff-channel",
+          "0-3/cli/riff-channel-create",
+          "0-3/cli/riff-channel-delete",
+          "0-3/cli/riff-channel-list"
+        ]
+      }
+    ]
+  }
+}

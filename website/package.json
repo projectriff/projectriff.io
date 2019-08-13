@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "docusaurus-start",
+    "build": "docusaurus-build"
+  },
+  "dependencies": {
+    "docusaurus": "^1.12.0"
+  }
+}
