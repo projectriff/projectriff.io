@@ -21,20 +21,16 @@ The following will help you get started running a riff function with Knative on 
 
 ## TL;DR
 
-1. install docker, kubectl, and minikube
-2. install the latest riff CLI
-3. create a minikube cluster for Knative
-4. install Knative using the riff CLI
-5. create a function
-6. invoke the function
-
-### install docker
-
-Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
+1. install kubectl, and minikube
+1. install the latest riff CLI
+1. create a minikube cluster for Knative
+1. install Knative using the riff CLI
+1. create a function
+1. invoke the function
 
 ### install kubectl
 
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. If you already have the Google Cloud Platform SDK, use: `gcloud components install kubectl`.
+[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
 ### install minikube
 
