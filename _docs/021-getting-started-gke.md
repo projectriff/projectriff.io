@@ -247,12 +247,12 @@ gcloud iam service-accounts keys create \
   gcr-storage-admin.json
 ```
 
-### initialize the namespace
+### apply build credentials
 
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This creates a serviceaccount that uses the secret saved above, installs a buildtemplate and labels the namespace for automatic Istio sidecar injection.
+Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag).
 
 ```sh
-riff namespace init default --gcr gcr-storage-admin.json
+riff credential apply my-creds --gcr gcr-storage-admin.json
 ```
 
 ## create a function

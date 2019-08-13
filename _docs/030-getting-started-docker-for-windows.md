@@ -156,12 +156,16 @@ adapters.knative.projectriff.io       allowed   allowed
 deployers.knative.projectriff.io      allowed   allowed
 ```
 
-## initialize the namespace and provide credentials for pushing images to DockerHub
+### apply build credentials
 
-Use the riff CLI in Windows PowerShell to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.
+Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag). Replace the ??? with your docker username.
 
-```powershell
-riff namespace init default --docker-hub ???
+```sh
+DOCKER_ID=???
+```
+
+```sh
+riff credential apply my-creds --docker-hub $DOCKER_ID
 ```
 
 You will be prompted to provide the password.
