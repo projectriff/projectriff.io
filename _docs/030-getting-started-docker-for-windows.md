@@ -193,69 +193,38 @@ NAME     LATEST IMAGE                                                           
 square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
-## invoke the function
-```powershell
-riff service invoke square --json -- -w '\n' -d 8
+## create a deployer
+
+Deployers take a built function and deploy it to a riff runtime. There are two runtimes: core and knative. The core runtime is always available, while the knatve runtime is only available on clusters with Istio and Knative installed.
+
+
+### create a core deployer
+
+```sh
+riff core deployer create square --function-ref square --tail
 ```
 
-#### result
-```
-curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
-64
-```
+After the deployer is created, you can get the service by listing deployers.
 
-## create a function from code in a local directory
-
-You can use riff to build functions from source in a local directory, instead of first committing the code to a repo on GitHub.
-
-For this to work with Docker Hub from Windows, a small workaround is required to support the multiple ways the Docker Hub registry can be referenced.
-
-After being prompted for you docker credentials you should see 2 entries for docker.io:
-
-```powershell
-$dockerid = Read-Host "Please enter your Docker ID: "
-$password = Read-Host -assecurestring "Please enter your password: "
-echo $('{"ServerURL": "https://index.docker.io", "Username": "' +  $dockerid + '", "Secret": "' + [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)) + '"}') | docker-credential-wincred store
-docker-credential-wincred list
+```sh
+riff core deployer list
 ```
 
-#### result
 ```
-{"https://index.docker.io":"YOUR_USERNAME","https://index.docker.io/v1/":"YOUR_USERNAME"}
-```
-
-### create the function
-
-Using PowerShell in a new directory with a single file called `square.js`
-
-#### square.js
-```js
-module.exports = (x) => `the square of ${x} is ${x**2}`
+NAME     TYPE       REF      SERVICE           STATUS   AGE
+square   function   square   square-deployer   Ready    10s
 ```
 
-#### delete the old square function and create a new one
-```powershell
-riff service delete square
 
-riff function create square `
-  --local-path . `
-  --artifact square.js `
-  --verbose
-```
+## delete the function and deployer
 
-#### invoke the function
-```powershell
-riff service invoke square --json -- -w '\n' -d 8
-```
-
-#### result
-```
-curl http://localhost:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
-the square of 8 is 64
+```sh
+riff core deployer delete square
+riff function delete square
 ```
 
 ### Note
-Due to differences between Windows and Linux file permissions, **Command invoker** functions which depend on file permissions will not work when built locally on Windows. We suggest building from a git repository as a workaround.
+Due to differences between Windows and Linux file permissions, local builds are not supported on Windows. We suggest building from a git repository as a workaround.
 
 ## uninstalling and reinstalling
 If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.

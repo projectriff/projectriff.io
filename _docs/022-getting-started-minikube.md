@@ -190,21 +190,32 @@ NAME     LATEST IMAGE                                                           
 square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
-## invoke the function
+## create a deployer
+
+Deployers take a built function and deploy it to a riff runtime. There are two runtimes: core and knative. The core runtime is always available, while the knatve runtime is only available on clusters with Istio and Knative installed.
+
+
+### create a core deployer
 
 ```sh
-riff service invoke square --json -- -w '\n' -d 8
+riff core deployer create square --function-ref square --tail
 ```
 
-#### result
-
-```
-curl http://192.168.64.46:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
-64
-```
-
-## delete the function
+After the deployer is created, you can get the service by listing deployers.
 
 ```sh
-riff service delete square
+riff core deployer list
+```
+
+```
+NAME     TYPE       REF      SERVICE           STATUS   AGE
+square   function   square   square-deployer   Ready    10s
+```
+
+
+## delete the function and deployer
+
+```sh
+riff core deployer delete square
+riff function delete square
 ```
