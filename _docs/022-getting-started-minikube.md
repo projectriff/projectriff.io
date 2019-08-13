@@ -163,35 +163,31 @@ DOCKER_ID=???
 ```
 
 ```sh
-riff credential apply my-creds --docker-hub $DOCKER_ID
+riff credential apply my-creds --docker-hub $DOCKER_ID --set-default-image-prefix
 ```
 
 You will be prompted to provide the password.
 
 ## create a function
 
-This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
+This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your Docker Hub repo.
 
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
   --artifact square.js \
-  --verbose
+  --tail
 ```
 
-If you're still watching pods, you should see something like the following
+After the function is created, you can get the built image by listing functions.
 
 ```sh
-NAMESPACE       NAME                         READY   STATUS      RESTARTS   AGE
-default         square-rqmsf-pod-2cd1ef      0/1     Init:3/7    0          20s
+riff function list
 ```
 
-The 7 "Init" containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.
-
-```sh
-NAMESPACE      NAME                                         READY   STATUS      RESTARTS   AGE
-default        square-5ksdq-deployment-6d875d87bf-64fz4     3/3     Running     0          47s
-default        square-rqmsf-pod-2cd1ef                      0/1     Completed   0          2m30s
+```
+NAME     LATEST IMAGE                                                                                                ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
 ## invoke the function

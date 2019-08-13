@@ -89,7 +89,7 @@ After installing the Helm CLI, we need to initialize the Helm Tiller in our clus
 
 > NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
 
-```sh
+```powershell
 kubectl create serviceaccount tiller -n kube-system
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
 helm init --wait --service-account tiller
@@ -110,7 +110,7 @@ riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 
 Load the projectriff charts
 
-```ah
+```powershell
 helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
 helm repo update
 ```
@@ -120,20 +120,20 @@ Knative is installed.
 
 To install riff with Knative and Istio:
 
-```sh
+```powershell
 helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
 helm install projectriff/riff --name riff --set knative.enabled=true
 ```
 
 Install riff without Knative or Istio:
 
-```sh
+```powershell
 helm install projectriff/riff --name riff
 ```
 
 Verify the riff install. 
 
-```sh
+```powershell
 riff doctor
 ```
 
@@ -160,12 +160,12 @@ deployers.knative.projectriff.io      allowed   allowed
 
 Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag). Replace the ??? with your docker username.
 
-```sh
+```powershell
 DOCKER_ID=???
 ```
 
-```sh
-riff credential apply my-creds --docker-hub $DOCKER_ID
+```powershell
+riff credential apply my-creds --docker-hub $DOCKER_ID --set-default-image-prefix
 ```
 
 You will be prompted to provide the password.
@@ -174,11 +174,23 @@ You will be prompted to provide the password.
 
 This riff command (formatted for PowerShell) will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
 
+
 ```powershell
 riff function create square `
-  --git-repo https://github.com/projectriff-samples/node-square `
+  --git-repo https://github.com/projectriff-samples/node-square  `
   --artifact square.js `
-  --verbose
+  --tail
+```
+
+After the function is created, you can get the built image by listing functions.
+
+```powershell
+riff function list
+```
+
+```
+NAME     LATEST IMAGE                                                                                                ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
 ## invoke the function

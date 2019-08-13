@@ -252,33 +252,29 @@ gcloud iam service-accounts keys create \
 Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag).
 
 ```sh
-riff credential apply my-creds --gcr gcr-storage-admin.json
+riff credential apply my-creds --gcr gcr-storage-admin.json --set-default-image-prefix
 ```
 
 ## create a function
 
-This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR.
+This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR. The function resource represents a build plan that will report the latest built image.
 
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square \
   --artifact square.js \
-  --verbose
+  --tail
 ```
 
-If you're still watching pods, you should see something like the following
+After the function is created, you can get the built image by listing functions.
+
+```sh
+riff function list
+```
 
 ```
-NAMESPACE    NAME                  READY     STATUS      RESTARTS   AGE
-default      square-00001-jk9vj    0/1       Init:0/4    0          24s
-```
-
-The 4 "Init" containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.
-
-```
-NAMESPACE   NAME                                       READY     STATUS      RESTARTS   AGE
-default     square-00001-deployment-679bffb58c-cpzz8   3/3       Running     0          4m
-default     square-00001-jk9vj                         0/1       Completed   0          5m
+NAME     LATEST IMAGE                                                                                         ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   gcr.io/$GCP_PROJECT/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
 ## invoke the function
