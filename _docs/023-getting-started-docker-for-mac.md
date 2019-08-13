@@ -22,6 +22,7 @@ The following will help you get started running a riff function with Knative on 
 
 1. Install the latest release of Docker for Mac
 1. Configure the cluster and enable Kubernetes
+1. Install kubectl, helm and the riff CLIs
 1. Install Knative using the riff CLI
 1. Create a function
 1. Invoke the function
@@ -32,7 +33,7 @@ Kubernetes and the kubectl CLI are now included with [Docker Community Edition f
 
 ![download Docker for mac](/images/docker-for-mac-download.png)
 
-### configure the VM
+### resize the VM
 
 Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply & Restart.
 ![configure Docker VM](/images/docker-for-mac-vm-config-4gb.png)
@@ -46,16 +47,31 @@ If you previously had Minikube or GKE configured, switch your kubectl context to
 
 ![set context to docker-for-desktop](/images/docker-for-mac-context.png)
 
-## install the riff CLI
+## install the helm CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.3.0 or later.
+[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+
+Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+
+After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
+
+> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
 
 ```sh
-riff version
+kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --wait --service-account tiller
+```
+
+## install the riff CLI
+
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
+
+```sh
+riff --version
 ```
 ```
-Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac

@@ -21,7 +21,7 @@ The following will help you get started running a riff function with Knative on 
 
 ## TL;DR
 
-1. select a Project, install and configure gcloud and kubectl
+1. select a Project, install and configure gcloud, kubectl, and helm
 1. create a GKE cluster for Knative
 1. install the latest riff CLI
 1. install Knative using the riff CLI
@@ -42,7 +42,7 @@ gcloud init
 ```
 
 ### install kubectl
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters like GKE. If you don't already have kubectl on your machine, you can use gcloud to install it.
+[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. If you don't already have kubectl on your machine, you can use gcloud to install it.
 
 ```sh
 gcloud components install kubectl
@@ -53,7 +53,7 @@ gcloud components install kubectl
 Create an environment variable, replacing ??? with your project ID (not to be confused with your project name; use `gcloud projects list` to find your project ID). 
 
 ```sh
-export GCP_PROJECT_ID=???
+GCP_PROJECT_ID=???
 ```
 
 Check your default project.
@@ -134,16 +134,31 @@ kubectl create clusterrolebinding cluster-admin-binding \
 --user=$(gcloud config get-value core/account)
 ```
 
-## install the riff CLI
+## install the helm CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.3.0 or later.
+[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+
+Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+
+After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
+
+> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
 
 ```sh
-riff version
+kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --wait --service-account tiller
+```
+
+## install the riff CLI
+
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
+
+```sh
+riff --version
 ```
 ```
-Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac

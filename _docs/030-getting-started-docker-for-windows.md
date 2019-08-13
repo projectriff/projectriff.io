@@ -22,6 +22,7 @@ The following will help you get started running a riff function with Knative on 
 
 1. Install the latest release of Docker for Windows
 1. Configure the cluster and enable Kubernetes
+1. Install kubectl, helm and the riff CLIs
 1. Install Knative using the riff CLI
 1. Create a function
 1. Invoke the function
@@ -31,7 +32,7 @@ Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows
 
 ![download Docker for mac](/images/docker-for-windows-download.png)
 
-### configure the VM
+### resize the VM
 Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 4GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
 
 ![configure Docker VM](/images/docker-vm-config-windows.png)
@@ -78,15 +79,30 @@ kube-system   kube-proxy-7n5v8                         1/1     Running   0      
 kube-system   kube-scheduler-docker-desktop            1/1     Running   0          102s
 ```
 
+## install the helm CLI
+
+[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+
+Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+
+After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
+
+> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
+
+```sh
+kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --wait --service-account tiller
+```
+
 ### install the riff CLI
-A zip with the riff CLI for Windows is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, validate the version.
+A zip with the riff CLI for Windows is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, check that the riff CLI version is 0.4.0 or later.
 
 ```powershell
-riff version
+riff --version
 ```
 ```
-Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 ```
 
 
