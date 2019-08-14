@@ -16,6 +16,11 @@
         ]
       }
     ],
+    "Function Invokers": [
+      "v0.4/invokers/java",
+      "v0.4/invokers/node",
+      "v0.4/invokers/command"
+    ],
     "CLI Reference": [
       "v0.4/cli/riff",
       "v0.4/cli/riff-doctor",
