@@ -13,16 +13,10 @@
         ]
       }
     ],
-    "CLI": [
-      {
-        "type": "subcategory",
-        "label": "CLI Usage",
-        "ids": [
-          "v0.4/cli/riff",
-          "v0.4/cli/riff-version",
-          "v0.4/cli/riff-doctor"
-        ]
-      },
+    "CLI Reference": [
+      "v0.4/cli/riff",
+      "v0.4/cli/riff-doctor",
+      "v0.4/cli/riff-completion",
       {
         "type": "subcategory",
         "label": "Credentials",
@@ -35,32 +29,20 @@
       },
       {
         "type": "subcategory",
-        "label": "Functions",
+        "label": "Build",
         "ids": [
           "v0.4/cli/riff-function",
           "v0.4/cli/riff-function-create",
           "v0.4/cli/riff-function-delete",
           "v0.4/cli/riff-function-list",
           "v0.4/cli/riff-function-status",
-          "v0.4/cli/riff-function-tail"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "Applications",
-        "ids": [
+          "v0.4/cli/riff-function-tail",
           "v0.4/cli/riff-application",
           "v0.4/cli/riff-application-create",
           "v0.4/cli/riff-application-delete",
           "v0.4/cli/riff-application-list",
           "v0.4/cli/riff-application-status",
-          "v0.4/cli/riff-application-tail"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "Containers",
-        "ids": [
+          "v0.4/cli/riff-application-tail",
           "v0.4/cli/riff-container",
           "v0.4/cli/riff-container-create",
           "v0.4/cli/riff-container-delete",
@@ -115,16 +97,10 @@
         ]
       }
     ],
-    "CLI": [
-      {
-        "type": "subcategory",
-        "label": "CLI Usage",
-        "ids": [
-          "v0.3/cli/riff",
-          "v0.3/cli/riff-version",
-          "v0.3/cli/riff-completion"
-        ]
-      },
+    "CLI Reference": [
+      "v0.3/cli/riff",
+      "v0.3/cli/riff-version",
+      "v0.3/cli/riff-completion",
       {
         "type": "subcategory",
         "label": "System",
