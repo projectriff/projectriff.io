@@ -4,24 +4,22 @@ title: Getting started on Minikube
 sidebar_label: Minikube
 ---
 
+# Getting started on Minikube
+
 The following will help you get started running a riff function with Knative on Minikube.
 
 ## TL;DR
 
-1. install docker, kubectl, and minikube
-2. install the latest riff CLI
-3. create a minikube cluster for Knative
-4. install Knative using the riff CLI
-5. create a function
-6. invoke the function
-
-### install docker
-
-Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with docker. Since minikube includes its own docker daemon, you actually only need the docker CLI to build function containers for riff. This means that if you want to, you can shut down the Docker (server) app, and turn off automatic startup of Docker on login.
+1. install kubectl, helm, and minikube
+1. install the latest riff CLI
+1. create a minikube cluster for Knative
+1. install Knative using the riff CLI
+1. create a function
+1. invoke the function
 
 ### install kubectl
 
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. If you already have the Google Cloud Platform SDK, use: `gcloud components install kubectl`.
+[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
 ### install minikube
 
@@ -56,16 +54,31 @@ Confirm that your kubectl context is pointing to the new cluster
 kubectl config current-context
 ```
 
-## install the riff CLI
+## install the helm CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.3.0 or later.
+[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+
+Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+
+After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
+
+> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
 
 ```sh
-riff version
+kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --wait --service-account tiller
+```
+
+## install the riff CLI
+
+The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
+
+```sh
+riff --version
 ```
 ```
-Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -80,105 +93,118 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install Knative using the riff CLI
+## install riff using Helm
 
-Install Knative, watching the pods until everything is running (this could take a couple of minutes). The `--node-port` option replaces LoadBalancer type services with NodePort.
+Load the projectriff charts
 
-```sh
-riff system install --node-port
+```ah
+helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+helm repo update
 ```
 
-You should see pods running in namespaces istio-system, knative-build, knative-serving, and knative-eventing as well as kube-system when the system is fully operational. 
+riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
+Knative is installed.
+
+To install riff with Knative and Istio:
 
 ```sh
-NAMESPACE          NAME                                            READY   STATUS      RESTARTS   AGE
-istio-system       cluster-local-gateway-547467ccf6-xbh9m          1/1     Running     0          3m34s
-istio-system       istio-citadel-7d64db8bcf-ljd5r                  1/1     Running     0          3m35s
-istio-system       istio-cleanup-secrets-pw842                     0/1     Completed   0          3m36s
-istio-system       istio-egressgateway-6ddf4c8bd6-k7bjr            1/1     Running     0          3m35s
-istio-system       istio-galley-7dd996474-467xc                    1/1     Running     0          3m35s
-istio-system       istio-ingressgateway-84b89d647f-76z5g           1/1     Running     0          3m35s
-istio-system       istio-pilot-54b76645df-xdszt                    2/2     Running     0          3m21s
-istio-system       istio-policy-5c4d9ff96b-htd5h                   2/2     Running     0          3m35s
-istio-system       istio-sidecar-injector-6977b5cf5b-fh7mr         1/1     Running     0          3m35s
-istio-system       istio-statsd-prom-bridge-b44b96d7b-htrgk        1/1     Running     0          3m35s
-istio-system       istio-telemetry-7676df547f-b4vdw                2/2     Running     0          3m35s
-knative-build      build-controller-7b8987d675-8vph5               1/1     Running     0          59s
-knative-build      build-webhook-74795c8696-xwwld                  1/1     Running     0          59s
-knative-eventing   eventing-controller-864657d8d4-hj7xz            1/1     Running     0          57s
-knative-eventing   in-memory-channel-controller-f794cc9d8-nb59s    1/1     Running     0          56s
-knative-eventing   in-memory-channel-dispatcher-8595c7f8d7-qzn9c   2/2     Running     1          56s
-knative-eventing   webhook-5d76776d55-jb56d                        1/1     Running     0          57s
-knative-serving    activator-7c8b59d78-2jrpk                       2/2     Running     1          58s
-knative-serving    autoscaler-666c9bfcc6-vwcrq                     2/2     Running     1          58s
-knative-serving    controller-799cd5c6dc-sbpzr                     1/1     Running     0          58s
-knative-serving    webhook-5b66fdf6b9-kqvjh                        1/1     Running     0          58s
-kube-system        coredns-86c58d9df4-dtf4v                        1/1     Running     0          9m17s
-kube-system        coredns-86c58d9df4-hpzlx                        1/1     Running     0          9m17s
-kube-system        etcd-minikube                                   1/1     Running     0          8m30s
-kube-system        kube-addon-manager-minikube                     1/1     Running     0          8m15s
-kube-system        kube-apiserver-minikube                         1/1     Running     0          8m20s
-kube-system        kube-controller-manager-minikube                1/1     Running     0          8m29s
-kube-system        kube-proxy-fcbqc                                1/1     Running     0          9m17s
-kube-system        kube-scheduler-minikube                         1/1     Running     0          8m9s
-kube-system        storage-provisioner                             1/1     Running     0          9m16s
+helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
+helm install projectriff/riff --name riff --set knative.enabled=true
 ```
 
-### initialize the namespace and provide credentials for pushing images to DockerHub
-
-Use the riff CLI to initialize your namespace (if you plan on using a namespace other than `default` then substitute the name you want to use). This will create a serviceaccount and a secret with the provided credentials and install a buildtemplate. Replace the ??? with your docker username.
+Install riff without Knative or Istio:
 
 ```sh
-export DOCKER_ID=???
+helm install projectriff/riff --name riff
+```
+
+Verify the riff install. 
+
+```sh
+riff doctor
+```
+
+```
+NAMESPACE     STATUS
+riff-system   ok
+
+RESOURCE                              READ      WRITE
+configmaps                            allowed   allowed
+secrets                               allowed   allowed
+pods                                  allowed   n/a
+pods/log                              allowed   n/a
+applications.build.projectriff.io     allowed   allowed
+containers.build.projectriff.io       allowed   allowed
+functions.build.projectriff.io        allowed   allowed
+deployers.core.projectriff.io         allowed   allowed
+processors.streaming.projectriff.io   allowed   allowed
+streams.streaming.projectriff.io      allowed   allowed
+adapters.knative.projectriff.io       allowed   allowed
+deployers.knative.projectriff.io      allowed   allowed
+```
+
+### apply build credentials
+
+Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag). Replace the ??? with your docker username.
+
+```sh
+DOCKER_ID=???
 ```
 
 ```sh
-riff namespace init default --docker-hub $DOCKER_ID
+riff credential apply my-creds --docker-hub $DOCKER_ID --set-default-image-prefix
 ```
 
 You will be prompted to provide the password.
 
 ## create a function
 
-This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
+This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your Docker Hub repo.
 
 ```sh
 riff function create square \
   --git-repo https://github.com/projectriff-samples/node-square  \
   --artifact square.js \
-  --verbose
+  --tail
 ```
 
-If you're still watching pods, you should see something like the following
+After the function is created, you can get the built image by listing functions.
 
 ```sh
-NAMESPACE       NAME                         READY   STATUS      RESTARTS   AGE
-default         square-rqmsf-pod-2cd1ef      0/1     Init:3/7    0          20s
+riff function list
 ```
 
-The 7 "Init" containers may take a while to complete the first time a function is built, but eventually that pod should show a status of completed, and a new square deployment pod should be running 3/3 containers.
+```
+NAME     LATEST IMAGE                                                                                                ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
+```
+
+## create a deployer
+
+Deployers take a built function and deploy it to a riff runtime. There are two runtimes: core and knative. The core runtime is always available, while the knatve runtime is only available on clusters with Istio and Knative installed.
+
+
+### create a core deployer
 
 ```sh
-NAMESPACE      NAME                                         READY   STATUS      RESTARTS   AGE
-default        square-5ksdq-deployment-6d875d87bf-64fz4     3/3     Running     0          47s
-default        square-rqmsf-pod-2cd1ef                      0/1     Completed   0          2m30s
+riff core deployer create square --function-ref square --tail
 ```
 
-## invoke the function
+After the deployer is created, you can get the service by listing deployers.
 
 ```sh
-riff service invoke square --json -- -w '\n' -d 8
+riff core deployer list
 ```
 
-#### result
-
 ```
-curl http://192.168.64.46:31380/ -H 'Host: square.default.example.com' -H 'Content-Type: application/json' -w '\n' -d 8
-64
+NAME     TYPE       REF      SERVICE           STATUS   AGE
+square   function   square   square-deployer   Ready    10s
 ```
 
-## delete the function
+
+## delete the function and deployer
 
 ```sh
-riff service delete square
+riff core deployer delete square
+riff function delete square
 ```
