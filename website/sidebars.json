@@ -1,6 +1,6 @@
 {
   "docs/v0.4": {
-    "Getting Started v0.4": [
+    "Getting Started": [
       {
         "type": "subcategory",
         "label": "Install",
@@ -102,7 +102,7 @@
     ]
   },
   "docs/v0.3": {
-    "Getting Started v0.3": [
+    "Getting Started": [
       {
         "type": "subcategory",
         "label": "Install",
