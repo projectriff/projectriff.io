@@ -1,5 +1,8 @@
 {
   "docs/v0.4": {
+    "Version (v0.4.x)": [
+      "v0.3"
+    ],
     "Getting Started": [
       {
         "type": "subcategory",
@@ -84,6 +87,9 @@
     ]
   },
   "docs/v0.3": {
+    "Version (v0.3.x)": [
+      "v0.4"
+    ],
     "Getting Started": [
       {
         "type": "subcategory",
