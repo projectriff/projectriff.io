@@ -14,7 +14,7 @@ function Docs(props) {
       <Container className="mainContainer versionsContainer">
         <div className="post">
           <header className="postHeader">
-            <h1>Docs Versions</h1>
+            <h1>Versions</h1>
           </header>
           <ul>
             {siteConfig.versions.map(

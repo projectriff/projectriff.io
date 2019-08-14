@@ -22,12 +22,12 @@
       "v0.4/cli/riff-completion",
       {
         "type": "subcategory",
-        "label": "Credentials",
+        "label": "Credential",
         "ids": [
-          "riff-credential",
-          "riff-credential-apply",
-          "riff-credential-delete",
-          "riff-credential-list"
+          "v0.4/cli/riff-credential",
+          "v0.4/cli/riff-credential-apply",
+          "v0.4/cli/riff-credential-delete",
+          "v0.4/cli/riff-credential-list"
         ]
       },
       {
