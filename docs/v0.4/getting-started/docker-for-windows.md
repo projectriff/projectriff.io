@@ -53,7 +53,7 @@ function watchpods { while(1){ kubectl get pod --all-namespaces; start-sleep -se
 
 Start by watching all namespaces to confirm that Kubernetes is running.
 
-```
+```powershell
 watchpods
 ```
 ```

@@ -43,6 +43,9 @@ const siteConfig = {
   // theme for syntax highlighting
   highlight: {
     theme: 'default',
+    hljs: function(hljs) {
+      hljs.configure({languages: []});
+    },
   },
 
   // on-page navigation
