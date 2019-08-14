@@ -28,6 +28,7 @@ const siteConfig = {
   headerLinks: [
     {doc: 'v0.4/getting-started', label: 'Docs'},
     {blog: true, label: 'Blog'},
+    {href: 'https://github.com/projectriff', label: 'GitHub', external: true},
   ],
 
   headerIcon: 'img/riff-white.svg',
