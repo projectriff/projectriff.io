@@ -56,7 +56,7 @@ const siteConfig = {
   twitterImage: 'img/riff.svg',
   
   // show all blog posts in sidebar
-  blogSidebarCount: 'ALL',
+  blogSidebarCount: '5',
 
 };
 
