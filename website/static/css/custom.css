@@ -59,3 +59,16 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
   width: 100%;
   height: 100%;
 }
+
+/* replace 'riff is for function' header text with 'is for function' since the logo is the word riff */
+.headerTitleWithLogo {
+	visibility: hidden;
+	position: relative;
+}
+.headerTitleWithLogo:after {
+	visibility: visible;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "is for functions";
+}
