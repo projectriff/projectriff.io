@@ -2,7 +2,7 @@
 
 This repo contains configuration and markdown content for [projectriff.io](projectriff.io).
 
-The site is built with [Docusaurus](https://docusaurus.io/), but does not use the built-in Docusuarus versioning. A complete set of markdown content is maintained in a directory for each published version, e.g the `v0.3.x` documentation is maintained in `docs/0-3`.
+The site is built with [Docusaurus](https://docusaurus.io/), but does not use the built-in Docusuarus versioning. A complete set of markdown content is maintained in a directory for each published version, e.g the `v0.3.x` documentation is maintained in `docs/v0.3`.
 
 Generated HTML is published online using Netlify. The build configuration for Netlify is in `netlify.toml`.
 

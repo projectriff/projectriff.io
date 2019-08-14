@@ -21,13 +21,13 @@ const siteConfig = {
 
   // used only in pages/en/versions.js
   versions: [
-    { name:'v0.4.x (Next)', url:'docs/0-4/getting-started' },
-    { name:'v0.3.x (Stable)', url:'docs/0-3/getting-started' }
+    { name:'v0.4.x (Next)', url:'docs/v0.4/getting-started' },
+    { name:'v0.3.x (Stable)', url:'docs/v0.3/getting-started' }
   ],
 
   headerLinks: [
-    {doc: '0-3/getting-started', label: 'v0.3.x (Stable)'},
-    {doc: '0-4/getting-started', label: 'v0.4.x (Next)'},
+    {doc: 'v0.3/getting-started', label: 'v0.3.x (Stable)'},
+    {doc: 'v0.4/getting-started', label: 'v0.4.x (Next)'},
     {blog: true, label: 'Blog'},
   ],
 
