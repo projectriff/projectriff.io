@@ -5,7 +5,7 @@ short_title: on Docker for Mac
 permalink: /docs/getting-started/docker-for-mac/
 excerpt: "How to run Knative using **riff** on Docker Community Edition for Mac"
 header:
-  overlay_image: /images/docker-for-mac-edge.png
+  overlay_image: /images/docker-for-mac.png
   overlay_filter: 0.4
   overlay_color: "#555"
 redirect_from:
@@ -20,31 +20,31 @@ The following will help you get started running a riff function with Knative on 
 
 ### TL;DR
 
-1. Install the latest release of Docker for Mac (Edge)
-2. Configure the cluster and enable Kubernetes
-3. Install Knative using the riff CLI
-4. Create a function
-5. Invoke the function
+1. Install the latest release of Docker for Mac
+1. Configure the cluster and enable Kubernetes
+1. Install Knative using the riff CLI
+1. Create a function
+1. Invoke the function
 
 ### install Docker
 
-Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac). We recommend downloading the latest Edge version which comes with a more recent release of Kubernetes.
+Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac).
 
-![download Docker edge for mac](/images/docker-for-mac-download-edge.png)
+![download Docker for mac](/images/docker-for-mac-download.png)
 
 ### configure the VM
 
-Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply & Restart.
-![configure Docker VM](/images/docker-for-mac-vm-config-edge-4gb.png)
+Once Docker is installed and running, use the Preferences feature in the Docker menu to open Resources / Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply & Restart.
+![configure Docker VM](/images/docker-for-mac-vm-config-4gb.png)
 
 ### enable Kubernetes
 
 Now enable Kubernetes, and wait for the cluster to start.
-![enable Kubernetes](/images/docker-for-mac-kubernetes-edge.png)
+![enable Kubernetes](/images/docker-for-mac-kubernetes.png)
 
-If you previously had minikube or GKE configured, switch your kubectl context to "docker-desktop".
+If you previously had Minikube or GKE configured, switch your kubectl context to "docker-desktop".
 
-![set context to docker-for-desktop](/images/docker-for-mac-context-edge.png)
+![set context to docker-for-desktop](/images/docker-for-mac-context.png)
 
 ## install the riff CLI
 
@@ -55,7 +55,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+  riff cli: 0.3.1 (1ff6c6d7a708e52eb6843e89f9a618fcbfebbb9f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -174,7 +174,7 @@ riff service delete square
 ```
 
 ## uninstalling and reinstalling
-If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.
+If you need to upgrade riff, we recommend resetting the Kubernetes cluster first from the Troubleshoot menu, and then reinstalling.
 
-![reset Kubernetes using Preferences/Reset](/images/docker-for-mac-reset-kubernetes-edge.png)
+![reset Kubernetes using Preferences/Reset](/images/docker-for-mac-reset-kubernetes.png)
 

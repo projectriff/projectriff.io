@@ -5,7 +5,7 @@ short_title: on Docker for Windows
 permalink: /docs/getting-started/docker-for-windows/
 excerpt: "How to run Knative using **riff** on Docker Community Edition for Windows"
 header:
-  overlay_image: /images/docker-for-windows-edge.png
+  overlay_image: /images/docker-for-windows.png
   overlay_filter: 0.4
   overlay_color: "#555"
 redirect_from:
@@ -20,16 +20,16 @@ The following will help you get started running a riff function with Knative on 
 
 ### TL;DR
 
-1. Install the latest release of Docker for Windows (Edge)
-2. Configure the cluster and enable Kubernetes
-3. Install Knative using the riff CLI
-4. Create a function
-5. Invoke the function
+1. Install the latest release of Docker for Windows
+1. Configure the cluster and enable Kubernetes
+1. Install Knative using the riff CLI
+1. Create a function
+1. Invoke the function
 
-### install docker edge
-Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro. We recommend downloading the latest Edge version which comes with a more recent release of Kubernetes.
+### install docker
+Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
 
-![download Docker edge for mac](/images/docker-edge-for-windows-download.png)
+![download Docker for mac](/images/docker-for-windows-download.png)
 
 ### configure the VM
 Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 4GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
@@ -40,12 +40,12 @@ Once Docker is installed and running, open Settings by right-clicking the Docker
 
 In the Shared Drives settings, enable sharing for the C drive, and enter your Windows password when prompted. This will be used for persistent volume claims to provide cache storage during function builds.
 
-![configure Docker VM](/images/docker-edge-windows-shared-drives.png)
+![configure Docker VM](/images/docker-windows-shared-drives.png)
 
 ### enable Kubernetes
 Enable Kubernetes in the Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
 
-![enable Kubernetes](/images/docker-edge-kubernetes-windows.png)
+![enable Kubernetes](/images/docker-kubernetes-windows.png)
 
 If you previously had minikube or GKE configured, switch your kubectl context to "docker-desktop" using a PowerShell or command window.
 
@@ -86,7 +86,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+  riff cli: 0.3.1 (1ff6c6d7a708e52eb6843e89f9a618fcbfebbb9f)
 ```
 
 
@@ -222,4 +222,4 @@ Due to differences between Windows and Linux file permissions, **Command invoker
 ## uninstalling and reinstalling
 If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.
 
-![reset Kubernetes](/images/docker-edge-kubernetes-reset-windows.png)
+![reset Kubernetes](/images/docker-kubernetes-reset-windows.png)
