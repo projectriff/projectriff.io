@@ -21,9 +21,9 @@ The following will help you get started running a riff function with Knative on 
 
 ## TL;DR
 
-1. install kubectl, and minikube
+1. install kubectl, Minikube, and Docker
 1. install the latest riff CLI
-1. create a minikube cluster for Knative
+1. create a Minikube cluster for Knative
 1. install Knative using the riff CLI
 1. create a function
 1. invoke the function
@@ -32,7 +32,7 @@ The following will help you get started running a riff function with Knative on 
 
 [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
-### install minikube
+### install Minikube
 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
@@ -40,20 +40,23 @@ For macOS we recommend using Hyperkit as the vm driver. To install Hyperkit, fir
 
 ```sh
 curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
-&& sudo install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
+&& sudo install -o root -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
 ```
 
 For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver) driver.
 
 For additional details see the minikube [driver installation](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#hyperkit-driver) docs.
 
+### install Docker
+
+Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with Docker. Since Minikube includes its own Docker daemon, you actually only need the `docker` CLI to run `docker login` for `--local-path` function builds. This means that if you want to, you can shut down the Docker Desktop app and depend on the Minikube Docker daemon by running `eval $(minikube docker-env)`.
+
 ## create a Minikube cluster
 
 ```sh
 minikube start --memory=4096 --cpus=4 \
---kubernetes-version=v1.14.0 \
+--kubernetes-version=v1.14.1 \
 --vm-driver=hyperkit \
---bootstrapper=kubeadm \
 --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
 ```
 
@@ -74,7 +77,7 @@ riff version
 ```
 ```
 Version
-  riff cli: 0.3.0 (4e474f57a463d4d2c1159af64d562532fcb3ac1b)
+  riff cli: 0.3.1 (1ff6c6d7a708e52eb6843e89f9a618fcbfebbb9f)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
