@@ -174,7 +174,7 @@ riff service delete square
 ```
 
 ## uninstalling and reinstalling
-If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.
+If you need to upgrade riff, we recommend resetting the Kubernetes cluster first from the Troubleshoot menu, and then reinstalling.
 
 ![reset Kubernetes using Preferences/Reset](/images/docker-for-mac-reset-kubernetes.png)
 
