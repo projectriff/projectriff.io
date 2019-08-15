@@ -4,8 +4,6 @@ title: Getting started on Docker for Mac
 sidebar_label: Docker for Mac
 ---
 
-# Getting started on Docker for Mac
-
 The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
 
 ### TL;DR

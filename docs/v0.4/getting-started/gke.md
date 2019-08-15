@@ -4,8 +4,6 @@ title: Getting started on GKE
 sidebar_label: GKE
 ---
 
-# Getting started on GKE
-
 The following will help you get started running a riff function with Knative on GKE.
 
 ## TL;DR

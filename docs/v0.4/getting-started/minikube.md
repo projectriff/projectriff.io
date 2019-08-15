@@ -4,8 +4,6 @@ title: Getting started on Minikube
 sidebar_label: Minikube
 ---
 
-# Getting started on Minikube
-
 The following will help you get started running a riff function with Knative on Minikube.
 
 ## TL;DR
