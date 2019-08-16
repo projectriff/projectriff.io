@@ -48,13 +48,13 @@ public class UpperApplication {
 
 You can build your function either from local source or from source committed to a GitHub repository. For local build use:
 
-```bash
+```terminal
 riff function create upper --local-path . --handler upper
 ```
 
 When building from a GitHub repo use something like (replace the `<owner>` placeholder with your account):
 
-```bash
+```terminal
 riff function create upper --git-repo https://github.com/<owner>/upper.git --handler upper
 ```
 
@@ -68,19 +68,19 @@ If you would like to run your Spring Boot based function locally you can include
 
 You can now run your function application locally using:
 
-```bash
+```terminal
 mvn spring-boot:run
 ```
 
 Once the app starts up, open another terminal and invoke the function using `curl`:
 
-```bash
+```terminal
 curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
 If your application contains multiple functions you need to provide the bean name as the path. You could use this to invoke a `lower` function:
 
-```bash
+```terminal
 curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
@@ -107,7 +107,7 @@ public class Hello implements Function<String, String> {
 
 Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
 
-```bash
+```terminal
 riff function create hello --git-repo https://github.com/projectriff-samples/java-hello.git --handler functions.Hello
 ```
 
@@ -117,19 +117,20 @@ The `--handler` option is the fully qualified name of the class that provides th
 
 To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core` for this example:
 
-```bash
+```terminal
 riff core deployer create upper --function-ref upper
 ```
 
 This should create the resources needed for a deploying the function. You can invoke the function using `kubectl port-forward` command to access the service that was created.
 
 In a separate terminal issue:
-```bash
+
+```terminal
 kubectl port-forward svc/upper-deployer 8080:80
 ```
 
 You can now invoke the function using the following `curl` command:
 
-```bash
+```terminal
 curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
