@@ -115,7 +115,7 @@ The `--handler` option is the fully qualified name of the class that provides th
 
 ## Deploying and invoking the function
 
-To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core`for this example:
+To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core` for this example:
 
 ```bash
 riff core deployer create upper --function-ref upper
