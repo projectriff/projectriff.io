@@ -97,7 +97,7 @@ gcloud container clusters create $CLUSTER_NAME \
   --zone=$GCP_ZONE
 ```
 
-For additional details see [Knative Install on Google Kubernetes Engine](https://github.com/knative/docs/blob/master/install/Knative-with-GKE.md).
+For additional details see [Knative Install on Google Kubernetes Engine](https://knative.dev/docs/install/knative-with-gke/).
 
 Confirm that your kubectl context is pointing to the new cluster
 
