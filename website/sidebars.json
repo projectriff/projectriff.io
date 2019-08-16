@@ -16,6 +16,10 @@
         ]
       }
     ],
+    "Runtimes": [
+      "v0.4/runtimes/core",
+      "v0.4/runtimes/knative"
+    ],
     "Function Invokers": [
       "v0.4/invokers/java",
       "v0.4/invokers/node",
