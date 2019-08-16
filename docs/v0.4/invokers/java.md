@@ -121,7 +121,7 @@ To deploy your function you need to select a runtime. The two options currently 
 riff core deployer create upper --function-ref upper
 ```
 
-This should create the resources needed for a deploying the function. You can invoke the function using `kubectl proxy` command to access the service that was created.
+This should create the resources needed for a deploying the function. You can invoke the function using `kubectl port-forward` command to access the service that was created.
 
 In a separate terminal issue:
 ```bash
