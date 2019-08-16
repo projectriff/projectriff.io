@@ -76,7 +76,7 @@ The [riff CLI](https://github.com/projectriff/riff/) is available to download fr
 riff --version
 ```
 ```
-riff version 0.4.0-snapshot (2c4a47d0872283b629ea478916c43d831e75ea1f)
+riff version 0.4.0 (d1b042f4247d8eb01ee0b9e984926028a2844fe8)
 ```
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
