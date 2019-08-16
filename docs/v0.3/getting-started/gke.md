@@ -92,7 +92,7 @@ gcloud container clusters create $CLUSTER_NAME \
   --machine-type=n1-standard-2 \
   --enable-autoscaling --min-nodes=1 --max-nodes=3 \
   --enable-autorepair \
-  --scopes=service-control,service-management,compute-rw,storage-ro,cloud-platform,logging-write,monitoring-write,pubsub,datastore \
+  --scopes=cloud-platform \
   --num-nodes=3 \
   --zone=$GCP_ZONE
 ```
