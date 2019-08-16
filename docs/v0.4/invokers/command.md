@@ -33,35 +33,13 @@ tr [:punct:] ' ' | tr -s ' ' '\n' | tr [:upper:] [:lower:] | sort | uniq -c | so
 
 You can build your function either from local source or from source committed to a GitHub repository. For local build use:
 
-```terminal
+```
 chmod +x wordcount.sh
 riff function create wordcount --artifact wordcount.sh --local-path .
 ```
 
 When building from a GitHub repo use something like (replace the `--git-repo` argument with your own repository URL):
 
-```terminal
+```
 riff function create wordcount --artifact wordcount.sh --git-repo https://github.com/projectriff-samples/command-wordcount
-```
-
-## Deploying and invoking the function
-
-To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core` for this example:
-
-```terminal
-riff core deployer create wordcount --function-ref wordcount
-```
-
-This should create the resources needed for a deploying the function. You can invoke the function using `kubectl port-forward` command to access the service that was created.
-
-In a separate terminal issue:
-
-```terminal
-kubectl port-forward svc/wordcount-deployer 8080:80
-```
-
-You can now invoke the function using the following `curl` command:
-
-```terminal
-curl localhost:8080 -H 'Content-Type: text/plain' -d "The quick brown fox jumps over the lazy dog. What does the fox say?"
 ```
