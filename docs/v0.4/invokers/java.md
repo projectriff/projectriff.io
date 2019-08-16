@@ -55,7 +55,7 @@ riff function create upper --local-path . --handler upper
 When building from a GitHub repo use something like (replace the `<owner>` placeholder with your account):
 
 ```bash
-riff function create upper --git-repo https://github.com/<owner>/upper-boot-gradle.git --handler upper
+riff function create upper --git-repo https://github.com/<owner>/upper.git --handler upper
 ```
 
 The `--handler` option is the name of the `@Bean` that was used for the function. If your application only has a single function bean then you can omit this option.
@@ -64,7 +64,7 @@ The `--handler` option is the name of the `@Bean` that was used for the function
 
 ### Running a Spring Boot based function locally
 
-If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the _Function_ dependency plus either _Spring Web Starter_ or _Spring Reactive Web_. 
+If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the _Function_ dependency plus either _Spring Web Starter_ or _Spring Reactive Web_.
 
 You can now run your function application locally using:
 
@@ -86,7 +86,7 @@ curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
 
 ## Creating a plain Java function
 
-You can create function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
+You can create a function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
 
 When creating plain Java function your function must implement the `java.util.function.Function` interface. Here is the function from the above mentioned sample:
 
@@ -115,20 +115,21 @@ The `--handler` option is the fully qualified name of the class that provides th
 
 ## Deploying and invoking the function
 
-To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `knative`for this example:
+To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core`for this example:
 
 ```bash
-riff knative deployer create upper --function-ref upper
+riff core deployer create upper --function-ref upper
 ```
 
-This should create the resources needed for a Knative app. You can invoke the function using the `istio-ingressgateway` service. Assuming you haven't configured DNS for your function you can use the following command to find the IP address for the `istio-ingressgateway`:
+This should create the resources needed for a deploying the function. You can invoke the function using `kubectl proxy` command to access the service that was created.
 
+In a separate terminal issue:
 ```bash
-ingress_ip=$(kubectl get svc/istio-ingressgateway -n istio-system -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
+kubectl port-forward svc/upper-deployer 8080:80
 ```
 
 You can now invoke the function using the following `curl` command:
 
 ```bash
-curl ${ingress_ip} -H 'Host: upper.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d hello
+curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
