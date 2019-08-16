@@ -1,5 +1,5 @@
 ## projectriff.io website
-[![Netlify Status](https://api.netlify.com/api/v1/badges/19a10200-d02a-45dd-a275-e873334f8624/deploy-status)](https://app.netlify.com/sites/hardcore-darwin-8dc428/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/19a10200-d02a-45dd-a275-e873334f8624/deploy-status)](https://app.netlify.com/sites/projectriff/deploys)
 
 
 This repo contains configuration and markdown content for [projectriff.io](projectriff.io).
