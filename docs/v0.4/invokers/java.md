@@ -18,7 +18,7 @@ Begin by creating a new project using [Spring Initializr](start.spring.io).  You
 
 ### Adding functions
 
-You can now add a `@Bean` providing the function implementation. It can either be added as a separate `@Configuration` source file or for simple functions just add it to the main application file. Here we add the `upper` function to the main `@SpringBootApplication` source file:
+You can now add a `@Bean` providing the function implementation. It can either be added as a separate `@Configuration` source file or for simple functions just add it to the main application file. Here we add the `uppercase` function to the main `@SpringBootApplication` source file:
 
 ```java
 package com.example.upper;
@@ -30,15 +30,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class UpperApplication {
+public class UppercaseApplication {
 
 	@Bean
-	public Function<String, String> upper() {
-		return String::toUpperCase;
+	public Function<String, String> uppercase() {
+		return s -> s.toUpperCase();
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(UpperApplication.class, args);
+		SpringApplication.run(UppercaseApplication.class, args);
 	}
 
 }
@@ -48,14 +48,14 @@ public class UpperApplication {
 
 You can build your function either from local source or from source committed to a GitHub repository. For local build use:
 
-```terminal
-riff function create upper --local-path . --handler upper
+```
+riff function create uppercase --local-path . --handler uppercase
 ```
 
-When building from a GitHub repo use something like (replace the `<owner>` placeholder with your account):
+When building from a GitHub repo use something like (replace the `--git-repo` argument with your own repository URL):
 
-```terminal
-riff function create upper --git-repo https://github.com/<owner>/upper.git --handler upper
+```
+riff function create uppercase --handler uppercase --git-repo https://github.com/projectriff-samples/java-boot-uppercase.git
 ```
 
 The `--handler` option is the name of the `@Bean` that was used for the function. If your application only has a single function bean then you can omit this option.
@@ -68,19 +68,19 @@ If you would like to run your Spring Boot based function locally you can include
 
 You can now run your function application locally using:
 
-```terminal
+```
 mvn spring-boot:run
 ```
 
 Once the app starts up, open another terminal and invoke the function using `curl`:
 
-```terminal
+```
 curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
 If your application contains multiple functions you need to provide the bean name as the path. You could use this to invoke a `lower` function:
 
-```terminal
+```
 curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
@@ -107,30 +107,8 @@ public class Hello implements Function<String, String> {
 
 Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
 
-```terminal
-riff function create hello --git-repo https://github.com/projectriff-samples/java-hello.git --handler functions.Hello
+```
+riff function create hello --handler functions.Hello --git-repo https://github.com/projectriff-samples/java-hello.git
 ```
 
 The `--handler` option is the fully qualified name of the class that provides the function implementation.
-
-## Deploying and invoking the function
-
-To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core` for this example:
-
-```terminal
-riff core deployer create upper --function-ref upper
-```
-
-This should create the resources needed for a deploying the function. You can invoke the function using `kubectl port-forward` command to access the service that was created.
-
-In a separate terminal issue:
-
-```terminal
-kubectl port-forward svc/upper-deployer 8080:80
-```
-
-You can now invoke the function using the following `curl` command:
-
-```terminal
-curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
-```
