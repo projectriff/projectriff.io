@@ -1,33 +1,48 @@
-## projectriff.io
-This site is using Jekyll and Github Pages for hosting, and CloudFlare for HTTPS.
+## projectriff.io website
 
-To make changes, please submit a pull request. Merged changes will automatically trigger a rebuild of the site.
+This repo contains configuration and markdown content for [projectriff.io](projectriff.io).
 
-- Docs live under `_docs`.
-- Blog posts live under `_posts`.
-- Invokers live under `_invokers`.
-- Other pages like the home page live under `_pages`
+The site is built with [Docusaurus](https://docusaurus.io/), but does not use the built-in Docusuarus versioning. A complete set of markdown content is maintained in a directory for each published version, e.g the `v0.3.x` documentation is maintained in `docs/v0.3`.
 
-### to build and preview the site locally
+Generated HTML is published online using Netlify. The build configuration for Netlify is in `netlify.toml`.
 
-- make sure you have ruby v2.3 or better and bundler
+### Getting started
+To bring in dependencies for the first time:
+
 ```sh
-ruby --version
-bundler --version
+cd website
+npm install
 ```
 
-- on MacOS you can use [rbenv](http://rbenv.org/) to manage your ruby versions.
+To preview using a local dev server:
 ```sh
-brew install rbenv
-eval "$(rbenv init -)"  # put this line in your .bash_profile
-rbenv install 2.5.3
-rbenv global 2.5.3
-gem install bundler -N
-rbenv rehash
+npm start
 ```
 
-- after cloning this repo, cd to this directory and run:
-```sh
-bundle install
-bundle exec jekyll serve
+### Creating docs pages
+
+Documentation markdown files live in the `/docs` directory at the same level as this `/website` directory. Each markdown file should include at least the following frontmatter:
+
+```markdown
+---
+id: documentation-url-slug
+title: Documentation Page Title
+---
+
+Content...
+```
+To allow access through the sidebar, docs pages need to be referenced (by their id) in `sidebar.json`.
+
+### Creating blog posts
+
+Blog posts live in the `/website/blog` directory.
+
+Blog post files should follow a naming convention of `YYYY-MM-DD-my-blog-post-title.md`. The lowercase, slugified name following the date will be used for the page url.
+
+```markdown
+---
+title: New Blog Post
+---
+
+Lorem Ipsum...
 ```
