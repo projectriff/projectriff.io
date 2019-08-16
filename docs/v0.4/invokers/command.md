@@ -4,12 +4,64 @@ title: Command Function Invoker
 sidebar_label: Command
 ---
 
-## Command Function Invoker
+Command functions will be invoked using a [Command Function Invoker](https://github.com/projectriff/command-function-invoker) that is provided by riff when you build the function.
 
-<!-- TODO replace the redirect with real content -->
+The *command function invoker* provides a host for functions implemented
+as a single executable command (be it a shell script or a binary).
+It accepts HTTP requests and invokes the command for each request.
 
-[Learn about riff's Command Function Invoker](https://github.com/projectriff/command-function-invoker)
+Communication with the function is done via `stdin` and `stdout`.
+Functions can log by writing to `stderr`.
 
-<script type="text/javascript">
-  window.location.href = 'https://github.com/projectriff/command-function-invoker';
-</script>
+For each invocation, functions are expected to read stdin until the end of the stream (EOF) and provide a result on stdout.
+
+Correct function execution is assumed if the exit code is zero. Any other value indicates an error.
+
+## Creating a simple command function
+
+This example uses the sample [command-wordcount](https://github.com/projectriff-samples/command-wordcount) function from projectriff-samples on GitHub. It consists of a single executable file named wordcount.sh with the following content:
+
+```bash
+#!/bin/bash
+
+tr [:punct:] ' ' | tr -s ' ' '\n' | tr [:upper:] [:lower:] | sort | uniq -c | sort -n
+```
+
+### Building the command function
+
+> NOTE: If you are creating command functions on Windows then you can't set the excute flag on a local file. This means that local-path builds will not work, you need to build the function from a Git repository. Before commiting your function file to a Git repository you should set the excute flag using the following Git command: `git update-index --chmod=+x wordcount.sh`.
+
+You can build your function either from local source or from source committed to a GitHub repository. For local build use:
+
+```terminal
+chmod +x wordcount.sh
+riff function create wordcount --artifact wordcount.sh --local-path .
+```
+
+When building from a GitHub repo use something like (replace the `--git-repo` argument with your own repository URL):
+
+```terminal
+riff function create wordcount --artifact wordcount.sh --git-repo https://github.com/projectriff-samples/command-wordcount
+```
+
+## Deploying and invoking the function
+
+To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `core` for this example:
+
+```terminal
+riff core deployer create wordcount --function-ref wordcount
+```
+
+This should create the resources needed for a deploying the function. You can invoke the function using `kubectl port-forward` command to access the service that was created.
+
+In a separate terminal issue:
+
+```terminal
+kubectl port-forward svc/wordcount-deployer 8080:80
+```
+
+You can now invoke the function using the following `curl` command:
+
+```terminal
+curl localhost:8080 -H 'Content-Type: text/plain' -d "The quick brown fox jumps over the lazy dog. What does the fox say?"
+```
