@@ -6,16 +6,17 @@ sidebar_label: Docker for Mac
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
 
-### TL;DR
+## TL;DR
 
 1. Install the latest release of Docker for Mac
 1. Configure the cluster and enable Kubernetes
-1. Install kubectl, helm and the riff CLIs
-1. Install Knative using the riff CLI
+1. Install Helm
+1. Install the riff CLI
+1. Install riff (with or without Knative and Istio) using Helm
 1. Create a function
 1. Invoke the function
 
-### install Docker
+## install Docker
 
 Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac).
 
@@ -35,21 +36,21 @@ If you previously had Minikube or GKE configured, switch your kubectl context to
 
 ![set context to docker-for-desktop](/img/docker-for-mac-context.png)
 
-## install the helm CLI
+## install Helm
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
-Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+Download and install the latest [Helm 2.x client CLI](https://helm.sh/docs/using_helm/#installing-helm) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
 
-After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
-
-> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
+After installing the Helm CLI, initialize the Helm Tiller in our cluster.
 
 ```sh
 kubectl create serviceaccount tiller -n kube-system
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
 helm init --wait --service-account tiller
 ```
+
+> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
 ## install the riff CLI
 
@@ -83,8 +84,7 @@ helm repo add projectriff https://projectriff.storage.googleapis.com/charts/rele
 helm repo update
 ```
 
-riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
-Knative is installed.
+riff can be installed with or without Knative. The riff [Core runtime](../runtimes/core.md) is available in both environments, however, the riff [Knative Runtime](../runtimes/knative.md) is only available if Knative is installed.
 
 To install riff with Knative and Istio:
 
@@ -93,7 +93,7 @@ helm install projectriff/istio --name istio --namespace istio-system --set gatew
 helm install projectriff/riff --name riff --set knative.enabled=true
 ```
 
-Install riff without Knative or Istio:
+Alternatively, install riff without Knative or Istio:
 
 ```sh
 helm install projectriff/riff --name riff
@@ -126,7 +126,7 @@ deployers.knative.projectriff.io      allowed   allowed
 
 ### apply build credentials
 
-Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than `default` add the `--namespace` flag). Replace the ??? with your docker username.
+Use the riff CLI to apply credentials for a container registry. If you plan on using a namespace other than `default` add the `--namespace` flag. Replace the ??? with your docker username.
 
 ```sh
 DOCKER_ID=???
@@ -149,7 +149,7 @@ riff function create square \
   --tail
 ```
 
-After the function is created, you can get the built image by listing functions.
+After the function is created, you can see the built image by listing functions.
 
 ```sh
 riff function list
@@ -160,34 +160,101 @@ NAME     LATEST IMAGE                                                           
 square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
-## create a deployer
+## create a Knative deployer
 
-Deployers take a built function and deploy it to a riff runtime. There are two runtimes: core and knative. The core runtime is always available, while the knatve runtime is only available on clusters with Istio and Knative installed.
-
-
-### create a core deployer
+The Knative runtime is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
-riff core deployer create square --function-ref square --tail
+riff knative deployer create knative-square --function-ref square --tail
 ```
 
-After the deployer is created, you can get the service by listing deployers.
+After the deployer is created, you can see the hostname by listing deployers.
 
 ```sh
-riff core deployer list
+riff knative deployer list
+```
+```
+NAME             TYPE       REF      HOST                                 STATUS   AGE
+knative-square   function   square   knative-square.default.example.com   Ready    28s
 ```
 
-```
-NAME     TYPE       REF      SERVICE           STATUS   AGE
-square   function   square   square-deployer   Ready    10s
-```
+### invoke the function
 
+Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
 
-## delete the function and deployer
+Look up the nodePort for the ingressgateway. You should a port value like 30195:
 
 ```sh
-riff core deployer delete square
+INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+echo $INGRESS_PORT
+```
+
+Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers:
+
+```sh
+curl http://localhost:$INGRESS_PORT/ -w '\n' \
+-H 'Host: knative-square.default.example.com' \
+-H 'Content-Type: application/json' \
+-d 7
+```
+```
+49
+```
+
+## create a Core deployer
+
+The Core runtime is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
+
+```sh
+riff core deployer create k8s-square --function-ref square --tail
+```
+
+After the deployer is created, you can lookup the deployment and service names for the function.
+
+```sh
+kubectl get deployer.core.projectriff.io k8s-square -o custom-columns=DEPLOYMENT:.metadata.name,DEPLOY:.status.deploymentName,SVC:.status.serviceName
+```
+```
+DEPLOYMENT   DEPLOY                SVC
+k8s-square   k8s-square-deployer   k8s-square-deployer
+```
+
+### invoke the function
+
+The ClusterIP service created by a deployer is not reachable from outside the cluster, so it is easier to create a new NodePort service.
+
+```sh
+kubectl expose deployment k8s-square-deployer \
+--type NodePort \
+--port 8080 \
+--name k8s-square
+```
+
+Now you can lookup the nodePort:
+
+```sh
+SERVICE_NODEPORT=$(kubectl get svc k8s-square --output 'jsonpath={.spec.ports[0].nodePort}')
+echo $SERVICE_NODEPORT
+```
+
+Make a POST request to invoke the function.
+
+```sh
+curl http://localhost:$SERVICE_NODEPORT/ -w '\n' \
+-H 'Content-Type: application/json' \
+-d 8
+```
+```
+64
+```
+
+## cleanup
+
+```sh
+riff knative deployer delete knative-square
+riff core deployer delete k8s-square
 riff function delete square
+kubectl delete svc k8s-square
 ```
 
 ## uninstalling and reinstalling
