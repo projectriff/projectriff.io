@@ -212,7 +212,7 @@ riff core deployer create k8s-square --function-ref square --tail
 After the deployer is created, you can lookup the deployment and service names for the function.
 
 ```sh
-kubectl get deployer.core.projectriff.io k8s-square -o custom-columns=DEPLOYMENT:.metadata.name,DEPLOY:.status.deploymentName,SVC:.status.serviceName
+kubectl get deployer.core.projectriff.io k8s-square -o custom-columns=NAME:.metadata.name,DEPLOYMENT:.status.deploymentName,SERVICE:.status.serviceName
 ```
 ```
 DEPLOYMENT   DEPLOY                SVC
