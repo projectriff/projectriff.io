@@ -46,7 +46,11 @@ public class UppercaseApplication {
 
 ### Building the Spring Boot based function
 
-You can build your function either from local source or from source committed to a GitHub repository. For local build use:
+You can build your function either from local source or from source committed to a GitHub repository.
+
+> NOTE: The local-path builds option is disabled on Windows.
+
+For local build use:
 
 ```
 riff function create uppercase --local-path . --handler uppercase
