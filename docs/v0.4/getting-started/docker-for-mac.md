@@ -213,22 +213,28 @@ k8s-square   function   square   k8s-square-deployer   Ready    16s
 
 ### invoke the function
 
-In a separate terminal, start port forwarding to the ClusterIP service created by the deployer
+In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
 
 ```sh
-port-forward service/k8s-square-deployer 8000:80
+kubectl port-forward service/k8s-square-deployer :80
+```
+```
+Forwarding from 127.0.0.1:54204 -> 8080
+Forwarding from [::1]:54204 -> 8080
 ```
 
-Make a POST request to invoke the function.
+Make a POST request to invoke the function using the port assigned above.
 
 ```sh
-curl http://localhost:8000/ -w '\n' \
+curl http://localhost:54204/ -w '\n' \
 -H 'Content-Type: application/json' \
 -d 8
 ```
 ```
 64
 ```
+
+> Note that unlike Knative, the Core runtime will not scale deployments down to zero.
 
 ## cleanup
 
