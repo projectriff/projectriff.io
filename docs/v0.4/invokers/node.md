@@ -4,13 +4,13 @@ title: Node Function Invoker
 sidebar_label: Node.js
 ---
 
-JavaScript functions will be invoked using a [Node Function Invoker](https://github.com/projectriff/node-function-invoker) that is provided by riff when building the function.
+JavaScript functions are invoked using a [Node Function Invoker](https://github.com/projectriff/node-function-invoker) that is provided by riff when building the function.
 
 The _Node Function Invoker_ provides a host for functions consisting of a single [Node.js](https://nodejs.org/) module. It accepts HTTP requests, invokes the function for each request, and sends the function's output to the HTTP response.
 
 ## Authoring a function
 
-At runtime, the node function invoker will `require()` the target function module. This module must export the function to invoke.
+At runtime, the node function invoker uses `require()` to load the target function module. This module must export the function to invoke.
 
 ```js
 // square
@@ -34,7 +34,7 @@ module.exports = x => Promise.resolve(x ** 2);
 ### streams (experimental)
 
 Streaming functions can be created by setting the `$interactionModel` property on the function to `node-streams`.
-The function will then be invoked with two arguments, an `input` [Readable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable) and an `output` [Writeable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable).
+The function is invoked with two arguments, an `input` [Readable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable) and an `output` [Writeable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable).
 Both streams are object streams. Any value returned by the function is ignored, new messages must be written to the output stream.
 
 ```js
@@ -158,7 +158,7 @@ module.exports.$destroy = async () => {
 };
 ```
 
-The lifecycle methods are optional, and should only be implemented when needed. The hooks may be either traditional or async functions. Lifecycle functions have up to 10 seconds to complete their work, or the function invoker will abort.
+The lifecycle methods are optional, and should only be implemented when needed. The hooks may be either traditional or async functions. Lifecycle functions have up to 10 seconds to complete their work, or the function invoker aborts.
 
 ## Creating a function
 
@@ -196,7 +196,7 @@ riff function create hello \
   --git-repo https://github.com/projectriff-samples/node-hello
 ```
 
-## Deploying a function
+## Deploying the function
 
 Please see the runtime documentation for how to deploy and invoke the function.
 
@@ -207,7 +207,7 @@ Please see the runtime documentation for how to deploy and invoke the function.
 
 When done with the function, delete the function resource to stop creating new builds. 
 
-> Images built by the function will continue to exist in the container registry and may continue to be consumed by a runtime.
+> NOTE: Images built by the function continue to exist in the container registry and may continue to be consumed by a runtime.
 
 ```sh
 riff function delete square
