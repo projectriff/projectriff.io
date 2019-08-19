@@ -17,7 +17,7 @@ For each invocation, functions are expected to read stdin until the end of the s
 
 Correct function execution is assumed if the exit code is zero. Any other value indicates an error.
 
-## Creating a simple command function
+## Creating a command function
 
 This example uses the sample [command-wordcount](https://github.com/projectriff-samples/command-wordcount) function from projectriff-samples on GitHub. It consists of a single executable file named wordcount.sh with the following content:
 
@@ -29,16 +29,22 @@ tr [:punct:] ' ' | tr -s ' ' '\n' | tr [:upper:] [:lower:] | sort | uniq -c | so
 
 ### Building the command function
 
-> NOTE: If you are creating command functions on Windows then you can't set the excute flag on a local file. This means that local-path builds will not work, you need to build the function from a Git repository. Before commiting your function file to a Git repository you should set the excute flag using the following Git command: `git update-index --chmod=+x wordcount.sh`.
+You can build your function either from local source or from source committed to a GitHub repository.
 
-You can build your function either from local source or from source committed to a GitHub repository. For local build use:
+> NOTE: The local-path builds option is disabled on Windows.
+
+For local build use:
 
 ```
 chmod +x wordcount.sh
 riff function create wordcount --artifact wordcount.sh --local-path .
 ```
 
-When building from a GitHub repo use something like (replace the `--git-repo` argument with your own repository URL):
+When building from a GitHub repo use something like the example below and replace the `--git-repo` argument with your own repository URL.
+
+> NOTE: If you are creating command functions on Windows then you can't set the excute flag on a local file. Before commiting your function file to a Git repository you should set the excute flag using the following Git command: `git update-index --chmod=+x wordcount.sh`.
+
+For building from a Git repository use:
 
 ```
 riff function create wordcount --artifact wordcount.sh --git-repo https://github.com/projectriff-samples/command-wordcount
