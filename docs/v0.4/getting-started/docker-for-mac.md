@@ -154,7 +154,7 @@ square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb4
 
 ## create a Knative deployer
 
-The Knative runtime is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
 riff knative deployer create knative-square --function-ref square --tail
@@ -174,14 +174,14 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 
 Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
 
-Look up the nodePort for the ingressgateway. You should a port value like 30195:
+Look up the nodePort for the ingressgateway; you should see a port value like `30195`.
 
 ```sh
 INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_PORT
 ```
 
-Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers:
+Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers.
 
 ```sh
 curl http://localhost:$INGRESS_PORT/ -w '\n' \
@@ -195,7 +195,7 @@ curl http://localhost:$INGRESS_PORT/ -w '\n' \
 
 ## create a Core deployer
 
-The Core runtime is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
+The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
 
 ```sh
 riff core deployer create k8s-square --function-ref square --tail
@@ -216,17 +216,17 @@ k8s-square   function   square   k8s-square-deployer   Ready    16s
 In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
 
 ```sh
-kubectl port-forward service/k8s-square-deployer :80
+kubectl port-forward service/k8s-square-deployer 8080:80
 ```
 ```
-Forwarding from 127.0.0.1:54204 -> 8080
-Forwarding from [::1]:54204 -> 8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
 ```
 
 Make a POST request to invoke the function using the port assigned above.
 
 ```sh
-curl http://localhost:54204/ -w '\n' \
+curl http://localhost:8080/ -w '\n' \
 -H 'Content-Type: application/json' \
 -d 8
 ```
