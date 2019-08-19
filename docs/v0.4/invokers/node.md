@@ -4,7 +4,7 @@ title: Node Function Invoker
 sidebar_label: Node.js
 ---
 
-JavaScript functions will be invoked using a [Node Function Invoker](https://github.com/projectriff/node-function-invoker) that is provided by riff when you build the function.
+JavaScript functions will be invoked using a [Node Function Invoker](https://github.com/projectriff/node-function-invoker) that is provided by riff when building the function.
 
 The _Node Function Invoker_ provides a host for functions consisting of a single [Node.js](https://nodejs.org/) module. It accepts HTTP requests, invokes the function for each request, and sends the function's output to the HTTP response.
 
@@ -200,12 +200,12 @@ riff function create hello \
 
 Please see the runtime documentation for how to deploy and invoke the function.
 
-- [core runtime](../runtimes/core.md)
-- [knative runtime](../runtimes/knative.md)
+- [Core runtime](../runtimes/core.md)
+- [Knative runtime](../runtimes/knative.md)
 
 ## Cleanup
 
-When done with the function delete the function resource to stop creating new builds. 
+When done with the function, delete the function resource to stop creating new builds. 
 
 > Images built by the function will continue to exist in the container registry and may continue to be consumed by a runtime.
 
