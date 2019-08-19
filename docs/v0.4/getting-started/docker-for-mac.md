@@ -6,16 +6,6 @@ sidebar_label: Docker for Mac
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
 
-## TL;DR
-
-1. Install the latest release of Docker for Mac
-1. Configure the cluster and enable Kubernetes
-1. Install Helm
-1. Install the riff CLI
-1. Install riff (with or without Knative and Istio) using Helm
-1. Create a function
-1. Invoke the function
-
 ## install Docker
 
 Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac).
@@ -32,9 +22,11 @@ Once Docker is installed and running, use the Preferences feature in the Docker 
 Now enable Kubernetes, and wait for the cluster to start.
 ![enable Kubernetes](/img/docker-for-mac-kubernetes.png)
 
-If you previously had Minikube or GKE configured, switch your kubectl context to "docker-desktop".
+Confirm that your kubectl context is pointing to `docker-desktop`
 
-![set context to docker-for-desktop](/img/docker-for-mac-context.png)
+```sh
+kubectl config current-context
+```
 
 ## install Helm
 
@@ -209,38 +201,28 @@ The Core runtime is available on all riff clusters. It deploys riff workloads as
 riff core deployer create k8s-square --function-ref square --tail
 ```
 
-After the deployer is created, you can lookup the deployment and service names for the function.
+After the deployer is created, you can see the service name by listing deployers.
 
 ```sh
-kubectl get deployer.core.projectriff.io k8s-square -o custom-columns=NAME:.metadata.name,DEPLOYMENT:.status.deploymentName,SERVICE:.status.serviceName
+riff core deployers list
 ```
 ```
-DEPLOYMENT   DEPLOY                SVC
-k8s-square   k8s-square-deployer   k8s-square-deployer
+NAME         TYPE       REF      SERVICE               STATUS   AGE
+k8s-square   function   square   k8s-square-deployer   Ready    16s
 ```
 
 ### invoke the function
 
-The ClusterIP service created by a deployer is not reachable from outside the cluster, so it is easier to create a new NodePort service.
+In a separate terminal, start port forwarding to the ClusterIP service created by the deployer
 
 ```sh
-kubectl expose deployment k8s-square-deployer \
---type NodePort \
---port 8080 \
---name k8s-square
-```
-
-Now you can lookup the nodePort:
-
-```sh
-SERVICE_NODEPORT=$(kubectl get svc k8s-square --output 'jsonpath={.spec.ports[0].nodePort}')
-echo $SERVICE_NODEPORT
+port-forward service/k8s-square-deployer 8000:80
 ```
 
 Make a POST request to invoke the function.
 
 ```sh
-curl http://localhost:$SERVICE_NODEPORT/ -w '\n' \
+curl http://localhost:8000/ -w '\n' \
 -H 'Content-Type: application/json' \
 -d 8
 ```
@@ -254,7 +236,6 @@ curl http://localhost:$SERVICE_NODEPORT/ -w '\n' \
 riff knative deployer delete knative-square
 riff core deployer delete k8s-square
 riff function delete square
-kubectl delete svc k8s-square
 ```
 
 ## uninstalling and reinstalling
