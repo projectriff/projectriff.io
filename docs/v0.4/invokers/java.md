@@ -18,7 +18,7 @@ Begin by creating a new project using [Spring Initializr](start.spring.io).  You
 
 ### Adding functions
 
-You can now add a `@Bean` providing the function implementation. It can either be added as a separate `@Configuration` source file or for simple functions just add it to the main application file. Here we add the `upper` function to the main `@SpringBootApplication` source file:
+You can now add a `@Bean` providing the function implementation. It can either be added as a separate `@Configuration` source file or for simple functions just add it to the main application file. Here we add the `uppercase` function to the main `@SpringBootApplication` source file:
 
 ```java
 package com.example.upper;
@@ -30,15 +30,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class UpperApplication {
+public class UppercaseApplication {
 
 	@Bean
-	public Function<String, String> upper() {
-		return String::toUpperCase;
+	public Function<String, String> uppercase() {
+		return s -> s.toUpperCase();
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(UpperApplication.class, args);
+		SpringApplication.run(UppercaseApplication.class, args);
 	}
 
 }
@@ -46,16 +46,20 @@ public class UpperApplication {
 
 ### Building the Spring Boot based function
 
-You can build your function either from local source or from source committed to a GitHub repository. For local build use:
+You can build your function either from local source or from source committed to a GitHub repository.
 
-```bash
-riff function create upper --local-path . --handler upper
+> NOTE: The local-path builds option is disabled on Windows.
+
+For local build use:
+
+```
+riff function create uppercase --local-path . --handler uppercase
 ```
 
-When building from a GitHub repo use something like (replace the `<owner>` placeholder with your account):
+When building from a GitHub repo use something like (replace the `--git-repo` argument with your own repository URL):
 
-```bash
-riff function create upper --git-repo https://github.com/<owner>/upper-boot-gradle.git --handler upper
+```
+riff function create uppercase --handler uppercase --git-repo https://github.com/projectriff-samples/java-boot-uppercase.git
 ```
 
 The `--handler` option is the name of the `@Bean` that was used for the function. If your application only has a single function bean then you can omit this option.
@@ -64,29 +68,29 @@ The `--handler` option is the name of the `@Bean` that was used for the function
 
 ### Running a Spring Boot based function locally
 
-If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the _Function_ dependency plus either _Spring Web Starter_ or _Spring Reactive Web_. 
+If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the _Function_ dependency plus either _Spring Web Starter_ or _Spring Reactive Web_.
 
 You can now run your function application locally using:
 
-```bash
+```
 mvn spring-boot:run
 ```
 
 Once the app starts up, open another terminal and invoke the function using `curl`:
 
-```bash
+```
 curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
 If your application contains multiple functions you need to provide the bean name as the path. You could use this to invoke a `lower` function:
 
-```bash
+```
 curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
 
 ## Creating a plain Java function
 
-You can create function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
+You can create a function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
 
 When creating plain Java function your function must implement the `java.util.function.Function` interface. Here is the function from the above mentioned sample:
 
@@ -107,28 +111,8 @@ public class Hello implements Function<String, String> {
 
 Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
 
-```bash
-riff function create hello --git-repo https://github.com/projectriff-samples/java-hello.git --handler functions.Hello
+```
+riff function create hello --handler functions.Hello --git-repo https://github.com/projectriff-samples/java-hello.git
 ```
 
 The `--handler` option is the fully qualified name of the class that provides the function implementation.
-
-## Deploying and invoking the function
-
-To deploy your function you need to select a runtime. The two options currently available are `core` and `knative` and we will select `knative`for this example:
-
-```bash
-riff knative deployer create upper --function-ref upper
-```
-
-This should create the resources needed for a Knative app. You can invoke the function using the `istio-ingressgateway` service. Assuming you haven't configured DNS for your function you can use the following command to find the IP address for the `istio-ingressgateway`:
-
-```bash
-ingress_ip=$(kubectl get svc/istio-ingressgateway -n istio-system -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
-```
-
-You can now invoke the function using the following `curl` command:
-
-```bash
-curl ${ingress_ip} -H 'Host: upper.default.example.com' -H 'Content-Type: text/plain' -w '\n' -d hello
-```
