@@ -12,6 +12,35 @@ The riff function support for the Java language relies on function code being wr
 
 The implementation can be provided as a plain Java class or as part of a Spring Boot app.
 
+## Creating a plain Java function
+
+You can create a function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
+
+When creating plain Java function your function must implement the `java.util.function.Function` interface. Here is the function from the above mentioned sample:
+
+```java
+package functions;
+
+import java.util.function.Function;
+
+public class Hello implements Function<String, String> {
+
+	public String apply(String name) {
+		return "Hello " + name;
+	}
+}
+```
+
+### building the plain Java function
+
+Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
+
+```
+riff function create hello --handler functions.Hello --git-repo https://github.com/projectriff-samples/java-hello.git
+```
+
+The `--handler` option is the fully qualified name of the class that provides the function implementation.
+
 ## Creating a Spring Boot based function
 
 Begin by creating a new project using [Spring Initializr](start.spring.io).  You can select either `Maven Project` or `Gradle Project` as the project type but the language must be `Java`. Pick a name for your project and any dependencies that your function requires. The final step is to download the generated zip file and extracting the contents.
@@ -87,35 +116,6 @@ If your application contains multiple functions you need to provide the bean nam
 ```
 curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
 ```
-
-## Creating a plain Java function
-
-You can create a function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: https://github.com/projectriff-samples/java-hello
-
-When creating plain Java function your function must implement the `java.util.function.Function` interface. Here is the function from the above mentioned sample:
-
-```java
-package functions;
-
-import java.util.function.Function;
-
-public class Hello implements Function<String, String> {
-
-	public String apply(String name) {
-		return "Hello " + name;
-	}
-}
-```
-
-### building the plain Java function
-
-Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
-
-```
-riff function create hello --handler functions.Hello --git-repo https://github.com/projectriff-samples/java-hello.git
-```
-
-The `--handler` option is the fully qualified name of the class that provides the function implementation.
 
 ## Deploying a function
 
