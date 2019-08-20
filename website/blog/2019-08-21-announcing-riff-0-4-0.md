@@ -20,7 +20,7 @@ riff no longer has a hard dependency on Knative and Istio. Knative integration i
 
 riff Builds now encompass more than just functions with the addition of application and container builds. Each build resource reports that latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
 
-Builds are transitioning from a one-off tasks to a continuous stream of images. riff 0.4 sets up the API to enable ongoing updated builds, but does not yet hook into sources to trigger rebuilding.
+Builds are transitioning from one-off tasks to continuous streams of images. riff 0.4 sets up the API to enable ongoing updated builds, but does not yet hook into sources to trigger rebuilding.
 
 #### function builds
 
@@ -52,7 +52,7 @@ The Knative runtime is most analogous to riff 0.3. It requires that Knative Serv
 
 Deployers create a Knative Configuration and Route from the latest image available for a referenced build. The Configuration is updated as the build produces new images.
 
-Adapters reference an existing Knative Service or Configuration, updating the image. The Route rules are preserved as new images trigger the creation of Knative Revisions.
+Adapters reference an existing Knative Service or Configuration, updating the image property as the build produces new ones. The Route rules are preserved as new images trigger the creation of Knative Revisions.
 
 See the [Knative runtime docs](/docs/v0.4/runtimes/knative) for details.
 
@@ -80,7 +80,7 @@ A few of the key highlights include:
 - `tail` command to watch all logs for a resource until canceled
 - `delete` and `list` for every resource that is `create`d
 
-riff is no longer installed into a Kubernetes cluster using the CLI. [Helm charts](#helm-charts) are available to aid the installation, we are exploring other installation options, like [Cloud Native Application Bundles](https://cnab.io) (CNAB).
+riff is no longer installed into a Kubernetes cluster using the CLI. [Helm charts](#helm-charts) are available to aid the installation, and we are exploring other installation options, like [Cloud Native Application Bundles](https://cnab.io) (CNAB).
 
 ### riff System and CRDs
 
