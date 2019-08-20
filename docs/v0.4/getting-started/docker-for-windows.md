@@ -6,7 +6,7 @@ sidebar_label: Docker for Windows
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Windows.
 
-### install Docker
+## install Docker
 Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
 
 ![download Docker for mac](/img/docker-for-windows-download.png)
