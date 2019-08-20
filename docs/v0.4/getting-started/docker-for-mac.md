@@ -42,7 +42,7 @@ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceac
 helm init --wait --service-account tiller
 ```
 
-> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
+> NOTE: Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
 ## install the riff CLI
 
@@ -234,7 +234,7 @@ curl http://localhost:8080/ -w '\n' \
 64
 ```
 
-> Note that unlike Knative, the Core runtime will not scale deployments down to zero.
+> NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
 
 ## cleanup
 
