@@ -4,22 +4,9 @@ title: Getting started on Minikube
 sidebar_label: Minikube
 ---
 
-The following will help you get started running a riff function with Knative on Minikube.
+The following will help you get started running a riff function on Minikube.
 
-## TL;DR
-
-1. install kubectl, helm, and minikube
-1. install the latest riff CLI
-1. create a minikube cluster for Knative
-1. install Knative using the riff CLI
-1. create a function
-1. invoke the function
-
-### install kubectl
-
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
-
-### install minikube
+## install Minikube
 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
@@ -33,6 +20,14 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-
 For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver) driver.
 
 For additional details see the minikube [driver installation](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#hyperkit-driver) docs.
+
+## install Docker
+
+Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with Docker. Since Minikube includes its own Docker daemon, you actually only need the `docker` CLI to run `docker login` for `--local-path` function builds. This means that if you want to, you can shut down the Docker Desktop app and depend on the Minikube Docker daemon by running `eval $(minikube docker-env)`.
+
+## install Kubectl
+
+[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
 ## create a Minikube cluster
 
@@ -60,13 +55,13 @@ Download and install the latest [Helm 2.x release](https://github.com/helm/helm/
 
 After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
 
-> NOTE: Please see the Helm documentation for how to [secure the connection to Tiller within your cluster](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
-
 ```sh
 kubectl create serviceaccount tiller -n kube-system
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
 helm init --wait --service-account tiller
 ```
+
+> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
 ## install the riff CLI
 
@@ -100,8 +95,7 @@ helm repo add projectriff https://projectriff.storage.googleapis.com/charts/rele
 helm repo update
 ```
 
-riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
-Knative is installed.
+riff can be installed with or without Knative. The riff [Core runtime](../runtimes/core.md) is available in both environments, however, the riff [Knative Runtime](../runtimes/knative.md) is only available if Knative is installed.
 
 To install riff with Knative and Istio:
 
@@ -110,7 +104,7 @@ helm install projectriff/istio --name istio --namespace istio-system --set gatew
 helm install projectriff/riff --name riff --set knative.enabled=true
 ```
 
-Install riff without Knative or Istio:
+Alternatively, install riff without Knative or Istio:
 
 ```sh
 helm install projectriff/riff --name riff
@@ -166,43 +160,106 @@ riff function create square \
   --tail
 ```
 
-After the function is created, you can get the built image by listing functions.
+After the function is created, you can see the built image by listing functions.
 
 ```sh
 riff function list
 ```
 
 ```
-NAME     LATEST IMAGE                                                                                                ARTIFACT    HANDLER   INVOKER   STATUS   AGE
-square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
+NAME     LATEST IMAGE                                                                                           ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   index.docker.io/jldec/square@sha256:527053273ec98697dbdd88951f77edf82a9a46767125cd1e4348422fe5b8e09f   square.js   <empty>   <empty>   Ready    4m3s
 ```
 
-## create a deployer
+## create a Knative deployer
 
-Deployers take a built function and deploy it to a riff runtime. There are two runtimes: core and knative. The core runtime is always available, while the knatve runtime is only available on clusters with Istio and Knative installed.
-
-
-### create a core deployer
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
-riff core deployer create square --function-ref square --tail
+riff knative deployer create knative-square --function-ref square --tail
 ```
 
-After the deployer is created, you can get the service by listing deployers.
+After the deployer is created, you can see the hostname by listing deployers.
 
 ```sh
-riff core deployer list
+riff knative deployer list
+```
+```
+NAME             TYPE       REF      HOST                                 STATUS   AGE
+knative-square   function   square   knative-square.default.example.com   Ready    19s
 ```
 
-```
-NAME     TYPE       REF      SERVICE           STATUS   AGE
-square   function   square   square-deployer   Ready    10s
-```
+### invoke the function
 
+Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
 
-## delete the function and deployer
+Look up the nodePort for the ingressgateway; you should see a port value like `30195`.
 
 ```sh
-riff core deployer delete square
+MINIKUBE_IP=$(minikube ip)
+INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+echo $MINIKUBE_IP:$INGRESS_PORT
+```
+
+Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers.
+
+```sh
+curl http://$MINIKUBE_IP:$INGRESS_PORT/ -w '\n' \
+-H 'Host: knative-square.default.example.com' \
+-H 'Content-Type: application/json' \
+-d 7
+```
+```
+49
+```
+
+## create a Core deployer
+
+The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
+
+```sh
+riff core deployer create k8s-square --function-ref square --tail
+```
+
+After the deployer is created, you can see the service name by listing deployers.
+
+```sh
+riff core deployers list
+```
+```
+NAME         TYPE       REF      SERVICE               STATUS   AGE
+k8s-square   function   square   k8s-square-deployer   Ready    7s
+```
+
+### invoke the function
+
+In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
+
+```sh
+kubectl port-forward service/k8s-square-deployer 8080:80
+```
+```
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+```
+
+Make a POST request to invoke the function using the port assigned above.
+
+```sh
+curl http://localhost:8080/ -w '\n' \
+-H 'Content-Type: application/json' \
+-d 8
+```
+```
+64
+```
+
+> NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
+
+## cleanup
+
+```sh
+riff knative deployer delete knative-square
+riff core deployer delete k8s-square
 riff function delete square
 ```
