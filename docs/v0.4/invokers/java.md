@@ -4,9 +4,9 @@ title: Java Function Invoker
 sidebar_label: Java
 ---
 
-Java functions will be invoked using a [Java Function Invoker](https://github.com/projectriff/java-function-invoker) that is provided by riff when you build the function.
+Java functions are invoked using a [Java Function Invoker](https://github.com/projectriff/java-function-invoker) that is provided by riff when you build the function.
 
-The _Java Function Invoker_ is a Spring Boot application which will locate your function based on configuration settings, and invoke the function for each request.
+The _Java Function Invoker_ is a Spring Boot application which locates your function based on configuration settings, and invoke the function for each request.
 
 The riff function support for the Java language relies on function code being written using interfaces like `Function<T,R>`, `Supplier<T>`, or `Consumer<T>` from the `java.util.function` package in the Java SE platform.
 
@@ -48,7 +48,7 @@ public class UppercaseApplication {
 
 You can build your function either from local source or from source committed to a GitHub repository.
 
-> NOTE: The local-path builds option is disabled on Windows.
+> NOTE: The `--local-path` builds option is disabled on Windows.
 
 For local build use:
 
@@ -116,3 +116,24 @@ riff function create hello --handler functions.Hello --git-repo https://github.c
 ```
 
 The `--handler` option is the fully qualified name of the class that provides the function implementation.
+
+## Deploying a function
+
+Please see the runtime documentation for how to deploy and invoke the function.
+
+- [Core runtime](../runtimes/core.md)
+- [Knative runtime](../runtimes/knative.md)
+
+## Cleanup
+
+When done with the function, delete the function resource to stop creating new builds. 
+
+> NOTE: Images built by the function continue to exist in the container registry and may continue to be consumed by a runtime.
+
+```sh
+riff function delete hello
+```
+
+```
+Deleted function "hello"
+```
