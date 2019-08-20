@@ -13,6 +13,15 @@ const MarkdownBlock = CompLibrary.MarkdownBlock;
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
+const BlogPost = require('../../core/BlogPost.js');
+const MetadataBlog = require('../../core/MetadataBlog.js');
+const MetadataPublicBlog =
+  process.env.NODE_ENV === 'development'
+    ? MetadataBlog
+    : MetadataBlog.filter(item => !item.unlisted);
+
+const utils = require('../../core/utils.js');
+
 class Index extends React.Component {
   render() {
     const {config: siteConfig, language = ''} = this.props;
@@ -59,6 +68,25 @@ This project is sponsored by [Pivotal](https://pivotala.io)
       </Block>
     );
 
+    const Blog = () => (
+      <Container className="paddingBottom" id="blogTopPost">
+        <div className="postContent">
+          {MetadataPublicBlog.slice(0, 1).map(post => (
+            <BlogPost
+              post={post}
+              content={post.content}
+              truncate
+              key={
+                utils.getPath(post.path, this.props.config.cleanUrl) +
+                post.title
+              }
+              config={this.props.config}
+            />
+          ))}
+        </div>
+      </Container>
+    )
+
     const Buildpacks= () => (
       <Block background="light">
         {[
@@ -103,6 +131,7 @@ This provides support for
       <div>
         <TitleBlock />
         <About />
+        <Blog />
         <Buildpacks />
         <Knative />
       </div>
