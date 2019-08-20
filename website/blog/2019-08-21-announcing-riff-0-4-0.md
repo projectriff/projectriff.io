@@ -2,7 +2,7 @@
 title: "Announcing riff v0.4.0"
 ---
 
-We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors. A lot has changed in this release; we're excited about having a new foundation to take riff to 1.0.
+We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors.
 
 A lot has changed, buckle up.
 
@@ -18,13 +18,13 @@ riff no longer has a hard dependency on Knative and Istio. Knative integration i
 
 ### builds
 
-riff Builds now encompass more than just functions with the addition of application and container builds. Each build resource reports that latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
+riff Builds now encompass more than just functions with the addition of application and container builds. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
 
 Builds are transitioning from one-off tasks to continuous streams of images. riff 0.4 sets up the API to enable ongoing updated builds, but does not yet hook into sources to trigger rebuilding.
 
 #### function builds
 
-A Function uses function buildpacks and invokers to convert function source code into a runnable container. The same invokers and buildpacks provided by riff 0.3 are available. Unlike riff 0.3, the Function is only responsible for building a container image. The deployment of the container is managed by the [runtime](#runtimes).
+A riff Function uses buildpacks with function invokers to convert function source code into a runnable container. The same invokers and buildpacks provided by riff 0.3 are available. Unlike riff 0.3, a Function resource is only responsible for building a container image. The deployment of the container is managed by the [runtime](#runtimes).
 
 #### application builds
 
@@ -32,11 +32,11 @@ In addition to functions, riff can now build Applications using the [Cloud Found
 
 #### container builds
 
-A Container is a build-less build. It exists to resolve an existing container image providing the same interface for other resources to consume as Application and Function. The image is resolved to a digest and checked for an updated image every 5 minutes.
+A riff Container resource is a build-less build. It exists to resolve an existing container image providing the same interface for other resources to consume as Application and Function. The image is resolved to a digest and checked for an updated image every 5 minutes.
 
 ### runtimes
 
-riff Runtimes provide different deployment experiences for a workload. A given riff cluster may not support each runtime.
+Runtimes deploy built containers in different ways. By offering users a choice of Runtimes, we hope to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative,and Streaming is under development.
 
 #### Core runtime
 
@@ -44,7 +44,7 @@ The Core runtime is a streamlined runtime that allows operators to provide their
 
 The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the `/scale` subresource on deployment.
 
-See the [Core runtime docs](/docs/v0.4/runtimes/core) for details.
+See the [Core runtime](/docs/v0.4/runtimes/core) docs for details.
 
 #### Knative runtime
 
@@ -58,33 +58,34 @@ See the [Knative runtime docs](/docs/v0.4/runtimes/knative) for details.
 
 #### Streaming runtime
 
-The new streaming runtime is under active development, but not ready in time for the v0.4 release.
+The new streaming runtime is under active development, and not included in this release.
 
-<!-- TODO say more about what makes our streaming model unique -->
+The goal of the streaming runtime is to enable workloads to consume, process, and produce message streams, in conjunction with streaming platforms like Kafka.
 
-Development can be tracked on GitHub, including:
+Streaming component development can be tracked on GitHub, including:
 - [streaming-processor](https://github.com/projectriff/streaming-processor)
 - [kafka-provider](https://github.com/projectriff/kafka-provider)
 - [streaming-http-adapter](https://github.com/projectriff/streaming-http-adapter)
 
 ### riff CLI
 
-The [riff CLI](/docs/v0.4/cli/riff) was rewritten from the ground up to support the new riff Build and Runtime models. The CLI behavior is more consistent and predictable. No more deleting a service that was created as a function.
+The [riff CLI](/docs/v0.4/cli/riff) was rewritten from the ground up to support the new riff Build and Runtime models. The CLI behavior is more consistent and predictable. No more deleting a "service" which was created as a function.
 
-The most significant change is that creating a function only builds source into a container image, it no longer also deploys the function as a Knative workload. Knative is just one runtime option.
+The most significant change is that creating a function builds the container image, but it no longer deploys the function as a Knative workload. Functions are deployed using the deployment features of the runtime, and Knative is just one runtime option
 
-A few of the key highlights include:
+riff is no longer installed into a Kubernetes cluster using the CLI. [Helm charts](#helm-charts) are available to aid the installation, and we are exploring other installation options, like [Cloud Native Application Bundles](https://cnab.io) (CNAB).
+
+Other highlights of the new CLI include:
 - table `list`ings with rolled up status
 - colorized output
 - `--tail` to watch logs during `create` until the resource is ready or fails
 - `tail` command to watch all logs for a resource until canceled
 - `delete` and `list` for every resource that is `create`d
 
-riff is no longer installed into a Kubernetes cluster using the CLI. [Helm charts](#helm-charts) are available to aid the installation, and we are exploring other installation options, like [Cloud Native Application Bundles](https://cnab.io) (CNAB).
 
 ### riff System and CRDs
 
-Powering the new build and runtime models is riff System. riff System provides Kubernetes CRDs and a controller to reconcile the state of these projectriff resources into other resources to achieve the desired outcome.
+Powering the new build and runtime models is [riff System](https://github.com/projectriff/system). riff System provides Kubernetes CRDs and a controller to reconcile the state of these custom riff resources into other resources, to achieve the desired outcome.
 
 The system provides four API groups, one for builds and one per runtime:
 
