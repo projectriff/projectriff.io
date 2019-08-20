@@ -16,7 +16,7 @@ The implementation can be provided as a plain Java class or as part of a Spring 
 
 Begin by creating a new project using [Spring Initializr](start.spring.io).  You can select either `Maven Project` or `Gradle Project` as the project type but the language must be `Java`. Pick a name for your project and any dependencies that your function requires. The final step is to download the generated zip file and extracting the contents.
 
-### Adding functions
+### adding functions
 
 You can now add a `@Bean` providing the function implementation. It can either be added as a separate `@Configuration` source file or for simple functions just add it to the main application file. Here we add the `uppercase` function to the main `@SpringBootApplication` source file:
 
@@ -44,7 +44,7 @@ public class UppercaseApplication {
 }
 ```
 
-### Building the Spring Boot based function
+### building the Spring Boot based function
 
 You can build your function either from local source or from source committed to a GitHub repository.
 
@@ -66,7 +66,7 @@ The `--handler` option is the name of the `@Bean` that was used for the function
 
 > NOTE: If you haven't specified a default image prefix when setting the credentials then you need to provide an _&#8209;&#8209;image_ option for the function create command.
 
-### Running a Spring Boot based function locally
+### running a Spring Boot based function locally
 
 If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the _Function_ dependency plus either _Spring Web Starter_ or _Spring Reactive Web_.
 
@@ -107,7 +107,7 @@ public class Hello implements Function<String, String> {
 }
 ```
 
-### Building the plain Java function
+### building the plain Java function
 
 Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:
 

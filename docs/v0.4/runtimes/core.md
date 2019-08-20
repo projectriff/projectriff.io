@@ -47,7 +47,7 @@ square   function   square   square-deployer   Ready    10s
 
 Since the core runtime does not provide Ingress, a connection to the cluster must be established before the function can be invoked. For production workloads, installing and configuring ingress is recommended but is outside the scope of this doc. For development, use `kubectl port-forward` to map a local port to the deployer.
 
-### Setup port forwarding
+### setup port forwarding
 
 From the deployer listing (`riff core deployer list`), get the service name for the function, in this case `square-deployer`. In a new terminal, run:
 
@@ -64,7 +64,7 @@ The port forward command establishes a connection to the deployer's service on l
 
 > NOTE: the port forwarding needs to be reestablished when a new instance of the function is rolled out.
 
-### Call the function
+### call the workload
 
 ```sh
 curl localhost:8080 -v -w '\n' -H 'Content-Type: application/json' -d 7

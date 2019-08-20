@@ -45,7 +45,7 @@ NAME     TYPE       REF      HOST                         STATUS   AGE
 square   function   square   square.default.example.com   Ready    11s
 ```
 
-### call the deployer
+### call the workload
 
 How to invoke the function depends on the type of cluster and how it was configured. After getting the host set it as `HOST` and then pick the `INGRESS` definition that is appropriate for the cluster.
 
