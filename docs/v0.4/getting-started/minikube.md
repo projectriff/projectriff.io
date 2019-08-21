@@ -33,7 +33,7 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 
 ```sh
 minikube start --memory=4096 --cpus=4 \
---kubernetes-version=v1.14.0 \
+--kubernetes-version=v1.14.6 \
 --vm-driver=hyperkit \
 --bootstrapper=kubeadm \
 --extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
