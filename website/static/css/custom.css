@@ -73,6 +73,10 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
 	content: "is for functions";
 }
 
+.projectTitle {
+  visibility: hidden;
+}
+
 /* futz with style to hack blog post on to the home page, this is a hack */
 #try {
   padding-bottom: 0;
