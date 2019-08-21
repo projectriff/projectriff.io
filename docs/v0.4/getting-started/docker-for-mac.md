@@ -46,7 +46,7 @@ helm init --wait --service-account tiller
 
 ## Install the riff CLI
 
-The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
+The [riff CLI](https://github.com/projectriff/cli/) is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
 
 ```sh
 riff --version
