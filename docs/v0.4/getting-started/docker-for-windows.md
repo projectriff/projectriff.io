@@ -89,7 +89,7 @@ helm init --wait --service-account tiller
 > Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
 ## Install the riff CLI
-A zip with the riff CLI for Windows is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, check that the riff CLI version is 0.4.0 or later.
+A zip with the [riff CLI](https://github.com/projectriff/cli/) for Windows is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, check that the riff CLI version is 0.4.0 or later.
 
 ```powershell
 riff --version
