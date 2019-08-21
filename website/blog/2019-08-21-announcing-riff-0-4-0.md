@@ -124,4 +124,3 @@ More information about the charts is available [on GitHub](https://github.com/pr
 - continued development of the Streaming runtime ([projectriff/riff#1159](https://github.com/projectriff/riff/issues/1159))
 - a better install/uninstall/upgrade experience for runtimes ([projectriff/riff#1352](https://github.com/projectriff/riff/issues/1352))
 - use Kubebuilder ([projectriff/system#58](https://github.com/projectriff/system/issues/58))
-- [and more](https://app.zenhub.com/workspaces/projectriff-5d5ace6071abaa14abfe8680/board?milestones=v0.5.0%23&filterLogic=any&repos=98690441,109905076,153138133,110752475,194789082,175896907,192814161)
