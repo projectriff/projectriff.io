@@ -41,10 +41,9 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 ## create a Minikube cluster
 
 ```sh
-minikube start --memory=4096 --cpus=4 \
---kubernetes-version=v1.14.1 \
---vm-driver=hyperkit \
---extra-config=apiserver.enable-admission-plugins="LimitRanger,NamespaceExists,NamespaceLifecycle,ResourceQuota,ServiceAccount,DefaultStorageClass,MutatingAdmissionWebhook"
+minikube start \
+  --memory=4096 --cpus=4 \
+  --vm-driver=hyperkit
 ```
 
 To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
