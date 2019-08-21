@@ -101,7 +101,7 @@ The system provides four API groups, one for builds and one per runtime:
   - `Stream` - streams of messages
   - `Processor` - processors apply functions to messages on streams
 - `knative.projectriff.io/v1alpha1`
-  - `Adapter` - deployers map applications, functions, or containers to an existing Knative Service or Configuration.
+  - `Adapter` - adapters map applications, functions, or containers to an existing Knative Service or Configuration.
   - `Deployer` - deployers map applications, functions, or containers to Knative resources: Configuration and Route
 
 The [riff CLI](#riff-cli) is but one client that interacts with these CRDs. One the the design goals was to avoid deep knowledge of the system implementation in the CLI. All of that knowledge lives behind the CRDs and is managed by the system. We hope to see additional clients consume these CRDs to provide riff outcomes.
