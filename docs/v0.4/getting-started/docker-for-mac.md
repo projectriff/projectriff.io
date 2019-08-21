@@ -6,7 +6,7 @@ sidebar_label: Docker for Mac
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
 
-## install Docker
+## Install Docker
 
 Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac).
 
@@ -28,7 +28,7 @@ Confirm that your kubectl context is pointing to `docker-desktop`
 kubectl config current-context
 ```
 
-## install Helm
+## Install Helm
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
@@ -44,7 +44,7 @@ helm init --wait --service-account tiller
 
 > NOTE: Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
-## install the riff CLI
+## Install the riff CLI
 
 The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
 
@@ -67,7 +67,7 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install riff using Helm
+## Install riff using Helm
 
 Load the projectriff charts
 
@@ -130,7 +130,7 @@ riff credential apply my-creds --docker-hub $DOCKER_ID --set-default-image-prefi
 
 You will be prompted to provide the password.
 
-## create a function
+## Create a function
 
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your Docker Hub repo.
 
@@ -152,7 +152,7 @@ NAME     LATEST IMAGE                                                           
 square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
-## create a Knative deployer
+## Create a Knative deployer
 
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
@@ -193,7 +193,7 @@ curl http://localhost:$INGRESS_PORT/ -w '\n' \
 49
 ```
 
-## create a Core deployer
+## Create a Core deployer
 
 The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
 
@@ -236,7 +236,7 @@ curl http://localhost:8080/ -w '\n' \
 
 > NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
 
-## cleanup
+## Cleanup
 
 ```sh
 riff knative deployer delete knative-square
@@ -244,7 +244,7 @@ riff core deployer delete k8s-square
 riff function delete square
 ```
 
-## uninstalling and reinstalling
+## Uninstalling and reinstalling
 If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.
 
 ![reset Kubernetes using Preferences/Reset](/img/docker-for-mac-reset-kubernetes.png)

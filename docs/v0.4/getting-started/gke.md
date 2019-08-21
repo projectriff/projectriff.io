@@ -6,7 +6,7 @@ sidebar_label: GKE
 
 The following will help you get started running a riff function on GKE.
 
-## create a Google Cloud project
+## Create a Google Cloud project
 
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top. 
 
@@ -67,7 +67,7 @@ gcloud services enable \
   containerregistry.googleapis.com
 ```
 
-## create a GKE cluster
+## Create a GKE cluster
 
 Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient.
 
@@ -111,7 +111,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 --user=$(gcloud config get-value core/account)
 ```
 
-## install the helm CLI
+## Install the Helm CLI
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
@@ -127,7 +127,7 @@ helm init --wait --service-account tiller
 
 > Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
-## install the riff CLI
+Install the riff CLI
 
 The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
 
@@ -150,7 +150,7 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install riff using Helm
+## Install riff using Helm
 
 Load the projectriff charts
 
@@ -231,7 +231,7 @@ Use the riff CLI to apply credentials to a container registry (if you plan on us
 riff credential apply my-creds --gcr gcr-storage-admin.json --set-default-image-prefix
 ```
 
-## create a function
+## Create a function
 
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR. The function resource represents a build plan that will report the latest built image.
 
@@ -253,7 +253,7 @@ NAME     LATEST IMAGE                                                           
 square   gcr.io/$GCP_PROJECT/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   <empty>   <empty>   Ready    1m13s
 ```
 
-## create a Knative deployer
+## Create a Knative deployer
 
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
@@ -294,7 +294,7 @@ curl http://$INGRESS_IP/ -w '\n' \
 49
 ```
 
-## create a Core deployer
+## Create a Core deployer
 
 The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
 
@@ -337,7 +337,7 @@ curl http://localhost:8080/ -w '\n' \
 
 Note that unlike Knative, the Core runtime will not scale deployments down to zero.
 
-## cleanup
+## Cleanup
 
 ```sh
 riff knative deployer delete knative-square

@@ -6,7 +6,7 @@ sidebar_label: Docker for Windows
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Windows.
 
-## install Docker
+## Install Docker
 Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
 
 ![download Docker for mac](/img/docker-for-windows-download.png)
@@ -72,7 +72,7 @@ kube-system   kube-proxy-6q844                         1/1     Running   0      
 kube-system   kube-scheduler-docker-desktop            1/1     Running   0          32s
 ```
 
-## install the helm CLI
+## Install the helm CLI
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
@@ -88,7 +88,7 @@ helm init --wait --service-account tiller
 
 > Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
-## install the riff CLI
+## Install the riff CLI
 A zip with the riff CLI for Windows is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, check that the riff CLI version is 0.4.0 or later.
 
 ```powershell
@@ -104,7 +104,7 @@ Most riff CLI commands below are formatted for PowerShell which has a different 
 Add-Content -Path $env:USERPROFILE\.riff.yaml -Value 'no-color: true'
 ```
 
-## install riff using Helm
+## Install riff using Helm
 
 Load the projectriff charts
 
@@ -166,7 +166,7 @@ You will be prompted to provide the password.
 
 > On Windows, a known issue prevents the password prompt from working in git bash. Use the Windows PowerShell or Command terminal instead.
 
-## create a function from a GitHub repo
+## Create a function from a GitHub repo
 
 This riff command (formatted for PowerShell) will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your dockerhub repo.
 
@@ -190,7 +190,7 @@ square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb4
 
 > Due to differences between Windows and Linux file permissions, local builds are not supported on Windows. We suggest building from a git repository as a workaround.
 
-## create a Knative deployer
+## Create a Knative deployer
 
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
@@ -280,7 +280,7 @@ curl http://localhost:8080/ `
 
 Note that unlike Knative, the Core runtime will not scale deployments down to zero.
 
-## delete the function and deployers
+## Delete the function and deployers
 
 ```sh
 riff knative deployer delete knative-square
@@ -288,7 +288,7 @@ riff core deployer delete k8s-square
 riff function delete square
 ```
 
-## uninstalling and reinstalling
+## Uninstalling and reinstalling
 If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.
 
 ![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)

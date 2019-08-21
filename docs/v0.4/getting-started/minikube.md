@@ -6,7 +6,7 @@ sidebar_label: Minikube
 
 The following will help you get started running a riff function on Minikube.
 
-## install Minikube
+## Install Minikube
 
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
 
@@ -21,15 +21,15 @@ For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blo
 
 For additional details see the minikube [driver installation](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#hyperkit-driver) docs.
 
-## install Docker
+## Install Docker
 
 Installing [Docker Community Edition](https://store.docker.com/search?type=edition&offering=community) is the easiest way get started with Docker. Since Minikube includes its own Docker daemon, you actually only need the `docker` CLI to run `docker login` for `--local-path` function builds. This means that if you want to, you can shut down the Docker Desktop app and depend on the Minikube Docker daemon by running `eval $(minikube docker-env)`.
 
-## install Kubectl
+## Install kubectl
 
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
+[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
-## create a Minikube cluster
+## Create a Minikube cluster
 
 ```sh
 minikube start --memory=4096 --cpus=4 \
@@ -47,7 +47,7 @@ Confirm that your kubectl context is pointing to the new cluster
 kubectl config current-context
 ```
 
-## install the helm CLI
+Install the Helm CLI
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
@@ -63,7 +63,7 @@ helm init --wait --service-account tiller
 
 > Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
-## install the riff CLI
+## Install the riff CLI
 
 The [riff CLI](https://github.com/projectriff/riff/) is available to download from our GitHub [releases](https://github.com/projectriff/riff/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
 
@@ -86,7 +86,7 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## install riff using Helm
+## Install riff using Helm
 
 Load the projectriff charts
 
@@ -149,7 +149,7 @@ riff credential apply my-creds --docker-hub $DOCKER_ID --set-default-image-prefi
 
 You will be prompted to provide the password.
 
-## create a function
+## Create a function
 
 This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to your Docker Hub repo.
 
@@ -171,7 +171,7 @@ NAME     LATEST IMAGE                                                           
 square   index.docker.io/jldec/square@sha256:527053273ec98697dbdd88951f77edf82a9a46767125cd1e4348422fe5b8e09f   square.js   <empty>   <empty>   Ready    4m3s
 ```
 
-## create a Knative deployer
+## Create a Knative deployer
 
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
@@ -213,7 +213,7 @@ curl http://$MINIKUBE_IP:$INGRESS_PORT/ -w '\n' \
 49
 ```
 
-## create a Core deployer
+## Create a Core deployer
 
 The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
 
@@ -256,7 +256,7 @@ curl http://localhost:8080/ -w '\n' \
 
 > NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
 
-## cleanup
+## Cleanup
 
 ```sh
 riff knative deployer delete knative-square

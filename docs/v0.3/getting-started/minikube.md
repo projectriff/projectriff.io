@@ -17,7 +17,7 @@ The following will help you get started running a riff function with Knative on 
 
 ### install kubectl
 
-[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
+[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
 
 ### install Minikube
 
