@@ -10,7 +10,7 @@ A lot has changed, buckle up.
 
 <!--truncate-->
 
-![Boston skyline at night](assets/boston-night.jpeg)
+![Boston skyline at night](assets/boston-night.jpg)
 
 ## Notable changes
 
