@@ -45,7 +45,7 @@ Confirm that your kubectl context is pointing to the new cluster
 kubectl config current-context
 ```
 
-Install the Helm CLI
+## Install Helm
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
