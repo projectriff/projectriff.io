@@ -60,6 +60,10 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
   height: 100%;
 }
 
+.gridBlock .blockImage img {
+  max-width: 80%;
+}
+
 /* replace 'riff is for function' header text with 'is for function' since the logo is the word riff */
 .headerTitleWithLogo {
 	visibility: hidden;
