@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Announcing riff v0.4.0 · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Announcing riff v0.4.0 · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0"/><meta property="og:description" content="We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/v0.4/getting-started" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://github.com/projectriff" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2019/08/21/announcing-riff-0-4-0">Announcing riff v0.4.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/10/announcing-riff-0-3-0">Announcing riff v0.3.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/announcing-riff-0-2-0">Announcing riff v0.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/27/riffing-on-knative">riffing on Knative at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/26/knative-and-riff-for-spring-developers">Knative and riff for Spring Developers at SpringOne Platform 2018</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/21/announcing-riff-0-4-0">Announcing riff v0.4.0</a></h1><p class="post-meta">August 21, 2019</p><div class="authorBlock"></div></header><div><span><p>We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors.</p>
+<p>The riff CLI can be downloaded from our <a href="https://github.com/projectriff/cli/releases/tag/v0.4.0">releases page</a> on GitHub. Please follow one of the <a href="/docs/v0.4/getting-started">getting started</a> guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.</p>
+<p>A lot has changed, buckle up.</p>
+<!--truncate-->
+<p><img src="/blog/assets/boston-night.jpg" alt="Boston skyline at night"></p>
+<h2><a class="anchor" aria-hidden="true" id="notable-changes"></a><a href="#notable-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Notable changes</h2>
+<h3><a class="anchor" aria-hidden="true" id="knative-and-istio"></a><a href="#knative-and-istio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Knative and Istio</h3>
+<p>riff no longer has a hard dependency on Knative and Istio. Knative integration is provided by riff's <a href="#knative-runtime">Knative runtime</a>, which is available in clusters with Knative Serving installed. Istio is only required for the Knative runtime.</p>
+<h3><a class="anchor" aria-hidden="true" id="builds"></a><a href="#builds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>builds</h3>
+<p>riff now supports builds for applications and containers as well as function builds. Each build resource reports the latest image that a <a href="#runtimes">runtime</a> uses to deploy the built workload. The built image is always reported as a digested image, making the detection and rollout of changes more deterministic.</p>
+<p>With builds transitioning from one-off tasks to continuous streams of images, riff 0.4 sets up the API to enable hooking into source repositories and triggering automated rebuilds.</p>
+<h4><a class="anchor" aria-hidden="true" id="function-builds"></a><a href="#function-builds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>function builds</h4>
+<p>A riff function uses buildpacks with function invokers to convert function source code into a runnable container. The same invokers and buildpacks provided by riff 0.3 are available. Unlike riff 0.3, a function resource is only responsible for building a container image. The deployment of the container is managed by the <a href="#runtimes">runtime</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="application-builds"></a><a href="#application-builds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>application builds</h4>
+<p>In addition to functions, riff can now build applications using the <a href="https://hub.docker.com/r/cloudfoundry/cnb">Cloud Foundry, Cloud Native Buildpack builder</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="container-builds"></a><a href="#container-builds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>container builds</h4>
+<p>A riff container resource is a way to bring your own builds to riff. It resolves an existing container image to a digest, providing the same interface as Application and Function.</p>
+<h3><a class="anchor" aria-hidden="true" id="runtimes"></a><a href="#runtimes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>runtimes</h3>
+<p>Runtimes deploy built containers in different ways. By offering users a choice of runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative. A streaming runtime is under development.</p>
+<h4><a class="anchor" aria-hidden="true" id="core-runtime"></a><a href="#core-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Core runtime</h4>
+<p>The Core runtime is a thin layer creating a Kubernetes deployment and a service that targets the deployment. The deployment is automatically updated for new images, creating a new replicaset based on the deployment rollout strategy.</p>
+<p>The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the <code>/scale</code> subresource on deployment. Custom scalers, observability and ingress can be provided for deployers as none are provided by default.</p>
+<p>See the <a href="/docs/v0.4/runtimes/core">Core runtime</a> docs for details.</p>
+<h4><a class="anchor" aria-hidden="true" id="knative-runtime"></a><a href="#knative-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Knative runtime</h4>
+<p>The Knative runtime is most analogous to riff 0.3. It requires that Knative Serving and Istio are installed into the cluster in addition to riff. There are two models for consuming Knative: Deployers and Adapters.</p>
+<p>Deployers create a Knative configuration and route for a referenced build. The configuration is updated as the build produces new images.</p>
+<p>Adapters reference an existing Knative service or configuration, updating the image property as the build produces new ones.  Route rules are preserved when new images trigger the creation of Knative revisions.</p>
+<p>See the <a href="/docs/v0.4/runtimes/knative">Knative runtime docs</a> for details.</p>
+<h4><a class="anchor" aria-hidden="true" id="streaming-runtime"></a><a href="#streaming-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Streaming runtime</h4>
+<p>The new streaming runtime is under active development, and not included in this release.</p>
+<p>The goal of the streaming runtime is to enable workloads to consume, process, and produce message streams, in conjunction with streaming platforms like Kafka.</p>
+<p>Streaming component development can be tracked on GitHub, including:</p>
+<ul>
+<li><a href="https://github.com/projectriff/streaming-processor">streaming-processor</a></li>
+<li><a href="https://github.com/projectriff/kafka-provider">kafka-provider</a></li>
+<li><a href="https://github.com/projectriff/streaming-http-adapter">streaming-http-adapter</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="riff-cli"></a><a href="#riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>riff CLI</h3>
+<p>The <a href="/docs/v0.4/cli/riff">riff CLI</a> was rewritten from the ground up to support the new riff Build and Runtime models. The CLI behavior is more consistent and predictable. No more deleting a &quot;service&quot; which was created as a function.</p>
+<p>The most significant change is that creating a function builds the container image, but it no longer deploys the function as a Knative workload. Functions are deployed using the deployment features of the runtime, and Knative is just one runtime option</p>
+<p>riff is no longer installed into a Kubernetes cluster using the CLI. <a href="#helm-charts">Helm charts</a> are available to aid the installation, and we are exploring other installation options, like <a href="https://cnab.io">Cloud Native Application Bundles</a> (CNAB).</p>
+<p>Other highlights of the new CLI include:</p>
+<ul>
+<li>table <code>list</code>ings with rolled up status</li>
+<li>colorized output</li>
+<li><code>--tail</code> to watch logs during <code>create</code> until the resource is ready or fails</li>
+<li><code>tail</code> command to watch all logs for a resource until canceled</li>
+<li><code>delete</code> and <code>list</code> for every resource that is <code>create</code>d</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="riff-system-and-crds"></a><a href="#riff-system-and-crds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>riff System and CRDs</h3>
+<p>Powering the new build and runtime models is <a href="https://github.com/projectriff/system">riff System</a>. riff System provides Kubernetes CRDs and a controller to reconcile the state of custom riff resources with other resources.</p>
+<p>The system provides four API groups, one for builds and one per runtime:</p>
+<ul>
+<li><code>build.projectriff.io/v1alpha1</code>
+<ul>
+<li><code>Application</code> - applications built from source using application buildpacks</li>
+<li><code>Function</code> - functions built from source using function buildpacks</li>
+<li><code>Container</code> - polls a container repository for updated images</li>
+</ul></li>
+<li><code>core.projectriff.io/v1alpha1</code>
+<ul>
+<li><code>Deployer</code> - deployers map applications, functions, or containers to Kubernetes core resources: Deployment and Service</li>
+</ul></li>
+<li><code>streaming.projectriff.io/v1alpha1</code>
+<ul>
+<li><code>Stream</code> - streams of messages</li>
+<li><code>Processor</code> - processors apply functions to messages on streams</li>
+</ul></li>
+<li><code>knative.projectriff.io/v1alpha1</code>
+<ul>
+<li><code>Adapter</code> - adapters map applications, functions, or containers to an existing Knative Service or Configuration.</li>
+<li><code>Deployer</code> - deployers map applications, functions, or containers to Knative resources: Configuration and Route</li>
+</ul></li>
+</ul>
+<p>The <a href="#riff-cli">riff CLI</a> is but one client that interacts with these CRDs. One the the design goals was to avoid deep knowledge of the system implementation in the CLI. All of that knowledge lives behind the CRDs and is managed by the system. We hope to see additional clients consume these CRDs to provide riff outcomes.</p>
+<h3><a class="anchor" aria-hidden="true" id="helm-charts"></a><a href="#helm-charts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Helm charts</h3>
+<p>riff and its dependencies are published as Helm charts in a custom chart repository.</p>
+<pre><code class="hljs css language-sh">helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+</code></pre>
+<p>More information about the charts is available <a href="https://github.com/projectriff/charts/tree/v0.4.x#readme">on GitHub</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="looking-to-the-future"></a><a href="#looking-to-the-future" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Looking to the future</h2>
+<!-- TODO describe the 0.5 road map at a high level -->
+<ul>
+<li>replace Knative Build (which has reached end-of-life) with Pivotal Build Service for continuous builds (<a href="https://github.com/projectriff/riff/issues/1348">projectriff/riff#1348</a>)</li>
+<li>continued development of the Streaming runtime (<a href="https://github.com/projectriff/riff/issues/1159">projectriff/riff#1159</a>)</li>
+<li>a better install/uninstall/upgrade experience for runtimes (<a href="https://github.com/projectriff/riff/issues/1352">projectriff/riff#1352</a>)</li>
+<li>use Kubebuilder (<a href="https://github.com/projectriff/system/issues/58">projectriff/system#58</a>)</li>
+</ul>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#notable-changes">Notable changes</a><ul class="toc-headings"><li><a href="#knative-and-istio">Knative and Istio</a></li><li><a href="#builds">builds</a></li><li><a href="#runtimes">runtimes</a></li><li><a href="#riff-cli">riff CLI</a></li><li><a href="#riff-system-and-crds">riff System and CRDs</a></li><li><a href="#helm-charts">Helm charts</a></li></ul></li><li><a href="#looking-to-the-future">Looking to the future</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
