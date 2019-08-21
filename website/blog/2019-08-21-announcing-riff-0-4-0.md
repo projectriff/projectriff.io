@@ -10,6 +10,9 @@ A lot has changed, buckle up.
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/cli/releases/tag/v0.4.0) on GitHub. Please follow one of the [getting started](/docs/v0.4/getting-started) guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.
 
+![Boston skyline at night](assets/boston-night.jpeg)
+
+
 ## Notable changes
 
 ### Knative and Istio
