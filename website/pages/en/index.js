@@ -59,7 +59,7 @@ class Index extends React.Component {
             content: `
 riff is an Open Source platform for building and running Functions, Applications, and Containers on [Kubernetes](https://kubernetes.io/). To get started running your own functions on riff, see our [Docs](/docs).
 
-This project is sponsored by [Pivotal](https://pivotala.io)
+This project is sponsored by [Pivotal](https://pivotal.io)
 `,
             image: `${baseUrl}img/riff-logo.png`,
             imageAlign: 'left'
@@ -93,7 +93,7 @@ This project is sponsored by [Pivotal](https://pivotala.io)
           {
             title: 'Buildpacks and Invokers',
             content: `
-[Cloud Native Buildpacks]() translate source code into container images.
+[Cloud Native Buildpacks](https://buildpacks.io) translate source code into container images.
 This release comes with buildpacks for functions using the following invokers:
 
 - [Java](https://github.com/projectriff/java-function-invoker)
@@ -113,7 +113,7 @@ This release comes with buildpacks for functions using the following invokers:
           {
             title: 'Knative Serving',
             content: `
-riff runs containers using [Knative serving](https://github.com/knative/serving).  
+riff supports running containers using [Knative serving](https://github.com/knative/serving).  
 This provides support for
 
 - 0-N autoscaling
