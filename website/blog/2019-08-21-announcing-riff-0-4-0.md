@@ -4,14 +4,13 @@ title: "Announcing riff v0.4.0"
 
 We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors.
 
+The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/cli/releases/tag/v0.4.0) on GitHub. Please follow one of the [getting started](/docs/v0.4/getting-started) guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.
+
 A lot has changed, buckle up.
 
 <!--truncate-->
 
-The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/cli/releases/tag/v0.4.0) on GitHub. Please follow one of the [getting started](/docs/v0.4/getting-started) guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.
-
 ![Boston skyline at night](assets/boston-night.jpeg)
-
 
 ## Notable changes
 
@@ -21,7 +20,7 @@ riff no longer has a hard dependency on Knative and Istio. Knative integration i
 
 ### builds
 
-riff Builds now encompass more than just functions with the addition of application and container builds. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
+riff Builds now encompass more than functions with the addition of application and container builds. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
 
 Builds are transitioning from one-off tasks to continuous streams of images. riff 0.4 sets up the API to enable ongoing updated builds, but does not yet hook into sources to trigger rebuilding.
 
@@ -35,17 +34,17 @@ In addition to functions, riff can now build Applications using the [Cloud Found
 
 #### container builds
 
-A riff Container resource is a build-less build. It exists to resolve an existing container image providing the same interface for other resources to consume as Application and Function. The image is resolved to a digest and checked for an updated image every 5 minutes.
+A riff Container resource is a way to bring your own builds to riff. It resolves to an existing container image to a digest providing the same interface as Application and Function.
 
 ### runtimes
 
-Runtimes deploy built containers in different ways. By offering users a choice of Runtimes, we hope to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative,and Streaming is under development.
+Runtimes deploy built containers in different ways. By offering users a choice of Runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative,and Streaming is under development.
 
 #### Core runtime
 
-The Core runtime is a streamlined runtime that allows operators to provide their own scalers, observability and ingress. For each Deployer, the runtime creates a Kubernetes Deployment and a Service that targets the deployment. The deployment is automatically updated for new build images creating a new replicaset based on the rollout strategy.
+The Core runtime is a thin layer creating a Kubernetes Deployment and a Service that targets the deployment. The deployment is automatically updated for new build images creating a new replicaset based on the rollout strategy.
 
-The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the `/scale` subresource on deployment.
+The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the `/scale` subresource on deployment. Custom scalers, observability and ingress can be provided for Deployers as none are provided by default.
 
 See the [Core runtime](/docs/v0.4/runtimes/core) docs for details.
 
@@ -95,15 +94,15 @@ The system provides four API groups, one for builds and one per runtime:
 - `build.projectriff.io/v1alpha1`
   - `Application` - applications built from source using application buildpacks
   - `Function` - functions built from source using function buildpacks
-  - `Container` - watch a container repository for the latest image
+  - `Container` - polls a container repository for updated images
 - `core.projectriff.io/v1alpha1`
-  - `Deployer` - deployers map HTTP requests to applications, functions, containers or images with Kubernetes core resources
+  - `Deployer` - deployers map applications, functions, or containers to Kubernetes core resources: Deployment and Service
 - `streaming.projectriff.io/v1alpha1`
   - `Stream` - streams of messages
   - `Processor` - processors apply functions to messages on streams
 - `knative.projectriff.io/v1alpha1`
-  - `Adapter` - adapters map applications, functions or container images into an existing Knative Service or Configuration.
-  - `Deployer` - deployers map HTTP requests to applications, functions, containers or images with Knative
+  - `Adapter` - deployers map applications, functions, or containers to an existing Knative Service or Configuration.
+  - `Deployer` - deployers map applications, functions, or containers to Knative resources: Configuration and Route
 
 The [riff CLI](#riff-cli) is but one client that interacts with these CRDs. One the the design goals was to avoid deep knowledge of the system implementation in the CLI. All of that knowledge lives behind the CRDs and is managed by the system. We hope to see additional clients consume these CRDs to provide riff outcomes.
 
