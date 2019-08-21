@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Announcing riff v0.1.3 · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We are pleased to announce the release of [riff v0.1.3](https://github.com/projectriff/riff/releases/tag/v0.1.3). Thank you riff and Knative contributors."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Announcing riff v0.1.3 · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/blog/2018/09/21/announcing-riff-0-1-3"/><meta property="og:description" content="We are pleased to announce the release of [riff v0.1.3](https://github.com/projectriff/riff/releases/tag/v0.1.3). Thank you riff and Knative contributors."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/v0.4/getting-started" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://github.com/projectriff" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/08/21/announcing-riff-0-4-0">Announcing riff v0.4.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/10/announcing-riff-0-3-0">Announcing riff v0.3.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/announcing-riff-0-2-0">Announcing riff v0.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/27/riffing-on-knative">riffing on Knative at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/26/knative-and-riff-for-spring-developers">Knative and riff for Spring Developers at SpringOne Platform 2018</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/09/21/announcing-riff-0-1-3">Announcing riff v0.1.3</a></h1><p class="post-meta">September 21, 2018</p><div class="authorBlock"></div></header><div><span><p>We are pleased to announce the release of <a href="https://github.com/projectriff/riff/releases/tag/v0.1.3">riff v0.1.3</a>. Thank you riff and Knative contributors.</p>
+<!--truncate-->
+<p>The riff CLI can be downloaded from our <a href="https://github.com/projectriff/riff/releases/tag/v0.1.3">releases page</a> on GitHub. Please follow one of the <a href="/docs">getting started</a> guides, to create a new cluster on GKE or minikube. To update an existing riff install first run <code>riff system uninstall --istio</code>. This release includes new manifests for the latest Knative and Istio.</p>
+<p>Here's an overview of some of the new features in riff v0.1.3:</p>
+<h2><a class="anchor" aria-hidden="true" id="credential-helpers"></a><a href="#credential-helpers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>credential helpers</h2>
+<p>Initializing a namespace with your push credentials is easier now.</p>
+<h4><a class="anchor" aria-hidden="true" id="point-to-your-gcr-key-docs-getting-started-with-knative-riff-on-gke-create-a-kubernetes-secret-for-pushing-images-to-gcr"></a><a href="#point-to-your-gcr-key-docs-getting-started-with-knative-riff-on-gke-create-a-kubernetes-secret-for-pushing-images-to-gcr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>point to your <a href="/docs/getting-started-with-knative-riff-on-gke/#create-a-kubernetes-secret-for-pushing-images-to-gcr">GCR key</a></h4>
+<pre><code class="hljs css language-sh">riff namespace init default --gcr &lt;path-to-json-file&gt;
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="or-enter-the-password-for-your-docker_id-when-prompted"></a><a href="#or-enter-the-password-for-your-docker_id-when-prompted" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>or enter the password for your $DOCKER_ID when prompted</h4>
+<pre><code class="hljs css language-sh">riff namespace init default --dockerhub <span class="hljs-variable">$DOCKER_ID</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="riff-buildpack-for-java"></a><a href="#riff-buildpack-for-java" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>riff buildpack for java</h2>
+<p>This release supports building java functions from source, either locally or on-cluster. Both variants use a new riff buildpack for java.</p>
+<blockquote>
+<p>NOTE: to preserve the old behavior of building containers with a pre-compiled jar file, use <code>riff function create jar</code>.</p>
+</blockquote>
+<p>All you need in your directory is the code with a maven pom, and the name of the handler class in a file called <code>riff.toml</code>. The example below uses a sample <a href="https://github.com/projectriff-samples/java-hello">java-hello</a> function available on GitHub.</p>
+<h4><a class="anchor" aria-hidden="true" id="rifftoml"></a><a href="#rifftoml" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>riff.toml</h4>
+<pre><code class="hljs css language-toml"><span class="hljs-attr">handler</span> = <span class="hljs-string">"functions.Hello"</span>
+</code></pre>
+<p>To build from code in a directory and push to local docker:</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create java hello \
+  --<span class="hljs-built_in">local</span>-path . \
+  --image dev.local/java-hello:v1
+</code></pre>
+<p>Using a <code>--local-path</code> builds code directly from your machine. The <code>dev.local</code> prefix exports the image to your docker environment. Remember to run <code>eval $(minikube docker-env)</code> for minikube.</p>
+<blockquote>
+<p>NOTE: pre-existing images with tags matching <code>--image</code> will result in an error &quot;Reading information from previous image for possible re-use&quot;. Remove those images first.</p>
+</blockquote>
+<p>You can iterate on your code by rebuilding locally, triggering a new Knative Revision for each build.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> build hello --<span class="hljs-built_in">local</span>-path path/to/<span class="hljs-keyword">function</span>/<span class="hljs-built_in">source</span>
+</code></pre>
+<p>To build from code on GitHub and push to DockerHub:</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create java hello \
+    --git-repo https://github.com/projectriff-samples/java-hello.git \
+    --image <span class="hljs-variable">$DOCKER_ID</span>/java-hello \
+    --verbose
+</code></pre>
+<p>Using <code>--verbose</code> shows the progress of the build as it's happening in the cluster. For GCR, replace <code>$DOCKER_ID</code> with your <code>gcr.io/$GCP_PROJECT</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="simpler-riff-service-invoke"></a><a href="#simpler-riff-service-invoke" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>simpler riff service invoke</h2>
+<p>You can now call <code>riff service invoke</code> with <code>--text</code> or <code>--json</code> to set the <code>Content-Type</code> header.</p>
+<h4><a class="anchor" aria-hidden="true" id="invoke-the-hello-function-with-text-input"></a><a href="#invoke-the-hello-function-with-text-input" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke the hello function with text input</h4>
+<pre><code class="hljs css language-sh">riff service invoke hello --text -- -w <span class="hljs-string">'\n'</span> -d world
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="riff-subscription-commands"></a><a href="#riff-subscription-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>riff subscription commands</h2>
+<p>Subscriptions now have their own separate CLI commands. The corresponding options on <code>riff function</code> and <code>riff service</code> have been removed.</p>
+<h4><a class="anchor" aria-hidden="true" id="create"></a><a href="#create" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create</h4>
+<pre><code class="hljs">Usage:
+  riff subscription create [SUBSCRIPTION_NAME] [flags]
+
+Examples:
+  riff subscription create --channel tweets --subscriber tweets-logger
+  riff subscription create my-subscription --channel tweets --subscriber tweets-logger
+  riff subscription create --channel tweets --subscriber tweets-logger --reply-to logged-tweets
+
+Flags:
+  -c, --channel string      the input channel of the subscription
+  -r, --reply-to string     the optional output channel of the subscription
+  -s, --subscriber string   the subscriber of the subscription
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="delete"></a><a href="#delete" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>delete</h4>
+<pre><code class="hljs">Usage:
+  riff subscription delete SUBSCRIPTION_NAME [flags]
+
+Example:
+  riff subscription delete my-subscription --namespace joseph-ns
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="list"></a><a href="#list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>list</h4>
+<pre><code class="hljs">Usage:
+  riff subscription list [flags]
+</code></pre>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#credential-helpers">credential helpers</a></li><li><a href="#riff-buildpack-for-java">riff buildpack for java</a></li><li><a href="#simpler-riff-service-invoke">simpler riff service invoke</a></li><li><a href="#riff-subscription-commands">riff subscription commands</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Announcing riff v0.1.2 on Knative · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[riff v0.1.2](https://github.com/projectriff/riff/releases/tag/v0.1.2) on Knative is now available.  "/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Announcing riff v0.1.2 on Knative · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/blog/2018/08/31/announcing-riff-0-1-2-on-Knative"/><meta property="og:description" content="[riff v0.1.2](https://github.com/projectriff/riff/releases/tag/v0.1.2) on Knative is now available.  "/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/v0.4/getting-started" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://github.com/projectriff" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/08/21/announcing-riff-0-4-0">Announcing riff v0.4.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/10/announcing-riff-0-3-0">Announcing riff v0.3.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/announcing-riff-0-2-0">Announcing riff v0.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/27/riffing-on-knative">riffing on Knative at SpringOne Platform 2018</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/26/knative-and-riff-for-spring-developers">Knative and riff for Spring Developers at SpringOne Platform 2018</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/08/31/announcing-riff-0-1-2-on-Knative">Announcing riff v0.1.2 on Knative</a></h1><p class="post-meta">August 31, 2018</p><div class="authorBlock"></div></header><div><span><p><a href="https://github.com/projectriff/riff/releases/tag/v0.1.2">riff v0.1.2</a> on Knative is now available.<br>
+Many thanks to all the riff and Knative contributors.</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="install"></a><a href="#install" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install</h2>
+<p>We recommend installing riff v0.1.2 on a fresh Kubernetes cluster. The riff CLI can be downloaded from our <a href="https://github.com/projectriff/riff/releases/tag/v0.1.2">releases page</a> on GitHub. Please follow one of the <a href="/docs">getting started</a> guides, to create a new cluster on GKE or minikube. Remember that you can also use the CLI to uninstall everything.</p>
+<h4><a class="anchor" aria-hidden="true" id="uninstall-knative-and-istio-without-prompting"></a><a href="#uninstall-knative-and-istio-without-prompting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>uninstall knative and istio without prompting</h4>
+<pre><code class="hljs css language-sh">riff system uninstall --istio --force
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="install-on-minikube-for-gke-omit-node-port"></a><a href="#install-on-minikube-for-gke-omit-node-port" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install on minikube (for GKE omit <code>--node-port</code>)</h4>
+<pre><code class="hljs css language-sh">riff system install --manifest stable --node-port
+</code></pre>
+<p>Riff will install &quot;stable&quot; release builds of Knative serving, eventing, and build components. You can opt to install the latest nightly builds using the new <code>--manifest latest</code> option.</p>
+<p>Remember that after installing you also need to install credentials for builds to push to a docker registry, and configure a namespace. See the <a href="/docs">getting started docs</a> for more details</p>
+<h4><a class="anchor" aria-hidden="true" id="install-dockerhub-push-credentials-and-initialize-the-default-namespace"></a><a href="#install-dockerhub-push-credentials-and-initialize-the-default-namespace" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install dockerhub push credentials and initialize the default namespace</h4>
+<pre><code class="hljs css language-sh">kubectl apply -f dockerhub-push-credentials.yaml
+riff namespace init default --secret push-credentials
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="feedback-during-builds"></a><a href="#feedback-during-builds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>feedback during builds</h2>
+<p>There are two new options to provide feedback during builds. In previous releases, <code>riff function create</code> would return immediately after creating the build resources, without waiting for the build to succeed or fail.</p>
+<ul>
+<li><code>--wait</code> or <code>-w</code> waits until the build status is known</li>
+<li><code>--verbose</code> or <code>-v</code> is like wait, but also relays logs to the output</li>
+</ul>
+<p>For example, if you have not <a href="/docs/getting-started-with-knative-riff-on-minikube/#initialize-the-namespace">initialized</a> the default namespace, creating a function with <code>--wait</code> will produce an error message.</p>
+<h4><a class="anchor" aria-hidden="true" id="create-square-and-push-image-to-docker"></a><a href="#create-square-and-push-image-to-docker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create square and push image to docker</h4>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create node square \
+  --git-repo https://github.com/trisberg/node-fun-square.git \
+  --artifact square.js \
+  --image <span class="hljs-variable">$DOCKER_ID</span>/node-fun-square:v1 \
+  --<span class="hljs-built_in">wait</span>
+</code></pre>
+<pre><code class="hljs">Error: function creation failed: RevisionMissing: Configuration "square" does not have any ready Revision.; Revision creation failed with message: "Internal error occurred: admission webhook \"webhook.build.knative.dev\" denied the request: mutation failed: serviceaccounts \"riff-build\" not found".
+</code></pre>
+<p>Using <code>--verbose</code> instead of <code>--wait</code> is useful in situations where the cause of an error can be deduced from container logs.</p>
+<h2><a class="anchor" aria-hidden="true" id="function-chaining-over-channels"></a><a href="#function-chaining-over-channels" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>function chaining over channels</h2>
+<p><a href="https://github.com/knative/eventing/pull/325">Knative/eventing</a> can now relay the reponse of a function to a another channel. This can be configured through the riff CLI by specifying the output channel with <code>--output</code> or <code>-o</code> when creating a subscription.</p>
+<p><img src="/img/function-chain.png" alt="function chain"></p>
+<p>In this example, we will build a chain consisting of 3 functions and 2 channels. The random function posts numbers to the square function via the numbers channel, which forwards the output of square to the squares channel, for processing by the hello function.</p>
+<p>To keep things interesting, we'll build the 3 functions in 3 different ways.</p>
+<ul>
+<li><strong>square</strong> uses a Knative build, pulling source code from github, and pushing the image to a registry.</li>
+<li><strong>hello</strong> is built manually with the docker CLI and a Dockerfile.</li>
+<li><strong>random</strong> uses a prebuilt image pulled from dockerhub.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="square-function"></a><a href="#square-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>square function</h2>
+<p>The command below runs an in-cluster build of the square function, and pushes the image to dockerhub. For gcr, replace $DOCKER_ID with your gcr.io/$GCP_PROJECT.</p>
+<h4><a class="anchor" aria-hidden="true" id="create-square-and-push-image-to-docker-1"></a><a href="#create-square-and-push-image-to-docker-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create square and push image to docker</h4>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create node square \
+  --git-repo https://github.com/trisberg/node-fun-square.git \
+  --artifact square.js \
+  --image <span class="hljs-variable">$DOCKER_ID</span>/node-fun-square:v1 \
+  --<span class="hljs-built_in">wait</span>
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="use-watch-to-monitor-pods"></a><a href="#use-watch-to-monitor-pods" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>use watch to monitor pods</h4>
+<pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
+</code></pre>
+<p>For the first build, you may see the <code>square-00001-xxxx</code> build pod show a status of <code>Init:0/4</code> for several minutes. Once built, the square function will show up as a pod called <code>square-00001-deployment-xxxxxxxxx-xxxxx</code>.</p>
+<p>When the square function is running, you should be able to invoke it.</p>
+<pre><code class="hljs css language-sh">riff service invoke square -- -w <span class="hljs-string">'\n'</span> \
+  -H <span class="hljs-string">'Content-Type: text/plain'</span> \
+  -d 7
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="hello-function"></a><a href="#hello-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>hello function</h2>
+<p>In this case, we'll start with a javascript function and a Dockerfile in a directory. Notice that the function logs its ouput in addition to returning it. We'll use this to monitor the output of the function chain.</p>
+<h4><a class="anchor" aria-hidden="true" id="hellojs"></a><a href="#hellojs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>hello.js</h4>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> {
+  <span class="hljs-keyword">var</span> out = <span class="hljs-string">'hello '</span> + x
+  <span class="hljs-built_in">console</span>.log(out)
+  <span class="hljs-keyword">return</span> out
+}
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="dockerfile"></a><a href="#dockerfile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dockerfile</h4>
+<pre><code class="hljs css language-dockerfile"><span class="hljs-keyword">FROM</span> projectriff/node-function-invoker:<span class="hljs-number">0.0</span>.<span class="hljs-number">8</span>
+<span class="hljs-keyword">ENV</span> FUNCTION_URI /functions/hello.js
+<span class="hljs-keyword">ADD</span><span class="bash"> hello.js <span class="hljs-variable">${FUNCTION_URI}</span></span>
+</code></pre>
+<p>Build the function image, and use it create a Knative Service.</p>
+<h4><a class="anchor" aria-hidden="true" id="build-locally-for-minikube"></a><a href="#build-locally-for-minikube" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>build locally for minikube</h4>
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">eval</span> $(minikube docker-env)
+</code></pre>
+<pre><code class="hljs css language-sh">docker build -t dev.local/hello:v1 .
+riff service create hello --image dev.local/hello:v1
+</code></pre>
+<p>The <code>dev.local</code> prefix tells Knative to use the local docker daemon instead of pulling an image from a remote container registry.</p>
+<h4><a class="anchor" aria-hidden="true" id="build-for-dockerhub"></a><a href="#build-for-dockerhub" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>build for dockerhub</h4>
+<pre><code class="hljs css language-sh">docker build -t <span class="hljs-variable">$DOCKER_ID</span>/hello:v1 .
+docker push <span class="hljs-variable">$DOCKER_ID</span>/hello:v1
+riff service create hello --image <span class="hljs-variable">$DOCKER_ID</span>/hello:v1
+</code></pre>
+<p>For gcr, replace $DOCKER_ID with your gcr.io/$GCP_PROJECT.</p>
+<p>Using a tool like kail makes it easy to watch the function container log.</p>
+<h4><a class="anchor" aria-hidden="true" id="start-kail-in-a-separate-terminal-window"></a><a href="#start-kail-in-a-separate-terminal-window" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>start kail in a separate terminal window</h4>
+<pre><code class="hljs css language-sh">kail -d hello-00001-deployment -c user-container
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="invoke-hello"></a><a href="#invoke-hello" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke hello</h4>
+<pre><code class="hljs css language-sh">riff service invoke hello -- -w <span class="hljs-string">'\n'</span> \
+  -H <span class="hljs-string">'Content-Type: text/plain'</span> \
+  -d riff
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="kail-output"></a><a href="#kail-output" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>kail output</h4>
+<pre><code class="hljs">default/hello...[user-container]: hello riff
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="random-function"></a><a href="#random-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>random function</h2>
+<p>We have published an image on <a href="https://hub.docker.com/r/jldec/random/tags/">dockerhub</a> for the random function. The source can be found on <a href="https://github.com/jldec/random">GitHub</a>. This function posts random numbers between 0 and 999 to a channel or to another function.</p>
+<p>Create the random function using the image from dockerhub.</p>
+<pre><code class="hljs css language-sh">riff service create random --image jldec/random:v0.0.2
+</code></pre>
+<p>Invoke the function to send posts to hello.</p>
+<pre><code class="hljs css language-sh">riff service invoke random -- -w <span class="hljs-string">'\n'</span> \
+  -H <span class="hljs-string">'Content-Type:application/json'</span> \
+  -d <span class="hljs-string">'{"url":"http://hello.default.svc.cluster.local"}'</span>
+</code></pre>
+<p>The kail log of the hello function from above should show the numbers as they are generated</p>
+<pre><code class="hljs">default/hello...[user-container]: hello riff
+default/hello...[user-container]: hello 315
+default/hello...[user-container]: hello 980
+default/hello...[user-container]: hello 122
+default/hello...[user-container]: hello 891
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="wiring-everything-together"></a><a href="#wiring-everything-together" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>wiring everything together</h2>
+<h4><a class="anchor" aria-hidden="true" id="create-the-numbers-and-squares-channels"></a><a href="#create-the-numbers-and-squares-channels" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create the numbers and squares channels</h4>
+<pre><code class="hljs css language-sh">riff channel create numbers --cluster-bus stub
+riff channel create squares --cluster-bus stub
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="create-two-subscriptions"></a><a href="#create-two-subscriptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create two subscriptions.</h4>
+<pre><code class="hljs css language-sh">riff service subscribe square --input numbers --output squares
+riff service subscribe hello --input squares
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="configure-the-random-function-to-post-to-the-numbers-channel"></a><a href="#configure-the-random-function-to-post-to-the-numbers-channel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>configure the random function to post to the numbers channel.</h4>
+<pre><code class="hljs css language-sh">riff service invoke random -- -w <span class="hljs-string">'\n'</span> \
+  -H <span class="hljs-string">'Content-Type:application/json'</span> \
+  -d <span class="hljs-string">'{"url":"http://numbers-channel.default.svc.cluster.local"}'</span>
+</code></pre>
+<p>Now the hello function should show the output of square and hello chained together.</p>
+<pre><code class="hljs">default/hello...[user-container]: hello 549081
+default/hello...[user-container]: hello 88804
+default/hello...[user-container]: hello 786769
+default/hello...[user-container]: hello 1225
+default/hello...[user-container]: hello 525625
+</code></pre>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install">install</a></li><li><a href="#feedback-during-builds">feedback during builds</a></li><li><a href="#function-chaining-over-channels">function chaining over channels</a></li><li><a href="#square-function">square function</a></li><li><a href="#hello-function">hello function</a></li><li><a href="#random-function">random function</a></li><li><a href="#wiring-everything-together">wiring everything together</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
