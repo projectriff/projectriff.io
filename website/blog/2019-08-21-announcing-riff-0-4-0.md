@@ -20,31 +20,31 @@ riff no longer has a hard dependency on Knative and Istio. Knative integration i
 
 ### builds
 
-riff Builds now encompass more than functions with the addition of application and container builds. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image to make the detection and rollout of changes more deterministic.
+riff now supports function builds as well as builds for applications and containers. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image, making the detection and rollout of changes more deterministic.
 
-Builds are transitioning from one-off tasks to continuous streams of images. riff 0.4 sets up the API to enable ongoing updated builds, but does not yet hook into sources to trigger rebuilding.
+With builds transitioning from one-off tasks to continuous streams of images, riff 0.4 sets up the API to enable hooking into source repositories and triggering automated rebuilds.
 
 #### function builds
 
-A riff Function uses buildpacks with function invokers to convert function source code into a runnable container. The same invokers and buildpacks provided by riff 0.3 are available. Unlike riff 0.3, a Function resource is only responsible for building a container image. The deployment of the container is managed by the [runtime](#runtimes).
+A riff function uses buildpacks with function invokers to convert function source code into a runnable container. The same invokers and buildpacks provided by riff 0.3 are available. Unlike riff 0.3, a function resource is only responsible for building a container image. The deployment of the container is managed by the [runtime](#runtimes).
 
 #### application builds
 
-In addition to functions, riff can now build Applications using the [Cloud Foundry, Cloud Native Buildpack builder](https://hub.docker.com/r/cloudfoundry/cnb).
+In addition to functions, riff can now build applications using the [Cloud Foundry, Cloud Native Buildpack builder](https://hub.docker.com/r/cloudfoundry/cnb).
 
 #### container builds
 
-A riff Container resource is a way to bring your own builds to riff. It resolves to an existing container image to a digest providing the same interface as Application and Function.
+A riff container resource is a way to bring your own builds to riff. It resolves an existing container image to a digest, providing the same interface as Application and Function.
 
 ### runtimes
 
-Runtimes deploy built containers in different ways. By offering users a choice of Runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative,and Streaming is under development.
+Runtimes deploy built containers in different ways. By offering users a choice of runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative. A streaming runtime is under development.
 
 #### Core runtime
 
-The Core runtime is a thin layer creating a Kubernetes Deployment and a Service that targets the deployment. The deployment is automatically updated for new build images creating a new replicaset based on the rollout strategy.
+The Core runtime is a thin layer creating a Kubernetes deployment and a service that targets the deployment. The deployment is automatically updated for new images, creating a new replicaset based on the deployment rollout strategy.
 
-The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the `/scale` subresource on deployment. Custom scalers, observability and ingress can be provided for Deployers as none are provided by default.
+The workload is accessible from within the cluster by default, but must be explicitly exposed externally. A single replica is run by default, but the deployment can be targeted by a HorizontalPodAutoscaler or any other scaler that supports the `/scale` subresource on deployment. Custom scalers, observability and ingress can be provided for deployers as none are provided by default.
 
 See the [Core runtime](/docs/v0.4/runtimes/core) docs for details.
 
@@ -52,9 +52,9 @@ See the [Core runtime](/docs/v0.4/runtimes/core) docs for details.
 
 The Knative runtime is most analogous to riff 0.3. It requires that Knative Serving and Istio are installed into the cluster in addition to riff. There are two models for consuming Knative: Deployers and Adapters.
 
-Deployers create a Knative Configuration and Route from the latest image available for a referenced build. The Configuration is updated as the build produces new images.
+Deployers create a Knative configuration and route for a referenced build. The configuration is updated as the build produces new images.
 
-Adapters reference an existing Knative Service or Configuration, updating the image property as the build produces new ones. The Route rules are preserved as new images trigger the creation of Knative Revisions.
+Adapters reference an existing Knative service or configuration, updating the image property as the build produces new ones.  Route rules are preserved when new images trigger the creation of Knative revisions.
 
 See the [Knative runtime docs](/docs/v0.4/runtimes/knative) for details.
 
@@ -87,7 +87,7 @@ Other highlights of the new CLI include:
 
 ### riff System and CRDs
 
-Powering the new build and runtime models is [riff System](https://github.com/projectriff/system). riff System provides Kubernetes CRDs and a controller to reconcile the state of these custom riff resources into other resources, to achieve the desired outcome.
+Powering the new build and runtime models is [riff System](https://github.com/projectriff/system). riff System provides Kubernetes CRDs and a controller to reconcile the state of custom riff resources with other resources.
 
 The system provides four API groups, one for builds and one per runtime:
 
