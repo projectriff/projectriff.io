@@ -14,6 +14,10 @@ A lot has changed, buckle up.
 
 ## Notable changes
 
+### runtimes
+
+Runtimes deploy built containers in different ways. By offering users a choice of runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative. A streaming runtime is under development.
+
 ### Knative and Istio
 
 riff no longer has a hard dependency on Knative and Istio. Knative integration is provided by riff's [Knative runtime](#knative-runtime), which is available in clusters with Knative Serving installed. Istio is only required for the Knative runtime.
@@ -35,10 +39,6 @@ In addition to functions, riff can now build applications using the [Cloud Found
 #### container builds
 
 A riff container resource is a way to bring your own builds to riff. It resolves an existing container image to a digest, providing the same interface as Application and Function.
-
-### runtimes
-
-Runtimes deploy built containers in different ways. By offering users a choice of runtimes, we plan to make the platform more extensible and support a variety of workloads including long-running applications, stream processors, and finite jobs. This release includes two runtimes, Core and Knative. A streaming runtime is under development.
 
 #### Core runtime
 
