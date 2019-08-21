@@ -20,7 +20,7 @@ riff no longer has a hard dependency on Knative and Istio. Knative integration i
 
 ### builds
 
-riff now supports function builds as well as builds for applications and containers. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image, making the detection and rollout of changes more deterministic.
+riff now supports builds for applications and containers as well as function builds. Each build resource reports the latest image that a [runtime](#runtimes) uses to deploy the built workload. The built image is always reported as a digested image, making the detection and rollout of changes more deterministic.
 
 With builds transitioning from one-off tasks to continuous streams of images, riff 0.4 sets up the API to enable hooking into source repositories and triggering automated rebuilds.
 
