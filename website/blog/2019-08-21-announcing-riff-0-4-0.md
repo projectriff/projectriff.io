@@ -118,9 +118,7 @@ More information about the charts is available [on GitHub](https://github.com/pr
 
 ## Looking to the future
 
-<!-- TODO describe the 0.5 road map at a high level -->
-
-- replace Knative Build (which has reached end-of-life) with Pivotal Build Service for continuous builds ([projectriff/riff#1348](https://github.com/projectriff/riff/issues/1348))
+- replace Knative Build (which has reached end-of-life) with kpack for continuous builds ([projectriff/riff#1348](https://github.com/projectriff/riff/issues/1348))
 - continued development of the Streaming runtime ([projectriff/riff#1159](https://github.com/projectriff/riff/issues/1159))
 - a better install/uninstall/upgrade experience for runtimes ([projectriff/riff#1352](https://github.com/projectriff/riff/issues/1352))
 - use Kubebuilder ([projectriff/system#58](https://github.com/projectriff/system/issues/58))
