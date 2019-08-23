@@ -6,12 +6,14 @@
 
 const siteConfig = {
 
-  projectName: 'riff',
+  // for gh-pages publishing using `npm run publish`
+  projectName: 'projectriff.io',
   organizationName: 'projectriff',
+  cname: 'projectriff.io',
+
   title: 'riff is for functions',
   tagline: '',
 
-  cname: 'projectriff.io',
   url: 'https://projectriff.io',
   baseUrl: '/',
 
