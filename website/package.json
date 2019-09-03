@@ -2,7 +2,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "docusaurus-start",
-    "build": "docusaurus-build"
+    "build": "docusaurus-build",
+    "publish": "docusaurus-publish"
   },
   "dependencies": {
     "docusaurus": "^1.12.0"
