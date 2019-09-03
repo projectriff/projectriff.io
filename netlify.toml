@@ -2,5 +2,5 @@
 
 [build]
   base = "website/"
-  publish = "website/build/riff/"
+  publish = "website/build/projectriff.io/"
   command = "npm run build"
