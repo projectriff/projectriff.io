@@ -1,0 +1,26 @@
+name: Publish to gh-pages
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - run: npm install
+      working-directory: website
+    - run: |
+        git config --global user.email "${GIT_USER}@users.noreply.github.com"
+        git config --global user.name "Github Actions"
+        echo "machine github.com login ${GIT_USER} password ${GITHUB_TOKEN}" > ~/.netrc
+        npm run publish
+      working-directory: website
+      env:
+        GIT_USER: ${{secrets.GH_USER}}
+        GITHUB_TOKEN: ${{secrets.GH_PERSONAL_ACCESS_TOKEN}}
