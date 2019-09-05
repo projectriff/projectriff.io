@@ -24,6 +24,7 @@ const siteConfig = {
 
   // used only in pages/en/versions.js
   versions: [
+    { name:'v0.5.x (snapshots)', url:'docs/v0.5/getting-started' },
     { name:'v0.4.x', url:'docs/v0.4/getting-started' },
     { name:'v0.3.x', url:'docs/v0.3/getting-started' }
   ],
