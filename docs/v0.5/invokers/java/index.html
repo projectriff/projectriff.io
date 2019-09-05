@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Java Function Invoker · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Java functions are invoked using a [Java Function Invoker](https://github.com/projectriff/java-function-invoker) that is provided by riff when you build the function."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Java Function Invoker · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/"/><meta property="og:description" content="Java functions are invoked using a [Java Function Invoker](https://github.com/projectriff/java-function-invoker) that is provided by riff when you build the function."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/v0.4/getting-started" target="_self">Docs</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://github.com/projectriff" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Function Invokers</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Version (v0.5.x snaphots)<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.5/versions/v0.4">v0.4.x</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/versions/v0.3">v0.3.x</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting Started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Install</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.5/getting-started">Pick your environment</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/getting-started/gke">GKE</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/getting-started/minikube">Minikube</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/getting-started/docker-for-mac">Docker for Mac</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/getting-started/docker-for-windows">Docker for Windows</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Runtimes<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.5/runtimes/core">Core</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/runtimes/knative">Knative</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Function Invokers<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem navListItemActive"><a class="navItem" href="/docs/v0.5/invokers/java">Java</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/invokers/node">Node.js</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/invokers/command">Command</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">CLI Reference<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff">riff</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-doctor">riff doctor</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-completion">riff completion</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Credential</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-credential">riff credential</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-credential-apply">riff credential apply</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-credential-delete">riff credential delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-credential-list">riff credential list</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Build</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function">riff function</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function-create">riff function create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function-delete">riff function delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function-list">riff function list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function-status">riff function status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-function-tail">riff function tail</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application">riff application</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application-create">riff application create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application-delete">riff application delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application-list">riff application list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application-status">riff application status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-application-tail">riff application tail</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-container">riff container</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-container-create">riff container create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-container-delete">riff container delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-container-list">riff container list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-container-status">riff container status</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Core Runtime</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core">riff core</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer">riff core deployer</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer-create">riff core deployer create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer-delete">riff core deployer delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer-list">riff core deployer list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer-status">riff core deployer status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-core-deployer-tail">riff core deployer tail</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Knative Runtime</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative">riff knative</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-adapter">riff knative adapter</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-adapter-create">riff knative adapter create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-adapter-delete">riff knative adapter delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-adapter-list">riff knative adapter list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-adapter-status">riff knative adapter status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer">riff knative deployer</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer-create">riff knative deployer create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer-delete">riff knative deployer delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer-list">riff knative deployer list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer-status">riff knative deployer status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.5/cli/riff-knative-deployer-tail">riff knative deployer tail</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/projectriff/projectriff.io/blob/master/docs/v0.5/invokers/java.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Java Function Invoker</h1></header><article><div><span><p>Java functions are invoked using a <a href="https://github.com/projectriff/java-function-invoker">Java Function Invoker</a> that is provided by riff when you build the function.</p>
+<p>The <em>Java Function Invoker</em> is a Spring Boot application which locates your function based on configuration settings, and invoke the function for each request.</p>
+<p>The riff function support for the Java language relies on function code being written using interfaces like <code>Function&lt;T,R&gt;</code>, <code>Supplier&lt;T&gt;</code>, or <code>Consumer&lt;T&gt;</code> from the <code>java.util.function</code> package in the Java SE platform.</p>
+<p>The implementation can be provided as a plain Java class or as part of a Spring Boot app.</p>
+<h2><a class="anchor" aria-hidden="true" id="creating-a-plain-java-function"></a><a href="#creating-a-plain-java-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a plain Java function</h2>
+<p>You can create a function using plain Java code, without having to depend on Spring Boot for configuration. This requires some more work when setting things up. You need to create your own build scripts using either Maven or Gradle. There are no required dependencies but you can provide dependencies that your function requires. You can find an example here: <a href="https://github.com/projectriff-samples/java-hello">https://github.com/projectriff-samples/java-hello</a></p>
+<p>When creating plain Java function your function must implement the <code>java.util.function.Function</code> interface. Here is the function from the above mentioned sample:</p>
+<pre><code class="hljs css language-java"><span class="hljs-keyword">package</span> functions;
+
+<span class="hljs-keyword">import</span> java.util.function.Function;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Function</span>&lt;<span class="hljs-title">String</span>, <span class="hljs-title">String</span>&gt; </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">apply</span><span class="hljs-params">(String name)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello "</span> + name;
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="building-the-plain-java-function"></a><a href="#building-the-plain-java-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>building the plain Java function</h3>
+<p>Just as for Spring Boot based functions you can build your plain Java function either from local source or from source committed to a GitHub repository. Here we will only show the build from the GitHub repo:</p>
+<pre><code class="hljs">riff function create hello --handler functions.Hello --git-repo https://github.com/projectriff-samples/java-hello.git
+</code></pre>
+<p>The <code>--handler</code> option is the fully qualified name of the class that provides the function implementation.</p>
+<h2><a class="anchor" aria-hidden="true" id="creating-a-spring-boot-based-function"></a><a href="#creating-a-spring-boot-based-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a Spring Boot based function</h2>
+<p>Begin by creating a new project using <a href="start.spring.io">Spring Initializr</a>.  You can select either <code>Maven Project</code> or <code>Gradle Project</code> as the project type but the language must be <code>Java</code>. Pick a name for your project and any dependencies that your function requires. The final step is to download the generated zip file and extracting the contents.</p>
+<h3><a class="anchor" aria-hidden="true" id="adding-functions"></a><a href="#adding-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>adding functions</h3>
+<p>You can now add a <code>@Bean</code> providing the function implementation. It can either be added as a separate <code>@Configuration</code> source file or for simple functions just add it to the main application file. Here we add the <code>uppercase</code> function to the main <code>@SpringBootApplication</code> source file:</p>
+<pre><code class="hljs css language-java"><span class="hljs-keyword">package</span> com.example.upper;
+
+<span class="hljs-keyword">import</span> java.util.function.Function;
+
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UppercaseApplication</span> </span>{
+
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Function&lt;String, String&gt; <span class="hljs-title">uppercase</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> s -&gt; s.toUpperCase();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        SpringApplication.run(UppercaseApplication.class, args);
+    }
+
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="building-the-spring-boot-based-function"></a><a href="#building-the-spring-boot-based-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>building the Spring Boot based function</h3>
+<p>You can build your function either from local source or from source committed to a GitHub repository.</p>
+<blockquote>
+<p>NOTE: The <code>--local-path</code> builds option is disabled on Windows.</p>
+</blockquote>
+<p>For local build use:</p>
+<pre><code class="hljs">riff function create uppercase --local-path . --handler uppercase
+</code></pre>
+<p>When building from a GitHub repo use something like (replace the <code>--git-repo</code> argument with your own repository URL):</p>
+<pre><code class="hljs">riff function create uppercase --handler uppercase --git-repo https://github.com/projectriff-samples/java-boot-uppercase.git
+</code></pre>
+<p>The <code>--handler</code> option is the name of the <code>@Bean</code> that was used for the function. If your application only has a single function bean then you can omit this option.</p>
+<blockquote>
+<p>NOTE: If you haven't specified a default image prefix when setting the credentials then you need to provide an <em>‑‑image</em> option for the function create command.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="running-a-spring-boot-based-function-locally"></a><a href="#running-a-spring-boot-based-function-locally" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>running a Spring Boot based function locally</h3>
+<p>If you would like to run your Spring Boot based function locally you can include web support when creating the project with Spring Initializr. Add the <em>Function</em> dependency plus either <em>Spring Web Starter</em> or <em>Spring Reactive Web</em>.</p>
+<p>You can now run your function application locally using:</p>
+<pre><code class="hljs">mvn spring-boot:run
+</code></pre>
+<p>Once the app starts up, open another terminal and invoke the function using <code>curl</code>:</p>
+<pre><code class="hljs">curl localhost:8080 -H 'Content-Type: text/plain' -w '\n' -d hello
+</code></pre>
+<p>If your application contains multiple functions you need to provide the bean name as the path. You could use this to invoke a <code>lower</code> function:</p>
+<pre><code class="hljs">curl localhost:8080/lower -H 'Content-Type: text/plain' -w '\n' -d hello
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="deploying-a-function"></a><a href="#deploying-a-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploying a function</h2>
+<p>Please see the runtime documentation for how to deploy and invoke the function.</p>
+<ul>
+<li><a href="/docs/v0.5/runtimes/core">Core runtime</a></li>
+<li><a href="/docs/v0.5/runtimes/knative">Knative runtime</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cleanup</h2>
+<p>When done with the function, delete the function resource to stop creating new builds.</p>
+<blockquote>
+<p>NOTE: Images built by the function continue to exist in the container registry and may continue to be consumed by a runtime.</p>
+</blockquote>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> delete hello
+</code></pre>
+<pre><code class="hljs">Deleted function "hello"
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/runtimes/knative"><span class="arrow-prev">← </span><span>Knative</span></a><a class="docs-next button" href="/docs/v0.5/invokers/node"><span>Node.js</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#creating-a-plain-java-function">Creating a plain Java function</a><ul class="toc-headings"><li><a href="#building-the-plain-java-function">building the plain Java function</a></li></ul></li><li><a href="#creating-a-spring-boot-based-function">Creating a Spring Boot based function</a><ul class="toc-headings"><li><a href="#adding-functions">adding functions</a></li><li><a href="#building-the-spring-boot-based-function">building the Spring Boot based function</a></li><li><a href="#running-a-spring-boot-based-function-locally">running a Spring Boot based function locally</a></li></ul></li><li><a href="#deploying-a-function">Deploying a function</a></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
