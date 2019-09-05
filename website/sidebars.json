@@ -1,7 +1,105 @@
 {
+  "docs/v0.5": {
+    "Version (v0.5.x snaphots)": [
+      "v0.5/versions/v0.4",
+      "v0.5/versions/v0.3"
+    ],
+    "Getting Started": [
+      {
+        "type": "subcategory",
+        "label": "Install",
+        "ids": [
+          "v0.5/getting-started",
+          "v0.5/getting-started/gke",
+          "v0.5/getting-started/minikube",
+          "v0.5/getting-started/docker-for-mac",
+          "v0.5/getting-started/docker-for-windows"
+        ]
+      }
+    ],
+    "Runtimes": [
+      "v0.5/runtimes/core",
+      "v0.5/runtimes/knative"
+    ],
+    "Function Invokers": [
+      "v0.5/invokers/java",
+      "v0.5/invokers/node",
+      "v0.5/invokers/command"
+    ],
+    "CLI Reference": [
+      "v0.5/cli/riff",
+      "v0.5/cli/riff-doctor",
+      "v0.5/cli/riff-completion",
+      {
+        "type": "subcategory",
+        "label": "Credential",
+        "ids": [
+          "v0.5/cli/riff-credential",
+          "v0.5/cli/riff-credential-apply",
+          "v0.5/cli/riff-credential-delete",
+          "v0.5/cli/riff-credential-list"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Build",
+        "ids": [
+          "v0.5/cli/riff-function",
+          "v0.5/cli/riff-function-create",
+          "v0.5/cli/riff-function-delete",
+          "v0.5/cli/riff-function-list",
+          "v0.5/cli/riff-function-status",
+          "v0.5/cli/riff-function-tail",
+          "v0.5/cli/riff-application",
+          "v0.5/cli/riff-application-create",
+          "v0.5/cli/riff-application-delete",
+          "v0.5/cli/riff-application-list",
+          "v0.5/cli/riff-application-status",
+          "v0.5/cli/riff-application-tail",
+          "v0.5/cli/riff-container",
+          "v0.5/cli/riff-container-create",
+          "v0.5/cli/riff-container-delete",
+          "v0.5/cli/riff-container-list",
+          "v0.5/cli/riff-container-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Core Runtime",
+        "ids": [
+          "v0.5/cli/riff-core",
+          "v0.5/cli/riff-core-deployer",
+          "v0.5/cli/riff-core-deployer-create",
+          "v0.5/cli/riff-core-deployer-delete",
+          "v0.5/cli/riff-core-deployer-list",
+          "v0.5/cli/riff-core-deployer-status",
+          "v0.5/cli/riff-core-deployer-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Knative Runtime",
+        "ids": [
+          "v0.5/cli/riff-knative",
+          "v0.5/cli/riff-knative-adapter",
+          "v0.5/cli/riff-knative-adapter-create",
+          "v0.5/cli/riff-knative-adapter-delete",
+          "v0.5/cli/riff-knative-adapter-list",
+          "v0.5/cli/riff-knative-adapter-status",
+          "v0.5/cli/riff-knative-deployer",
+          "v0.5/cli/riff-knative-deployer-create",
+          "v0.5/cli/riff-knative-deployer-delete",
+          "v0.5/cli/riff-knative-deployer-list",
+          "v0.5/cli/riff-knative-deployer-status",
+          "v0.5/cli/riff-knative-deployer-tail"
+        ]
+      }
+    ]
+  },
   "docs/v0.4": {
     "Version (v0.4.x)": [
-      "v0.3"
+      "v0.4/versions/v0.5",
+      "v0.4/versions/v0.3"
     ],
     "Getting Started": [
       {
@@ -97,7 +195,8 @@
   },
   "docs/v0.3": {
     "Version (v0.3.x)": [
-      "v0.4"
+      "v0.3/versions/v0.5",
+      "v0.3/versions/v0.4"
     ],
     "Getting Started": [
       {
