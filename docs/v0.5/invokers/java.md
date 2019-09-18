@@ -43,7 +43,7 @@ The `--handler` option is the fully qualified name of the class that provides th
 
 ## Creating a Spring Boot based function
 
-Begin by creating a new project using [Spring Initializr](start.spring.io).  You can select either `Maven Project` or `Gradle Project` as the project type but the language must be `Java`. Pick a name for your project and any dependencies that your function requires. The final step is to download the generated zip file and extracting the contents.
+Begin by creating a new project using [Spring Initializr](https://start.spring.io/).  You can select either `Maven Project` or `Gradle Project` as the project type but the language must be `Java`. Pick a name for your project and any dependencies that your function requires. The final step is to download the generated zip file and extracting the contents.
 
 ### adding functions
 
