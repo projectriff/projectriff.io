@@ -145,11 +145,11 @@ helm repo update
 </code></pre>
 <p>riff can be installed with or without Knative. The riff <a href="/docs/v0.4/runtimes/core">Core runtime</a> is available in both environments, however, the riff <a href="/docs/v0.4/runtimes/knative">Knative Runtime</a> is only available if Knative is installed.</p>
 <p>To install riff with Knative and Istio:</p>
-<pre><code class="hljs css language-sh">helm install projectriff/istio --name istio --namespace istio-system --<span class="hljs-built_in">wait</span>
-helm install projectriff/riff --name riff --<span class="hljs-built_in">set</span> knative.enabled=<span class="hljs-literal">true</span>
+<pre><code class="hljs css language-sh">helm install projectriff/istio --name istio --version 0.4.x --namespace istio-system --<span class="hljs-built_in">wait</span>
+helm install projectriff/riff --name riff --version 0.4.x --<span class="hljs-built_in">set</span> knative.enabled=<span class="hljs-literal">true</span>
 </code></pre>
 <p>Alternatively, install riff without Knative or Istio:</p>
-<pre><code class="hljs css language-sh">helm install projectriff/riff --name riff
+<pre><code class="hljs css language-sh">helm install projectriff/riff --name riff --version 0.4.x
 </code></pre>
 <p>Verify the riff install.</p>
 <pre><code class="hljs css language-sh">riff doctor
