@@ -164,14 +164,14 @@ riff can be installed with or without Knative. The riff [Core runtime](../runtim
 To install riff with Knative and Istio:
 
 ```sh
-helm install projectriff/istio --name istio --namespace istio-system --wait
-helm install projectriff/riff --name riff --set knative.enabled=true
+helm install projectriff/istio --name istio --version 0.4.x --namespace istio-system --wait
+helm install projectriff/riff --name riff --version 0.4.x --set knative.enabled=true
 ```
 
 Alternatively, install riff without Knative or Istio:
 
 ```sh
-helm install projectriff/riff --name riff
+helm install projectriff/riff --name riff --version 0.4.x
 ```
 
 Verify the riff install. 
