@@ -82,7 +82,7 @@ To install riff with Knative and Istio:
 
 ```sh
 helm install projectriff/istio --name istio --version 0.4.x --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
-helm install projectriff/riff --name --version 0.4.x riff --set knative.enabled=true
+helm install projectriff/riff --name riff --version 0.4.x --set knative.enabled=true
 ```
 
 Alternatively, install riff without Knative or Istio:
