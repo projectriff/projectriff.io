@@ -113,23 +113,27 @@ helm repo add projectriff https://projectriff.storage.googleapis.com/charts/rele
 helm repo update
 ```
 
-riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
-Knative is installed.
+riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-To install riff with Knative and Istio:
-
-```powershell
-helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
-helm install projectriff/riff --name riff --set knative.enabled=true
-```
-
-Alternatively, install riff without Knative or Istio:
+If using the Knative runtime, first install Istio:
 
 ```powershell
-helm install projectriff/riff --name riff
+helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait --devel
 ```
 
-Verify the riff install. 
+Install riff with the desired runtime (pick any, all or none):
+
+Append:
+
+- `--set riff.runtimes.core.enabled=true` to enable the Core runtime
+- `--set riff.runtimes.knative.enabled=true` to enable the Knative runtime
+- `--set riff.runtimes.streaming.enabled=true` to enable the Streaming runtime
+
+```powershell
+helm install projectriff/riff --name riff --wait --devel
+```
+
+Verify the riff install. Resource may be missing if the corresponding runtime was not installed.
 
 ```powershell
 riff doctor
