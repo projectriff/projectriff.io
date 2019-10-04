@@ -19,7 +19,8 @@
     ],
     "Runtimes": [
       "v0.5/runtimes/core",
-      "v0.5/runtimes/knative"
+      "v0.5/runtimes/knative",
+      "v0.5/runtimes/streaming"
     ],
     "Function Invokers": [
       "v0.5/invokers/java",
