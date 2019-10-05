@@ -76,26 +76,36 @@ kube-system   kube-scheduler-docker-desktop            1/1     Running   0      
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
-Download the latest [Helm 2.x client CLI](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
+Download the [Helm v2.13.1 CLI](https://github.com/helm/helm/releases/tag/v2.13.1) for your platform. (Helm 3 is currently in beta and has not been tested for compatibility with riff). Unzip and copy the Helm CLI executable to a directory on your path.
 
-After copying helm.exe to a directory in your path, initialize the Helm Tiller.
-
-```powershell
+Initialize the Helm Tiller server in your cluster.
+```sh
 kubectl create serviceaccount tiller -n kube-system
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
 helm init --wait --service-account tiller
 ```
 
+Validate the installation.
+```sh
+helm version
+```
+```
+Client: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+```
+
 > Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
 
-## Install the riff CLI
-A zip with the [riff CLI](https://github.com/projectriff/cli/) for Windows is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Extract riff.exe and add it to a directory in your path. Once installed, check that the riff CLI version is 0.4.0 or later.
+## Build the riff CLI
 
-```powershell
+Clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install).
+
+Check that the riff CLI version is 0.5.0-snapshot.
+```sh
 riff --version
 ```
 ```
-riff version 0.4.0 (d1b042f4247d8eb01ee0b9e984926028a2844fe8)
+riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 ```
 
 Most riff CLI commands below are formatted for PowerShell which has a different way of interpreting colors. Disable riff CLI colors with the following command.
@@ -113,23 +123,27 @@ helm repo add projectriff https://projectriff.storage.googleapis.com/charts/rele
 helm repo update
 ```
 
-riff can be installed with or without Knative. The riff core runtime is available in both environments, however, the riff knative runtime is only available if
-Knative is installed.
+riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-To install riff with Knative and Istio:
-
-```powershell
-helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
-helm install projectriff/riff --name riff --set knative.enabled=true
-```
-
-Alternatively, install riff without Knative or Istio:
+If using the Knative runtime, first install Istio:
 
 ```powershell
-helm install projectriff/riff --name riff
+helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait --devel
 ```
 
-Verify the riff install. 
+Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.
+
+```powershell
+helm install projectriff/riff --name riff `
+  --set riff.runtimes.core.enabled=true `
+  --set riff.runtimes.knative.enabled=true `
+  --set riff.runtimes.streaming.enabled=false `
+  --wait --devel
+```
+
+> NOTE: Because of an issue, it is currently not possible to install the Knative and Streaming runtimes at the same time. After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+
+Verify the riff install. Resources may be missing if the corresponding runtime was not installed.
 
 ```powershell
 riff doctor

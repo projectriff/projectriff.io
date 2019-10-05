@@ -3,6 +3,7 @@ id: streaming
 title: Streaming Runtime
 sidebar_label: Streaming
 ---
+
 The streaming runtime allows execution of functions on **streams** of messages, permitting more complex interactions than the simple request / reply used by the [core](core.md) or [knative](knative.md) runtimes.
 
 ## Install
@@ -84,4 +85,3 @@ riff function create time-averager \
 ```bash
 riff processor create time-averager --function-ref time-averager --input numbers --output avgs
 ```
-

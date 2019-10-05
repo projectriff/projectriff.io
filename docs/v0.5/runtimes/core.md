@@ -10,7 +10,7 @@ Ingress and autoscalers are not provided.
 
 ## Install
 
-The core runtime is installed with riff by default. No further action is required.
+The core runtime is not installed with riff by default. See the platform [getting started guide](../getting-started.md) for how to install the core runtime.
 
 ## Create a deployer
 

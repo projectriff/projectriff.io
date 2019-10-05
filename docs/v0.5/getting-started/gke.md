@@ -103,40 +103,7 @@ kubectl config get-contexts
 
 You should also be able to find the cluster the [Kubernetes Engine](https://console.cloud.google.com/kubernetes/) console.
 
-### grant yourself cluster-admin permissions
-
-```sh
-kubectl create clusterrolebinding cluster-admin-binding \
---clusterrole=cluster-admin \
---user=$(gcloud config get-value core/account)
-```
-
-## Install the Helm CLI
-
-[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
-
-Download and install the latest [Helm 2.x release](https://github.com/helm/helm/releases) for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)
-
-After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.
-
-```sh
-kubectl create serviceaccount tiller -n kube-system
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
-helm init --wait --service-account tiller
-```
-
-> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
-
-## Install the riff CLI
-
-The [riff CLI](https://github.com/projectriff/cli/) is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Once installed, check that the riff CLI version is 0.4.0 or later.
-
-```sh
-riff --version
-```
-```
-riff version 0.4.0 (d1b042f4247d8eb01ee0b9e984926028a2844fe8)
-```
+### monitor your cluster
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
 
@@ -150,31 +117,80 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
+### grant yourself cluster-admin permissions
+
+```sh
+kubectl create clusterrolebinding cluster-admin-binding \
+--clusterrole=cluster-admin \
+--user=$(gcloud config get-value core/account)
+```
+
+## Install the Helm CLI
+
+[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+
+Download the [Helm v2.13.1 CLI](https://github.com/helm/helm/releases/tag/v2.13.1) for your platform. (Helm 3 is currently in beta and has not been tested for compatibility with riff). Unzip and copy the Helm CLI executable to a directory on your path.
+
+Initialize the Helm Tiller server in your cluster.
+```sh
+kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --wait --service-account tiller
+```
+
+Validate the installation.
+```sh
+helm version
+```
+```
+Client: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+```
+
+> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
+
+## Build the riff CLI
+
+Clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
+
+Check that the riff CLI version is 0.5.0-snapshot.
+```sh
+riff --version
+```
+```
+riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
+```
+
 ## Install riff using Helm
 
 Load the projectriff charts
 
-```ah
+```sh
 helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
 helm repo update
 ```
 
-riff can be installed with or without Knative. The riff [Core runtime](../runtimes/core.md) is available in both environments, however, the riff [Knative Runtime](../runtimes/knative.md) is only available if Knative is installed.
+riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-To install riff with Knative and Istio:
-
-```sh
-helm install projectriff/istio --name istio --namespace istio-system --wait
-helm install projectriff/riff --name riff --set knative.enabled=true
-```
-
-Alternatively, install riff without Knative or Istio:
+If using the Knative runtime, first install Istio:
 
 ```sh
-helm install projectriff/riff --name riff
+helm install projectriff/istio --name istio --namespace istio-system --wait --devel
 ```
 
-Verify the riff install. 
+Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.
+
+```sh
+helm install projectriff/riff --name riff \
+  --set riff.runtimes.core.enabled=true \
+  --set riff.runtimes.knative.enabled=true \
+  --set riff.runtimes.streaming.enabled=false \
+  --wait --devel
+```
+
+> NOTE: Because of an issue, it is currently not possible to install the Knative and Streaming runtimes at the same time. After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+
+Verify the riff install. Resources may be missing if the corresponding runtime was not installed.
 
 ```sh
 riff doctor
@@ -296,7 +312,7 @@ curl http://$INGRESS_IP/ -w '\n' \
 
 ## Create a Core deployer
 
-The [Core runtime](../runtimes/core.md) is available on all riff clusters. It deploys riff workloads as "vanilla" Kubernetes deployments and services.
+The [Core runtime](../runtimes/core.md) deploys riff workloads as "vanilla" Kubernetes deployments and services.
 
 ```sh
 riff core deployer create k8s-square --function-ref square --tail
