@@ -40,6 +40,11 @@ spec:
   bootstrapServers: kafkabroker:9092
 ```
 
+For convenience, this provider is available from [github.com/projectriff/system](https://github.com/projectriff/system/blob/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml).
+```sh
+kubectl apply -f https://raw.githubusercontent.com/projectriff/system/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml
+```
+
 Upon application, two deployments and two services should appear:
 ```bash
 kubectl get deploy,svc
@@ -80,8 +85,12 @@ Here is how to create an example processor using a function that averages number
 riff function create time-averager \
 	--git-repo https://github.com/projectriff-samples/time-averager.git \
 	--handler com.acme.TimeAverager
+  --tail
 ```
 
 ```bash
-riff processor create time-averager --function-ref time-averager --input numbers --output avgs
+riff streaming processor create time-averager \
+  --function-ref time-averager \
+  --input in \
+  --output out
 ```
