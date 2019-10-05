@@ -109,8 +109,8 @@ riff streaming stream create out --provider franz-kafka-provisioner --content-ty
 </blockquote>
 <p>Here is how to create an example processor using a function that averages numbers over time:</p>
 <pre><code class="hljs css language-bash">riff <span class="hljs-keyword">function</span> create time-averager \
-    --git-repo https://github.com/projectriff-samples/time-averager.git \
-    --handler com.acme.TimeAverager
+  --git-repo https://github.com/projectriff-samples/time-averager.git \
+  --handler com.acme.TimeAverager \
   --tail
 </code></pre>
 <pre><code class="hljs css language-bash">riff streaming processor create time-averager \
