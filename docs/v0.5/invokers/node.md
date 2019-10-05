@@ -34,15 +34,27 @@ module.exports = x => Promise.resolve(x ** 2);
 ### streams (experimental)
 
 Streaming functions can be created by setting the `$interactionModel` property on the function to `node-streams`.
-The function is invoked with two arguments, an `input` [Readable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable) and an `output` [Writeable Stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable).
-Both streams are object streams. Any value returned by the function is ignored, new messages must be written to the output stream.
+They must set the `$arity` to tell the invoker how many (input and output) streams they require.
+
+> NOTE: the `$arity` setting is temporary and will go away in a future release. 
+
+The function is invoked with two arguments:
+ - `inputs`, a dictionary of [Readable Streams](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable) 
+ - `outputs`, a dictionary of [Writeable Streams](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable)
+
+All of these streams are object streams and are currently only indexed by declaration order (`"0"`, `"1"`...).
+
+> NOTE: the streams may also be indexed by name in a future release.  
+
+Any value returned by the function is ignored, new messages must be written to the output stream.
 
 ```js
 // echo.js
-module.exports = (input, output) => {
-  input.pipe(output);
+module.exports = (inputs, outputs) => {
+  inputs["0"].pipe(outputs["0"]);
 };
 module.exports.$interactionModel = "node-streams";
+module.exports.$arity = 2;
 ```
 
 Any npm package that works with Node Streams can be used.
@@ -55,29 +67,11 @@ const upperCaser = miss.through.obj((chunk, enc, cb) => {
   cb(null, chunk.toUpperCase());
 });
 
-module.exports = (input, output) => {
-  input.pipe(upperCaser).pipe(output);
+module.exports = (inputs, outputs) => {
+  inputs["0"].pipe(upperCaser).pipe(outputs["0"]);
 };
 module.exports.$interactionModel = "node-streams";
-```
-
-The `Content-Type` for output messages can be set with the `$defaultContentType` property. By default, `text/plain` is used. For request-reply function, the `Accept` header is used, however, there is no Accept header in a stream.
-
-```js
-// greeter.js
-const miss = require("mississippi");
-
-const greeter = miss.through.obj((chunk, enc, cb) => {
-  cb(null, {
-    greeting: `Hello ${chunk}!`
-  });
-});
-
-module.exports = (input, output) => {
-  input.pipe(greeter).pipe(output);
-};
-module.exports.$interactionModel = "node-streams";
-module.exports.$defaultContentType = "application/json";
+module.exports.$arity = 2;
 ```
 
 ### messages vs payloads
@@ -101,11 +95,8 @@ module.exports = message => {
     ...
 };
 
-// tell the invoker the function wants to receive messages
-module.exports.$argumentType = 'message';
-
-// tell the invoker to produce this particular type of message
-Message.install();
+// tell the invoker the function wants to receive whole messages
+module.exports.$argumentTransformers = [(message) => { return message; }];
 ```
 
 #### producing messages
@@ -125,9 +116,14 @@ module.exports = name => {
     .build();
 };
 
-// even if the function receives payloads, it can still produce a message
-module.exports.$argumentType = "payload";
+// the following is the same as the default applied argument transformer
+module.exports.$argumentTransformers = [(message) => { return message.payload; }];
 ```
+#### cardinality
+
+In the case of request-reply functions (like the above ones), there must be at most one argument transformer.
+
+In the case of streaming functions, there must be either 0 or as many declared argument transformers as there are input streams. 
 
 ### lifecycle
 
@@ -200,8 +196,9 @@ riff function create hello \
 
 Please see the runtime documentation for how to deploy and invoke the function.
 
-- [Core runtime](../runtimes/core.md)
-- [Knative runtime](../runtimes/knative.md)
+- [Core runtime](../runtimes/core.md) -- for request-reply functions only!
+- [Knative runtime](../runtimes/knative.md) -- for request-reply functions only!
+- [Streaming runtime](../runtimes/streaming.md)
 
 ## Cleanup
 
