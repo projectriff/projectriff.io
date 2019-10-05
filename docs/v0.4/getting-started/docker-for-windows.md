@@ -119,14 +119,14 @@ Knative is installed.
 To install riff with Knative and Istio:
 
 ```powershell
-helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
-helm install projectriff/riff --name riff --set knative.enabled=true
+helm install projectriff/istio --name istio --version 0.4.x --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait
+helm install projectriff/riff --name riff --version 0.4.x --set knative.enabled=true
 ```
 
 Alternatively, install riff without Knative or Istio:
 
 ```powershell
-helm install projectriff/riff --name riff
+helm install projectriff/riff --name riff --version 0.4.x
 ```
 
 Verify the riff install. 
