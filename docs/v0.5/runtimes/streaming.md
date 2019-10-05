@@ -3,7 +3,7 @@ id: streaming
 title: Streaming Runtime
 sidebar_label: Streaming
 ---
-The streaming runtime allows execution of function on **streams** of messages, permitting more complex interactions than the simple request / reply used by the [core](core.md) or [knative](knative.md) runtimes.
+The streaming runtime allows execution of functions on **streams** of messages, permitting more complex interactions than the simple request / reply used by the [core](core.md) or [knative](knative.md) runtimes.
 
 ## Install
 
@@ -56,9 +56,9 @@ service/franz-kafka-provisioner   ClusterIP      10.11.255.151   <none>         
 
 ## Streams
 
-Streams are namespaced resources that allow the flow (and typically persist) of messages serialized by riff streaming. Each stream has a **content-type** assigned to it and only messages of that MIME type are allowed on that stream.
+Streams are namespaced resources that allow the flow of (and typically persist) messages serialized by riff streaming. Each stream has a **content-type** assigned to it and only messages compatible with that MIME type are allowed on that stream.
 
-To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff cli and specify the _address of the **provisioner** service of the provider to use_.
+To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff CLI and specify the _address of the **provisioner** service of the provider to use_.
 
 Building on the example above, here is how to create two streams, named `in` and `out` respectively, both managed by the `franz` provider:
 ```bash
