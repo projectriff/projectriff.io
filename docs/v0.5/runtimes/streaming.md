@@ -83,8 +83,8 @@ Upon creation of a processor, a deployment is created that hosts both the functi
 Here is how to create an example processor using a function that averages numbers over time:
 ```bash
 riff function create time-averager \
-	--git-repo https://github.com/projectriff-samples/time-averager.git \
-	--handler com.acme.TimeAverager
+  --git-repo https://github.com/projectriff-samples/time-averager.git \
+  --handler com.acme.TimeAverager \
   --tail
 ```
 
