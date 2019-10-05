@@ -72,13 +72,26 @@
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="streams-experimental"></a><a href="#streams-experimental" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>streams (experimental)</h3>
 <p>Streaming functions can be created by setting the <code>$interactionModel</code> property on the function to <code>node-streams</code>.
-The function is invoked with two arguments, an <code>input</code> <a href="https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable">Readable Stream</a> and an <code>output</code> <a href="https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable">Writeable Stream</a>.
-Both streams are object streams. Any value returned by the function is ignored, new messages must be written to the output stream.</p>
+They must set the <code>$arity</code> to tell the invoker how many (input and output) streams they require.</p>
+<blockquote>
+<p>NOTE: the <code>$arity</code> setting is temporary and will go away in a future release.</p>
+</blockquote>
+<p>The function is invoked with two arguments:</p>
+<ul>
+<li><code>inputs</code>, a dictionary of <a href="https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_readable">Readable Streams</a></li>
+<li><code>outputs</code>, a dictionary of <a href="https://nodejs.org/dist/latest-v8.x/docs/api/stream.html#stream_class_stream_writable">Writeable Streams</a></li>
+</ul>
+<p>All of these streams are object streams and are currently only indexed by declaration order (<code>&quot;0&quot;</code>, <code>&quot;1&quot;</code>...).</p>
+<blockquote>
+<p>NOTE: the streams may also be indexed by name in a future release.</p>
+</blockquote>
+<p>Any value returned by the function is ignored, new messages must be written to the output stream.</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">// echo.js</span>
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
-  input.pipe(output);
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">inputs, outputs</span>) =&gt;</span> {
+  inputs[<span class="hljs-string">"0"</span>].pipe(outputs[<span class="hljs-string">"0"</span>]);
 };
 <span class="hljs-built_in">module</span>.exports.$interactionModel = <span class="hljs-string">"node-streams"</span>;
+<span class="hljs-built_in">module</span>.exports.$arity = <span class="hljs-number">2</span>;
 </code></pre>
 <p>Any npm package that works with Node Streams can be used.</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">// upperCase.js</span>
@@ -88,26 +101,11 @@ Both streams are object streams. Any value returned by the function is ignored, 
   cb(<span class="hljs-literal">null</span>, chunk.toUpperCase());
 });
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
-  input.pipe(upperCaser).pipe(output);
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">inputs, outputs</span>) =&gt;</span> {
+  inputs[<span class="hljs-string">"0"</span>].pipe(upperCaser).pipe(outputs[<span class="hljs-string">"0"</span>]);
 };
 <span class="hljs-built_in">module</span>.exports.$interactionModel = <span class="hljs-string">"node-streams"</span>;
-</code></pre>
-<p>The <code>Content-Type</code> for output messages can be set with the <code>$defaultContentType</code> property. By default, <code>text/plain</code> is used. For request-reply function, the <code>Accept</code> header is used, however, there is no Accept header in a stream.</p>
-<pre><code class="hljs css language-js"><span class="hljs-comment">// greeter.js</span>
-<span class="hljs-keyword">const</span> miss = <span class="hljs-built_in">require</span>(<span class="hljs-string">"mississippi"</span>);
-
-<span class="hljs-keyword">const</span> greeter = miss.through.obj(<span class="hljs-function">(<span class="hljs-params">chunk, enc, cb</span>) =&gt;</span> {
-  cb(<span class="hljs-literal">null</span>, {
-    <span class="hljs-attr">greeting</span>: <span class="hljs-string">`Hello <span class="hljs-subst">${chunk}</span>!`</span>
-  });
-});
-
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
-  input.pipe(greeter).pipe(output);
-};
-<span class="hljs-built_in">module</span>.exports.$interactionModel = <span class="hljs-string">"node-streams"</span>;
-<span class="hljs-built_in">module</span>.exports.$defaultContentType = <span class="hljs-string">"application/json"</span>;
+<span class="hljs-built_in">module</span>.exports.$arity = <span class="hljs-number">2</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="messages-vs-payloads"></a><a href="#messages-vs-payloads" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>messages vs payloads</h3>
 <p>By default, functions accept and produce payloads. Functions that need to interact with headers can instead opt to receive and/or produce messages. A message is an object that contains both headers and a payload. Message headers are a map with case-insensitive keys and multiple string values.</p>
@@ -123,11 +121,8 @@ Both streams are object streams. Any value returned by the function is ignored, 
     ...
 };
 
-<span class="hljs-comment">// tell the invoker the function wants to receive messages</span>
-<span class="hljs-built_in">module</span>.exports.$argumentType = <span class="hljs-string">'message'</span>;
-
-<span class="hljs-comment">// tell the invoker to produce this particular type of message</span>
-Message.install();
+<span class="hljs-comment">// tell the invoker the function wants to receive whole messages</span>
+<span class="hljs-built_in">module</span>.exports.$argumentTransformers = [<span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> { <span class="hljs-keyword">return</span> message; }];
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="producing-messages"></a><a href="#producing-messages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>producing messages</h4>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> { Message } = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@projectriff/message"</span>);
@@ -144,9 +139,12 @@ Message.install();
     .build();
 };
 
-<span class="hljs-comment">// even if the function receives payloads, it can still produce a message</span>
-<span class="hljs-built_in">module</span>.exports.$argumentType = <span class="hljs-string">"payload"</span>;
+<span class="hljs-comment">// the following is the same as the default applied argument transformer</span>
+<span class="hljs-built_in">module</span>.exports.$argumentTransformers = [<span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> { <span class="hljs-keyword">return</span> message.payload; }];
 </code></pre>
+<h4><a class="anchor" aria-hidden="true" id="cardinality"></a><a href="#cardinality" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cardinality</h4>
+<p>In the case of request-reply functions (like the above ones), there must be at most one argument transformer.</p>
+<p>In the case of streaming functions, there must be either 0 or as many declared argument transformers as there are input streams.</p>
 <h3><a class="anchor" aria-hidden="true" id="lifecycle"></a><a href="#lifecycle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>lifecycle</h3>
 <p>Functions that communicate with external services, like a database, can use the <code>$init</code> and <code>$destroy</code> lifecycle hooks on the function.
 These methods are invoked once per function invoker instance, whereas the target function may be invoked multiple times within a single function invoker instance.</p>
@@ -197,8 +195,9 @@ The <code>$destroy</code> method is guaranteed to be invoked after all of the ma
 <h2><a class="anchor" aria-hidden="true" id="deploying-the-function"></a><a href="#deploying-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deploying the function</h2>
 <p>Please see the runtime documentation for how to deploy and invoke the function.</p>
 <ul>
-<li><a href="/docs/v0.5/runtimes/core">Core runtime</a></li>
-<li><a href="/docs/v0.5/runtimes/knative">Knative runtime</a></li>
+<li><a href="/docs/v0.5/runtimes/core">Core runtime</a> -- for request-reply functions only!</li>
+<li><a href="/docs/v0.5/runtimes/knative">Knative runtime</a> -- for request-reply functions only!</li>
+<li><a href="/docs/v0.5/runtimes/streaming">Streaming runtime</a></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cleanup</h2>
 <p>When done with the function, delete the function resource to stop creating new builds.</p>
