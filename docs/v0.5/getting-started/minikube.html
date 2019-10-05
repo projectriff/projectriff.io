@@ -76,43 +76,57 @@
 <p>Confirm that your kubectl context is pointing to the new cluster</p>
 <pre><code class="hljs css language-sh">kubectl config current-context
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="install-helm"></a><a href="#install-helm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Helm</h2>
-<p><a href="https://helm.sh">Helm</a> is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.</p>
-<p>Download and install the latest <a href="https://github.com/helm/helm/releases">Helm 2.x release</a> for your platform. (Helm 3 is currently in alpha and has not been tested for compatibility with riff)</p>
-<p>After installing the Helm CLI, we need to initialize the Helm Tiller in our cluster.</p>
-<pre><code class="hljs css language-sh">kubectl create serviceaccount tiller -n kube-system
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
-helm init --<span class="hljs-built_in">wait</span> --service-account tiller
-</code></pre>
-<blockquote>
-<p>Please see the <a href="https://helm.sh/docs/using_helm/#securing-your-helm-installation">Helm documentation</a> for additional Helm security configuration.</p>
-</blockquote>
-<h2><a class="anchor" aria-hidden="true" id="install-the-riff-cli"></a><a href="#install-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install the riff CLI</h2>
-<p>The <a href="https://github.com/projectriff/cli/">riff CLI</a> is available to download from our GitHub <a href="https://github.com/projectriff/cli/releases">releases</a> page. Once installed, check that the riff CLI version is 0.4.0 or later.</p>
-<pre><code class="hljs css language-sh">riff --version
-</code></pre>
-<pre><code class="hljs">riff version 0.4.0 (d1b042f4247d8eb01ee0b9e984926028a2844fe8)
-</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="monitor-your-cluster"></a><a href="#monitor-your-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>monitor your cluster</h3>
 <p>At this point it is useful to monitor your cluster using a utility like <code>watch</code>. To install on a Mac</p>
 <pre><code class="hljs css language-sh">brew install watch
 </code></pre>
 <p>Watch pods in a separate terminal.</p>
 <pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
 </code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-helm"></a><a href="#install-helm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Helm</h2>
+<p><a href="https://helm.sh">Helm</a> is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.</p>
+<p>Download the <a href="https://github.com/helm/helm/releases/tag/v2.13.1">Helm v2.13.1 CLI</a> for your platform. (Helm 3 is currently in beta and has not been tested for compatibility with riff). Unzip and copy the Helm CLI executable to a directory on your path.</p>
+<p>Initialize the Helm Tiller server in your cluster.</p>
+<pre><code class="hljs css language-sh">kubectl create serviceaccount tiller -n kube-system
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
+helm init --<span class="hljs-built_in">wait</span> --service-account tiller
+</code></pre>
+<p>Validate the installation.</p>
+<pre><code class="hljs css language-sh">helm version
+</code></pre>
+<pre><code class="hljs">Client: &amp;version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Server: &amp;version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+</code></pre>
+<blockquote>
+<p>Please see the <a href="https://helm.sh/docs/using_helm/#securing-your-helm-installation">Helm documentation</a> for additional Helm security configuration.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="build-the-riff-cli"></a><a href="#build-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build the riff CLI</h2>
+<p>Clone the <a href="https://github.com/projectriff/cli/">riff CLI repo</a>, and run <code>make build install</code>. This will require a recent <a href="https://golang.org/doc/install#install">go build environment</a>. On macOS you can use <code>brew install go</code>.</p>
+<p>Check that the riff CLI version is 0.5.0-snapshot.</p>
+<pre><code class="hljs css language-sh">riff --version
+</code></pre>
+<pre><code class="hljs">riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="install-riff-using-helm"></a><a href="#install-riff-using-helm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install riff using Helm</h2>
 <p>Load the projectriff charts</p>
-<pre><code class="hljs css language-ah">helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
+<pre><code class="hljs css language-sh">helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
 helm repo update
 </code></pre>
-<p>riff can be installed with or without Knative. The riff <a href="/docs/v0.5/runtimes/core">Core runtime</a> is available in both environments, however, the riff <a href="/docs/v0.5/runtimes/knative">Knative Runtime</a> is only available if Knative is installed.</p>
-<p>To install riff with Knative and Istio:</p>
-<pre><code class="hljs css language-sh">helm install projectriff/istio --name istio --namespace istio-system --<span class="hljs-built_in">set</span> gateways.istio-ingressgateway.type=NodePort --<span class="hljs-built_in">wait</span>
-helm install projectriff/riff --name riff --<span class="hljs-built_in">set</span> knative.enabled=<span class="hljs-literal">true</span>
+<p>riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.</p>
+<p>If using the Knative runtime, first install Istio:</p>
+<pre><code class="hljs css language-sh">helm install projectriff/istio --name istio --namespace istio-system --<span class="hljs-built_in">set</span> gateways.istio-ingressgateway.type=NodePort --<span class="hljs-built_in">wait</span> --devel
 </code></pre>
-<p>Alternatively, install riff without Knative or Istio:</p>
-<pre><code class="hljs css language-sh">helm install projectriff/riff --name riff
+<p>Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.</p>
+<pre><code class="hljs css language-sh">helm install projectriff/riff --name riff \
+  --<span class="hljs-built_in">set</span> riff.runtimes.core.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> riff.runtimes.knative.enabled=<span class="hljs-literal">true</span> \
+  --<span class="hljs-built_in">set</span> riff.runtimes.streaming.enabled=<span class="hljs-literal">false</span> \
+  --<span class="hljs-built_in">wait</span> --devel
 </code></pre>
-<p>Verify the riff install.</p>
+<blockquote>
+<p>NOTE: Because of an issue, it is currently not possible to install the Knative and Streaming runtimes at the same time. After installing the Streaming runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
+</blockquote>
+<p>Verify the riff install. Resources may be missing if the corresponding runtime was not installed.</p>
 <pre><code class="hljs css language-sh">riff doctor
 </code></pre>
 <pre><code class="hljs">NAMESPACE     STATUS
@@ -178,7 +192,7 @@ INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --o
 <pre><code class="hljs">49
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="create-a-core-deployer"></a><a href="#create-a-core-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Core deployer</h2>
-<p>The <a href="/docs/v0.5/runtimes/core">Core runtime</a> is available on all riff clusters. It deploys riff workloads as &quot;vanilla&quot; Kubernetes deployments and services.</p>
+<p>The <a href="/docs/v0.5/runtimes/core">Core runtime</a> deploys riff workloads as &quot;vanilla&quot; Kubernetes deployments and services.</p>
 <pre><code class="hljs css language-sh">riff core deployer create k8s-square --<span class="hljs-keyword">function</span>-ref square --tail
 </code></pre>
 <p>After the deployer is created, you can see the service name by listing deployers.</p>
@@ -209,4 +223,4 @@ Forwarding from [::1]:8080 -&gt; 8080
 riff core deployer delete k8s-square
 riff <span class="hljs-keyword">function</span> delete square
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started/gke"><span class="arrow-prev">← </span><span>GKE</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/docker-for-mac"><span>Docker for Mac</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-minikube">Install Minikube</a></li><li><a href="#install-docker">Install Docker</a></li><li><a href="#install-kubectl">Install kubectl</a></li><li><a href="#create-a-minikube-cluster">Create a Minikube cluster</a></li><li><a href="#install-helm">Install Helm</a></li><li><a href="#install-the-riff-cli">Install the riff CLI</a></li><li><a href="#install-riff-using-helm">Install riff using Helm</a><ul class="toc-headings"><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#create-a-core-deployer">Create a Core deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function-1">invoke the function</a></li></ul></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started/gke"><span class="arrow-prev">← </span><span>GKE</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/docker-for-mac"><span>Docker for Mac</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-minikube">Install Minikube</a></li><li><a href="#install-docker">Install Docker</a></li><li><a href="#install-kubectl">Install kubectl</a></li><li><a href="#create-a-minikube-cluster">Create a Minikube cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li></ul></li><li><a href="#install-helm">Install Helm</a></li><li><a href="#build-the-riff-cli">Build the riff CLI</a></li><li><a href="#install-riff-using-helm">Install riff using Helm</a><ul class="toc-headings"><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#create-a-core-deployer">Create a Core deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function-1">invoke the function</a></li></ul></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
