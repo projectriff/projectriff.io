@@ -79,6 +79,29 @@
       },
       {
         "type": "subcategory",
+        "label": "Streaming Runtime",
+        "ids": [
+          "v0.5/cli/riff-streaming",
+          "v0.5/cli/riff-streaming-stream",
+          "v0.5/cli/riff-streaming-stream-create",
+          "v0.5/cli/riff-streaming-stream-delete",
+          "v0.5/cli/riff-streaming-stream-list",
+          "v0.5/cli/riff-streaming-stream-status",
+          "v0.5/cli/riff-streaming-processor",
+          "v0.5/cli/riff-streaming-processor-create",
+          "v0.5/cli/riff-streaming-processor-delete",
+          "v0.5/cli/riff-streaming-processor-list",
+          "v0.5/cli/riff-streaming-processor-status",
+          "v0.5/cli/riff-streaming-processor-tail",
+          "v0.5/cli/riff-streaming-kafka-provider",
+          "v0.5/cli/riff-streaming-kafka-provider-create",
+          "v0.5/cli/riff-streaming-kafka-provider-delete",
+          "v0.5/cli/riff-streaming-kafka-provider-list",
+          "v0.5/cli/riff-streaming-kafka-provider-status"
+        ]
+      },
+      {
+        "type": "subcategory",
         "label": "Knative Runtime",
         "ids": [
           "v0.5/cli/riff-knative",
