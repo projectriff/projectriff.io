@@ -4,7 +4,7 @@
         <title>riff is for functions Blog</title>
         <link>https://projectriff.io/blog</link>
         <description>The best place to stay up-to-date with the latest riff is for functions news and events.</description>
-        <lastBuildDate>Wed, 21 Aug 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 09 Oct 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,20 @@
             <url>https://projectriff.io/img/riff-white.svg</url>
             <link>https://projectriff.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[From Monolith to riff Functions at SpringOne Platform 2019]]></title>
+            <link>https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html</link>
+            <guid>https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html</guid>
+            <pubDate>Wed, 09 Oct 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/GIubKs2-KJ4" frameborder="0" allowfullscreen width="100%"></iframe> </figure> ]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Mark Fisher and Cornelia Davis' Keynote at SpringOne Platform 2019]]></title>
+            <link>https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html</link>
+            <guid>https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html</guid>
+            <pubDate>Tue, 08 Oct 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/aIbAHg_QvEI" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
+        </item>
         <item>
             <title><![CDATA[Announcing riff v0.4.0]]></title>
             <link>https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0.html</link>
@@ -46,18 +60,18 @@
             <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/eZ4dKU0tZEk" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
         </item>
         <item>
-            <title><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
-            <link>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</link>
-            <guid>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</guid>
-            <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
-        </item>
-        <item>
             <title><![CDATA[Introduction to Knative at SpringOne Platform 2018]]></title>
             <link>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</link>
             <guid>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</guid>
             <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/CylT5O6IfkU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
+            <link>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</link>
+            <guid>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</guid>
+            <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
         </item>
         <item>
             <title><![CDATA[Mark Fisher's Keynote at SpringOne Platform 2018]]></title>

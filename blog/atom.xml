@@ -2,11 +2,31 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://projectriff.io/blog</id>
     <title>riff is for functions Blog</title>
-    <updated>2019-08-21T06:00:00Z</updated>
+    <updated>2019-10-09T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://projectriff.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest riff is for functions news and events.</subtitle>
     <logo>https://projectriff.io/img/riff-white.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[From Monolith to riff Functions at SpringOne Platform 2019]]></title>
+        <id>https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html</id>
+        <link href="https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html">
+        </link>
+        <updated>2019-10-09T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/GIubKs2-KJ4" frameborder="0" allowfullscreen width="100%"></iframe> </figure> ]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Mark Fisher and Cornelia Davis' Keynote at SpringOne Platform 2019]]></title>
+        <id>https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html</id>
+        <link href="https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html">
+        </link>
+        <updated>2019-10-08T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/aIbAHg_QvEI" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.4.0]]></title>
         <id>https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0.html</id>
@@ -53,22 +73,22 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
-        <id>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</id>
-        <link href="https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html">
-        </link>
-        <updated>2018-09-26T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
-        <author>
-        </author>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Introduction to Knative at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</id>
         <link href="https://projectriff.io/blog/2018/09/26/introduction-to-knative.html">
         </link>
         <updated>2018-09-26T06:00:00Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/CylT5O6IfkU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
+        <id>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</id>
+        <link href="https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html">
+        </link>
+        <updated>2018-09-26T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
         </author>
     </entry>
