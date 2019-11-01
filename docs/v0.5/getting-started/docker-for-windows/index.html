@@ -137,13 +137,13 @@ helm repo update
 </code></pre>
 <p>Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.</p>
 <pre><code class="hljs css language-powershell">helm install projectriff/riff --name riff `
-  --set riff.runtimes.core.enabled=true `
-  --set riff.runtimes.knative.enabled=true `
-  --set riff.runtimes.streaming.enabled=false `
+  --set tags.core-runtime=true `
+  --set tags.knative-runtime=true `
+  --set tags.streaming-runtime=false `
   --wait --devel
 </code></pre>
 <blockquote>
-<p>NOTE: Because of an issue, it is currently not possible to install the Knative and Streaming runtimes at the same time. After installing the Streaming runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
+<p>NOTE: After installing the Streaming runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
 </blockquote>
 <p>Verify the riff install. Resources may be missing if the corresponding runtime was not installed.</p>
 <pre><code class="hljs css language-powershell">riff doctor

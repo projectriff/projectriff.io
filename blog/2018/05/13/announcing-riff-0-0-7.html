@@ -92,15 +92,15 @@ The response should be a generator yielding the response payload.</p>
 <p>The riff sidecar has been modified to support bounded gRPC calls. This is a first step toward moving streaming responsibilities like windowing and request/reply correlation out of the invokers.</p>
 <p>Starting with the 0.0.7 release, the CLI will generate function yaml with a default window size of 1.</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  protocol:</span> <span class="hljs-string">grpc</span>
-<span class="hljs-attr">  windowing:</span>
-<span class="hljs-attr">    size:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">protocol:</span> <span class="hljs-string">grpc</span>
+  <span class="hljs-attr">windowing:</span>
+    <span class="hljs-attr">size:</span> <span class="hljs-number">1</span>
 </code></pre>
 <p>The <code>windowing.size</code> key can be used to control the window size. Alternatively you can use <code>windowing.time</code></p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">spec:</span>
-<span class="hljs-attr">  protocol:</span> <span class="hljs-string">grpc</span>
-<span class="hljs-attr">  windowing:</span>
-<span class="hljs-attr">    time:</span> <span class="hljs-number">10</span><span class="hljs-string">s</span>
+  <span class="hljs-attr">protocol:</span> <span class="hljs-string">grpc</span>
+  <span class="hljs-attr">windowing:</span>
+    <span class="hljs-attr">time:</span> <span class="hljs-string">10s</span>
 </code></pre>
 <p>Windowing can be disabled entirely for streaming functions which expect unbounded streams by removing the  <code>windowing</code> key from the yaml. For now, this is also the recommended approach to handle sliding windows.</p>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#go-streaming">go streaming</a></li><li><a href="#python-streaming">python streaming</a></li><li><a href="#bounded-grpc-calls">bounded gRPC calls</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="" target="blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="blank">Terms of Use</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2019 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
