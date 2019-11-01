@@ -135,9 +135,9 @@ Install riff with both the Core and Knative runtimes. To omit or include other r
 
 ```powershell
 helm install projectriff/riff --name riff `
-  --set tags.core-runtime=true \
-  --set tags.knative-runtime=true \
-  --set tags.streaming-runtime=false \
+  --set tags.core-runtime=true `
+  --set tags.knative-runtime=true `
+  --set tags.streaming-runtime=false `
   --wait --devel
 ```
 
