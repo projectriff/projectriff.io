@@ -116,13 +116,13 @@ Install riff with both the Core and Knative runtimes. To omit or include other r
 
 ```sh
 helm install projectriff/riff --name riff \
-  --set riff.runtimes.core.enabled=true \
-  --set riff.runtimes.knative.enabled=true \
-  --set riff.runtimes.streaming.enabled=false \
+  --set tags.core-runtime=true \
+  --set tags.knative-runtime=true \
+  --set tags.streaming-runtime=false \
   --wait --devel
 ```
 
-> NOTE: Because of an issue, it is currently not possible to install the Knative and Streaming runtimes at the same time. After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+> NOTE: After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
 
 Verify the riff install. Resources may be missing if the corresponding runtime was not installed.
 
