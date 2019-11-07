@@ -64,7 +64,7 @@ watch -n 1 kubectl get pod --all-namespaces
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
 Download a recent release of the [Helm v2 CLI](https://github.com/helm/helm/releases/) for your platform.
-(Download version 2.13 or later, Helm v3 is currently in beta and has not been tested for compatibility with riff).
+(Download version 2.13 or later, Helm v3 is currently pre-release and has not been tested for compatibility with riff).
 Unzip and copy the Helm CLI executable to a directory on your path.
 
 Initialize the Helm Tiller server in your cluster.
