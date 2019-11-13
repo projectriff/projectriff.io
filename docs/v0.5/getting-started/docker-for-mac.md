@@ -46,7 +46,9 @@ watch -n 1 kubectl get pod --all-namespaces
 
 [Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
 
-Download the [Helm v2.13.1 CLI](https://github.com/helm/helm/releases/tag/v2.13.1) for your platform. (Helm 3 is currently in beta and has not been tested for compatibility with riff). Unzip and copy the Helm CLI executable to a directory on your path.
+Download a recent release of the [Helm v2 CLI](https://github.com/helm/helm/releases/) for your platform.
+(Download version 2.13 or later, Helm v3 is currently pre-release and has not been tested for compatibility with riff).
+Unzip and copy the Helm CLI executable to a directory on your path.
 
 Initialize the Helm Tiller server in your cluster.
 ```sh
@@ -60,8 +62,8 @@ Validate the installation.
 helm version
 ```
 ```
-Client: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Client: &version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
 ```
 
 > NOTE: Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
