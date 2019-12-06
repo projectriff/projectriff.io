@@ -276,7 +276,7 @@ square   gcr.io/$GCP_PROJECT/square@sha256:ac089ca183368aa831597f94a2dbb462a157c
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
-riff knative deployer create knative-square --function-ref square --tail
+riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
 ```
 
 After the deployer is created, you can see the hostname by listing deployers.

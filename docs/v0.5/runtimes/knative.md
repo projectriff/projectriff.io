@@ -21,7 +21,7 @@ If the cluster supports LoadBalancer services, it is recommended to [setup a cus
 Assuming a function named `square` is available, create a knative deployer referencing the square function.
 
 ```terminal
-riff knative deployer create square --function-ref square --tail
+riff knative deployer create square --function-ref square --ingress-policy External --tail
 ```
 
 ```

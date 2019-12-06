@@ -192,7 +192,7 @@ square   index.docker.io/jldec/square@sha256:527053273ec98697dbdd88951f77edf82a9
 The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
-riff knative deployer create knative-square --function-ref square --tail
+riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
 ```
 
 After the deployer is created, you can see the hostname by listing deployers.
