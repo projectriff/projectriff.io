@@ -2,259 +2,305 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://projectriff.io/blog</id>
     <title>riff is for functions Blog</title>
-    <updated>2019-10-09T06:00:00Z</updated>
-    <generator>Feed for Node.js</generator>
+    <updated>2019-10-09T06:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://projectriff.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest riff is for functions news and events.</subtitle>
     <logo>https://projectriff.io/img/riff-white.svg</logo>
     <entry>
         <title type="html"><![CDATA[From Monolith to riff Functions at SpringOne Platform 2019]]></title>
         <id>https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html</id>
-        <link href="https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html">
-        </link>
-        <updated>2019-10-09T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html"/>
+        <updated>2019-10-09T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/GIubKs2-KJ4" frameborder="0" allowfullscreen width="100%"></iframe> </figure> ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Mark Fisher and Cornelia Davis' Keynote at SpringOne Platform 2019]]></title>
         <id>https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html</id>
-        <link href="https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html">
-        </link>
-        <updated>2019-10-08T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2019/10/08/springone-platform-keynote-2019-mark-fisher-and-cornelia-davis.html"/>
+        <updated>2019-10-08T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/aIbAHg_QvEI" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.4.0]]></title>
         <id>https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0.html</id>
-        <link href="https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0.html">
-        </link>
-        <updated>2019-08-21T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2019/08/21/announcing-riff-0-4-0.html"/>
+        <updated>2019-08-21T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce the release of riff v0.4.0. Thank you all riff, Cloud Native Buildpack, and Knative contributors.</p>
 <p>The riff CLI can be downloaded from our <a href="https://github.com/projectriff/cli/releases/tag/v0.4.0">releases page</a> on GitHub. Please follow one of the <a href="/docs/v0.4/getting-started">getting started</a> guides, to create a new cluster on GKE, Minikube, Docker Desktop for Mac, or Docker Desktop for Windows.</p>
 <p>A lot has changed, buckle up.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.3.0]]></title>
         <id>https://projectriff.io/blog/2019/04/10/announcing-riff-0-3-0.html</id>
-        <link href="https://projectriff.io/blog/2019/04/10/announcing-riff-0-3-0.html">
-        </link>
-        <updated>2019-04-10T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2019/04/10/announcing-riff-0-3-0.html"/>
+        <updated>2019-04-10T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce the release of <a href="https://github.com/projectriff/riff/releases/tag/v0.3.0">riff v0.3.0</a>. Thank you all riff, Buildpacks, and Knative contributors.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.2.0]]></title>
         <id>https://projectriff.io/blog/2018/11/19/announcing-riff-0-2-0.html</id>
-        <link href="https://projectriff.io/blog/2018/11/19/announcing-riff-0-2-0.html">
-        </link>
-        <updated>2018-11-19T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/11/19/announcing-riff-0-2-0.html"/>
+        <updated>2018-11-19T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce the release of <a href="https://github.com/projectriff/riff/releases/tag/v0.2.0">riff v0.2.0</a>. Thank you once again, all riff, Buildpacks, and Knative contributors.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[riffing on Knative at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/27/riffing-on-knative.html</id>
-        <link href="https://projectriff.io/blog/2018/09/27/riffing-on-knative.html">
-        </link>
-        <updated>2018-09-27T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/27/riffing-on-knative.html"/>
+        <updated>2018-09-27T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/eZ4dKU0tZEk" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Introduction to Knative at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</id>
-        <link href="https://projectriff.io/blog/2018/09/26/introduction-to-knative.html">
-        </link>
-        <updated>2018-09-26T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/26/introduction-to-knative.html"/>
+        <updated>2018-09-26T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/CylT5O6IfkU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</id>
-        <link href="https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html">
-        </link>
-        <updated>2018-09-26T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html"/>
+        <updated>2018-09-26T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Mark Fisher's Keynote at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-fisher.html</id>
-        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-fisher.html">
-        </link>
-        <updated>2018-09-25T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-fisher.html"/>
+        <updated>2018-09-25T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/_OiGt4QwdlM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Mark Chmarny's Keynote at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-chmarny.html</id>
-        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-chmarny.html">
-        </link>
-        <updated>2018-09-25T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-mark-chmarny.html"/>
+        <updated>2018-09-25T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/EKmp9xbKiso" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Dave Syer's Keynote at SpringOne Platform 2018]]></title>
         <id>https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-dave-syer.html</id>
-        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-dave-syer.html">
-        </link>
-        <updated>2018-09-25T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/25/springone-platform-keynote-2018-dave-syer.html"/>
+        <updated>2018-09-25T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/icZaMdNExNU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.1.3]]></title>
         <id>https://projectriff.io/blog/2018/09/21/announcing-riff-0-1-3.html</id>
-        <link href="https://projectriff.io/blog/2018/09/21/announcing-riff-0-1-3.html">
-        </link>
-        <updated>2018-09-21T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/09/21/announcing-riff-0-1-3.html"/>
+        <updated>2018-09-21T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are pleased to announce the release of <a href="https://github.com/projectriff/riff/releases/tag/v0.1.3">riff v0.1.3</a>. Thank you riff and Knative contributors.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.1.2 on Knative]]></title>
         <id>https://projectriff.io/blog/2018/08/31/announcing-riff-0-1-2-on-Knative.html</id>
-        <link href="https://projectriff.io/blog/2018/08/31/announcing-riff-0-1-2-on-Knative.html">
-        </link>
-        <updated>2018-08-31T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/08/31/announcing-riff-0-1-2-on-Knative.html"/>
+        <updated>2018-08-31T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p><a href="https://github.com/projectriff/riff/releases/tag/v0.1.2">riff v0.1.2</a> on Knative is now available.<br>
 Many thanks to all the riff and Knative contributors.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.1.1 on Knative]]></title>
         <id>https://projectriff.io/blog/2018/08/09/announcing-riff-0-1-1-on-Knative.html</id>
-        <link href="https://projectriff.io/blog/2018/08/09/announcing-riff-0-1-1-on-Knative.html">
-        </link>
-        <updated>2018-08-09T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/08/09/announcing-riff-0-1-1-on-Knative.html"/>
+        <updated>2018-08-09T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are pleased to announce that <a href="https://github.com/projectriff/riff/releases/tag/v0.1.1">riff v0.1.1</a> on Knative is now available. Thanks, everyone for contributing.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[riff in 60ish seconds]]></title>
         <id>https://projectriff.io/blog/2018/07/26/riff-in-60ish-seconds.html</id>
-        <link href="https://projectriff.io/blog/2018/07/26/riff-in-60ish-seconds.html">
-        </link>
-        <updated>2018-07-26T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/07/26/riff-in-60ish-seconds.html"/>
+        <updated>2018-07-26T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>Using <a href="https://projectriff.io/blog/announcing-riff-0-1-0-on-Knative/">riff v0.1</a>, which builds on <a href="https://github.com/knative/docs">Knative</a>, the new open source project initiated by Google to which the riff team is contributing, Mark Fisher creates and invokes a riff function in this 60ish second overview.</p> <figure class="video-container"> <iframe src="//www.youtube.com/embed/izSLUdTSOF8" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.1.0 on Knative]]></title>
         <id>https://projectriff.io/blog/2018/07/24/announcing-riff-0-1-0-on-Knative.html</id>
-        <link href="https://projectriff.io/blog/2018/07/24/announcing-riff-0-1-0-on-Knative.html">
-        </link>
-        <updated>2018-07-24T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/07/24/announcing-riff-0-1-0-on-Knative.html"/>
+        <updated>2018-07-24T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are excited to announce that the riff team has re-architected the riff core, bringing essential aspects of riff to Knative. This is the first release of riff on Knative.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.0.7]]></title>
         <id>https://projectriff.io/blog/2018/05/13/announcing-riff-0-0-7.html</id>
-        <link href="https://projectriff.io/blog/2018/05/13/announcing-riff-0-0-7.html">
-        </link>
-        <updated>2018-05-13T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/05/13/announcing-riff-0-0-7.html"/>
+        <updated>2018-05-13T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce the 0.0.7 release of riff. Thank you all who worked on this effort.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff v0.0.6]]></title>
         <id>https://projectriff.io/blog/2018/04/06/announcing-riff-0-0-6.html</id>
-        <link href="https://projectriff.io/blog/2018/04/06/announcing-riff-0-0-6.html">
-        </link>
-        <updated>2018-04-06T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/04/06/announcing-riff-0-0-6.html"/>
+        <updated>2018-04-06T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>The 0.0.6 release of riff is now available. A big thank you, once again, to everyone
 who contributed on this effort.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[riff 0.0.5]]></title>
         <id>https://projectriff.io/blog/2018/03/21/announcing-riff-0-0-5.html</id>
-        <link href="https://projectriff.io/blog/2018/03/21/announcing-riff-0-0-5.html">
-        </link>
-        <updated>2018-03-21T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/03/21/announcing-riff-0-0-5.html"/>
+        <updated>2018-03-21T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce the 0.0.5 release of riff. A huge thanks to all
 who contributed to this effort. Here are some of the highlights.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing riff 0.0.4]]></title>
         <id>https://projectriff.io/blog/2018/02/20/announcing-riff-0-0-4.html</id>
-        <link href="https://projectriff.io/blog/2018/02/20/announcing-riff-0-0-4.html">
-        </link>
-        <updated>2018-02-20T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/02/20/announcing-riff-0-0-4.html"/>
+        <updated>2018-02-20T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are happy to announce a new release of riff. Thank you, once again, everyone
 who contributed to this effort. Here are some of the highlights.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Announcing the 0.0.3 release of riff]]></title>
         <id>https://projectriff.io/blog/2018/01/26/announcing-riff-0-0-3.html</id>
-        <link href="https://projectriff.io/blog/2018/01/26/announcing-riff-0-0-3.html">
-        </link>
-        <updated>2018-01-26T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2018/01/26/announcing-riff-0-0-3.html"/>
+        <updated>2018-01-26T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>We are excited to announce a shiny new release of riff. Thank you, all the riff team and community members
 who contributed to make this happen.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Introducing riff]]></title>
         <id>https://projectriff.io/blog/2017/12/15/introducing-riff.html</id>
-        <link href="https://projectriff.io/blog/2017/12/15/introducing-riff.html">
-        </link>
-        <updated>2017-12-15T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2017/12/15/introducing-riff.html"/>
+        <updated>2017-12-15T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>Welcome to the riff blog! With this first post, we are pleased to announce the 0.0.2 release of riff. The 0.0.2 release includes the code as shown in demos at SpringOne Platform, along with a handful of issues we were able to address over the past few days.</p>
 ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Mark Fisher's Keynote at SpringOne Platform 2017]]></title>
         <id>https://projectriff.io/blog/2017/12/07/springone-platform-keynote-2017.html</id>
-        <link href="https://projectriff.io/blog/2017/12/07/springone-platform-keynote-2017.html">
-        </link>
-        <updated>2017-12-07T06:00:00Z</updated>
+        <link href="https://projectriff.io/blog/2017/12/07/springone-platform-keynote-2017.html"/>
+        <updated>2017-12-07T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/mlRSp9Z3zwY" frameborder="0" allowfullscreen width="100%"></iframe> </figure> ]]></summary>
         <author>
+            <name/>
+            <email/>
+            <uri/>
         </author>
     </entry>
 </feed>

@@ -6,7 +6,7 @@
         <description>The best place to stay up-to-date with the latest riff is for functions news and events.</description>
         <lastBuildDate>Wed, 09 Oct 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-        <generator>Feed for Node.js</generator>
+        <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>riff is for functions Blog</title>
             <url>https://projectriff.io/img/riff-white.svg</url>
