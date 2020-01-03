@@ -265,12 +265,11 @@ riff core deployer create k8s-square --function-ref square --tail
 After the deployer is created, you can see the service name by listing deployers.
 
 ```sh
-riff core deployer list
+riff core deployers list
 ```
-
 ```
-NAME         TYPE       REF      SERVICE               STATUS   AGE
-k8s-square   function   square   k8s-square-deployer   Ready    21s
+NAME         TYPE       REF      URL                                           STATUS   AGE
+k8s-square   function   square   http://k8s-square.default.svc.cluster.local   Ready    35s
 ```
 
 ### invoke the function
@@ -278,7 +277,7 @@ k8s-square   function   square   k8s-square-deployer   Ready    21s
 In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
 
 ```sh
-kubectl port-forward service/k8s-square-deployer 8080:80
+kubectl port-forward service/k8s-square 8080:80
 ```
 ```
 Forwarding from 127.0.0.1:8080 -> 8080
