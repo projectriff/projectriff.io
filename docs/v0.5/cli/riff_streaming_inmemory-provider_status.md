@@ -1,28 +1,28 @@
 ---
-id: riff-knative-adapter-status
-title: "riff knative adapter status"
+id: riff-streaming-inmemory-provider-status
+title: "riff streaming inmemory-provider status"
 ---
-## riff knative adapter status
+## riff streaming inmemory-provider status
 
-show knative adapter status
+show inmemory provider status
 
 ### Synopsis
 
-Display status details for an adapter.
+Display status details for a in-memory provider.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-adapter roll out is processed.
+in-memory provider roll out is being processed.
 
 ```
-riff knative adapter status <name> [flags]
+riff streaming inmemory-provider status <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff knative adapter status my-adapter
+riff streamming inmemory-provider status my-inmemory-provider
 ```
 
 ### Options
@@ -42,5 +42,5 @@ riff knative adapter status my-adapter
 
 ### SEE ALSO
 
-* [riff knative adapter](riff_knative_adapter.md)	 - adapters push built images to Knative
+* [riff streaming inmemory-provider](riff_streaming_inmemory-provider.md)	 - (experimental) in-memory stream provider
 

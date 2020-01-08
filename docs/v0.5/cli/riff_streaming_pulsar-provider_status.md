@@ -1,28 +1,28 @@
 ---
-id: riff-knative-adapter-status
-title: "riff knative adapter status"
+id: riff-streaming-pulsar-provider-status
+title: "riff streaming pulsar-provider status"
 ---
-## riff knative adapter status
+## riff streaming pulsar-provider status
 
-show knative adapter status
+show pulsar provider status
 
 ### Synopsis
 
-Display status details for an adapter.
+Display status details for a pulsar provider.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-adapter roll out is processed.
+pulsar provider roll out is being processed.
 
 ```
-riff knative adapter status <name> [flags]
+riff streaming pulsar-provider status <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff knative adapter status my-adapter
+riff streamming pulsar-provider status my-pulsar-provider
 ```
 
 ### Options
@@ -42,5 +42,5 @@ riff knative adapter status my-adapter
 
 ### SEE ALSO
 
-* [riff knative adapter](riff_knative_adapter.md)	 - adapters push built images to Knative
+* [riff streaming pulsar-provider](riff_streaming_pulsar-provider.md)	 - (experimental) pulsar stream provider
 

@@ -4,16 +4,15 @@ title: "riff doctor"
 ---
 ## riff doctor
 
-check riff's requirements are installed
+check riff's permissions
 
 ### Synopsis
 
-Check that riff is installed.
+The doctor checks that the current user has permission to access riff, and riff
+related, resources in a namespace.
 
-The doctor checks that necessary system components are installed and the user
-has access to resources in the namespace.
-
-The doctor is not a tool for monitoring the health of the cluster.
+The doctor is not a tool for monitoring the health of the cluster or the riff
+install.
 
 ```
 riff doctor [flags]
@@ -35,9 +34,9 @@ riff doctor
 ### Options inherited from parent commands
 
 ```
-      --config file        config file (default is $HOME/.riff.yaml)
-      --kube-config file   kubectl config file (default is $HOME/.kube/config)
-      --no-color           disable color output in terminals
+      --config file       config file (default is $HOME/.riff.yaml)
+      --kubeconfig file   kubectl config file (default is $HOME/.kube/config)
+      --no-color          disable color output in terminals
 ```
 
 ### SEE ALSO
