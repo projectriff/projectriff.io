@@ -4,3 +4,13 @@
   base = "website/"
   publish = "website/build/projectriff.io/"
   command = "npm run build"
+
+[[redirects]]
+  from = "/docs/latest/*"
+  to = "/docs/v0.5/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/docs/stable/*"
+  to = "/docs/v0.4/:splat"
+  status = 200
