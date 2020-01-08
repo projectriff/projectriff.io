@@ -93,11 +93,21 @@
           "v0.5/cli/riff-streaming-processor-list",
           "v0.5/cli/riff-streaming-processor-status",
           "v0.5/cli/riff-streaming-processor-tail",
+          "v0.5/cli/riff-streaming-inmemory-provider",
+          "v0.5/cli/riff-streaming-inmemory-provider-create",
+          "v0.5/cli/riff-streaming-inmemory-provider-delete",
+          "v0.5/cli/riff-streaming-inmemory-provider-list",
+          "v0.5/cli/riff-streaming-inmemory-provider-status",
           "v0.5/cli/riff-streaming-kafka-provider",
           "v0.5/cli/riff-streaming-kafka-provider-create",
           "v0.5/cli/riff-streaming-kafka-provider-delete",
           "v0.5/cli/riff-streaming-kafka-provider-list",
-          "v0.5/cli/riff-streaming-kafka-provider-status"
+          "v0.5/cli/riff-streaming-kafka-provider-status",
+          "v0.5/cli/riff-streaming-pulsar-provider",
+          "v0.5/cli/riff-streaming-pulsar-provider-create",
+          "v0.5/cli/riff-streaming-pulsar-provider-delete",
+          "v0.5/cli/riff-streaming-pulsar-provider-list",
+          "v0.5/cli/riff-streaming-pulsar-provider-status"
         ]
       },
       {

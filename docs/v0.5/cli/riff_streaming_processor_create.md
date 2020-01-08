@@ -18,18 +18,22 @@ riff streaming processor create <name> [flags]
 
 ```
 riff streaming processor create my-processor --function-ref my-func --input my-input-stream
-riff streaming processor create my-processor --function-ref my-func --input my-input-stream --input my-join-stream --output my-output-stream
+riff streaming processor create my-processor --function-ref my-func --input input:my-input-stream --input my-join-stream@earliest --output out:my-output-stream
 ```
 
 ### Options
 
 ```
+      --container-ref name      name of container to deploy
       --dry-run                 print kubernetes resources to stdout rather than apply them to the cluster, messages normally on stdout will be sent to stderr
-      --function-ref name       name of function build to deploy
+      --env variable            environment variable defined as a key value pair separated by an equals sign, example "--env MY_VAR=my-value" (may be set multiple times)
+      --env-from variable       environment variable from a config map or secret, example "--env-from MY_SECRET_VALUE=secretKeyRef:my-secret-name:key-in-secret", "--env-from MY_CONFIG_MAP_VALUE=configMapKeyRef:my-config-map-name:key-in-config-map" (may be set multiple times)
+      --function-ref name       name of function to deploy
   -h, --help                    help for create
-      --input name              name of stream to read messages from (may be set multiple times)
+      --image image             container image to deploy
+      --input name              name of stream to read messages from (or [<alias>:]<stream>[@<earliest|latest>], may be set multiple times)
   -n, --namespace name          kubernetes namespace (defaulted from kube config)
-      --output name             name of stream to write messages to (may be set multiple times)
+      --output name             name of stream to write messages to (or [<alias>:]<stream>, may be set multiple times)
       --tail                    watch processor logs
       --wait-timeout duration   duration to wait for the processor to become ready when watching logs (default "10m")
 ```
@@ -37,9 +41,9 @@ riff streaming processor create my-processor --function-ref my-func --input my-i
 ### Options inherited from parent commands
 
 ```
-      --config file        config file (default is $HOME/.riff.yaml)
-      --kube-config file   kubectl config file (default is $HOME/.kube/config)
-      --no-color           disable color output in terminals
+      --config file       config file (default is $HOME/.riff.yaml)
+      --kubeconfig file   kubectl config file (default is $HOME/.kube/config)
+      --no-color          disable color output in terminals
 ```
 
 ### SEE ALSO
