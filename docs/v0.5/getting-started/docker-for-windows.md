@@ -9,7 +9,7 @@ The following will help you get started running a riff function with Knative on 
 ## Install Docker
 Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
 
-![download Docker for mac](/img/docker-for-windows-download.png)
+![download Docker for Windows](/img/docker-for-windows-download.png)
 
 ### resize the VM
 Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 4GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
@@ -72,31 +72,41 @@ kube-system   kube-proxy-6q844                         1/1     Running   0      
 kube-system   kube-scheduler-docker-desktop            1/1     Running   0          32s
 ```
 
-## Install the helm CLI
+## Install kapp
 
-[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+[kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
-Download a recent release of the [Helm v2 CLI](https://github.com/helm/helm/releases/) for your platform.
-(Download version 2.13 or later, Helm v3 is currently pre-release and has not been tested for compatibility with riff).
-Unzip and copy the Helm CLI executable to a directory on your path.
+Download a recent binary for your platform from [github]((https://github.com/k14s/kapp/releases)).
+Move it into a directory on your path, and make it executable.
+Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
-Initialize the Helm Tiller server in your cluster.
-```sh
-kubectl create serviceaccount tiller -n kube-system
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
-helm init --wait --service-account tiller
-```
 
 Validate the installation.
 ```sh
-helm version
+kapp version
 ```
 ```
-Client: &version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Client Version: 0.17.0
+
+Succeeded
 ```
 
-> Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
+## Install ytt
+
+[ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
+
+Download a recent binary for your platform from [github]((https://github.com/k14s/ytt/releases)).
+Move it into a directory on your path, and make it executable.
+Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
+
+
+Validate the installation.
+```sh
+ytt version
+```
+```
+Version: 0.22.0
+```
 
 ## Install a snapshot build of the riff CLI
 
@@ -112,42 +122,55 @@ riff --version
 riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 ```
 
-Most riff CLI commands below are formatted for PowerShell which has a different way of interpreting colors. Disable riff CLI colors with the following command.
-
-```powershell
-Add-Content -Path $env:USERPROFILE\.riff.yaml -Value 'no-color: true'
-```
-
-## Install riff using Helm
-
-Load the projectriff charts
-
-```powershell
-helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
-helm repo update
-```
+## Install riff Using kapp
 
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-If using the Knative runtime, first install Istio:
-
-```powershell
-helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait --devel
+Create a namespace for kapp to store configuration:
+```
+kubectl create ns apps
 ```
 
-Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.
-
-```powershell
-helm install projectriff/riff --name riff `
-  --set tags.core-runtime=true `
-  --set tags.knative-runtime=true `
-  --set tags.streaming-runtime=false `
-  --wait --devel
+### install riff Build
+To install riff build and it's dependencies:
+```sh
+   kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/cert-manager.yaml
+   kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kpack.yaml
+   kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-builders.yaml
+   kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
 ```
 
-> NOTE: After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+### install riff Core Runtime
 
-Verify the riff install. Resources may be missing if the corresponding runtime was not installed.
+To optionally install riff Core Runtime:
+```
+kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
+```
+
+### install riff Knative Runtime
+
+To optionally install riff Knative Runtime and it's dependencies:
+
+```sh
+# ytt is used to convert the ingress service to NodePort because Docker for Windows does not support `LoadBalancer` services.
+ytt -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/istio.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark istio.yaml:type=yaml-plain | kapp deploy -n apps -a istio -f - -y
+kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/knative.yaml
+kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
+```
+
+### install riff Streaming Runtime
+
+Install riff Streaming Runtime and it's dependencies:
+
+```
+kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
+```
+
+> NOTE: After installing the Streaming Runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+
+### verify riff installation
+Resources may be missing if the corresponding runtime was not installed.
 
 ```powershell
 riff doctor
