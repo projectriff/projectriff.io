@@ -52,7 +52,7 @@ brew tap k14s/tap
 brew install kapp
 ```
 
-Alternatively, Download a recent binary for your platform from [github]((https://github.com/k14s/kapp/releases)).
+Alternatively, Download a recent binary for your platform from [github](https://github.com/k14s/kapp/releases).
 Move it into a directory on your path, and make it executable.
 Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
@@ -76,7 +76,7 @@ brew tap k14s/tap
 brew install ytt
 ```
 
-Alternatively, Download a recent binary for your platform from [github]((https://github.com/k14s/ytt/releases)).
+Alternatively, Download a recent binary for your platform from [github](https://github.com/k14s/ytt/releases).
 Move it into a directory on your path, and make it executable.
 Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 

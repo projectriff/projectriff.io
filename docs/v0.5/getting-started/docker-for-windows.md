@@ -76,7 +76,7 @@ kube-system   kube-scheduler-docker-desktop            1/1     Running   0      
 
 [kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
-Download a recent binary for your platform from [github]((https://github.com/k14s/kapp/releases)).
+Download a recent binary for your platform from [github](https://github.com/k14s/kapp/releases).
 Move it into a directory on your path, and make it executable.
 Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
@@ -95,7 +95,7 @@ Succeeded
 
 [ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
 
-Download a recent binary for your platform from [github]((https://github.com/k14s/ytt/releases)).
+Download a recent binary for your platform from [github](https://github.com/k14s/ytt/releases).
 Move it into a directory on your path, and make it executable.
 Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
