@@ -83,25 +83,36 @@
 <p>Watch pods in a separate terminal.</p>
 <pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="install-helm"></a><a href="#install-helm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Helm</h2>
-<p><a href="https://helm.sh">Helm</a> is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.</p>
-<p>Download a recent release of the <a href="https://github.com/helm/helm/releases/">Helm v2 CLI</a> for your platform.
-(Download version 2.13 or later, Helm v3 is currently pre-release and has not been tested for compatibility with riff).
-Unzip and copy the Helm CLI executable to a directory on your path.</p>
-<p>Initialize the Helm Tiller server in your cluster.</p>
-<pre><code class="hljs css language-sh">kubectl create serviceaccount tiller -n kube-system
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
-helm init --<span class="hljs-built_in">wait</span> --service-account tiller
+<h2><a class="anchor" aria-hidden="true" id="install-kapp"></a><a href="#install-kapp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install kapp</h2>
+<p><a href="https://get-kapp.io/">kapp</a> is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.</p>
+<p>You can find install kapp using Homebrew on MacOS</p>
+<pre><code class="hljs css language-sh">brew tap k14s/tap
+brew install kapp
 </code></pre>
+<p>Alternatively, Download a recent binary for your platform from <a href="https://github.com/k14s/kapp/releases">github</a>.
+Move it into a directory on your path, and make it executable.
+Complete kapp installation instructions can be found <a href="https://k14s.io/#install-from-github-release">here</a></p>
 <p>Validate the installation.</p>
-<pre><code class="hljs css language-sh">helm version
+<pre><code class="hljs css language-sh">kapp version
 </code></pre>
-<pre><code class="hljs">Client: &amp;version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
-Server: &amp;version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+<pre><code class="hljs">Client Version: 0.17.0
+
+Succeeded
 </code></pre>
-<blockquote>
-<p>Please see the <a href="https://helm.sh/docs/using_helm/#securing-your-helm-installation">Helm documentation</a> for additional Helm security configuration.</p>
-</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="install-ytt"></a><a href="#install-ytt" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install ytt</h2>
+<p><a href="https://get-ytt.io/">ytt</a> is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.</p>
+<p>You can find install ytt using Homebrew on MacOS</p>
+<pre><code class="hljs css language-sh">brew tap k14s/tap
+brew install ytt
+</code></pre>
+<p>Alternatively, Download a recent binary for your platform from <a href="https://github.com/k14s/ytt/releases">github</a>.
+Move it into a directory on your path, and make it executable.
+Complete ytt installation instructions can be found <a href="https://k14s.io/#install-from-github-release">here</a></p>
+<p>Validate the installation.</p>
+<pre><code class="hljs css language-sh">ytt version
+</code></pre>
+<pre><code class="hljs">Version: 0.22.0
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="install-a-snapshot-build-of-the-riff-cli"></a><a href="#install-a-snapshot-build-of-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install a snapshot build of the riff CLI</h2>
 <p>Recent snapshot builds of the riff CLI for <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-darwin-amd64.tgz">macOS</a>, <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-windows-amd64.zip">Windows</a>, or <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-linux-amd64.tgz">Linux</a>, can be downloaded from GCS.</p>
 <p>Alternatively, clone the <a href="https://github.com/projectriff/cli/">riff CLI repo</a>, and run <code>make build install</code>. This will require a recent <a href="https://golang.org/doc/install#install">go build environment</a>. On macOS you can use <code>brew install go</code>.</p>
@@ -110,26 +121,39 @@ Server: &amp;version.Version{SemVer:"v2.16.0", GitCommit:"618447cbf203d147601b4b
 </code></pre>
 <pre><code class="hljs">riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="install-riff-using-helm"></a><a href="#install-riff-using-helm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install riff using Helm</h2>
-<p>Load the projectriff charts</p>
-<pre><code class="hljs css language-sh">helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
-helm repo update
-</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-riff-using-kapp"></a><a href="#install-riff-using-kapp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install riff Using kapp</h2>
 <p>riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.</p>
-<p>If using the Knative runtime, first install Istio:</p>
-<pre><code class="hljs css language-sh">helm install projectriff/istio --name istio --namespace istio-system --<span class="hljs-built_in">set</span> gateways.istio-ingressgateway.type=NodePort --<span class="hljs-built_in">wait</span> --devel
+<p>Create a namespace for kapp to store configuration:</p>
+<pre><code class="hljs">kubectl create ns apps
 </code></pre>
-<p>Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.</p>
-<pre><code class="hljs css language-sh">helm install projectriff/riff --name riff \
-  --<span class="hljs-built_in">set</span> tags.core-runtime=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> tags.knative-runtime=<span class="hljs-literal">true</span> \
-  --<span class="hljs-built_in">set</span> tags.streaming-runtime=<span class="hljs-literal">false</span> \
-  --<span class="hljs-built_in">wait</span> --devel
+<h3><a class="anchor" aria-hidden="true" id="install-riff-build"></a><a href="#install-riff-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Build</h3>
+<p>To install riff build and it's dependencies:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/cert-manager.yaml
+kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kpack.yaml
+kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-builders.yaml
+kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-riff-core-runtime"></a><a href="#install-riff-core-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Core Runtime</h3>
+<p>To optionally install riff Core Runtime:</p>
+<pre><code class="hljs">kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-riff-knative-runtime"></a><a href="#install-riff-knative-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Knative Runtime</h3>
+<p>To optionally install riff Knative Runtime and it's dependencies:</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># ytt is used to convert the ingress service to NodePort because minikube does not support `LoadBalancer` services.</span>
+ytt -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/istio.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark istio.yaml:<span class="hljs-built_in">type</span>=yaml-plain | kapp deploy -n apps -a istio -f - -y
+kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/knative.yaml
+kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-riff-streaming-runtime"></a><a href="#install-riff-streaming-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Streaming Runtime</h3>
+<p>Install riff Streaming Runtime and it's dependencies:</p>
+<pre><code class="hljs">kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
 </code></pre>
 <blockquote>
-<p>NOTE: After installing the Streaming runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
+<p>NOTE: After installing the Streaming Runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
 </blockquote>
-<p>Verify the riff install. Resources may be missing if the corresponding runtime was not installed.</p>
+<h3><a class="anchor" aria-hidden="true" id="verify-riff-installation"></a><a href="#verify-riff-installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>verify riff installation</h3>
+<p>Resources may be missing if the corresponding runtime was not installed.</p>
 <pre><code class="hljs css language-sh">riff doctor
 </code></pre>
 <pre><code class="hljs">NAMESPACE     STATUS
@@ -150,7 +174,7 @@ adapters.knative.projectriff.io       allowed   allowed
 deployers.knative.projectriff.io      allowed   allowed
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="apply-build-credentials"></a><a href="#apply-build-credentials" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>apply build credentials</h3>
-<p>Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than <code>default</code> add the <code>--namespace</code> flag). Replace the ??? with your docker username.</p>
+<p>Use the riff CLI to apply credentials for a container registry. If you plan on using a namespace other than <code>default</code> add the <code>--namespace</code> flag. Replace the ??? with your docker username.</p>
 <pre><code class="hljs css language-sh">DOCKER_ID=???
 </code></pre>
 <pre><code class="hljs css language-sh">riff credential apply my-creds --docker-hub <span class="hljs-variable">$DOCKER_ID</span> --<span class="hljs-built_in">set</span>-default-image-prefix
@@ -226,4 +250,4 @@ Forwarding from [::1]:8080 -&gt; 8080
 riff core deployer delete k8s-square
 riff <span class="hljs-keyword">function</span> delete square
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started/gke"><span class="arrow-prev">← </span><span>GKE</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/docker-for-mac"><span>Docker for Mac</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-minikube">Install Minikube</a></li><li><a href="#install-docker">Install Docker</a></li><li><a href="#install-kubectl">Install kubectl</a></li><li><a href="#create-a-minikube-cluster">Create a Minikube cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li></ul></li><li><a href="#install-helm">Install Helm</a></li><li><a href="#install-a-snapshot-build-of-the-riff-cli">Install a snapshot build of the riff CLI</a></li><li><a href="#install-riff-using-helm">Install riff using Helm</a><ul class="toc-headings"><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#create-a-core-deployer">Create a Core deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function-1">invoke the function</a></li></ul></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started/gke"><span class="arrow-prev">← </span><span>GKE</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/docker-for-mac"><span>Docker for Mac</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install-minikube">Install Minikube</a></li><li><a href="#install-docker">Install Docker</a></li><li><a href="#install-kubectl">Install kubectl</a></li><li><a href="#create-a-minikube-cluster">Create a Minikube cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li></ul></li><li><a href="#install-kapp">Install kapp</a></li><li><a href="#install-ytt">Install ytt</a></li><li><a href="#install-a-snapshot-build-of-the-riff-cli">Install a snapshot build of the riff CLI</a></li><li><a href="#install-riff-using-kapp">Install riff Using kapp</a><ul class="toc-headings"><li><a href="#install-riff-build">install riff Build</a></li><li><a href="#install-riff-core-runtime">install riff Core Runtime</a></li><li><a href="#install-riff-knative-runtime">install riff Knative Runtime</a></li><li><a href="#install-riff-streaming-runtime">install riff Streaming Runtime</a></li><li><a href="#verify-riff-installation">verify riff installation</a></li><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#create-a-core-deployer">Create a Core deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function-1">invoke the function</a></li></ul></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
