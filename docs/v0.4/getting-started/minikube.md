@@ -32,9 +32,7 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 ## Create a Minikube cluster
 
 ```sh
-minikube start \
-  --memory=4096 --cpus=4 \
-  --vm-driver=hyperkit
+minikube start --memory=4096 --cpus=4
 ```
 
 To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
@@ -284,10 +282,8 @@ kubectl delete namespace istio-system
 kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
 ```
 
-Alternatively, you can use delete and recreate your minikube cluster
+Alternatively, you can delete your Minikube cluster and then recreate it.
 ```sh
 minikube delete
-minikube start \
-  --memory=4096 --cpus=4 \
-  --vm-driver=hyperkit
+minikube start --memory=4096 --cpus=4
 ```
