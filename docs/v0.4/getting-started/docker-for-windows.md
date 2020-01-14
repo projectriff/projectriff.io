@@ -309,6 +309,6 @@ helm delete --purge istio
 kubectl delete namespace istio-system
 kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
 ```
-Alternatively you an reset the Kubernetes cluster (this will remove all state including riff).
+Alternatively you can reset the Kubernetes cluster (this will remove all state including riff).
 
 ![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)
