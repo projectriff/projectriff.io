@@ -288,7 +288,27 @@ riff core deployer delete k8s-square
 riff function delete square
 ```
 
-## Uninstalling and reinstalling
-If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.
+## Upgrading
+If you need to upgrade riff, we recommend uninstalling and then reinstalling.
+
+## Uninstalling
+You can use helm to uninstall riff.
+```sh
+# remove any riff resources
+kubectl delete riff --all-namespaces --all
+
+# remove any Knative resources (if Knative runtime is enabled)
+kubectl delete knative --all-namespaces --all
+
+# remove riff
+helm delete --purge riff
+kubectl delete customresourcedefinitions.apiextensions.k8s.io -l app.kubernetes.io/managed-by=Tiller,app.kubernetes.io/instance=riff
+
+# remove istio (if installed)
+helm delete --purge istio
+kubectl delete namespace istio-system
+kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+```
+Alternatively you an reset the Kubernetes cluster (this will remove all state including riff).
 
 ![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)

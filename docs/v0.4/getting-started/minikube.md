@@ -32,9 +32,7 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 ## Create a Minikube cluster
 
 ```sh
-minikube start \
-  --memory=4096 --cpus=4 \
-  --vm-driver=hyperkit
+minikube start --memory=4096 --cpus=4
 ```
 
 To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
@@ -260,4 +258,32 @@ curl http://localhost:8080/ -w '\n' \
 riff knative deployer delete knative-square
 riff core deployer delete k8s-square
 riff function delete square
+```
+
+## Upgrading
+If you need to upgrade riff, we recommend uninstalling and then reinstalling.
+
+## Uninstalling
+You can use helm to uninstall riff.
+```sh
+# remove any riff resources
+kubectl delete riff --all-namespaces --all
+
+# remove any Knative resources (if Knative runtime is enabled)
+kubectl delete knative --all-namespaces --all
+
+# remove riff
+helm delete --purge riff
+kubectl delete customresourcedefinitions.apiextensions.k8s.io -l app.kubernetes.io/managed-by=Tiller,app.kubernetes.io/instance=riff
+
+# remove istio (if installed)
+helm delete --purge istio
+kubectl delete namespace istio-system
+kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+```
+
+Alternatively, you can delete your Minikube cluster and then recreate it.
+```sh
+minikube delete
+minikube start --memory=4096 --cpus=4
 ```

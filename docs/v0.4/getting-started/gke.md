@@ -344,3 +344,25 @@ riff knative deployer delete knative-square
 riff core deployer delete k8s-square
 riff function delete square
 ```
+
+## Upgrading
+If you need to upgrade riff, we recommend uninstalling and then reinstalling.
+
+## Uninstalling
+You can use helm to uninstall riff.
+```sh
+# remove any riff resources
+kubectl delete riff --all-namespaces --all
+
+# remove any Knative resources (if Knative runtime is enabled)
+kubectl delete knative --all-namespaces --all
+
+# remove riff
+helm delete --purge riff
+kubectl delete customresourcedefinitions.apiextensions.k8s.io -l app.kubernetes.io/managed-by=Tiller,app.kubernetes.io/instance=riff
+
+# remove istio (if installed)
+helm delete --purge istio
+kubectl delete namespace istio-system
+kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+```
