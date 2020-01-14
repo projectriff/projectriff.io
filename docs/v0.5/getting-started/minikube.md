@@ -32,9 +32,7 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 ## Create a Minikube cluster
 
 ```sh
-minikube start \
-  --memory=4096 --cpus=4 \
-  --vm-driver=hyperkit
+minikube start --memory=4096 --cpus=4
 ```
 
 To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
@@ -130,6 +128,8 @@ riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 ## Install riff Using kapp
 
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
+
+> NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See [instructions](../../v0.4/getting-started/minikube.md#uninstalling) in the v0.4.0 documentation.
 
 Create a namespace for kapp to store configuration:
 
@@ -349,10 +349,83 @@ curl http://localhost:8080/ -w '\n' \
 
 > NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
 
-## Cleanup
+## Delete the function and deployers
 
 ```sh
 riff knative deployer delete knative-square
 riff core deployer delete k8s-square
 riff function delete square
+```
+
+## Uninstalling
+
+You can delete your Minikube cluster and then recreate it (this will remove all state including riff).
+
+```sh
+minikube delete
+minikube start --memory=4096 --cpus=4
+```
+
+Alternatively, you can use the following commands to uninstall riff:
+
+### remove any riff resources
+
+```sh
+kubectl delete riff --all-namespaces --all
+```
+
+### remove riff Streaming Runtime
+
+```sh
+kapp delete -n apps -a riff-streaming-runtime
+```
+
+```sh
+kapp delete -n apps -a keda
+```
+
+### remove riff Core Runtime (if installed)
+
+```sh
+kapp delete -n apps -a riff-core-runtime
+```
+
+### remove riff Knative Runtime (if installed)
+
+```sh
+kubectl delete knative --all-namespaces --all
+```
+
+```sh
+kapp delete -n apps -a riff-knative-runtime
+```
+
+```sh
+kapp delete -n apps -a knative
+```
+
+```sh
+kapp delete -n apps -a istio
+```
+
+```sh
+kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+```
+
+### remove riff Build
+
+```sh
+kapp delete -n apps -a riff-build
+```
+
+```sh
+kapp delete -n apps -a riff-builders
+```
+
+```sh
+kapp delete -n apps -a kpack
+```
+
+```sh
+kapp delete -n apps -a cert-manager
 ```
