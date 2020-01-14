@@ -380,17 +380,17 @@ kubectl delete riff --all-namespaces --all
 ### remove riff Streaming Runtime
 
 ```powershell
-kapp delete -y -n apps -a riff-streaming-runtime
+kapp delete -n apps -a riff-streaming-runtime
 ```
 
 ```powershell
-kapp delete -y -n apps -a keda
+kapp delete -n apps -a keda
 ```
 
 ### remove riff Core Runtime (if installed)
 
 ```powershell
-kapp delete -y -n apps -a riff-core-runtime
+kapp delete -n apps -a riff-core-runtime
 ```
 
 ### remove riff Knative Runtime (if installed)
@@ -400,15 +400,15 @@ kubectl delete knative --all-namespaces --all
 ```
 
 ```powershell
-kapp delete -y -n apps -a riff-knative-runtime
+kapp delete -n apps -a riff-knative-runtime
 ```
 
 ```powershell
-kapp delete -y -n apps -a knative
+kapp delete -n apps -a knative
 ```
 
 ```powershell
-kapp delete -y -n apps -a istio
+kapp delete -n apps -a istio
 ```
 
 ```powershell
@@ -418,19 +418,19 @@ kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.i
 ### remove riff Build
 
 ```powershell
-kapp delete -y -n apps -a riff-build
+kapp delete -n apps -a riff-build
 ```
 
 ```powershell
-kapp delete -y -n apps -a riff-builders
+kapp delete -n apps -a riff-builders
 ```
 
 ```powershell
-kapp delete -y -n apps -a kpack
+kapp delete -n apps -a kpack
 ```
 
 ```powershell
-kapp delete -y -n apps -a cert-manager
+kapp delete -n apps -a cert-manager
 ```
 
 Alternatively you an reset the Kubernetes cluster (this will remove all state including riff).
