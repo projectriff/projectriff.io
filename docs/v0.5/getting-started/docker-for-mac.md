@@ -47,6 +47,7 @@ watch -n 1 kubectl get pod --all-namespaces
 [kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
 You install kapp using Homebrew:
+
 ```sh
 brew tap k14s/tap
 brew install kapp
@@ -57,9 +58,11 @@ Move it into a directory on your path, and make it executable.
 Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
 Validate the installation.
+
 ```sh
 kapp version
 ```
+
 ```
 Client Version: 0.17.0
 
@@ -71,6 +74,7 @@ Succeeded
 [ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
 
 You install ytt using Homebrew:
+
 ```sh
 brew tap k14s/tap
 brew install ytt
@@ -81,11 +85,13 @@ Move it into a directory on your path, and make it executable.
 Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
 Validate the installation.
+
 ```sh
 ytt version
 ```
+
 ```
-Version: 0.22.0
+Version: 0.23.0
 ```
 
 ## Install a snapshot build of the riff CLI
@@ -95,9 +101,11 @@ A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google
 Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
 
 Check that the riff CLI version is 0.5.0-snapshot.
+
 ```sh
 riff --version
 ```
+
 ```
 riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 ```
@@ -107,16 +115,28 @@ riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
 Create a namespace for kapp to store configuration:
-```
+
+```sh
 kubectl create ns apps
 ```
 
 ### install riff Build
+
 To install riff build and it's dependencies:
+
 ```sh
 kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/cert-manager.yaml
+```
+
+```sh
 kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kpack.yaml
+```
+
+```sh
 kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-builders.yaml
+```
+
+```sh
 kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
 ```
 
@@ -142,14 +162,18 @@ kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/pr
 
 Install riff Streaming Runtime and it's dependencies:
 
-```
+```sh
 kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+```
+
+```sh
 kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
 ```
 
 > NOTE: After installing the Streaming Runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
 
 ### verify riff installation
+
 Resources may be missing if the corresponding runtime was not installed.
 
 ```sh
@@ -224,6 +248,7 @@ After the deployer is created, you can see the hostname by listing deployers.
 ```sh
 riff knative deployer list
 ```
+
 ```
 NAME             TYPE       REF      HOST                                 STATUS   AGE
 knative-square   function   square   knative-square.default.example.com   Ready    28s
@@ -248,6 +273,7 @@ curl http://localhost:$INGRESS_PORT/ -w '\n' \
 -H 'Content-Type: application/json' \
 -d 7
 ```
+
 ```
 49
 ```
@@ -265,6 +291,7 @@ After the deployer is created, you can see the service name by listing deployers
 ```sh
 riff core deployers list
 ```
+
 ```
 NAME         TYPE       REF      URL                                           STATUS   AGE
 k8s-square   function   square   http://k8s-square.default.svc.cluster.local   Ready    35s
@@ -277,6 +304,7 @@ In a separate terminal, start port-forwarding to the ClusterIP service created b
 ```sh
 kubectl port-forward service/k8s-square 8080:80
 ```
+
 ```
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
@@ -289,6 +317,7 @@ curl http://localhost:8080/ -w '\n' \
 -H 'Content-Type: application/json' \
 -d 8
 ```
+
 ```
 64
 ```
@@ -304,6 +333,7 @@ riff function delete square
 ```
 
 ## Uninstalling and reinstalling
+
 If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.
 
 ![reset Kubernetes using Preferences/Reset](/img/docker-for-mac-reset-kubernetes.png)
