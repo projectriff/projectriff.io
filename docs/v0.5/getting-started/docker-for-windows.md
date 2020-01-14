@@ -135,7 +135,7 @@ riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-> NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See [instructions](../../v0.4/getting-started/docker-for-windows#uninstalling) in the v0.4.0 documentation.
+> NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See [instructions](../../v0.4/getting-started/docker-for-windows.md#uninstalling) in the v0.4.0 documentation.
 
 Create a namespace for kapp to store configuration:
 
