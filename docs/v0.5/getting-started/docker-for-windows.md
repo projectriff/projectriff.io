@@ -7,11 +7,13 @@ sidebar_label: Docker for Windows
 The following will help you get started running a riff function with Knative on Docker Community Edition for Windows.
 
 ## Install Docker
+
 Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
 
 ![download Docker for Windows](/img/docker-for-windows-download.png)
 
 ### resize the VM
+
 Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 4GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
 
 ![configure Docker VM](/img/docker-vm-config-windows.png)
@@ -23,26 +25,28 @@ In the Shared Drives settings, enable sharing for the C drive, and enter your Wi
 ![configure Docker VM](/img/docker-windows-shared-drives.png)
 
 ### enable Kubernetes
+
 Enable Kubernetes in the Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
 
 ![enable Kubernetes](/img/docker-kubernetes-windows.png)
 
 Confirm that your kubectl context is pointing to "docker-desktop".
 
-```sh
+```powershell
 kubectl config current-context
 ```
 
 If you previously had a different cluster configured, switch your kubectl context to "docker-desktop" using a PowerShell or command window.
 
-```sh
+```powershell
 kubectl config use-context docker-desktop
 ```
 
 ### monitor your cluster
+
 At this point it is useful to monitor your Kubernetes cluster. If you have [git bash](https://gitforwindows.org/) installed, create a bash script called `watch`, with the following content.
 
-```sh
+```powershell
 #!/bin/bash
 ARGS="${@}"
 clear;
@@ -59,6 +63,7 @@ Start by watching all namespaces to confirm that Kubernetes is running.
 ```powershell
 watch kubectl get pod --all-namespaces
 ```
+
 ```
 NAMESPACE     NAME                                     READY   STATUS    RESTARTS   AGE
 docker        compose-6c67d745f6-gcjcl                 1/1     Running   0          19s
@@ -80,11 +85,12 @@ Download a recent binary for your platform from [github](https://github.com/k14s
 Move it into a directory on your path, and make it executable.
 Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
-
 Validate the installation.
-```sh
+
+```powershell
 kapp version
 ```
+
 ```
 Client Version: 0.17.0
 
@@ -99,13 +105,14 @@ Download a recent binary for your platform from [github](https://github.com/k14s
 Move it into a directory on your path, and make it executable.
 Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
-
 Validate the installation.
-```sh
+
+```powershell
 ytt version
 ```
+
 ```
-Version: 0.22.0
+Version: 0.23.0
 ```
 
 ## Install a snapshot build of the riff CLI
@@ -115,9 +122,11 @@ A recent snapshot build of the riff [CLI for Windows](https://storage.cloud.goog
 Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install).
 
 Check that the riff CLI version is 0.5.0-snapshot.
-```sh
+
+```powershell
 riff --version
 ```
+
 ```
 riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 ```
@@ -127,23 +136,36 @@ riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
 Create a namespace for kapp to store configuration:
-```
+
+```powershell
 kubectl create ns apps
 ```
 
 ### install riff Build
+
 To install riff build and it's dependencies:
-```sh
+
+```powershell
 kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/cert-manager.yaml
+```
+
+```powershell
 kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kpack.yaml
+```
+
+```powershell
 kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-builders.yaml
+```
+
+```powershell
 kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
 ```
 
 ### install riff Core Runtime
 
 To optionally install riff Core Runtime:
-```
+
+```powershell
 kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
 ```
 
@@ -151,10 +173,16 @@ kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/proje
 
 To optionally install riff Knative Runtime and it's dependencies:
 
-```sh
+```powershell
 # ytt is used to convert the ingress service to NodePort because Docker for Windows does not support `LoadBalancer` services.
 ytt -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/istio.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark istio.yaml:type=yaml-plain | kapp deploy -n apps -a istio -f - -y
+```
+
+```powershell
 kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/knative.yaml
+```
+
+```powershell
 kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
 ```
 
@@ -162,14 +190,18 @@ kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/pr
 
 Install riff Streaming Runtime and it's dependencies:
 
-```
+```powershell
 kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+```
+
+```powershell
 kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
 ```
 
 > NOTE: After installing the Streaming Runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
 
 ### verify riff installation
+
 Resources may be missing if the corresponding runtime was not installed.
 
 ```powershell
@@ -244,6 +276,7 @@ After the deployer is created, you can see the hostname by listing deployers.
 ```powershell
 riff knative deployer list
 ```
+
 ```
 NAME             TYPE       REF      HOST                                 STATUS   AGE
 knative-square   function   square   knative-square.default.example.com   Ready    28s
@@ -270,6 +303,7 @@ curl http://localhost:$INGRESS_PORT/ `
   -H 'Content-Type: application/json' `
   -d 7
 ```
+
 ```
 49
 ```
@@ -281,15 +315,16 @@ Remove the built-in PowerShell `curl` alias with `Remove-item alias:curl`.
 
 The Core Runtime runs riff workloads by creating Kubernetes built-in [deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) and [service](https://kubernetes.io/docs/concepts/services-networking/service/#service-resource) resources.
 
-```sh
+```powershell
 riff core deployer create k8s-square --function-ref square --tail
 ```
 
 After the deployer is created, you can see the service name by listing deployers.
 
-```sh
+```powershell
 riff core deployers list
 ```
+
 ```
 NAME         TYPE       REF      URL                                           STATUS   AGE
 k8s-square   function   square   http://k8s-square.default.svc.cluster.local   Ready    35s
@@ -299,9 +334,10 @@ k8s-square   function   square   http://k8s-square.default.svc.cluster.local   R
 
 In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
 
-```sh
+```powershell
 kubectl port-forward service/k8s-square 8080:80
 ```
+
 ```
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
@@ -309,11 +345,12 @@ Forwarding from [::1]:8080 -> 8080
 
 Make a POST request to invoke the function using the port assigned above.
 
-```sh
+```powershell
 curl http://localhost:8080/ `
 -H 'Content-Type: application/json' `
 -d 8
 ```
+
 ```
 64
 ```
@@ -322,13 +359,14 @@ Note that unlike Knative, the Core runtime will not scale deployments down to ze
 
 ## Delete the function and deployers
 
-```sh
+```powershell
 riff knative deployer delete knative-square
 riff core deployer delete k8s-square
 riff function delete square
 ```
 
 ## Uninstalling and reinstalling
+
 If you need to upgrade or reinstall riff, we recommend resetting the Kubernetes cluster first. To do this, click `Reset Kubernetes Cluster...` in the Reset tab in Docker Settings.
 
 ![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)
