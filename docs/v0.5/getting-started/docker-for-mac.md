@@ -114,6 +114,8 @@ riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
 
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
+> NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See [instructions](../v0.4/getting-started/docker-for-mac#uninstalling) in the v0.4.0 documentation.
+
 Create a namespace for kapp to store configuration:
 
 ```sh
@@ -332,8 +334,72 @@ riff core deployer delete k8s-square
 riff function delete square
 ```
 
-## Uninstalling and reinstalling
+## Uninstalling
 
-If you need to upgrade riff, we recommend resetting the Kubernetes cluster first, and then reinstalling.
+Use the following commands to uninstall riff:
+
+### Remove any riff resources
+
+```sh
+kubectl delete riff --all-namespaces --all
+```
+
+### remove riff Streaming Runtime
+
+```sh
+kapp delete -y -n apps -a riff-streaming-runtime
+```
+
+```sh
+kapp delete -y -n apps -a keda
+```
+
+### remove riff Core Runtime (if installed)
+
+```sh
+kapp delete -y -n apps -a riff-core-runtime
+```
+
+### remove riff Knative Runtime (if installed)
+
+```sh
+kubectl delete knative --all-namespaces --all
+```
+
+```sh
+kapp delete -y -n apps -a riff-knative-runtime
+```
+
+```sh
+kapp delete -y -n apps -a knative
+```
+
+```sh
+kapp delete -y -n apps -a istio
+```
+
+```sh
+kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+```
+
+### remove riff Build
+
+```sh
+kapp delete -y -n apps -a riff-build
+```
+
+```sh
+kapp delete -y -n apps -a riff-builders
+```
+
+```sh
+kapp delete -y -n apps -a kpack
+```
+
+```sh
+kapp delete -y -n apps -a cert-manager
+```
+
+Alternatively you an reset the Kubernetes cluster (this will remove all state including riff).
 
 ![reset Kubernetes using Preferences/Reset](/img/docker-for-mac-reset-kubernetes.png)
