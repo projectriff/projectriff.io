@@ -336,7 +336,11 @@ riff function delete square
 
 ## Uninstalling
 
-Use the following commands to uninstall riff:
+You can reset the Kubernetes cluster (this will remove all state including riff).
+
+![reset Kubernetes using Preferences/Reset](/img/docker-for-mac-reset-kubernetes.png)
+
+Alternatively, you can use the following commands to uninstall riff:
 
 ### Remove any riff resources
 
@@ -399,7 +403,3 @@ kapp delete -n apps -a kpack
 ```sh
 kapp delete -n apps -a cert-manager
 ```
-
-Alternatively you an reset the Kubernetes cluster (this will remove all state including riff).
-
-![reset Kubernetes using Preferences/Reset](/img/docker-for-mac-reset-kubernetes.png)

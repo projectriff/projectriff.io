@@ -359,7 +359,14 @@ riff function delete square
 
 ## Uninstalling
 
-Use the following commands to uninstall riff:
+You can delete your Minikube cluster and then recreate it (this will remove all state including riff).
+
+```sh
+minikube delete
+minikube start --memory=4096 --cpus=4
+```
+
+Alternatively, you can use the following commands to uninstall riff:
 
 ### Remove any riff resources
 
@@ -421,11 +428,4 @@ kapp delete -n apps -a kpack
 
 ```sh
 kapp delete -n apps -a cert-manager
-```
-
-Alternatively, you can delete your Minikube cluster and then recreate it.
-
-```sh
-minikube delete
-minikube start --memory=4096 --cpus=4
 ```
