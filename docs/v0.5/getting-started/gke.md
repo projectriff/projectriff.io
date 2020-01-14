@@ -415,7 +415,7 @@ riff function delete square
 
 Use the following commands to uninstall riff:
 
-### Remove any riff resources
+### remove any riff resources
 
 ```sh
 kubectl delete riff --all-namespaces --all

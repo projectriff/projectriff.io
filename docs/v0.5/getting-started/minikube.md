@@ -368,7 +368,7 @@ minikube start --memory=4096 --cpus=4
 
 Alternatively, you can use the following commands to uninstall riff:
 
-### Remove any riff resources
+### remove any riff resources
 
 ```sh
 kubectl delete riff --all-namespaces --all

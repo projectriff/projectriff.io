@@ -342,7 +342,7 @@ You can reset the Kubernetes cluster (this will remove all state including riff)
 
 Alternatively, you can use the following commands to uninstall riff:
 
-### Remove any riff resources
+### remove any riff resources
 
 ```sh
 kubectl delete riff --all-namespaces --all
