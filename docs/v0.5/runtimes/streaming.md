@@ -60,7 +60,7 @@ The easiest way to create this KafkaProvider is using the riff CLI:
 riff streaming kafka-provider create franz --bootstrap-servers kafka.kafka:9092
 ```
 
-Youe should see two deployments and two services appear:
+You should see two deployments and two services appear:
 
 ```bash
 kubectl get deploy,svc
