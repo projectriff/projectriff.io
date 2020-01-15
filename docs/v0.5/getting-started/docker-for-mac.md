@@ -156,7 +156,13 @@ To optionally install riff Knative Runtime and it's dependencies:
 ```sh
 # ytt is used to convert the ingress service to NodePort because Docker for Mac does not support `LoadBalancer` services.
 ytt -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/istio.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark istio.yaml:type=yaml-plain | kapp deploy -n apps -a istio -f - -y
+```
+
+```sh
 kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/knative.yaml
+```
+
+```sh
 kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
 ```
 
