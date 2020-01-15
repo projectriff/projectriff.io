@@ -201,14 +201,6 @@ kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectri
 kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
 ```
 
-### install riff Core Runtime
-
-To optionally install riff Core Runtime:
-
-```sh
-kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
-```
-
 ### install riff Knative Runtime
 
 To optionally install riff Knative Runtime and it's dependencies:
@@ -225,20 +217,6 @@ kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/cha
 kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
 ```
 
-### install riff Streaming Runtime
-
-Install riff Streaming Runtime and it's dependencies:
-
-```sh
-kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
-```
-
-```sh
-kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
-```
-
-> NOTE: After installing the Streaming Runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
-
 ### verify riff installation
 
 Resources may be missing if the corresponding runtime was not installed.
@@ -249,21 +227,26 @@ riff doctor
 
 ```
 NAMESPACE     STATUS
+default       ok
 riff-system   ok
 
-RESOURCE                              READ      WRITE
-configmaps                            allowed   allowed
-secrets                               allowed   allowed
-pods                                  allowed   n/a
-pods/log                              allowed   n/a
-applications.build.projectriff.io     allowed   allowed
-containers.build.projectriff.io       allowed   allowed
-functions.build.projectriff.io        allowed   allowed
-deployers.core.projectriff.io         allowed   allowed
-processors.streaming.projectriff.io   allowed   allowed
-streams.streaming.projectriff.io      allowed   allowed
-adapters.knative.projectriff.io       allowed   allowed
-deployers.knative.projectriff.io      allowed   allowed
+RESOURCE                                     NAMESPACE     NAME       READ      WRITE
+configmaps                                   riff-system   builders   allowed   n/a
+configmaps                                   default       *          allowed   allowed
+secrets                                      default       *          allowed   allowed
+pods                                         default       *          allowed   n/a
+pods/log                                     default       *          allowed   n/a
+applications.build.projectriff.io            default       *          allowed   allowed
+containers.build.projectriff.io              default       *          allowed   allowed
+functions.build.projectriff.io               default       *          allowed   allowed
+deployers.core.projectriff.io                default       *          missing   missing
+processors.streaming.projectriff.io          default       *          missing   missing
+streams.streaming.projectriff.io             default       *          missing   missing
+inmemoryproviders.streaming.projectriff.io   default       *          missing   missing
+kafkaproviders.streaming.projectriff.io      default       *          missing   missing
+pulsarproviders.streaming.projectriff.io     default       *          missing   missing
+adapters.knative.projectriff.io              default       *          allowed   allowed
+deployers.knative.projectriff.io             default       *          allowed   allowed
 ```
 
 ### create a Kubernetes secret for pushing images to GCR
@@ -363,61 +346,14 @@ curl http://$INGRESS_IP/ -w '\n' \
 49
 ```
 
-## Create a Core deployer
-
-The [Core runtime](../runtimes/core.md) deploys riff workloads as "vanilla" Kubernetes deployments and services.
-
-```sh
-riff core deployer create k8s-square --function-ref square --tail
-```
-
-After the deployer is created, you can see the service name by listing deployers.
-
-```sh
-riff core deployers list
-```
-
-```
-NAME         TYPE       REF      URL                                           STATUS   AGE
-k8s-square   function   square   http://k8s-square.default.svc.cluster.local   Ready    35s
-```
-
-### invoke the function
-
-In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
-
-```sh
-kubectl port-forward service/k8s-square 8080:80
-```
-
-```
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
-
-Make a POST request to invoke the function using the port assigned above.
-
-```sh
-curl http://localhost:8080/ -w '\n' \
--H 'Content-Type: application/json' \
--d 8
-```
-
-```
-64
-```
-
-Note that unlike Knative, the Core runtime will not scale deployments down to zero.
-
-## Delete the function and deployers
+## Delete the function and deployer
 
 ```sh
 riff knative deployer delete knative-square
-riff core deployer delete k8s-square
 riff function delete square
 ```
 
-## Uninstalling
+## Uninstalling riff
 
 Use the following commands to uninstall riff:
 
