@@ -10,11 +10,26 @@ Ingress and autoscalers are not provided.
 
 ## Install
 
-The core runtime is not installed with riff by default. See the platform [getting started guide](../getting-started.md) for how to install the core runtime.
+The Core runtime is not installed with riff by default. See the [getting started guide](../getting-started.md) for how to install the prerequisits and riff Build in your Kubernetes environment.
+
+You can then install the Core runtime using the following:
+
+```sh
+kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
+```
 
 ## Create a deployer
 
-Assuming a function named `square` is available, create a core deployer referencing the square function.
+We need a function to use for the deployer. We create a function named `square` that can be used for our deployer.
+
+```sh
+riff function create square \
+  --git-repo https://github.com/projectriff-samples/node-square \
+  --artifact square.js \
+  --tail
+```
+
+We can now create a core deployer referencing the square function.
 
 ```sh
 riff core deployer create square --function-ref square --tail
@@ -22,25 +37,20 @@ riff core deployer create square --function-ref square --tail
 
 ```
 Created deployer "square"
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: /usr/local/bin/jq
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Node started in 130ms
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Server starting with request-reply interaction model and payload argument type
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: HTTP loaded in 86ms
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: HTTP running on localhost:8080
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Function invoker started in 223ms
+Deployer "square" is ready
 ```
 
 Deployers can also be created referencing applications and containers; new images are automatically detected and rolled out. Alternatively, a deployer created from an image needs to be manually updated to consume a new image.
 
-After the deployer is created, get the service by listing deployers.
+After the deployer is created, you can list the deployers.
 
 ```sh
 riff core deployer list
 ```
 
 ```
-NAME     TYPE       REF      SERVICE           STATUS   AGE
-square   function   square   square-deployer   Ready    10s
+NAME     TYPE       REF      URL                                       STATUS   AGE
+square   function   square   http://square.default.svc.cluster.local   Ready    75s
 ```
 
 ## Invoke a deployer
@@ -49,10 +59,10 @@ Since the core runtime does not provide Ingress, a connection to the cluster mus
 
 ### setup port forwarding
 
-From the deployer listing (`riff core deployer list`), get the service name for the function, in this case `square-deployer`. In a new terminal, run:
+In a new terminal, run:
 
 ```sh
-kubectl port-forward service/square-deployer 8080:80
+kubectl port-forward service/square 8080:80
 ```
 
 ```
@@ -84,11 +94,9 @@ curl localhost:8080 -v -w '\n' -H 'Content-Type: application/json' -d 7
 > 
 * upload completely sent off: 1 out of 1 bytes
 < HTTP/1.1 200 OK
-< X-Powered-By: Express
-< Content-Type: text/plain; charset=utf-8
-< Date: Fri, 16 Aug 2019 17:01:09 GMT
-< Connection: keep-alive
+< Date: Wed, 15 Jan 2020 22:19:48 GMT
 < Content-Length: 2
+< Content-Type: text/plain; charset=utf-8
 < 
 * Connection #0 to host localhost left intact
 49
@@ -106,4 +114,14 @@ riff core deployer delete square
 
 ```
 Deleted deployer "square"
+```
+
+Delete the function when you no longer need it.
+
+```sh
+riff function delete square
+```
+
+```
+Deleted function "square"
 ```

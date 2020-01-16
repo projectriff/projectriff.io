@@ -8,9 +8,17 @@ The streaming runtime allows execution of functions on **streams** of messages, 
 
 ## Install
 
-The streaming runtime is not installed with riff by default. See the platform [getting started guide](../getting-started.md) for how to install the streaming runtime.
+The Streaming runtime is not installed with riff by default. See the [getting started guide](../getting-started.md) for how to install the prerequisits and riff Build in your Kubernetes environment.
 
-> NOTE: It is currently impossible to install both the knative and the streaming runtimes.
+You can then install the Streaming runtime and it's dependencies using the following:
+
+```sh
+kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+```
+
+```sh
+kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
+```
 
 > NOTE: Not all invokers support streaming. Invokers conforming to the full invoker [specification](https://github.com/projectriff/invoker-specification) can be used with the streaming runtimes, while some can't. In particular, the [command](../invokers/command.md) invoker does not support streaming.
 
@@ -27,9 +35,9 @@ The configuration needed by each kind of provider varies greatly depending on th
 
 ### KafkaProvider
 
-At of riff 0.5.x, the only available kind of **Provider** available is **KafkaProvider**, which maps each riff stream to a Kafka _topic_.
+As of riff 0.5.x, one kind of **Provider** available is **KafkaProvider**, which maps each riff stream to a Kafka _topic_.
 
-Here is an example declaration of a `KafkaProvider` named `franz`, which assumes that a Kafka broker is reachable at `kafkabroker:9092`.
+Here is an example declaration of a `KafkaProvider` named `franz`, which assumes that a Kafka broker is reachable at `kafka.kafka:9092`.
 
 ```yaml
 apiVersion: streaming.projectriff.io/v1alpha1
@@ -37,27 +45,35 @@ kind: KafkaProvider
 metadata:
   name: franz
 spec:
-  bootstrapServers: kafkabroker:9092
+  bootstrapServers: kafka.kafka:9092
 ```
 
-For convenience, this provider is available from [github.com/projectriff/system](https://github.com/projectriff/system/blob/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml).
+If you don't have Kafka installed in your cluster you can create a single node Kafka install using the following:
+
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/projectriff/system/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml
+kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kafka.yaml
 ```
 
-Upon application, two deployments and two services should appear:
+The easiest way to create this KafkaProvider is using the riff CLI:
+
+```sh
+riff streaming kafka-provider create franz --bootstrap-servers kafka.kafka:9092
+```
+
+You should see two deployments and two services appear:
+
 ```bash
 kubectl get deploy,svc
 ```
 
 ```
-NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/franz-kafka-liiklus       1/1     1            1           23h
-deployment.extensions/franz-kafka-provisioner   1/1     1            1           23h
+NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/franz-kafka-gateway-db57m       1/1     1            1           8s
+deployment.extensions/franz-kafka-provisioner-nv426   1/1     1            1           8s
 
-NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                          AGE
-service/franz-kafka-liiklus       ClusterIP      10.11.251.168   <none>           6565/TCP                         23h
-service/franz-kafka-provisioner   ClusterIP      10.11.255.151   <none>           80/TCP                           23h
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/franz-kafka-gateway-q5wh8   ClusterIP   10.3.242.150   <none>        6565/TCP   8s
+service/franz-kafka-provisioner     ClusterIP   10.3.246.193   <none>        80/TCP     8s
 ```
 
 ## Streams
@@ -67,9 +83,10 @@ Streams are namespaced resources that allow the flow of (and typically persist) 
 To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff CLI and specify the _address of the **provisioner** service of the provider to use_.
 
 Building on the example above, here is how to create two streams, named `in` and `out` respectively, both managed by the `franz` provider:
+
 ```bash
-riff streaming stream create in  --provider franz-kafka-provisioner --content-type application/json 
-riff streaming stream create out --provider franz-kafka-provisioner --content-type application/json 
+riff streaming stream create in  --provider franz-kafka-provisioner --content-type application/json
+riff streaming stream create out --provider franz-kafka-provisioner --content-type application/json
 ```
 
 ## Processors
@@ -81,6 +98,7 @@ Upon creation of a processor, a deployment is created that hosts both the functi
 > NOTE: The windowing function implemented by the streaming processor is currently hardcoded to create windows every minute.
 
 Here is how to create an example processor using a function that averages numbers over time:
+
 ```bash
 riff function create time-averager \
   --git-repo https://github.com/projectriff-samples/time-averager.git \
