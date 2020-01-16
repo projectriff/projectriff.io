@@ -56,10 +56,12 @@
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/projectriff/projectriff.io/blob/master/docs/v0.5/runtimes/streaming.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Streaming Runtime</h1></header><article><div><span><p>The streaming runtime allows execution of functions on <strong>streams</strong> of messages, permitting more complex interactions than the simple request / reply used by the <a href="/docs/v0.5/runtimes/core">core</a> or <a href="/docs/v0.5/runtimes/knative">knative</a> runtimes.</p>
 <h2><a class="anchor" aria-hidden="true" id="install"></a><a href="#install" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install</h2>
-<p>The streaming runtime is not installed with riff by default. See the platform <a href="/docs/v0.5/getting-started">getting started guide</a> for how to install the streaming runtime.</p>
-<blockquote>
-<p>NOTE: It is currently impossible to install both the knative and the streaming runtimes.</p>
-</blockquote>
+<p>The Streaming runtime is not installed with riff by default. See the <a href="/docs/v0.5/getting-started">getting started guide</a> for how to install the prerequisits and riff Build in your Kubernetes environment.</p>
+<p>You can then install the Streaming runtime and it's dependencies using the following:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+</code></pre>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
+</code></pre>
 <blockquote>
 <p>NOTE: Not all invokers support streaming. Invokers conforming to the full invoker <a href="https://github.com/projectriff/invoker-specification">specification</a> can be used with the streaming runtimes, while some can't. In particular, the <a href="/docs/v0.5/invokers/command">command</a> invoker does not support streaming.</p>
 </blockquote>
@@ -71,35 +73,38 @@ Conversely, functions can interact with streams managed by two (or more) differe
 <p>The reconciliation of some providers is taken care of by the riff streaming runtime, while it is expected that <em>extension</em> providers may be handled by custom controllers.
 The configuration needed by each kind of provider varies greatly depending on the backing message broker. For both of these reasons, creation of an instance of a provider is not carried out <em>via</em> the riff CLI, but rather &quot;manually&quot; using yaml files. Additionally, the installation of concrete message brokers (inside or outside the cluster) is out of scope of this document.</p>
 <h3><a class="anchor" aria-hidden="true" id="kafkaprovider"></a><a href="#kafkaprovider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KafkaProvider</h3>
-<p>At of riff 0.5.x, the only available kind of <strong>Provider</strong> available is <strong>KafkaProvider</strong>, which maps each riff stream to a Kafka <em>topic</em>.</p>
-<p>Here is an example declaration of a <code>KafkaProvider</code> named <code>franz</code>, which assumes that a Kafka broker is reachable at <code>kafkabroker:9092</code>.</p>
+<p>As of riff 0.5.x, one kind of <strong>Provider</strong> available is <strong>KafkaProvider</strong>, which maps each riff stream to a Kafka <em>topic</em>.</p>
+<p>Here is an example declaration of a <code>KafkaProvider</code> named <code>franz</code>, which assumes that a Kafka broker is reachable at <code>kafka.kafka:9092</code>.</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">streaming.projectriff.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">KafkaProvider</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">franz</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">kafkabroker:9092</span>
+  <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">kafka.kafka:9092</span>
 </code></pre>
-<p>For convenience, this provider is available from <a href="https://github.com/projectriff/system/blob/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml">github.com/projectriff/system</a>.</p>
-<pre><code class="hljs css language-sh">kubectl apply -f https://raw.githubusercontent.com/projectriff/system/master/config/streaming/samples/streaming_v1alpha1_kafka-provider.yaml
+<p>If you don't have Kafka installed in your cluster you can create a single node Kafka install using the following:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kafka.yaml
 </code></pre>
-<p>Upon application, two deployments and two services should appear:</p>
+<p>The easiest way to create this KafkaProvider is using the riff CLI:</p>
+<pre><code class="hljs css language-sh">riff streaming kafka-provider create franz --bootstrap-servers kafka.kafka:9092
+</code></pre>
+<p>You should see two deployments and two services appear:</p>
 <pre><code class="hljs css language-bash">kubectl get deploy,svc
 </code></pre>
-<pre><code class="hljs">NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/franz-kafka-liiklus       1/1     1            1           23h
-deployment.extensions/franz-kafka-provisioner   1/1     1            1           23h
+<pre><code class="hljs">NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/franz-kafka-gateway-db57m       1/1     1            1           8s
+deployment.extensions/franz-kafka-provisioner-nv426   1/1     1            1           8s
 
-NAME                              TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                          AGE
-service/franz-kafka-liiklus       ClusterIP      10.11.251.168   &lt;none&gt;           6565/TCP                         23h
-service/franz-kafka-provisioner   ClusterIP      10.11.255.151   &lt;none&gt;           80/TCP                           23h
+NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/franz-kafka-gateway-q5wh8   ClusterIP   10.3.242.150   &lt;none&gt;        6565/TCP   8s
+service/franz-kafka-provisioner     ClusterIP   10.3.246.193   &lt;none&gt;        80/TCP     8s
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="streams"></a><a href="#streams" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Streams</h2>
 <p>Streams are namespaced resources that allow the flow of (and typically persist) messages serialized by riff streaming. Each stream has a <strong>content-type</strong> assigned to it and only messages compatible with that MIME type are allowed on that stream.</p>
 <p>To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff CLI and specify the <em>address of the <strong>provisioner</strong> service of the provider to use</em>.</p>
 <p>Building on the example above, here is how to create two streams, named <code>in</code> and <code>out</code> respectively, both managed by the <code>franz</code> provider:</p>
-<pre><code class="hljs css language-bash">riff streaming stream create <span class="hljs-keyword">in</span>  --provider franz-kafka-provisioner --content-type application/json 
-riff streaming stream create out --provider franz-kafka-provisioner --content-type application/json 
+<pre><code class="hljs css language-bash">riff streaming stream create <span class="hljs-keyword">in</span>  --provider franz-kafka-provisioner --content-type application/json
+riff streaming stream create out --provider franz-kafka-provisioner --content-type application/json
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="processors"></a><a href="#processors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Processors</h2>
 <p><strong>Processors</strong> are the glue between streams and functions. An instance of a processor tells the streaming runtime that a given function should react to messages flowing on its <em>input</em> stream(s) and forward results to its <em>output</em> stream(s).</p>

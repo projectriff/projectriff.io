@@ -164,10 +164,6 @@ Succeeded
 </code></pre>
 <pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-build.yaml
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="install-riff-core-runtime"></a><a href="#install-riff-core-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Core Runtime</h3>
-<p>To optionally install riff Core Runtime:</p>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
-</code></pre>
 <h3><a class="anchor" aria-hidden="true" id="install-riff-knative-runtime"></a><a href="#install-riff-knative-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Knative Runtime</h3>
 <p>To optionally install riff Knative Runtime and it's dependencies:</p>
 <pre><code class="hljs css language-sh">kapp deploy -n apps -a istio -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/istio.yaml
@@ -176,35 +172,31 @@ Succeeded
 </code></pre>
 <pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-knative-runtime.yaml
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="install-riff-streaming-runtime"></a><a href="#install-riff-streaming-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Streaming Runtime</h3>
-<p>Install riff Streaming Runtime and it's dependencies:</p>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
-</code></pre>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
-</code></pre>
-<blockquote>
-<p>NOTE: After installing the Streaming Runtime, configure Kafka with a <a href="/docs/v0.5/runtimes/streaming#kafkaprovider">KafkaProvider</a>.</p>
-</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="verify-riff-installation"></a><a href="#verify-riff-installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>verify riff installation</h3>
 <p>Resources may be missing if the corresponding runtime was not installed.</p>
 <pre><code class="hljs css language-sh">riff doctor
 </code></pre>
 <pre><code class="hljs">NAMESPACE     STATUS
+default       ok
 riff-system   ok
 
-RESOURCE                              READ      WRITE
-configmaps                            allowed   allowed
-secrets                               allowed   allowed
-pods                                  allowed   n/a
-pods/log                              allowed   n/a
-applications.build.projectriff.io     allowed   allowed
-containers.build.projectriff.io       allowed   allowed
-functions.build.projectriff.io        allowed   allowed
-deployers.core.projectriff.io         allowed   allowed
-processors.streaming.projectriff.io   allowed   allowed
-streams.streaming.projectriff.io      allowed   allowed
-adapters.knative.projectriff.io       allowed   allowed
-deployers.knative.projectriff.io      allowed   allowed
+RESOURCE                                     NAMESPACE     NAME       READ      WRITE
+configmaps                                   riff-system   builders   allowed   n/a
+configmaps                                   default       *          allowed   allowed
+secrets                                      default       *          allowed   allowed
+pods                                         default       *          allowed   n/a
+pods/log                                     default       *          allowed   n/a
+applications.build.projectriff.io            default       *          allowed   allowed
+containers.build.projectriff.io              default       *          allowed   allowed
+functions.build.projectriff.io               default       *          allowed   allowed
+deployers.core.projectriff.io                default       *          missing   missing
+processors.streaming.projectriff.io          default       *          missing   missing
+streams.streaming.projectriff.io             default       *          missing   missing
+inmemoryproviders.streaming.projectriff.io   default       *          missing   missing
+kafkaproviders.streaming.projectriff.io      default       *          missing   missing
+pulsarproviders.streaming.projectriff.io     default       *          missing   missing
+adapters.knative.projectriff.io              default       *          allowed   allowed
+deployers.knative.projectriff.io             default       *          allowed   allowed
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="create-a-kubernetes-secret-for-pushing-images-to-gcr"></a><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a Kubernetes secret for pushing images to GCR</h3>
 <p>Create a <a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts">GCP Service Account</a> in the GCP console or using the gcloud CLI</p>
@@ -261,37 +253,11 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 </code></pre>
 <pre><code class="hljs">49
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="create-a-core-deployer"></a><a href="#create-a-core-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Core deployer</h2>
-<p>The <a href="/docs/v0.5/runtimes/core">Core runtime</a> deploys riff workloads as &quot;vanilla&quot; Kubernetes deployments and services.</p>
-<pre><code class="hljs css language-sh">riff core deployer create k8s-square --<span class="hljs-keyword">function</span>-ref square --tail
-</code></pre>
-<p>After the deployer is created, you can see the service name by listing deployers.</p>
-<pre><code class="hljs css language-sh">riff core deployers list
-</code></pre>
-<pre><code class="hljs">NAME         TYPE       REF      URL                                           STATUS   AGE
-k8s-square   function   square   http://k8s-square.default.svc.cluster.local   Ready    35s
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="invoke-the-function-1"></a><a href="#invoke-the-function-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke the function</h3>
-<p>In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.</p>
-<pre><code class="hljs css language-sh">kubectl port-forward service/k8s-square 8080:80
-</code></pre>
-<pre><code class="hljs">Forwarding from 127.0.0.1:8080 -&gt; 8080
-Forwarding from [::1]:8080 -&gt; 8080
-</code></pre>
-<p>Make a POST request to invoke the function using the port assigned above.</p>
-<pre><code class="hljs css language-sh">curl http://localhost:8080/ -w <span class="hljs-string">'\n'</span> \
--H <span class="hljs-string">'Content-Type: application/json'</span> \
--d 8
-</code></pre>
-<pre><code class="hljs">64
-</code></pre>
-<p>Note that unlike Knative, the Core runtime will not scale deployments down to zero.</p>
-<h2><a class="anchor" aria-hidden="true" id="delete-the-function-and-deployers"></a><a href="#delete-the-function-and-deployers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delete the function and deployers</h2>
+<h2><a class="anchor" aria-hidden="true" id="delete-the-function-and-deployer"></a><a href="#delete-the-function-and-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delete the function and deployer</h2>
 <pre><code class="hljs css language-sh">riff knative deployer delete knative-square
-riff core deployer delete k8s-square
 riff <span class="hljs-keyword">function</span> delete square
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="uninstalling"></a><a href="#uninstalling" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uninstalling</h2>
+<h2><a class="anchor" aria-hidden="true" id="uninstalling-riff"></a><a href="#uninstalling-riff" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uninstalling riff</h2>
 <p>Use the following commands to uninstall riff:</p>
 <h3><a class="anchor" aria-hidden="true" id="remove-any-riff-resources"></a><a href="#remove-any-riff-resources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove any riff resources</h3>
 <pre><code class="hljs css language-sh">kubectl delete riff --all-namespaces --all
@@ -324,4 +290,4 @@ riff <span class="hljs-keyword">function</span> delete square
 </code></pre>
 <pre><code class="hljs css language-sh">kapp delete -n apps -a cert-manager
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started"><span class="arrow-prev">← </span><span>Pick your environment</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/minikube"><span>Minikube</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-a-google-cloud-project">Create a Google Cloud project</a><ul class="toc-headings"><li><a href="#install-gcloud">install gcloud</a></li><li><a href="#install-kubectl">install kubectl</a></li><li><a href="#configure-gcloud">configure gcloud</a></li></ul></li><li><a href="#create-a-gke-cluster">Create a GKE cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li><li><a href="#grant-yourself-cluster-admin-permissions">grant yourself cluster-admin permissions</a></li></ul></li><li><a href="#install-kapp">Install kapp</a></li><li><a href="#install-a-snapshot-build-of-the-riff-cli">Install a snapshot build of the riff CLI</a></li><li><a href="#install-riff-using-kapp">Install riff Using kapp</a><ul class="toc-headings"><li><a href="#install-riff-build">install riff Build</a></li><li><a href="#install-riff-core-runtime">install riff Core Runtime</a></li><li><a href="#install-riff-knative-runtime">install riff Knative Runtime</a></li><li><a href="#install-riff-streaming-runtime">install riff Streaming Runtime</a></li><li><a href="#verify-riff-installation">verify riff installation</a></li><li><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr">create a Kubernetes secret for pushing images to GCR</a></li><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#create-a-core-deployer">Create a Core deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function-1">invoke the function</a></li></ul></li><li><a href="#delete-the-function-and-deployers">Delete the function and deployers</a></li><li><a href="#uninstalling">Uninstalling</a><ul class="toc-headings"><li><a href="#remove-any-riff-resources">remove any riff resources</a></li><li><a href="#remove-riff-streaming-runtime">remove riff Streaming Runtime</a></li><li><a href="#remove-riff-core-runtime-if-installed">remove riff Core Runtime (if installed)</a></li><li><a href="#remove-riff-knative-runtime-if-installed">remove riff Knative Runtime (if installed)</a></li><li><a href="#remove-riff-build">remove riff Build</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started"><span class="arrow-prev">← </span><span>Pick your environment</span></a><a class="docs-next button" href="/docs/v0.5/getting-started/minikube"><span>Minikube</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-a-google-cloud-project">Create a Google Cloud project</a><ul class="toc-headings"><li><a href="#install-gcloud">install gcloud</a></li><li><a href="#install-kubectl">install kubectl</a></li><li><a href="#configure-gcloud">configure gcloud</a></li></ul></li><li><a href="#create-a-gke-cluster">Create a GKE cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li><li><a href="#grant-yourself-cluster-admin-permissions">grant yourself cluster-admin permissions</a></li></ul></li><li><a href="#install-kapp">Install kapp</a></li><li><a href="#install-a-snapshot-build-of-the-riff-cli">Install a snapshot build of the riff CLI</a></li><li><a href="#install-riff-using-kapp">Install riff Using kapp</a><ul class="toc-headings"><li><a href="#install-riff-build">install riff Build</a></li><li><a href="#install-riff-knative-runtime">install riff Knative Runtime</a></li><li><a href="#verify-riff-installation">verify riff installation</a></li><li><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr">create a Kubernetes secret for pushing images to GCR</a></li><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#delete-the-function-and-deployer">Delete the function and deployer</a></li><li><a href="#uninstalling-riff">Uninstalling riff</a><ul class="toc-headings"><li><a href="#remove-any-riff-resources">remove any riff resources</a></li><li><a href="#remove-riff-streaming-runtime">remove riff Streaming Runtime</a></li><li><a href="#remove-riff-core-runtime-if-installed">remove riff Core Runtime (if installed)</a></li><li><a href="#remove-riff-knative-runtime-if-installed">remove riff Knative Runtime (if installed)</a></li><li><a href="#remove-riff-build">remove riff Build</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>

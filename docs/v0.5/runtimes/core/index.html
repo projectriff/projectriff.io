@@ -57,31 +57,35 @@
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/projectriff/projectriff.io/blob/master/docs/v0.5/runtimes/core.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Core Runtime</h1></header><article><div><span><p>The core runtime uses stock Kubernetes resources to deploy a workload. A Deployment along with a Service are created to forward traffic to the workload.</p>
 <p>Ingress and autoscalers are not provided.</p>
 <h2><a class="anchor" aria-hidden="true" id="install"></a><a href="#install" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install</h2>
-<p>The core runtime is not installed with riff by default. See the platform <a href="/docs/v0.5/getting-started">getting started guide</a> for how to install the core runtime.</p>
+<p>The Core runtime is not installed with riff by default. See the <a href="/docs/v0.5/getting-started">getting started guide</a> for how to install the prerequisits and riff Build in your Kubernetes environment.</p>
+<p>You can then install the Core runtime using the following:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-core-runtime.yaml
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="create-a-deployer"></a><a href="#create-a-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a deployer</h2>
-<p>Assuming a function named <code>square</code> is available, create a core deployer referencing the square function.</p>
+<p>We need a function to use for the deployer. We create a function named <code>square</code> that can be used for our deployer.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create square \
+  --git-repo https://github.com/projectriff-samples/node-square \
+  --artifact square.js \
+  --tail
+</code></pre>
+<p>We can now create a core deployer referencing the square function.</p>
 <pre><code class="hljs css language-sh">riff core deployer create square --<span class="hljs-keyword">function</span>-ref square --tail
 </code></pre>
 <pre><code class="hljs">Created deployer "square"
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: /usr/local/bin/jq
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Node started in 130ms
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Server starting with request-reply interaction model and payload argument type
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: HTTP loaded in 86ms
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: HTTP running on localhost:8080
-default/square-deployer-6f6cb6d6f5-dhknt[handler]: Function invoker started in 223ms
+Deployer "square" is ready
 </code></pre>
 <p>Deployers can also be created referencing applications and containers; new images are automatically detected and rolled out. Alternatively, a deployer created from an image needs to be manually updated to consume a new image.</p>
-<p>After the deployer is created, get the service by listing deployers.</p>
+<p>After the deployer is created, you can list the deployers.</p>
 <pre><code class="hljs css language-sh">riff core deployer list
 </code></pre>
-<pre><code class="hljs">NAME     TYPE       REF      SERVICE           STATUS   AGE
-square   function   square   square-deployer   Ready    10s
+<pre><code class="hljs">NAME     TYPE       REF      URL                                       STATUS   AGE
+square   function   square   http://square.default.svc.cluster.local   Ready    75s
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="invoke-a-deployer"></a><a href="#invoke-a-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Invoke a deployer</h2>
 <p>Since the core runtime does not provide Ingress, a connection to the cluster must be established before the function can be invoked. For production workloads, installing and configuring ingress is recommended but is outside the scope of this doc. For development, use <code>kubectl port-forward</code> to map a local port to the deployer.</p>
 <h3><a class="anchor" aria-hidden="true" id="setup-port-forwarding"></a><a href="#setup-port-forwarding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>setup port forwarding</h3>
-<p>From the deployer listing (<code>riff core deployer list</code>), get the service name for the function, in this case <code>square-deployer</code>. In a new terminal, run:</p>
-<pre><code class="hljs css language-sh">kubectl port-forward service/square-deployer 8080:80
+<p>In a new terminal, run:</p>
+<pre><code class="hljs css language-sh">kubectl port-forward service/square 8080:80
 </code></pre>
 <pre><code class="hljs">Forwarding from 127.0.0.1:8080 -&gt; 8080
 Forwarding from [::1]:8080 -&gt; 8080
@@ -106,11 +110,9 @@ Forwarding from [::1]:8080 -&gt; 8080
 &gt; 
 * upload completely sent off: 1 out of 1 bytes
 &lt; HTTP/1.1 200 OK
-&lt; X-Powered-By: Express
-&lt; Content-Type: text/plain; charset=utf-8
-&lt; Date: Fri, 16 Aug 2019 17:01:09 GMT
-&lt; Connection: keep-alive
+&lt; Date: Wed, 15 Jan 2020 22:19:48 GMT
 &lt; Content-Length: 2
+&lt; Content-Type: text/plain; charset=utf-8
 &lt; 
 * Connection #0 to host localhost left intact
 49
@@ -121,5 +123,10 @@ Forwarding from [::1]:8080 -&gt; 8080
 <pre><code class="hljs css language-sh">riff core deployer delete square
 </code></pre>
 <pre><code class="hljs">Deleted deployer "square"
+</code></pre>
+<p>Delete the function when you no longer need it.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> delete square
+</code></pre>
+<pre><code class="hljs">Deleted function "square"
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/getting-started/docker-for-windows"><span class="arrow-prev">← </span><span>Docker for Windows</span></a><a class="docs-next button" href="/docs/v0.5/runtimes/knative"><span>Knative</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install">Install</a></li><li><a href="#create-a-deployer">Create a deployer</a></li><li><a href="#invoke-a-deployer">Invoke a deployer</a><ul class="toc-headings"><li><a href="#setup-port-forwarding">setup port forwarding</a></li><li><a href="#call-the-workload">call the workload</a></li></ul></li><li><a href="#cleanup">Cleanup</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
