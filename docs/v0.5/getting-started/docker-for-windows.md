@@ -189,6 +189,7 @@ riff doctor
 ```
 
 ```
+NAMESPACE     STATUS
 default       ok
 riff-system   ok
 
