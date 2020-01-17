@@ -13,11 +13,11 @@ The Streaming runtime is not installed with riff by default. See the [getting st
 You can then install the Streaming runtime and it's dependencies using the following:
 
 ```sh
-kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/keda.yaml
 ```
 
 ```sh
-kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
+kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-streaming-runtime.yaml
 ```
 
 > NOTE: Not all invokers support streaming. Invokers conforming to the full invoker [specification](https://github.com/projectriff/invoker-specification) can be used with the streaming runtimes, while some can't. In particular, the [command](../invokers/command.md) invoker does not support streaming.
@@ -51,7 +51,7 @@ spec:
 If you don't have Kafka installed in your cluster you can create a single node Kafka install using the following:
 
 ```sh
-kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kafka.yaml
+kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kafka.yaml
 ```
 
 The easiest way to create this KafkaProvider is using the riff CLI:
