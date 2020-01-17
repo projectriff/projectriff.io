@@ -1,28 +1,28 @@
 ---
-id: riff-streaming-kafka-provider-status
-title: "riff streaming kafka-provider status"
+id: riff-streaming-inmemory-gateway-status
+title: "riff streaming inmemory-gateway status"
 ---
-## riff streaming kafka-provider status
+## riff streaming inmemory-gateway status
 
-show kafka provider status
+show inmemory gateway status
 
 ### Synopsis
 
-Display status details for a kafka provider.
+Display status details for a in-memory gateway.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-kafka provider roll out is being processed.
+in-memory gateway roll out is being processed.
 
 ```
-riff streaming kafka-provider status <name> [flags]
+riff streaming inmemory-gateway status <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff streamming kafka-provider status my-kafka-provider
+riff streamming inmemory-gateway status my-inmemory-gateway
 ```
 
 ### Options
@@ -42,5 +42,5 @@ riff streamming kafka-provider status my-kafka-provider
 
 ### SEE ALSO
 
-* [riff streaming kafka-provider](riff_streaming_kafka-provider.md)	 - (experimental) kafka stream provider
+* [riff streaming inmemory-gateway](riff_streaming_inmemory-gateway.md)	 - (experimental) in-memory stream gateway
 

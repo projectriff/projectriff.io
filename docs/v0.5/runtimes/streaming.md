@@ -22,26 +22,26 @@ kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/
 
 > NOTE: Not all invokers support streaming. Invokers conforming to the full invoker [specification](https://github.com/projectriff/invoker-specification) can be used with the streaming runtimes, while some can't. In particular, the [command](../invokers/command.md) invoker does not support streaming.
 
-## Providers
+## Gateways
 
 When using the streaming runtime, messages flow between functions using **streams**, which are backed by some concrete messaging system, such as Kafka.
-**Providers** abstract away the protocol details of concrete messaging systems (riff uses [liiklus](https://github.com/bsideup/liiklus) to that effect), as well as the way to provision topics/queues corresponding to each stream. 
+**Gateways** abstract away the protocol details of concrete messaging systems (riff uses [liiklus](https://github.com/bsideup/liiklus) to that effect), as well as the way to provision topics/queues corresponding to each stream. 
 
-Providers are namespaced resources and manage streams in their own namespace. They typically target their own messaging system, but are implemented in such a way that two different provider instances could use the same broker (_e.g._ the same Kafka cluster) without interference.
-Conversely, functions can interact with streams managed by two (or more) different providers.
+Gateways are namespaced resources and manage streams in their own namespace. They typically target their own messaging system, but are implemented in such a way that two different gateway instances could use the same broker (_e.g._ the same Kafka cluster) without interference.
+Conversely, functions can interact with streams managed by two (or more) different gateways.
 
-The reconciliation of some providers is taken care of by the riff streaming runtime, while it is expected that _extension_ providers may be handled by custom controllers.
-The configuration needed by each kind of provider varies greatly depending on the backing message broker. For both of these reasons, creation of an instance of a provider is not carried out _via_ the riff CLI, but rather "manually" using yaml files. Additionally, the installation of concrete message brokers (inside or outside the cluster) is out of scope of this document.
+The reconciliation of some gateways is taken care of by the riff streaming runtime, while it is expected that _extension_ gateways may be handled by custom controllers.
+The configuration needed by each kind of gateway varies greatly depending on the backing message broker. For both of these reasons, creation of an instance of a gateway is not carried out _via_ the riff CLI, but rather "manually" using yaml files. Additionally, the installation of concrete message brokers (inside or outside the cluster) is out of scope of this document.
 
-### KafkaProvider
+### KafkaGateway
 
-As of riff 0.5.x, one kind of **Provider** available is **KafkaProvider**, which maps each riff stream to a Kafka _topic_.
+As of riff 0.5.x, one kind of **Gateway** available is **KafkaGateway**, which maps each riff stream to a Kafka _topic_.
 
-Here is an example declaration of a `KafkaProvider` named `franz`, which assumes that a Kafka broker is reachable at `kafka.kafka:9092`.
+Here is an example declaration of a `KafkaGateway` named `franz`, which assumes that a Kafka broker is reachable at `kafka.kafka:9092`.
 
 ```yaml
 apiVersion: streaming.projectriff.io/v1alpha1
-kind: KafkaProvider
+kind: KafkaGateway
 metadata:
   name: franz
 spec:
@@ -54,10 +54,10 @@ If you don't have Kafka installed in your cluster you can create a single node K
 kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kafka.yaml
 ```
 
-The easiest way to create this KafkaProvider is using the riff CLI:
+The easiest way to create this KafkaGateway is using the riff CLI:
 
 ```sh
-riff streaming kafka-provider create franz --bootstrap-servers kafka.kafka:9092
+riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
 ```
 
 You should see two deployments and two services appear:
@@ -80,13 +80,13 @@ service/franz-kafka-provisioner     ClusterIP   10.3.246.193   <none>        80/
 
 Streams are namespaced resources that allow the flow of (and typically persist) messages serialized by riff streaming. Each stream has a **content-type** assigned to it and only messages compatible with that MIME type are allowed on that stream.
 
-To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff CLI and specify the _address of the **provisioner** service of the provider to use_.
+To declare a stream (and maybe provision any backing resources in the concrete message broker supporting it), use the riff CLI and specify the _address of the **provisioner** service of the gateway to use_.
 
-Building on the example above, here is how to create two streams, named `in` and `out` respectively, both managed by the `franz` provider:
+Building on the example above, here is how to create two streams, named `in` and `out` respectively, both managed by the `franz` gateway:
 
 ```bash
-riff streaming stream create in  --provider franz-kafka-provisioner --content-type application/json
-riff streaming stream create out --provider franz-kafka-provisioner --content-type application/json
+riff streaming stream create in  --gateway franz --content-type application/json
+riff streaming stream create out --gateway franz --content-type application/json
 ```
 
 ## Processors

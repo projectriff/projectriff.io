@@ -1,28 +1,28 @@
 ---
-id: riff-streaming-inmemory-provider-status
-title: "riff streaming inmemory-provider status"
+id: riff-streaming-pulsar-gateway-status
+title: "riff streaming pulsar-gateway status"
 ---
-## riff streaming inmemory-provider status
+## riff streaming pulsar-gateway status
 
-show inmemory provider status
+show pulsar gateway status
 
 ### Synopsis
 
-Display status details for a in-memory provider.
+Display status details for a pulsar gateway.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-in-memory provider roll out is being processed.
+pulsar gateway roll out is being processed.
 
 ```
-riff streaming inmemory-provider status <name> [flags]
+riff streaming pulsar-gateway status <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff streamming inmemory-provider status my-inmemory-provider
+riff streamming pulsar-gateway status my-pulsar-gateway
 ```
 
 ### Options
@@ -42,5 +42,5 @@ riff streamming inmemory-provider status my-inmemory-provider
 
 ### SEE ALSO
 
-* [riff streaming inmemory-provider](riff_streaming_inmemory-provider.md)	 - (experimental) in-memory stream provider
+* [riff streaming pulsar-gateway](riff_streaming_pulsar-gateway.md)	 - (experimental) pulsar stream gateway
 

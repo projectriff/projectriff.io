@@ -1,23 +1,23 @@
 ---
-id: riff-streaming-inmemory-provider-create
-title: "riff streaming inmemory-provider create"
+id: riff-streaming-pulsar-gateway-create
+title: "riff streaming pulsar-gateway create"
 ---
-## riff streaming inmemory-provider create
+## riff streaming pulsar-gateway create
 
-create a in-memory provider of messages
+create a pulsar gateway of messages
 
 ### Synopsis
 
 <todo>
 
 ```
-riff streaming inmemory-provider create <name> [flags]
+riff streaming pulsar-gateway create <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff streaming inmemory-provider create my-inmemory-provider
+riff streaming pulsar-gateway create my-pulsar-gateway --service-url pulsar://localhost:6650
 ```
 
 ### Options
@@ -26,8 +26,9 @@ riff streaming inmemory-provider create my-inmemory-provider
       --dry-run                 print kubernetes resources to stdout rather than apply them to the cluster, messages normally on stdout will be sent to stderr
   -h, --help                    help for create
   -n, --namespace name          kubernetes namespace (defaulted from kube config)
+      --service-url url         url of the pulsar service
       --tail                    watch creation progress
-      --wait-timeout duration   duration to wait for the provider to become ready when watching progress (default 1m0s)
+      --wait-timeout duration   duration to wait for the gateway to become ready when watching progress (default 1m0s)
 ```
 
 ### Options inherited from parent commands
@@ -40,5 +41,5 @@ riff streaming inmemory-provider create my-inmemory-provider
 
 ### SEE ALSO
 
-* [riff streaming inmemory-provider](riff_streaming_inmemory-provider.md)	 - (experimental) in-memory stream provider
+* [riff streaming pulsar-gateway](riff_streaming_pulsar-gateway.md)	 - (experimental) pulsar stream gateway
 
