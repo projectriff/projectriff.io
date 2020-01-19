@@ -8,18 +8,11 @@ The following will help you get started running a riff function on Minikube.
 
 ## Install Minikube
 
-[Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [latest release](https://github.com/kubernetes/minikube/releases) for installation, and the [readme](https://github.com/kubernetes/minikube/blob/master/README.md) for more detailed information.
+[Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [Getting Started](https://minikube.sigs.k8s.io/docs/start/) page for installation information.
 
-For macOS we recommend using Hyperkit as the vm driver. To install Hyperkit, first install [Docker Desktop (Mac)](https://store.docker.com/editions/community/docker-ce-desktop-mac), then run:
+Minikube uses a hypervisor driver that varies by operating system. Some drivers are provided with Minikube while others requires an extra installation step. See the [Driver](https://minikube.sigs.k8s.io/docs/reference/drivers/)page for details.
 
-```sh
-curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
-&& sudo install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
-```
-
-For Linux we suggest using the [kvm2](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver) driver.
-
-For additional details see the minikube [driver installation](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#hyperkit-driver) docs.
+For macOS we recommend using Hyperkit as the vm-driver and for Linux we suggest using the KVM (kvm2) driver. You can select what driver to use as default using the `minikube config set vm-driver` command. Newer versions of Minikube seem to default to usig the `hyperkit` driver for MacOS and it is provided with Minikube, so no extra install needed. The `kvm2` driver for Linux does require an extra install step.
 
 ## Install Docker
 
@@ -27,7 +20,7 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 
 ## Install kubectl
 
-[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters. 
+[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) is the Kubernetes CLI. It is used to manage minikube as well as hosted Kubernetes clusters.
 
 ## Create a Minikube cluster
 
@@ -35,9 +28,9 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 minikube start --memory=4096 --cpus=4
 ```
 
-To use the kvm2 driver for Linux specify `--vm-driver=kvm2`. Omitting the `--vm-driver` option will use the default driver.
+> NOTE: To use the kvm2 driver for Linux specify `--vm-driver=kvm2`.
 
-Confirm that your kubectl context is pointing to the new cluster
+Confirm that your kubectl context is pointing to the new cluster:
 
 ```sh
 kubectl config current-context
@@ -45,7 +38,7 @@ kubectl config current-context
 
 ### monitor your cluster
 
-At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
+At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac:
 
 ```sh
 brew install watch
@@ -61,7 +54,7 @@ watch -n 1 kubectl get pod --all-namespaces
 
 [kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
-You can find install kapp using Homebrew on MacOS
+You can install kapp using Homebrew on MacOS:
 
 ```sh
 brew tap k14s/tap
@@ -88,7 +81,7 @@ Succeeded
 
 [ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
 
-You can find install ytt using Homebrew on MacOS
+You can install ytt using Homebrew on MacOS:
 
 ```sh
 brew tap k14s/tap
