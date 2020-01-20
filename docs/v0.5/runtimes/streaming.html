@@ -58,9 +58,9 @@
 <h2><a class="anchor" aria-hidden="true" id="install"></a><a href="#install" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install</h2>
 <p>The Streaming runtime is not installed with riff by default. See the <a href="/docs/v0.5/getting-started">getting started guide</a> for how to install the prerequisits and riff Build in your Kubernetes environment.</p>
 <p>You can then install the Streaming runtime and it's dependencies using the following:</p>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/keda.yaml
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/keda.yaml
 </code></pre>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/riff-streaming-runtime.yaml
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-streaming-runtime.yaml
 </code></pre>
 <blockquote>
 <p>NOTE: Not all invokers support streaming. Invokers conforming to the full invoker <a href="https://github.com/projectriff/invoker-specification">specification</a> can be used with the streaming runtimes, while some can't. In particular, the <a href="/docs/v0.5/invokers/command">command</a> invoker does not support streaming.</p>
@@ -83,7 +83,7 @@ The configuration needed by each kind of provider varies greatly depending on th
   <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">kafka.kafka:9092</span>
 </code></pre>
 <p>If you don't have Kafka installed in your cluster you can create a single node Kafka install using the following:</p>
-<pre><code class="hljs css language-sh">kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/charts/uncharted/0.5.0-snapshot/kafka.yaml
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kafka.yaml
 </code></pre>
 <p>The easiest way to create this KafkaProvider is using the riff CLI:</p>
 <pre><code class="hljs css language-sh">riff streaming kafka-provider create franz --bootstrap-servers kafka.kafka:9092
