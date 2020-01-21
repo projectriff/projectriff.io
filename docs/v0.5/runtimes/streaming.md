@@ -60,20 +60,18 @@ The easiest way to create this KafkaGateway is using the riff CLI:
 riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
 ```
 
-You should see two deployments and two services appear:
+You should see a deployment and service appear:
 
 ```bash
 kubectl get deploy,svc
 ```
 
 ```
-NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/franz-kafka-gateway-db57m       1/1     1            1           8s
-deployment.extensions/franz-kafka-provisioner-nv426   1/1     1            1           8s
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.extensions/franz-gateway-db57m       1/1     1            1           8s
 
-NAME                                TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/franz-kafka-gateway-q5wh8   ClusterIP   10.3.242.150   <none>        6565/TCP   8s
-service/franz-kafka-provisioner     ClusterIP   10.3.246.193   <none>        80/TCP     8s
+NAME                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/franz-gateway-q5wh8   ClusterIP   10.3.242.150   <none>        6565/TCP   8s
 ```
 
 ## Streams
