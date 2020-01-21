@@ -5,8 +5,8 @@ USE_SSH ?= true
 install:
 	cd website && npm install
 
-.PHONY: start
-start:
+.PHONY: start dev
+start dev:
 	cd website && npm start
 
 .PHONY: build
