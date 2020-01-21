@@ -12,13 +12,12 @@ Generated HTML is published online using Netlify. The build configuration for Ne
 To bring in dependencies for the first time:
 
 ```sh
-cd website
-npm install
+make install
 ```
 
 To preview using a local dev server:
 ```sh
-npm start
+make dev
 ```
 
 ### Creating docs pages
