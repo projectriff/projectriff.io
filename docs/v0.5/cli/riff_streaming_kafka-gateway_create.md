@@ -1,23 +1,23 @@
 ---
-id: riff-streaming-kafka-provider-create
-title: "riff streaming kafka-provider create"
+id: riff-streaming-kafka-gateway-create
+title: "riff streaming kafka-gateway create"
 ---
-## riff streaming kafka-provider create
+## riff streaming kafka-gateway create
 
-create a kafka provider of messages
+create a kafka gateway of messages
 
 ### Synopsis
 
 <todo>
 
 ```
-riff streaming kafka-provider create <name> [flags]
+riff streaming kafka-gateway create <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff streaming kafka-provider create my-kafka-provider --bootstrap-servers kafka.local:9092
+riff streaming kafka-gateway create my-kafka-gateway --bootstrap-servers kafka.local:9092
 ```
 
 ### Options
@@ -28,7 +28,7 @@ riff streaming kafka-provider create my-kafka-provider --bootstrap-servers kafka
   -h, --help                        help for create
   -n, --namespace name              kubernetes namespace (defaulted from kube config)
       --tail                        watch creation progress
-      --wait-timeout duration       duration to wait for the provider to become ready when watching progress (default 1m0s)
+      --wait-timeout duration       duration to wait for the gateway to become ready when watching progress (default 1m0s)
 ```
 
 ### Options inherited from parent commands
@@ -41,5 +41,5 @@ riff streaming kafka-provider create my-kafka-provider --bootstrap-servers kafka
 
 ### SEE ALSO
 
-* [riff streaming kafka-provider](riff_streaming_kafka-provider.md)	 - (experimental) kafka stream provider
+* [riff streaming kafka-gateway](riff_streaming_kafka-gateway.md)	 - (experimental) kafka stream gateway
 

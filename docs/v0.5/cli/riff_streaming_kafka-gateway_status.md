@@ -1,28 +1,28 @@
 ---
-id: riff-streaming-pulsar-provider-status
-title: "riff streaming pulsar-provider status"
+id: riff-streaming-kafka-gateway-status
+title: "riff streaming kafka-gateway status"
 ---
-## riff streaming pulsar-provider status
+## riff streaming kafka-gateway status
 
-show pulsar provider status
+show kafka gateway status
 
 ### Synopsis
 
-Display status details for a pulsar provider.
+Display status details for a kafka gateway.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-pulsar provider roll out is being processed.
+kafka gateway roll out is being processed.
 
 ```
-riff streaming pulsar-provider status <name> [flags]
+riff streaming kafka-gateway status <name> [flags]
 ```
 
 ### Examples
 
 ```
-riff streamming pulsar-provider status my-pulsar-provider
+riff streamming kafka-gateway status my-kafka-gateway
 ```
 
 ### Options
@@ -42,5 +42,5 @@ riff streamming pulsar-provider status my-pulsar-provider
 
 ### SEE ALSO
 
-* [riff streaming pulsar-provider](riff_streaming_pulsar-provider.md)	 - (experimental) pulsar stream provider
+* [riff streaming kafka-gateway](riff_streaming_kafka-gateway.md)	 - (experimental) kafka stream gateway
 
