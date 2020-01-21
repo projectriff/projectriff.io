@@ -10,7 +10,7 @@ The following will help you get started running a riff function on Minikube.
 
 [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [Getting Started](https://minikube.sigs.k8s.io/docs/start/) page for installation information.
 
-Minikube uses a hypervisor driver that varies by operating system. Some drivers are provided with Minikube while others requires an extra installation step. See the [Driver](https://minikube.sigs.k8s.io/docs/reference/drivers/)page for details.
+Minikube uses a hypervisor driver that varies by operating system. Some drivers are provided with Minikube while others requires an extra installation step. See the [Driver](https://minikube.sigs.k8s.io/docs/reference/drivers/) page for details.
 
 For macOS we recommend using Hyperkit as the vm-driver and for Linux we suggest using the KVM (kvm2) driver. You can select what driver to use as default using the `minikube config set vm-driver` command. Newer versions of Minikube seem to default to usig the `hyperkit` driver for MacOS and it is provided with Minikube, so no extra install needed. The `kvm2` driver for Linux does require an extra install step.
 
