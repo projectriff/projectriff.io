@@ -6,21 +6,35 @@ sidebar_label: Streaming
 
 The streaming runtime allows execution of functions on **streams** of messages, permitting more complex interactions than the simple request / reply used by the [core](core.md) or [knative](knative.md) runtimes.
 
+> NOTE: Not all invokers support streaming. Invokers conforming to the full invoker [specification](https://github.com/projectriff/invoker-specification) can be used with the streaming runtimes, while some can't. In particular, the [command](../invokers/command.md) invoker does not support streaming.
+
 ## Install
 
 The Streaming runtime is not installed with riff by default. See the [getting started guide](../getting-started.md) for how to install the prerequisits and riff Build in your Kubernetes environment.
 
 You can then install the Streaming runtime and it's dependencies using the following:
 
+### install KEDA
+
+> NOTE: For Kubernetes versions 1.16 and later the use of `k8s.io` in the KEDA CRDs results in a [failed status condition](https://github.com/kedacore/keda/issues/552) and we need to avoid the kapp reconciliation for the KEDA resources.
+
+For Kubernetes version 1.15 or earlier use:
+
 ```sh
 kapp deploy -n apps -a keda -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/keda.yaml
 ```
 
+For Kubernetes version 1.16 or later use:
+
+```sh
+kapp deploy -n apps -a keda --wait=false -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/keda.yaml
+```
+
+### install the Streaming Runtime
+
 ```sh
 kapp deploy -n apps -a riff-streaming-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-streaming-runtime.yaml
 ```
-
-> NOTE: Not all invokers support streaming. Invokers conforming to the full invoker [specification](https://github.com/projectriff/invoker-specification) can be used with the streaming runtimes, while some can't. In particular, the [command](../invokers/command.md) invoker does not support streaming.
 
 ## Providers
 
