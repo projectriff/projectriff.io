@@ -8,7 +8,7 @@ The knative runtime uses the [Knative](https://knative.dev) project to deploy HT
 
 ## Install
 
-The knative runtime is not installed with riff by default. See the platform [getting started guide](../getting-started.md) for how to install the knative runtime.
+The knative runtime is not required to be installed with riff. The [riff getting started guide](../getting-started.md) does have instructions for installing the knative runtime for each environment.
 
 If the cluster supports LoadBalancer services, it is recommended to [setup a custom domain](https://knative.dev/docs/serving/using-a-custom-domain/).
 
