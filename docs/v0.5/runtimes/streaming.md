@@ -48,13 +48,18 @@ spec:
   bootstrapServers: kafka.kafka:9092
 ```
 
-If you don't have Kafka installed in your cluster you can create a single node Kafka install using the following:
+#### Kafka development deployment
+
+If you don't have Kafka installed in your cluster you can create a single node Kafka install using the [Helm incubator chart for Apache Kafka](https://github.com/helm/charts/tree/master/incubator/kafka).
 
 ```sh
-kapp deploy -n apps -a kafka -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kafka.yaml
+helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+helm install --name kafka --namespace kafka incubator/kafka --set replicas=1 --set zookeeper.replicaCount=1 --wait
 ```
 
-The easiest way to create this KafkaGateway is using the riff CLI:
+#### Create Kafka gateway with riff CLI
+
+The easiest way to create a KafkaGateway is using the riff CLI:
 
 ```sh
 riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
