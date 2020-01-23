@@ -50,11 +50,12 @@ spec:
 
 #### Kafka development deployment
 
-If you don't have Kafka installed in your cluster you can create a single node Kafka install using the [Helm incubator chart for Apache Kafka](https://github.com/helm/charts/tree/master/incubator/kafka).
+If you don't have Kafka installed in your cluster you can create a single node Kafka install using Helm 3 [(docs)](https://helm.sh/docs/) and the [Helm incubator chart for Apache Kafka](https://hub.helm.sh/charts/incubator/kafka). To install Helm 3 follow the [instructions in the Helm GitHub repo](https://github.com/helm/helm#install). Once you have Helm 3 installed you can run the following commands to install a single node Kafka deployment:
 
 ```sh
-helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
-helm install --name kafka --namespace kafka incubator/kafka --set replicas=1 --set zookeeper.replicaCount=1 --wait
+helm repo add incubator https://storage.googleapis.com/kubernetes-charts-incubator
+kubectl create namespace kafka
+helm install kafka --namespace kafka incubator/kafka --set replicas=1 --set zookeeper.replicaCount=1 --wait
 ```
 
 #### Create Kafka gateway with riff CLI
