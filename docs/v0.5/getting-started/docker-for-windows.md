@@ -92,7 +92,7 @@ kapp version
 ```
 
 ```
-Client Version: 0.17.0
+Client Version: 0.18.0
 
 Succeeded
 ```
