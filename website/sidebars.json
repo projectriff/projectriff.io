@@ -84,6 +84,19 @@
       },
       {
         "type": "subcategory",
+        "label": "Core Runtime",
+        "ids": [
+          "v0.5/cli/riff-core",
+          "v0.5/cli/riff-core-deployer",
+          "v0.5/cli/riff-core-deployer-create",
+          "v0.5/cli/riff-core-deployer-delete",
+          "v0.5/cli/riff-core-deployer-list",
+          "v0.5/cli/riff-core-deployer-status",
+          "v0.5/cli/riff-core-deployer-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
         "label": "Streaming Runtime",
         "ids": [
           "v0.5/cli/riff-streaming",
@@ -131,19 +144,6 @@
           "v0.5/cli/riff-streaming-pulsar-gateway-delete",
           "v0.5/cli/riff-streaming-pulsar-gateway-list",
           "v0.5/cli/riff-streaming-pulsar-gateway-status"
-        ]
-      },
-      {
-        "type": "subcategory",
-        "label": "Core Runtime",
-        "ids": [
-          "v0.5/cli/riff-core",
-          "v0.5/cli/riff-core-deployer",
-          "v0.5/cli/riff-core-deployer-create",
-          "v0.5/cli/riff-core-deployer-delete",
-          "v0.5/cli/riff-core-deployer-list",
-          "v0.5/cli/riff-core-deployer-status",
-          "v0.5/cli/riff-core-deployer-tail"
         ]
       }
     ]
