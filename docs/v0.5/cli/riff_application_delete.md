@@ -2,8 +2,6 @@
 id: riff-application-delete
 title: "riff application delete"
 ---
-## riff application delete
-
 delete application(s)
 
 ### Synopsis

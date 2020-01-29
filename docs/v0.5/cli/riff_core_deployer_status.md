@@ -2,8 +2,6 @@
 id: riff-core-deployer-status
 title: "riff core deployer status"
 ---
-## riff core deployer status
-
 show core deployer status
 
 ### Synopsis

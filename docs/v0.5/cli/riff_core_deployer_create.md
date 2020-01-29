@@ -2,8 +2,6 @@
 id: riff-core-deployer-create
 title: "riff core deployer create"
 ---
-## riff core deployer create
-
 create a deployer to deploy a workload
 
 ### Synopsis

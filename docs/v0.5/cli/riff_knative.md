@@ -2,8 +2,6 @@
 id: riff-knative
 title: "riff knative"
 ---
-## riff knative
-
 Knative runtime for riff workloads
 
 ### Synopsis

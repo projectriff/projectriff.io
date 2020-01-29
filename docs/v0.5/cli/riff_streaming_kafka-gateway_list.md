@@ -1,16 +1,14 @@
 ---
 id: riff-streaming-kafka-gateway-list
-title: "riff streaming kafka-gateway list"
+title: "kafka-gateway list"
 ---
-## riff streaming kafka-gateway list
-
 table listing of kafka gateways
 
 ### Synopsis
 
-List kafka gateways in a namespace or across all namespaces.
+List Kafka gateways in a namespace or across all namespaces.
 
-For detail regarding the status of a single kafka gateway, run:
+For detail regarding the status of a single Kafka gateway, run:
 
     riff streaming kafka-gateway status <kafka-gateway-name>
 

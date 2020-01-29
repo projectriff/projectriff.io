@@ -2,8 +2,6 @@
 id: riff-container-create
 title: "riff container create"
 ---
-## riff container create
-
 watch for new images in a repository
 
 ### Synopsis

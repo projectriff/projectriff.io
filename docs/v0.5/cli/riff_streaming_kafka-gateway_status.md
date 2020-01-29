@@ -1,19 +1,17 @@
 ---
 id: riff-streaming-kafka-gateway-status
-title: "riff streaming kafka-gateway status"
+title: "kafka-gateway status"
 ---
-## riff streaming kafka-gateway status
-
 show kafka gateway status
 
 ### Synopsis
 
-Display status details for a kafka gateway.
+Display status details for a Kafka gateway.
 
 The Ready condition is shown which should include a reason code and a
 descriptive message when the status is not "True". The status for the condition
 may be: "True", "False" or "Unknown". An "Unknown" status is common while the
-kafka gateway roll out is being processed.
+Kafka gateway rollout is being processed.
 
 ```
 riff streaming kafka-gateway status <name> [flags]

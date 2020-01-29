@@ -2,8 +2,6 @@
 id: riff-streaming-processor-delete
 title: "riff streaming processor delete"
 ---
-## riff streaming processor delete
-
 delete processor(s)
 
 ### Synopsis

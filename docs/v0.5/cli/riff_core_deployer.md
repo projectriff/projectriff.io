@@ -2,8 +2,6 @@
 id: riff-core-deployer
 title: "riff core deployer"
 ---
-## riff core deployer
-
 deployers deploy a workload
 
 ### Synopsis
@@ -12,7 +10,7 @@ Deployers can be created for a build or an image. Build based deployers
 continuously watch for the latest image and will deploy new images. If the
 underlying build is deleted, the deployer will continue to run, but will no
 longer self update. Image based deployers must be manually updated to trigger
-roll out of an updated image.
+the rollout of an updated image.
 
 Users wishing to perform checks on built images before deploying them can
 provide their own external process to watch the build for new images and only

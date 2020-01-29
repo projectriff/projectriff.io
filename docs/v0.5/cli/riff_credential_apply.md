@@ -2,8 +2,6 @@
 id: riff-credential-apply
 title: "riff credential apply"
 ---
-## riff credential apply
-
 create or update credentials for a container registry
 
 ### Synopsis

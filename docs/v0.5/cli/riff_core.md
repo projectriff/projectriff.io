@@ -2,8 +2,6 @@
 id: riff-core
 title: "riff core"
 ---
-## riff core
-
 core runtime for riff workloads
 
 ### Synopsis

@@ -2,8 +2,6 @@
 id: riff-application-status
 title: "riff application status"
 ---
-## riff application status
-
 show application status
 
 ### Synopsis

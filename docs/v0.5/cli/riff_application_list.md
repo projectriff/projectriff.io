@@ -2,8 +2,6 @@
 id: riff-application-list
 title: "riff application list"
 ---
-## riff application list
-
 table listing of applications
 
 ### Synopsis

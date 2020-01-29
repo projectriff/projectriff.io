@@ -2,8 +2,6 @@
 id: riff-knative-adapter-list
 title: "riff knative adapter list"
 ---
-## riff knative adapter list
-
 table listing of adapters
 
 ### Synopsis

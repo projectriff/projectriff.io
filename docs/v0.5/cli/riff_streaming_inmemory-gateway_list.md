@@ -1,9 +1,7 @@
 ---
 id: riff-streaming-inmemory-gateway-list
-title: "riff streaming inmemory-gateway list"
+title: "inmemory-gateway list"
 ---
-## riff streaming inmemory-gateway list
-
 table listing of in-memory gateways
 
 ### Synopsis

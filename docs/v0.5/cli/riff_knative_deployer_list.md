@@ -2,8 +2,6 @@
 id: riff-knative-deployer-list
 title: "riff knative deployer list"
 ---
-## riff knative deployer list
-
 table listing of deployers
 
 ### Synopsis

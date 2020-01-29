@@ -2,8 +2,6 @@
 id: riff-credential-delete
 title: "riff credential delete"
 ---
-## riff credential delete
-
 delete credential(s)
 
 ### Synopsis

@@ -2,8 +2,6 @@
 id: riff-streaming-stream-list
 title: "riff streaming stream list"
 ---
-## riff streaming stream list
-
 table listing of streams
 
 ### Synopsis

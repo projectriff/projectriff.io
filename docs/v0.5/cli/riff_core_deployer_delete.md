@@ -2,8 +2,6 @@
 id: riff-core-deployer-delete
 title: "riff core deployer delete"
 ---
-## riff core deployer delete
-
 delete deployer(s)
 
 ### Synopsis

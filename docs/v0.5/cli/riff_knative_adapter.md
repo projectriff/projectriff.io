@@ -2,8 +2,6 @@
 id: riff-knative-adapter
 title: "riff knative adapter"
 ---
-## riff knative adapter
-
 adapters push built images to Knative
 
 ### Synopsis

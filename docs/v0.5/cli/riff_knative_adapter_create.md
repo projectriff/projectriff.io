@@ -2,8 +2,6 @@
 id: riff-knative-adapter-create
 title: "riff knative adapter create"
 ---
-## riff knative adapter create
-
 create an adapter to Knative Serving
 
 ### Synopsis

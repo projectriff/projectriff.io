@@ -2,13 +2,14 @@
 id: riff-streaming-processor-create
 title: "riff streaming processor create"
 ---
-## riff streaming processor create
-
 create a processor to apply a function to messages on streams
 
 ### Synopsis
 
-<todo>
+Creates a processor within a namespace.
+
+The processor is configured with a function or container reference and multiple
+input and/or output streams.
 
 ```
 riff streaming processor create <name> [flags]
