@@ -2,8 +2,6 @@
 id: riff-container-status
 title: "riff container status"
 ---
-## riff container status
-
 show container status
 
 ### Synopsis

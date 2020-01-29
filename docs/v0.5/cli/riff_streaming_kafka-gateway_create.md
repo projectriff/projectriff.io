@@ -1,14 +1,14 @@
 ---
 id: riff-streaming-kafka-gateway-create
-title: "riff streaming kafka-gateway create"
+title: "kafka-gateway create"
 ---
-## riff streaming kafka-gateway create
-
 create a kafka gateway of messages
 
 ### Synopsis
 
-<todo>
+Creates a Kafka gateway within a namespace.
+
+The gateway is configured with the address of the Kafka broker.
 
 ```
 riff streaming kafka-gateway create <name> [flags]

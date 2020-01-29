@@ -66,15 +66,20 @@
       },
       {
         "type": "subcategory",
-        "label": "Core Runtime",
+        "label": "Knative Runtime",
         "ids": [
-          "v0.5/cli/riff-core",
-          "v0.5/cli/riff-core-deployer",
-          "v0.5/cli/riff-core-deployer-create",
-          "v0.5/cli/riff-core-deployer-delete",
-          "v0.5/cli/riff-core-deployer-list",
-          "v0.5/cli/riff-core-deployer-status",
-          "v0.5/cli/riff-core-deployer-tail"
+          "v0.5/cli/riff-knative",
+          "v0.5/cli/riff-knative-adapter",
+          "v0.5/cli/riff-knative-adapter-create",
+          "v0.5/cli/riff-knative-adapter-delete",
+          "v0.5/cli/riff-knative-adapter-list",
+          "v0.5/cli/riff-knative-adapter-status",
+          "v0.5/cli/riff-knative-deployer",
+          "v0.5/cli/riff-knative-deployer-create",
+          "v0.5/cli/riff-knative-deployer-delete",
+          "v0.5/cli/riff-knative-deployer-list",
+          "v0.5/cli/riff-knative-deployer-status",
+          "v0.5/cli/riff-knative-deployer-tail"
         ]
       },
       {
@@ -92,17 +97,35 @@
           "v0.5/cli/riff-streaming-processor-delete",
           "v0.5/cli/riff-streaming-processor-list",
           "v0.5/cli/riff-streaming-processor-status",
-          "v0.5/cli/riff-streaming-processor-tail",
+          "v0.5/cli/riff-streaming-processor-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "In-memory Gateway",
+        "ids": [
           "v0.5/cli/riff-streaming-inmemory-gateway",
           "v0.5/cli/riff-streaming-inmemory-gateway-create",
           "v0.5/cli/riff-streaming-inmemory-gateway-delete",
           "v0.5/cli/riff-streaming-inmemory-gateway-list",
-          "v0.5/cli/riff-streaming-inmemory-gateway-status",
+          "v0.5/cli/riff-streaming-inmemory-gateway-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Kafka Gateway",
+        "ids": [
           "v0.5/cli/riff-streaming-kafka-gateway",
           "v0.5/cli/riff-streaming-kafka-gateway-create",
           "v0.5/cli/riff-streaming-kafka-gateway-delete",
           "v0.5/cli/riff-streaming-kafka-gateway-list",
-          "v0.5/cli/riff-streaming-kafka-gateway-status",
+          "v0.5/cli/riff-streaming-kafka-gateway-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Pulsar Gateway",
+        "ids": [
           "v0.5/cli/riff-streaming-pulsar-gateway",
           "v0.5/cli/riff-streaming-pulsar-gateway-create",
           "v0.5/cli/riff-streaming-pulsar-gateway-delete",
@@ -112,20 +135,15 @@
       },
       {
         "type": "subcategory",
-        "label": "Knative Runtime",
+        "label": "Core Runtime",
         "ids": [
-          "v0.5/cli/riff-knative",
-          "v0.5/cli/riff-knative-adapter",
-          "v0.5/cli/riff-knative-adapter-create",
-          "v0.5/cli/riff-knative-adapter-delete",
-          "v0.5/cli/riff-knative-adapter-list",
-          "v0.5/cli/riff-knative-adapter-status",
-          "v0.5/cli/riff-knative-deployer",
-          "v0.5/cli/riff-knative-deployer-create",
-          "v0.5/cli/riff-knative-deployer-delete",
-          "v0.5/cli/riff-knative-deployer-list",
-          "v0.5/cli/riff-knative-deployer-status",
-          "v0.5/cli/riff-knative-deployer-tail"
+          "v0.5/cli/riff-core",
+          "v0.5/cli/riff-core-deployer",
+          "v0.5/cli/riff-core-deployer-create",
+          "v0.5/cli/riff-core-deployer-delete",
+          "v0.5/cli/riff-core-deployer-list",
+          "v0.5/cli/riff-core-deployer-status",
+          "v0.5/cli/riff-core-deployer-tail"
         ]
       }
     ]

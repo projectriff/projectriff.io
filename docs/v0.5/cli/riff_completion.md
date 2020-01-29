@@ -2,8 +2,6 @@
 id: riff-completion
 title: "riff completion"
 ---
-## riff completion
-
 generate shell completion script
 
 ### Synopsis

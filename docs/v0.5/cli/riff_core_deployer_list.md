@@ -2,8 +2,6 @@
 id: riff-core-deployer-list
 title: "riff core deployer list"
 ---
-## riff core deployer list
-
 table listing of deployers
 
 ### Synopsis

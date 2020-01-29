@@ -2,8 +2,6 @@
 id: riff-container-delete
 title: "riff container delete"
 ---
-## riff container delete
-
 delete container(s)
 
 ### Synopsis

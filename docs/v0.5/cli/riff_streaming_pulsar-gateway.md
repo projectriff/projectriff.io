@@ -1,14 +1,17 @@
 ---
 id: riff-streaming-pulsar-gateway
-title: "riff streaming pulsar-gateway"
+title: "pulsar-gateway"
 ---
-## riff streaming pulsar-gateway
-
 (experimental) pulsar stream gateway
 
 ### Synopsis
 
-<todo>
+The Pulsar gateway encapsulates the address of a streaming gateway and a Pulsar
+provisioner instance.
+
+The Pulsar provisioner is responsible for resolving topic addresses in a Pulsar
+cluster. The streaming gateway coordinates and standardizes reads and writes to
+a Pulsar broker.
 
 ### Options
 

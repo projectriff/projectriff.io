@@ -1,14 +1,14 @@
 ---
 id: riff-streaming-pulsar-gateway-create
-title: "riff streaming pulsar-gateway create"
+title: "pulsar-gateway create"
 ---
-## riff streaming pulsar-gateway create
-
 create a pulsar gateway of messages
 
 ### Synopsis
 
-<todo>
+Creates a Pulsar gateway within a namespace.
+
+The gateway is configured with a Pulsar service URL.
 
 ```
 riff streaming pulsar-gateway create <name> [flags]

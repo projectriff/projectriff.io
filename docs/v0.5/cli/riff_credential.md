@@ -2,8 +2,6 @@
 id: riff-credential
 title: "riff credential"
 ---
-## riff credential
-
 credentials for container registries
 
 ### Synopsis

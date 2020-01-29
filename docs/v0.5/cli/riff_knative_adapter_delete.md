@@ -2,8 +2,6 @@
 id: riff-knative-adapter-delete
 title: "riff knative adapter delete"
 ---
-## riff knative adapter delete
-
 delete adapter(s)
 
 ### Synopsis

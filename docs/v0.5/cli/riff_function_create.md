@@ -2,8 +2,6 @@
 id: riff-function-create
 title: "riff function create"
 ---
-## riff function create
-
 create a function from source
 
 ### Synopsis

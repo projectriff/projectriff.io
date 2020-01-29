@@ -1,19 +1,17 @@
 ---
 id: riff-streaming-kafka-gateway-delete
-title: "riff streaming kafka-gateway delete"
+title: "kafka-gateway delete"
 ---
-## riff streaming kafka-gateway delete
-
 delete kafka gateway(s)
 
 ### Synopsis
 
-Delete one or more kafka gateways by name or all kafka gateways within a
+Delete one or more Kafka gateways by name or all Kafka gateways within a
 namespace.
 
-Deleting a kafka gateway will disrupt all processors consuming streams managed
+Deleting a Kafka gateway will disrupt all processors consuming streams managed
 by the gateway. Existing messages in the stream may be preserved by the
-underlying kafka broker, depending on the implementation.
+underlying Kafka broker, depending on the implementation.
 
 ```
 riff streaming kafka-gateway delete <name(s)> [flags]

@@ -2,8 +2,6 @@
 id: riff-streaming-processor-list
 title: "riff streaming processor list"
 ---
-## riff streaming processor list
-
 table listing of processors
 
 ### Synopsis

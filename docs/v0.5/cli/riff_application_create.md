@@ -2,8 +2,6 @@
 id: riff-application-create
 title: "riff application create"
 ---
-## riff application create
-
 create an application from source
 
 ### Synopsis

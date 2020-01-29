@@ -1,9 +1,7 @@
 ---
 id: riff-streaming-inmemory-gateway-delete
-title: "riff streaming inmemory-gateway delete"
+title: "inmemory-gateway delete"
 ---
-## riff streaming inmemory-gateway delete
-
 delete in-memory gateway(s)
 
 ### Synopsis

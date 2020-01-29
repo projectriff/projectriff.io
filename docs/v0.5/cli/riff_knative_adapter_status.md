@@ -2,8 +2,6 @@
 id: riff-knative-adapter-status
 title: "riff knative adapter status"
 ---
-## riff knative adapter status
-
 show knative adapter status
 
 ### Synopsis

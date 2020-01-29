@@ -2,13 +2,15 @@
 id: riff-streaming-stream-create
 title: "riff streaming stream create"
 ---
-## riff streaming stream create
-
 create a stream of messages
 
 ### Synopsis
 
-<todo>
+Create a stream resource within a namespace and provision a stream in the
+underlying message broker via the referenced stream gateway.
+
+The created stream can then be referenced as an input or an output of a given
+function when creating a streaming processor.
 
 ```
 riff streaming stream create <name> [flags]

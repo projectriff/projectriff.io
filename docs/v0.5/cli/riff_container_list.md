@@ -2,8 +2,6 @@
 id: riff-container-list
 title: "riff container list"
 ---
-## riff container list
-
 table listing of containers
 
 ### Synopsis

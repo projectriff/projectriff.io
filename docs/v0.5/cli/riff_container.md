@@ -2,8 +2,6 @@
 id: riff-container
 title: "riff container"
 ---
-## riff container
-
 containers resolve the latest image
 
 ### Synopsis

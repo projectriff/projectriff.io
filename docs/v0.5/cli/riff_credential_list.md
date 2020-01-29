@@ -2,8 +2,6 @@
 id: riff-credential-list
 title: "riff credential list"
 ---
-## riff credential list
-
 table listing of credentials
 
 ### Synopsis

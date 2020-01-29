@@ -2,8 +2,6 @@
 id: riff-knative-deployer-status
 title: "riff knative deployer status"
 ---
-## riff knative deployer status
-
 show knative deployer status
 
 ### Synopsis

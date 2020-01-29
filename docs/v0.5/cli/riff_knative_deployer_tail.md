@@ -2,8 +2,6 @@
 id: riff-knative-deployer-tail
 title: "riff knative deployer tail"
 ---
-## riff knative deployer tail
-
 watch deployer logs
 
 ### Synopsis
@@ -11,8 +9,8 @@ watch deployer logs
 Stream runtime logs for a deployer until canceled. To cancel, press Ctl-c in the
 shell or kill the process.
 
-As new deployer pods are started, the logs are displayed. To show historical logs
-use --since.
+As new deployer pods are started, the logs are displayed. To show historical
+logs use --since.
 
 ```
 riff knative deployer tail <name> [flags]

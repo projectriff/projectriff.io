@@ -2,8 +2,6 @@
 id: riff-streaming-stream-delete
 title: "riff streaming stream delete"
 ---
-## riff streaming stream delete
-
 delete stream(s)
 
 ### Synopsis

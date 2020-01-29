@@ -2,8 +2,6 @@
 id: riff-streaming-processor-tail
 title: "riff streaming processor tail"
 ---
-## riff streaming processor tail
-
 watch processor logs
 
 ### Synopsis

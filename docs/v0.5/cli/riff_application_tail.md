@@ -2,8 +2,6 @@
 id: riff-application-tail
 title: "riff application tail"
 ---
-## riff application tail
-
 watch build logs
 
 ### Synopsis

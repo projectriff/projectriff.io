@@ -1,14 +1,12 @@
 ---
 id: riff-streaming-pulsar-gateway-list
-title: "riff streaming pulsar-gateway list"
+title: "pulsar-gateway list"
 ---
-## riff streaming pulsar-gateway list
-
 table listing of pulsar gateways
 
 ### Synopsis
 
-List pulsar gateways in a namespace or across all namespaces.
+List Pulsar gateways in a namespace or across all namespaces.
 
 For detail regarding the status of a single pulsar gateway, run:
 
