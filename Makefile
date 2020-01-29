@@ -19,9 +19,10 @@ build: ## run docusaurus build - output to website/build
 	cd website && npm run build
 
 .PHONY: clean-cli
-clean-cli: ## remove existing CLI markdown files for the current version
+clean-cli: ## remove existing CLI markdown files for the current VERSION
 	rm $(CLI_DOCS_DIR)/* || echo no-files
 
+.PHONY: cli
 cli: clean-cli $(CLI_FILES)  ## copy CLI markdown files from CLI_DOCS_SRC (../cli/docs)
 
 $(CLI_DOCS_DIR)/%: $(CLI_DOCS_SRC)/%
