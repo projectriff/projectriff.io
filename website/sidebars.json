@@ -110,7 +110,10 @@
           "v0.5/cli/riff-streaming-processor-delete",
           "v0.5/cli/riff-streaming-processor-list",
           "v0.5/cli/riff-streaming-processor-status",
-          "v0.5/cli/riff-streaming-processor-tail"
+          "v0.5/cli/riff-streaming-processor-tail",
+          "v0.5/cli/riff-streaming-gateway",
+          "v0.5/cli/riff-streaming-gateway-list",
+          "v0.5/cli/riff-streaming-gateway-status"
         ]
       },
       {
