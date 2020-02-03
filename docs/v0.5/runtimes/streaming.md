@@ -37,19 +37,6 @@ The configuration needed by each kind of gateway varies greatly depending on the
 
 As of riff 0.5.x, one kind of **Gateway** available is **KafkaGateway**, which maps each riff stream to a Kafka _topic_.
 
-Here is an example declaration of a `KafkaGateway` named `franz`, which assumes that a Kafka broker is reachable at `kafka.kafka:9092`.
-
-```yaml
-apiVersion: streaming.projectriff.io/v1alpha1
-kind: KafkaGateway
-metadata:
-  name: franz
-spec:
-  bootstrapServers: kafka.kafka:9092
-```
-
-#### Kafka development deployment
-
 If you don't have Kafka installed in your cluster you can create a single node Kafka install using Helm 3 [(docs)](https://helm.sh/docs/) and the [Helm incubator chart for Apache Kafka](https://hub.helm.sh/charts/incubator/kafka). To install Helm 3 follow the [instructions in the Helm GitHub repo](https://github.com/helm/helm#install). Once you have Helm 3 installed you can run the following commands to install a single node Kafka deployment:
 
 ```sh
@@ -58,18 +45,16 @@ kubectl create namespace kafka
 helm install kafka --namespace kafka incubator/kafka --set replicas=1 --set zookeeper.replicaCount=1 --wait
 ```
 
-#### Create Kafka gateway with riff CLI
-
 The easiest way to create a KafkaGateway is using the riff CLI:
 
 ```sh
 riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
 ```
 
-You should see a deployment and service appear:
+You should see a deployment and service:
 
-```bash
-kubectl get deploy,svc
+```sh
+kubectl get deploy,svc -l streaming.projectriff.io/gateway=franz
 ```
 
 ```
@@ -97,11 +82,13 @@ riff streaming stream create out --gateway franz --content-type application/json
 
 **Processors** are the glue between streams and functions. An instance of a processor tells the streaming runtime that a given function should react to messages flowing on its _input_ stream(s) and forward results to its _output_ stream(s).
 
-Upon creation of a processor, a deployment is created that hosts both the function (with its dedicated invoker) and a sidecar container running the [streaming processor](https://github.com/projectriff). The role of that sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming [rpc protocol](https://github.com/projectriff/invoker-specification/blob/master/streaming.md). The function is not invoked just once, but rather several times and it is the responsibility of the _streaming processor_ sidecar to chop inputs into _windows_.
+Upon creation of a processor, a deployment is created that hosts both the function (with its dedicated invoker) and a sidecar container running the [streaming processor](https://github.com/projectriff).
+
+The role of the sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming [rpc protocol](https://github.com/projectriff/invoker-specification/blob/master/streaming.md). The function is invoked once per window. It is the responsibility of the _streaming processor_ sidecar to chop inputs into windows.
 
 > NOTE: The windowing function implemented by the streaming processor is currently hardcoded to create windows every minute.
 
-Here is how to create an example processor using a function that averages numbers over time:
+Here is an example processor using a [time-averager](https://github.com/projectriff-samples/time-averager) function that emits an average of the input numbers computed every 10 seconds:
 
 ```bash
 riff function create time-averager \
@@ -116,3 +103,49 @@ riff streaming processor create time-averager \
   --input in \
   --output out
 ```
+
+## Testing with dev-utils
+
+The [dev-utils](https://github.com/projectriff/dev-utils/) container offers CLI utilities which can be used to publish messages to an input stream and subscribe to messages on an output stream.
+
+To run dev-utils in a pod in the `default` namespace, using a service account called `dev-utils`:
+
+```bash
+kubectl create serviceaccount dev-utils
+kubectl create rolebinding dev-utils-edit --clusterrole=edit --serviceaccount=default:dev-utils
+kubectl run dev-utils --serviceaccount=dev-utils --generator=run-pod/v1 --image=projectriff/dev-utils
+```
+
+Using separate terminal windows, subscribe to the `in` and `out` streams.
+
+```bash
+kubectl exec dev-utils -it -- subscribe in --payload-encoding raw
+```
+
+```bash
+kubectl exec dev-utils -it -- subscribe out --payload-encoding raw
+```
+
+Publish numbers to the `in` stream.
+
+```bash
+kubectl exec dev-utils -it -- publish in --content-type application/json --payload 10
+```
+
+```bash
+kubectl exec dev-utils -it -- publish in --content-type application/json --payload 100
+```
+
+```bash
+kubectl exec dev-utils -it -- publish in --content-type application/json --payload 2
+```
+
+The subscriber on the `out` stream should show the resulting averages. (Your results may vary depending on window boundaries.)
+
+```
+$ kubectl exec dev-utils -it -- subscribe out --payload-encoding raw
+{"payload":"55.0","contentType":"application/json","headers":{}}
+{"payload":"2.0","contentType":"application/json","headers":{}}
+```
+
+
