@@ -48,21 +48,14 @@ helm install kafka --namespace kafka incubator/kafka --set replicas=1 --set zook
 The easiest way to create a KafkaGateway is using the riff CLI:
 
 ```sh
-riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
-```
-
-You should see a deployment and service:
-
-```sh
-kubectl get deploy,svc -l streaming.projectriff.io/gateway=franz
+riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092 --tail
 ```
 
 ```
-NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/franz-gateway-db57m       1/1     1            1           8s
-
-NAME                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/franz-gateway-q5wh8   ClusterIP   10.3.242.150   <none>        6565/TCP   8s
+Created kafka gateway "franz"
+Waiting for kafka gateway "franz" to become ready...
+<additional log elided...>
+KafkaGateway "franz" is ready
 ```
 
 ## Streams
@@ -106,46 +99,44 @@ riff streaming processor create time-averager \
 
 ## Testing with dev-utils
 
-The [dev-utils](https://github.com/projectriff/dev-utils/) container offers CLI utilities which can be used to publish messages to an input stream and subscribe to messages on an output stream.
+The [dev-utils](https://github.com/projectriff/dev-utils/) container offers CLI utilities which can be used to publish and subscribe to messages.
 
-To run dev-utils in a pod in the `default` namespace, using a service account called `dev-utils`:
+To run dev-utils in a pod called `riff-dev` in the `default` namespace:
 
 ```bash
-kubectl create serviceaccount dev-utils
-kubectl create rolebinding dev-utils-edit --clusterrole=edit --serviceaccount=default:dev-utils
-kubectl run dev-utils --serviceaccount=dev-utils --generator=run-pod/v1 --image=projectriff/dev-utils
+kubectl create serviceaccount riff-dev
+kubectl create rolebinding riff-dev-edit --clusterrole=edit --serviceaccount=default:riff-dev
+kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils
 ```
 
-Using separate terminal windows, subscribe to the `in` and `out` streams.
+Using separate terminal windows, subscribe to the `in` and `out` streams to observe messages on those streams.
 
 ```bash
-kubectl exec dev-utils -it -- subscribe in --payload-encoding raw
+kubectl exec riff-dev -it -- subscribe in --payload-encoding raw
 ```
 
 ```bash
-kubectl exec dev-utils -it -- subscribe out --payload-encoding raw
+kubectl exec riff-dev -it -- subscribe out --payload-encoding raw
 ```
 
 Publish numbers to the `in` stream.
 
 ```bash
-kubectl exec dev-utils -it -- publish in --content-type application/json --payload 10
+kubectl exec riff-dev -it -- publish in --content-type application/json --payload 10
 ```
 
 ```bash
-kubectl exec dev-utils -it -- publish in --content-type application/json --payload 100
+kubectl exec riff-dev -it -- publish in --content-type application/json --payload 100
 ```
 
 ```bash
-kubectl exec dev-utils -it -- publish in --content-type application/json --payload 2
+kubectl exec riff-dev -it -- publish in --content-type application/json --payload 2
 ```
 
 The subscriber on the `out` stream should show the resulting averages. (Your results may vary depending on window boundaries.)
 
 ```
-$ kubectl exec dev-utils -it -- subscribe out --payload-encoding raw
+$ kubectl exec riff-dev -it -- subscribe out --payload-encoding raw
 {"payload":"55.0","contentType":"application/json","headers":{}}
 {"payload":"2.0","contentType":"application/json","headers":{}}
 ```
-
-
