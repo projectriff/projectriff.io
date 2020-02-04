@@ -241,7 +241,7 @@ square   index.docker.io/jldec/square@sha256:527053273ec98697dbdd88951f77edf82a9
 
 ## Create a Knative deployer
 
-The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
 riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
@@ -260,9 +260,9 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 
 ### invoke the function
 
-Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
+Knative configures HTTP routes on the ingress controller. Requests are routed by hostname.
 
-Look up the nodePort for the ingressgateway; you should see a port value like `30195`.
+Look up the nodePort for the ingress gateway; you should see a port value like `30195`.
 
 ```sh
 MINIKUBE_IP=$(minikube ip)
@@ -270,7 +270,7 @@ INGRESS_PORT=$(kubectl get svc envoy-external  --namespace projectcontour --outp
 echo $MINIKUBE_IP:$INGRESS_PORT
 ```
 
-Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers.
+Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.
 
 ```sh
 curl http://$MINIKUBE_IP:$INGRESS_PORT/ -w '\n' \
@@ -337,12 +337,10 @@ kapp delete -n apps -a riff-knative-runtime
 kapp delete -n apps -a knative
 ```
 
-```sh
-kapp delete -n apps -a istio
-```
+### remove Contour
 
 ```sh
-kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+kapp delete -n apps -a contour
 ```
 
 ### remove riff Build

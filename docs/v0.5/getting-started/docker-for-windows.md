@@ -254,7 +254,7 @@ square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb4
 
 ## Create a Knative deployer
 
-The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```powershell
 riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
@@ -273,9 +273,9 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 
 ### invoke the function
 
-Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
+Knative configures HTTP routes on the ingress controller. Requests are routed by hostname.
 
-Look up the nodePort for the ingressgateway; you should see a port value like `30086`.
+Look up the nodePort for the ingress gateway; you should see a port value like `30086`.
 
 ```powershell
 $INGRESS_PORT = kubectl get svc envoy-external --namespace projectcontour `
@@ -284,7 +284,7 @@ $INGRESS_PORT = kubectl get svc envoy-external --namespace projectcontour `
 $INGRESS_PORT
 ```
 
-Invoke the function by POSTing to the ingressgateway on the nodePort, passing hostname and content-type as headers.
+Invoke the function by POSTing to the ingress gateway on the nodePort, passing hostname and content-type as headers.
 
 ```powershell
 curl http://localhost:$INGRESS_PORT/ `
@@ -351,12 +351,10 @@ kapp delete -n apps -a riff-knative-runtime
 kapp delete -n apps -a knative
 ```
 
-```powershell
-kapp delete -n apps -a istio
-```
+### remove Contour
 
 ```powershell
-kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+kapp delete -n apps -a contour
 ```
 
 ### remove riff Build

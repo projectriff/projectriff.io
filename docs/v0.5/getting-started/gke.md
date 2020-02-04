@@ -309,7 +309,7 @@ square   gcr.io/$GCP_PROJECT/square@sha256:ac089ca183368aa831597f94a2dbb462a157c
 
 ## Create a Knative deployer
 
-The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
 riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
@@ -328,16 +328,16 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 
 ### invoke the function
 
-Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
+Knative configures HTTP routes on the ingress controller. Requests are routed by hostname.
 
-Look up the Loadbalancer IP for the ingressgateway; you should see a value like `35.205.114.86`.
+Look up the Loadbalancer IP for the ingress gateway; you should see a value like `35.205.114.86`.
 
 ```sh
 INGRESS_IP=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 echo $INGRESS_IP
 ```
 
-Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers.
+Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.
 
 ```sh
 curl http://$INGRESS_IP/ -w '\n' \
@@ -397,12 +397,10 @@ kapp delete -n apps -a riff-knative-runtime
 kapp delete -n apps -a knative
 ```
 
-```sh
-kapp delete -n apps -a istio
-```
+### remove Contour
 
 ```sh
-kubectl get customresourcedefinitions.apiextensions.k8s.io -oname | grep istio.io | xargs -L1 kubectl delete
+kapp delete -n apps -a contour
 ```
 
 ### remove riff Build
