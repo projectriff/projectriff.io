@@ -142,14 +142,18 @@ kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectri
 kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-build.yaml
 ```
 
-### install riff Knative Runtime
+### install Contour ingress controller
 
-To install riff Knative Runtime and it's dependencies:
+The Contour ingress controller can be used by both Knative and Core runtimes.
 
 ```sh
 # ytt is used to convert the ingress service to NodePort because Docker for Mac does not support `LoadBalancer` services.
-ytt -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/istio.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark istio.yaml:type=yaml-plain | kapp deploy -n apps -a istio -f - -y
+ytt -f https://storage.googleapis.com/projectriff/release/${riff_version}/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
 ```
+
+### install riff Knative Runtime
+
+To install riff Knative Runtime and it's dependencies:
 
 ```sh
 kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/knative.yaml
@@ -253,7 +257,7 @@ Knative configures HTTP routes on the istio-ingressgateway. Requests are routed 
 Look up the nodePort for the ingressgateway; you should see a port value like `30195`.
 
 ```sh
-INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+INGRESS_PORT=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_PORT
 ```
 

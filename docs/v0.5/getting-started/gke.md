@@ -201,13 +201,17 @@ kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectri
 kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-build.yaml
 ```
 
+### install Contour ingress controller
+
+The Contour ingress controller can be used by both Knative and Core runtimes.
+
+```sh
+kapp deploy -n apps -a contour -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/contour.yaml
+```
+
 ### install riff Knative Runtime
 
 To optionally install riff Knative Runtime and it's dependencies:
-
-```sh
-kapp deploy -n apps -a istio -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/istio.yaml
-```
 
 ```sh
 kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/knative.yaml
@@ -329,7 +333,7 @@ Knative configures HTTP routes on the istio-ingressgateway. Requests are routed 
 Look up the Loadbalancer IP for the ingressgateway; you should see a value like `35.205.114.86`.
 
 ```sh
-INGRESS_IP=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+INGRESS_IP=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 echo $INGRESS_IP
 ```
 

@@ -52,10 +52,10 @@ HOST=square.default.example.com
 INGRESS=$HOST
 
 # for clusters with LoadBalancer services (like GKE)
-INGRESS=$(kubectl get svc -n istio-system istio-ingressgateway -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
+INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 # for clusters with NodePort services (like Minikube and Docker Desktop)
-INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n istio-system istio-ingressgateway -ojsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
+INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
@@ -69,10 +69,10 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 ```
 
 ```
-* Rebuilt URL to: 35.184.153.67/
-*   Trying 35.184.153.67...
+* Rebuilt URL to: 192.168.64.3:32697/
+*   Trying 192.168.64.3...
 * TCP_NODELAY set
-* Connected to 35.184.153.67 (35.184.153.67) port 80 (#0)
+* Connected to 192.168.64.3 (192.168.64.3) port 32697 (#0)
 > POST / HTTP/1.1
 > Host: square.default.example.com
 > User-Agent: curl/7.54.0
@@ -84,12 +84,11 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 < HTTP/1.1 200 OK
 < content-length: 2
 < content-type: text/plain; charset=utf-8
-< date: Mon, 19 Aug 2019 19:03:26 GMT
-< x-powered-by: Express
-< x-envoy-upstream-service-time: 7968
-< server: istio-envoy
+< date: Tue, 04 Feb 2020 17:53:48 GMT
+< x-envoy-upstream-service-time: 2957
+< server: envoy
 < 
-* Connection #0 to host 35.184.153.67 left intact
+* Connection #0 to host 192.168.64.3 left intact
 49
 ```
 

@@ -18,7 +18,9 @@ You can then install the Core runtime using the following:
 kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-core-runtime.yaml
 ```
 
-## Create a deployer
+## Deployers
+
+### create a deployer
 
 We need a function to use for the deployer. We create a function named `square` that can be used for our deployer.
 
@@ -53,40 +55,41 @@ NAME     TYPE       REF      URL                                       STATUS   
 square   function   square   http://square.default.svc.cluster.local   Ready    75s
 ```
 
-## Invoke a deployer
-
-Since the core runtime does not provide Ingress, a connection to the cluster must be established before the function can be invoked. For production workloads, installing and configuring ingress is recommended but is outside the scope of this doc. For development, use `kubectl port-forward` to map a local port to the deployer.
-
-### setup port forwarding
-
-In a new terminal, run:
-
-```sh
-kubectl port-forward service/square 8080:80
-```
-
-```
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
-
-The port forward command establishes a connection to the deployer's service on local port 8080 and runs until terminated. If port 8080 is not available, pick any open port.
-
-> NOTE: the port forwarding needs to be reestablished when a new instance of the function is rolled out.
-
 ### call the workload
 
+How to invoke the function depends on the type of cluster and how it was configured. After getting the host set it as `HOST` and then pick the `INGRESS` definition that is appropriate for the cluster.
+
 ```sh
-curl localhost:8080 -v -w '\n' -H 'Content-Type: application/json' -d 7
+# from URL shown with `riff knative deployer list`
+HOST=square.default.example.com
+
+# for clusters with a custom domain
+INGRESS=$HOST
+
+# for clusters with LoadBalancer services (like GKE)
+INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+# for clusters with NodePort services (like Minikube and Docker Desktop)
+INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+```
+
+The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
+
+#### make the request
+
+```sh
+curl $INGRESS -v -w '\n' -H "Host: $HOST" \
+  -H 'Content-Type: application/json' \
+  -d 7
 ```
 
 ```
-* Rebuilt URL to: localhost:8080/
-*   Trying ::1...
+* Rebuilt URL to: 192.168.64.3:32697/
+*   Trying 192.168.64.3...
 * TCP_NODELAY set
-* Connected to localhost (::1) port 8080 (#0)
+* Connected to 192.168.64.3 (192.168.64.3) port 32697 (#0)
 > POST / HTTP/1.1
-> Host: localhost:8080
+> Host: square.default.example.com
 > User-Agent: curl/7.54.0
 > Accept: */*
 > Content-Type: application/json
@@ -94,17 +97,19 @@ curl localhost:8080 -v -w '\n' -H 'Content-Type: application/json' -d 7
 > 
 * upload completely sent off: 1 out of 1 bytes
 < HTTP/1.1 200 OK
-< Date: Wed, 15 Jan 2020 22:19:48 GMT
-< Content-Length: 2
-< Content-Type: text/plain; charset=utf-8
+< content-length: 2
+< content-type: text/plain; charset=utf-8
+< date: Tue, 04 Feb 2020 17:53:48 GMT
+< x-envoy-upstream-service-time: 2957
+< server: envoy
 < 
-* Connection #0 to host localhost left intact
+* Connection #0 to host 192.168.64.3 left intact
 49
 ```
 
 When done invoking the deployer, terminate the port-forward tunnel.
 
-## Cleanup
+### cleanup
 
 Delete the deployer when done with the function. Since the core runtime does not scale-to-zero, the workload will continue running until deleted.
 
