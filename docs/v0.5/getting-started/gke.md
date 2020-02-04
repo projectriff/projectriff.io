@@ -59,6 +59,21 @@ Choose a zone, preferably in a region with higher CPU quota.
 export GCP_ZONE=us-central1-b
 ```
 
+Confirm that the zone offers Kubernetes v1.15 or later.
+
+```sh
+gcloud container get-server-config --zone $GCP_ZONE | head -n 10
+```
+
+```
+Fetching server config for us-central1-b
+defaultClusterVersion: 1.13.11-gke.23
+...
+validMasterVersions:
+- 1.15.8-gke.2
+- 1.15.7-gke.23
+```
+
 Enable the necessary APIs for gcloud. You also need to [enable billing](https://cloud.google.com/billing/docs/how-to/manage-billing-account) for your new project.
 
 ```sh
@@ -70,8 +85,7 @@ gcloud services enable \
 
 ## Create a GKE cluster
 
-Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient. v0.5 of riff requires Kubernetes v1.15 or later.
-
+Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient. Use the `latest` cluster-version.
 
 ```sh
 # replace ??? below with your own cluster name
