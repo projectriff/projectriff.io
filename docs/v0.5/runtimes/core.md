@@ -34,7 +34,7 @@ riff function create square \
 We can now create a core deployer referencing the square function.
 
 ```sh
-riff core deployer create square --function-ref square --tail
+riff core deployer create square --function-ref square --ingress-policy External --tail
 ```
 
 ```
