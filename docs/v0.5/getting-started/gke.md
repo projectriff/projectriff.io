@@ -70,7 +70,8 @@ gcloud services enable \
 
 ## Create a GKE cluster
 
-Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient.
+Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient. v0.5 of riff requires Kubernetes v1.15 or later.
+
 
 ```sh
 # replace ??? below with your own cluster name
