@@ -168,7 +168,7 @@ kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/
 The Contour ingress controller can be used by both Knative and Core runtimes.
 
 ```powershell
-# ytt is used to convert the ingress service to NodePort because Docker for Mac does not support `LoadBalancer` services.
+# ytt is used to convert the ingress service to NodePort because Docker for Widows does not support `LoadBalancer` services.
 ytt -f https://storage.googleapis.com/projectriff/release/${riff_version}/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
 ```
 
