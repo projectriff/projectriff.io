@@ -74,32 +74,18 @@ Conversely, functions can interact with streams managed by two (or more) differe
 The configuration needed by each kind of gateway varies greatly depending on the backing message broker. For both of these reasons, creation of an instance of a gateway is not carried out <em>via</em> the riff CLI, but rather &quot;manually&quot; using yaml files. Additionally, the installation of concrete message brokers (inside or outside the cluster) is out of scope of this document.</p>
 <h3><a class="anchor" aria-hidden="true" id="kafkagateway"></a><a href="#kafkagateway" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>KafkaGateway</h3>
 <p>As of riff 0.5.x, one kind of <strong>Gateway</strong> available is <strong>KafkaGateway</strong>, which maps each riff stream to a Kafka <em>topic</em>.</p>
-<p>Here is an example declaration of a <code>KafkaGateway</code> named <code>franz</code>, which assumes that a Kafka broker is reachable at <code>kafka.kafka:9092</code>.</p>
-<pre><code class="hljs css language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">streaming.projectriff.io/v1alpha1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">KafkaGateway</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">franz</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">bootstrapServers:</span> <span class="hljs-string">kafka.kafka:9092</span>
-</code></pre>
-<h4><a class="anchor" aria-hidden="true" id="kafka-development-deployment"></a><a href="#kafka-development-deployment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Kafka development deployment</h4>
 <p>If you don't have Kafka installed in your cluster you can create a single node Kafka install using Helm 3 <a href="https://helm.sh/docs/">(docs)</a> and the <a href="https://hub.helm.sh/charts/incubator/kafka">Helm incubator chart for Apache Kafka</a>. To install Helm 3 follow the <a href="https://github.com/helm/helm#install">instructions in the Helm GitHub repo</a>. Once you have Helm 3 installed you can run the following commands to install a single node Kafka deployment:</p>
 <pre><code class="hljs css language-sh">helm repo add incubator https://storage.googleapis.com/kubernetes-charts-incubator
 kubectl create namespace kafka
 helm install kafka --namespace kafka incubator/kafka --<span class="hljs-built_in">set</span> replicas=1 --<span class="hljs-built_in">set</span> zookeeper.replicaCount=1 --<span class="hljs-built_in">wait</span>
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="create-kafka-gateway-with-riff-cli"></a><a href="#create-kafka-gateway-with-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create Kafka gateway with riff CLI</h4>
 <p>The easiest way to create a KafkaGateway is using the riff CLI:</p>
-<pre><code class="hljs css language-sh">riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092
+<pre><code class="hljs css language-sh">riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092 --tail
 </code></pre>
-<p>You should see a deployment and service appear:</p>
-<pre><code class="hljs css language-bash">kubectl get deploy,svc
-</code></pre>
-<pre><code class="hljs">NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/franz-gateway-db57m       1/1     1            1           8s
-
-NAME                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/franz-gateway-q5wh8   ClusterIP   10.3.242.150   &lt;none&gt;        6565/TCP   8s
+<pre><code class="hljs">Created kafka gateway "franz"
+Waiting for kafka gateway "franz" to become ready...
+&lt;additional log elided...&gt;
+KafkaGateway "franz" is ready
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="streams"></a><a href="#streams" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Streams</h2>
 <p>Streams are namespaced resources that allow the flow of (and typically persist) messages serialized by riff streaming. Each stream has a <strong>content-type</strong> assigned to it and only messages compatible with that MIME type are allowed on that stream.</p>
@@ -110,11 +96,12 @@ riff streaming stream create out --gateway franz --content-type application/json
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="processors"></a><a href="#processors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Processors</h2>
 <p><strong>Processors</strong> are the glue between streams and functions. An instance of a processor tells the streaming runtime that a given function should react to messages flowing on its <em>input</em> stream(s) and forward results to its <em>output</em> stream(s).</p>
-<p>Upon creation of a processor, a deployment is created that hosts both the function (with its dedicated invoker) and a sidecar container running the <a href="https://github.com/projectriff">streaming processor</a>. The role of that sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming <a href="https://github.com/projectriff/invoker-specification/blob/master/streaming.md">rpc protocol</a>. The function is not invoked just once, but rather several times and it is the responsibility of the <em>streaming processor</em> sidecar to chop inputs into <em>windows</em>.</p>
+<p>Upon creation of a processor, a deployment is created that hosts both the function (with its dedicated invoker) and a sidecar container running the <a href="https://github.com/projectriff">streaming processor</a>.</p>
+<p>The role of the sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming <a href="https://github.com/projectriff/invoker-specification/blob/master/streaming.md">rpc protocol</a>. The function is invoked once per window. It is the responsibility of the <em>streaming processor</em> sidecar to chop inputs into windows.</p>
 <blockquote>
 <p>NOTE: The windowing function implemented by the streaming processor is currently hardcoded to create windows every minute.</p>
 </blockquote>
-<p>Here is how to create an example processor using a function that averages numbers over time:</p>
+<p>Here is an example processor using a <a href="https://github.com/projectriff-samples/time-averager">time-averager</a> function that emits an average of the input numbers computed every 10 seconds:</p>
 <pre><code class="hljs css language-bash">riff <span class="hljs-keyword">function</span> create time-averager \
   --git-repo https://github.com/projectriff-samples/time-averager.git \
   --handler com.acme.TimeAverager \
@@ -125,4 +112,28 @@ riff streaming stream create out --gateway franz --content-type application/json
   --input <span class="hljs-keyword">in</span> \
   --output out
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/runtimes/knative"><span class="arrow-prev">← </span><span>Knative</span></a><a class="docs-next button" href="/docs/v0.5/invokers/java"><span>Java</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install">Install</a></li><li><a href="#gateways">Gateways</a><ul class="toc-headings"><li><a href="#kafkagateway">KafkaGateway</a></li></ul></li><li><a href="#streams">Streams</a></li><li><a href="#processors">Processors</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
+<h2><a class="anchor" aria-hidden="true" id="testing-with-dev-utils"></a><a href="#testing-with-dev-utils" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Testing with dev-utils</h2>
+<p>The <a href="https://github.com/projectriff/dev-utils/">dev-utils</a> container offers CLI utilities which can be used to publish and subscribe to messages.</p>
+<p>To run dev-utils in a pod called <code>riff-dev</code> in the <code>default</code> namespace:</p>
+<pre><code class="hljs css language-bash">kubectl create serviceaccount riff-dev
+kubectl create rolebinding riff-dev-edit --clusterrole=edit --serviceaccount=default:riff-dev
+kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils
+</code></pre>
+<p>Using separate terminal windows, subscribe to the <code>in</code> and <code>out</code> streams to observe messages on those streams.</p>
+<pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- subscribe <span class="hljs-keyword">in</span> --payload-encoding raw
+</code></pre>
+<pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- subscribe out --payload-encoding raw
+</code></pre>
+<p>Publish numbers to the <code>in</code> stream.</p>
+<pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- publish <span class="hljs-keyword">in</span> --content-type application/json --payload 10
+</code></pre>
+<pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- publish <span class="hljs-keyword">in</span> --content-type application/json --payload 100
+</code></pre>
+<pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- publish <span class="hljs-keyword">in</span> --content-type application/json --payload 2
+</code></pre>
+<p>The subscriber on the <code>out</code> stream should show the resulting averages. (Your results may vary depending on window boundaries.)</p>
+<pre><code class="hljs">$ kubectl exec riff-dev -it -- subscribe out --payload-encoding raw
+{"payload":"55.0","contentType":"application/json","headers":{}}
+{"payload":"2.0","contentType":"application/json","headers":{}}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.5/runtimes/knative"><span class="arrow-prev">← </span><span>Knative</span></a><a class="docs-next button" href="/docs/v0.5/invokers/java"><span>Java</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#install">Install</a></li><li><a href="#gateways">Gateways</a><ul class="toc-headings"><li><a href="#kafkagateway">KafkaGateway</a></li></ul></li><li><a href="#streams">Streams</a></li><li><a href="#processors">Processors</a></li><li><a href="#testing-with-dev-utils">Testing with dev-utils</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>
