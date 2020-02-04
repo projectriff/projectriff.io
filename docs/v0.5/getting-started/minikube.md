@@ -8,6 +8,8 @@ The following will help you get started running a riff function on Minikube.
 
 ## Install Minikube
 
+v0.5 of riff requires Kubernetes v1.15 or later.
+
 [Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/) is a Kubernetes environment which runs in a single virtual machine. See the [Getting Started](https://minikube.sigs.k8s.io/docs/start/) page for installation information.
 
 Minikube uses a hypervisor driver that varies by operating system. Some drivers are provided with Minikube while others requires an extra installation step. See the [Driver](https://minikube.sigs.k8s.io/docs/reference/drivers/) page for details.
@@ -25,10 +27,11 @@ Installing [Docker Community Edition](https://store.docker.com/search?type=editi
 ## Create a Minikube cluster
 
 ```sh
-minikube start --memory=4096 --cpus=4
-```
+minikube config set memory 5192
+minikube config set cpus 4
 
-> NOTE: To use the kvm2 driver for Linux specify `--vm-driver=kvm2`.
+minikube start
+```
 
 Confirm that your kubectl context is pointing to the new cluster:
 

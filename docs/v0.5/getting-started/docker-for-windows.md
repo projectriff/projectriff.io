@@ -8,13 +8,15 @@ The following will help you get started running a riff function with Knative on 
 
 ## Install Docker
 
-Kubernetes and the kubectl CLI are now included with [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/). Docker Desktop for Windows requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
+v0.5 of riff requires Kubernetes v1.15 or later. Docker Desktop requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.
+
+Download the latest _stable_ release from [Docker](https://docs.docker.com/docker-for-windows/install/). Kubernetes and the kubectl CLI are included.
 
 ![download Docker for Windows](/img/docker-for-windows-download.png)
 
 ### resize the VM
 
-Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 4GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
+Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 5GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
 
 ![configure Docker VM](/img/docker-vm-config-windows.png)
 

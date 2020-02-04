@@ -4,18 +4,20 @@ title: Getting started on Docker for Mac
 sidebar_label: Docker for Mac
 ---
 
-The following will help you get started running a riff function with Knative on Docker Community Edition for Mac.
+The following will help you get started running a riff function with Knative on Docker Desktop for Mac.
 
 ## Install Docker
 
-Kubernetes and the kubectl CLI are now included with [Docker Community Edition for Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac).
+v0.5 of riff requires Kubernetes v1.15 or later.
+
+Download the latest _stable_ release from [Docker](https://store.docker.com/editions/community/docker-ce-desktop-mac). Kubernetes and the kubectl CLI are included.
 
 ![download Docker for Mac](/img/docker-for-mac-download.png)
 
 ### resize the VM
 
-Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 4GB of memory and 4 CPUs. Click on Apply & Restart.
-![configure Docker VM](/img/docker-for-mac-vm-config-4gb.png)
+Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 5GB of memory and 4 CPUs. Click on Apply & Restart.
+![configure Docker VM](/img/docker-for-mac-vm-config-5gb.png)
 
 ### enable Kubernetes
 

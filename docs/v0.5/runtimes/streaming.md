@@ -54,7 +54,7 @@ riff streaming kafka-gateway create franz --bootstrap-servers kafka.kafka:9092 -
 ```
 Created kafka gateway "franz"
 Waiting for kafka gateway "franz" to become ready...
-<additional log elided...>
+...
 KafkaGateway "franz" is ready
 ```
 
