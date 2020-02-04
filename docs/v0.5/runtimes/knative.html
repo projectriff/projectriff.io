@@ -82,10 +82,10 @@ HOST=square.default.example.com
 INGRESS=<span class="hljs-variable">$HOST</span>
 
 <span class="hljs-comment"># for clusters with LoadBalancer services (like GKE)</span>
-INGRESS=$(kubectl get svc -n istio-system istio-ingressgateway -ojsonpath=<span class="hljs-string">'{.status.loadBalancer.ingress[0].ip}'</span>)
+INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath=<span class="hljs-string">'{.status.loadBalancer.ingress[0].ip}'</span>)
 
 <span class="hljs-comment"># for clusters with NodePort services (like Minikube and Docker Desktop)</span>
-INGRESS=$(kubectl get nodes -ojsonpath=<span class="hljs-string">'{.items[0].status.addresses[?(@.type=="InternalIP")].address}'</span>):$(kubectl get svc -n istio-system istio-ingressgateway -ojsonpath=<span class="hljs-string">'{.spec.ports[?(@.name=="http2")].nodePort}'</span>)
+INGRESS=$(kubectl get nodes -ojsonpath=<span class="hljs-string">'{.items[0].status.addresses[?(@.type=="InternalIP")].address}'</span>):$(kubectl get svc -n projectcontour envoy-external -ojsonpath=<span class="hljs-string">'{.spec.ports[?(@.port==80)].nodePort}'</span>)
 </code></pre>
 <p>The value of <code>INGRESS</code> will be constant for the life of the cluster. Change the <code>HOST</code> value to match the deployer being targeted.</p>
 <h4><a class="anchor" aria-hidden="true" id="make-the-request"></a><a href="#make-the-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>make the request</h4>
@@ -93,10 +93,10 @@ INGRESS=$(kubectl get nodes -ojsonpath=<span class="hljs-string">'{.items[0].sta
   -H <span class="hljs-string">'Content-Type: application/json'</span> \
   -d 7
 </code></pre>
-<pre><code class="hljs">* Rebuilt URL to: 35.184.153.67/
-*   Trying 35.184.153.67...
+<pre><code class="hljs">* Rebuilt URL to: 192.168.64.3:32697/
+*   Trying 192.168.64.3...
 * TCP_NODELAY set
-* Connected to 35.184.153.67 (35.184.153.67) port 80 (#0)
+* Connected to 192.168.64.3 (192.168.64.3) port 32697 (#0)
 &gt; POST / HTTP/1.1
 &gt; Host: square.default.example.com
 &gt; User-Agent: curl/7.54.0
@@ -108,12 +108,11 @@ INGRESS=$(kubectl get nodes -ojsonpath=<span class="hljs-string">'{.items[0].sta
 &lt; HTTP/1.1 200 OK
 &lt; content-length: 2
 &lt; content-type: text/plain; charset=utf-8
-&lt; date: Mon, 19 Aug 2019 19:03:26 GMT
-&lt; x-powered-by: Express
-&lt; x-envoy-upstream-service-time: 7968
-&lt; server: istio-envoy
+&lt; date: Tue, 04 Feb 2020 17:53:48 GMT
+&lt; x-envoy-upstream-service-time: 2957
+&lt; server: envoy
 &lt; 
-* Connection #0 to host 35.184.153.67 left intact
+* Connection #0 to host 192.168.64.3 left intact
 49
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="cleanup"></a><a href="#cleanup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cleanup</h3>
