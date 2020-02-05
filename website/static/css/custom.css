@@ -92,3 +92,9 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
   font-size: 24px;
   color: #24292e;
 }
+
+/* navbar version dropdown */
+.navGroups > .navGroup:first-of-type > .navGroupCategoryTitle {
+  font-size: 15px;
+  border-bottom:solid 1px #555;
+}
