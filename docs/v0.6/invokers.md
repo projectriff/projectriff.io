@@ -1,8 +1,10 @@
 ---
-id: v0.5
-title: riff v0.5.x
-sidebar_label: v0.5.x
+id: invokers
+title: Invokers
+sidebar_label: Invokers
 ---
+
+<!-- TODO convert into a listing of each invoker -->
 
 <style>
 .mainContainer {
@@ -34,9 +36,8 @@ sidebar_label: v0.5.x
 }
 </style>
 
-[Get started with riff v0.5.x](../../v0.5/getting-started.md)
+[riff CLI](./invokers/command.md)
 
 <script type="text/javascript">
-  window.location.href = '/docs/v0.5/getting-started';
+  window.location.href = '/docs/v0.6/invokers/command';
 </script>
-

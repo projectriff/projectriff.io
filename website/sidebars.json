@@ -1,6 +1,160 @@
 {
+  "docs/v0.6": {
+    "Version (v0.6 snapshot)": [
+      "v0.6/versions/v0.5",
+      "v0.6/versions/v0.4",
+      "v0.6/versions/v0.3"
+    ],
+    "Getting Started": [
+      {
+        "type": "subcategory",
+        "label": "Install",
+        "ids": [
+          "v0.6/getting-started",
+          "v0.6/getting-started/gke",
+          "v0.6/getting-started/minikube",
+          "v0.6/getting-started/docker-for-mac",
+          "v0.6/getting-started/docker-for-windows"
+        ]
+      }
+    ],
+    "Runtimes": [
+      "v0.6/runtimes/core",
+      "v0.6/runtimes/knative",
+      "v0.6/runtimes/streaming"
+    ],
+    "Function Invokers": [
+      "v0.6/invokers/java",
+      "v0.6/invokers/node",
+      "v0.6/invokers/command"
+    ],
+    "CLI Reference": [
+      "v0.6/cli/riff",
+      "v0.6/cli/riff-doctor",
+      "v0.6/cli/riff-completion",
+      {
+        "type": "subcategory",
+        "label": "Credential",
+        "ids": [
+          "v0.6/cli/riff-credential",
+          "v0.6/cli/riff-credential-apply",
+          "v0.6/cli/riff-credential-delete",
+          "v0.6/cli/riff-credential-list"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Build",
+        "ids": [
+          "v0.6/cli/riff-function",
+          "v0.6/cli/riff-function-create",
+          "v0.6/cli/riff-function-delete",
+          "v0.6/cli/riff-function-list",
+          "v0.6/cli/riff-function-status",
+          "v0.6/cli/riff-function-tail",
+          "v0.6/cli/riff-application",
+          "v0.6/cli/riff-application-create",
+          "v0.6/cli/riff-application-delete",
+          "v0.6/cli/riff-application-list",
+          "v0.6/cli/riff-application-status",
+          "v0.6/cli/riff-application-tail",
+          "v0.6/cli/riff-container",
+          "v0.6/cli/riff-container-create",
+          "v0.6/cli/riff-container-delete",
+          "v0.6/cli/riff-container-list",
+          "v0.6/cli/riff-container-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Knative Runtime",
+        "ids": [
+          "v0.6/cli/riff-knative",
+          "v0.6/cli/riff-knative-adapter",
+          "v0.6/cli/riff-knative-adapter-create",
+          "v0.6/cli/riff-knative-adapter-delete",
+          "v0.6/cli/riff-knative-adapter-list",
+          "v0.6/cli/riff-knative-adapter-status",
+          "v0.6/cli/riff-knative-deployer",
+          "v0.6/cli/riff-knative-deployer-create",
+          "v0.6/cli/riff-knative-deployer-delete",
+          "v0.6/cli/riff-knative-deployer-list",
+          "v0.6/cli/riff-knative-deployer-status",
+          "v0.6/cli/riff-knative-deployer-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Core Runtime",
+        "ids": [
+          "v0.6/cli/riff-core",
+          "v0.6/cli/riff-core-deployer",
+          "v0.6/cli/riff-core-deployer-create",
+          "v0.6/cli/riff-core-deployer-delete",
+          "v0.6/cli/riff-core-deployer-list",
+          "v0.6/cli/riff-core-deployer-status",
+          "v0.6/cli/riff-core-deployer-tail"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Streaming Runtime",
+        "ids": [
+          "v0.6/cli/riff-streaming",
+          "v0.6/cli/riff-streaming-stream",
+          "v0.6/cli/riff-streaming-stream-create",
+          "v0.6/cli/riff-streaming-stream-delete",
+          "v0.6/cli/riff-streaming-stream-list",
+          "v0.6/cli/riff-streaming-stream-status",
+          "v0.6/cli/riff-streaming-processor",
+          "v0.6/cli/riff-streaming-processor-create",
+          "v0.6/cli/riff-streaming-processor-delete",
+          "v0.6/cli/riff-streaming-processor-list",
+          "v0.6/cli/riff-streaming-processor-status",
+          "v0.6/cli/riff-streaming-processor-tail",
+          "v0.6/cli/riff-streaming-gateway",
+          "v0.6/cli/riff-streaming-gateway-list",
+          "v0.6/cli/riff-streaming-gateway-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "In-memory Gateway",
+        "ids": [
+          "v0.6/cli/riff-streaming-inmemory-gateway",
+          "v0.6/cli/riff-streaming-inmemory-gateway-create",
+          "v0.6/cli/riff-streaming-inmemory-gateway-delete",
+          "v0.6/cli/riff-streaming-inmemory-gateway-list",
+          "v0.6/cli/riff-streaming-inmemory-gateway-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Kafka Gateway",
+        "ids": [
+          "v0.6/cli/riff-streaming-kafka-gateway",
+          "v0.6/cli/riff-streaming-kafka-gateway-create",
+          "v0.6/cli/riff-streaming-kafka-gateway-delete",
+          "v0.6/cli/riff-streaming-kafka-gateway-list",
+          "v0.6/cli/riff-streaming-kafka-gateway-status"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Pulsar Gateway",
+        "ids": [
+          "v0.6/cli/riff-streaming-pulsar-gateway",
+          "v0.6/cli/riff-streaming-pulsar-gateway-create",
+          "v0.6/cli/riff-streaming-pulsar-gateway-delete",
+          "v0.6/cli/riff-streaming-pulsar-gateway-list",
+          "v0.6/cli/riff-streaming-pulsar-gateway-status"
+        ]
+      }
+    ]
+  },
   "docs/v0.5": {
-    "Version (v0.5 snapshot)": [
+    "Version (v0.5.x)": [
+      "v0.5/versions/v0.6",
       "v0.5/versions/v0.4",
       "v0.5/versions/v0.3"
     ],
@@ -153,6 +307,7 @@
   },
   "docs/v0.4": {
     "Version (v0.4.x)": [
+      "v0.4/versions/v0.6",
       "v0.4/versions/v0.5",
       "v0.4/versions/v0.3"
     ],
@@ -250,6 +405,7 @@
   },
   "docs/v0.3": {
     "Version (v0.3.x)": [
+      "v0.3/versions/v0.6",
       "v0.3/versions/v0.5",
       "v0.3/versions/v0.4"
     ],

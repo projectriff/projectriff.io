@@ -34,9 +34,9 @@ sidebar_label: Getting started
 }
 </style>
 
-[Get started with riff v0.4.x](./v0.4/getting-started.md)
+[Get started with riff v0.5.x](./v0.5/getting-started.md)
 
 <script type="text/javascript">
-  window.location.href = '/docs/v0.4/getting-started';
+  window.location.href = '/docs/v0.5/getting-started';
 </script>
 

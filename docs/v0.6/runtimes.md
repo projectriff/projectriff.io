@@ -1,8 +1,10 @@
 ---
-id: v0.5
-title: riff v0.5.x
-sidebar_label: v0.5.x
+id: runtimes
+title: Runtimes
+sidebar_label: Runtimes
 ---
+
+<!-- TODO convert into a listing of each runtime -->
 
 <style>
 .mainContainer {
@@ -34,9 +36,8 @@ sidebar_label: v0.5.x
 }
 </style>
 
-[Get started with riff v0.5.x](../../v0.5/getting-started.md)
+[riff CLI](./runtimes/core.md)
 
 <script type="text/javascript">
-  window.location.href = '/docs/v0.5/getting-started';
+  window.location.href = '/docs/v0.6/runtimes/core';
 </script>
-

@@ -7,10 +7,10 @@
 
 [[redirects]]
   from = "/docs/latest/*"
-  to = "/docs/v0.5/:splat"
+  to = "/docs/v0.6/:splat"
   status = 200
 
 [[redirects]]
   from = "/docs/stable/*"
-  to = "/docs/v0.4/:splat"
+  to = "/docs/v0.5/:splat"
   status = 200
