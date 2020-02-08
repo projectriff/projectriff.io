@@ -33,7 +33,7 @@ This release includes Gateways for Kafka and Pulsar, and a non-production in-mem
 
 #### Streaming Next Steps
 
-We are discussing this streaming model with the Knative community, and exploring ways to enable streaming for other types of workloads beyond streaming functions.
+We are discussing this streaming model with the community, and exploring ways to enable streaming for other types of workloads beyond streaming functions.
 
 ## Other Highlights of v0.5.0
 
