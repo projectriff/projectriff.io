@@ -2,7 +2,7 @@
 title: "Announcing riff v0.5.0"
 ---
 
-We are happy to announce riff v0.5.0. Thanks to all riff, Cloud Native Buildpack, Knative, Liiklus, Keda, Contour, and other contributors.
+We are happy to announce riff v0.5.0. Thanks to all riff, Cloud Native Buildpack, Knative, Liiklus, KEDA, Contour, and other contributors.
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/cli/releases/tag/v0.5.0) on GitHub. The [getting started](/docs/v0.5/getting-started) guides will help you to run your first function.
 
