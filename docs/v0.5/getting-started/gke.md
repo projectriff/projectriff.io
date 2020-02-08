@@ -170,11 +170,7 @@ Succeeded
 
 ## Install the riff CLI
 
-Recent snapshot builds of the riff CLI for [macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-darwin-amd64.tgz), [Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-windows-amd64.zip), or [Linux](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-linux-amd64.tgz), can be downloaded from GCS.
-
-Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
-
-Check that the riff CLI version is 0.5.0.
+The [riff CLI](https://github.com/projectriff/cli/) is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Once installed, check that the riff CLI version is 0.5.0.
 
 ```sh
 riff --version
@@ -198,7 +194,7 @@ kubectl create ns apps
 
 ### install riff Build
 
-To install riff build and it's dependencies:
+Each `kapp` command below will display a list of changes and then prompt for confirmation. Press `y` to proceed. To auto-confirm, append a `-y` flag to the command.
 
 ```sh
 kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.5.0/cert-manager.yaml
