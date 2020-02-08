@@ -40,7 +40,7 @@ We are discussing this streaming model with the community, and exploring ways to
 ### Knative Runtime
 
 - The Knative runtime has been upgraded to use Knative Serving v0.12.1.
-- Istio has been replaced with Contour as the ingress, and works with both the Knative and the Core runtime. Note that `--ingress-policy External` is now [required](/docs/v0.5/cli/riff-knative-deployer-create) in order to route HTTP traffic from outside the cluster.
+- [Contour](https://projectcontour.io) has replaced Istio as the ingress controller, and works with both the Knative and the Core runtime. Note that Deployers are only accessible from inside the cluster by default, `--ingress-policy External` is now [required](/docs/v0.5/cli/riff-knative-deployer-create) in order to route HTTP traffic from outside the cluster.
 - The CLI also provides for configuration of
   -  `--min-scale` and `--max-scale`
   -  `--container-concurrency`
