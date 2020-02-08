@@ -29,7 +29,7 @@ module.exports.$interactionModel = 'node-streams';
 
 ![Streaming architecture diagram](assets/streaming.png)
 
-This release includes Gateways for Kafka and Pulsar, and a lightweight in-memory gateway. All three are based on [Liiklus](https://github.com/bsideup/liiklus).
+This release includes Gateways for Kafka and Pulsar, and a non-production in-memory gateway. All three are based on [Liiklus](https://github.com/bsideup/liiklus).
 
 #### Streaming Next Steps
 
