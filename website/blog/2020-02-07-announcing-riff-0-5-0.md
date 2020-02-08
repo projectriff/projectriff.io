@@ -47,7 +47,7 @@ We are discussing this streaming model with the Knative community, and exploring
 
 ### Core Runtime
 
-- We have added Ingress support to the Core Runtime, making it easier direct HTTP requests to functions, apps, and containers deployed using the Core runtime.
+- We added Ingress support to the Core Runtime, allowing external HTTP requests to target functions, apps, and containers.
 
 ### Build
 
