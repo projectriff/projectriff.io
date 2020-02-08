@@ -25,7 +25,7 @@ module.exports.$interactionModel = 'node-streams';
 
 #### Gateways and Processors
 
-[Gateways](docs/v0.5/cli/riff-streaming-kafka-gateway) connect streams to a messaging service like Kafka. [Processors](/docs/v0.5/cli/riff-streaming-processor-create) connect functions with gateways.
+[Gateways](docs/v0.5/cli/riff-streaming-gateway) connect streams to a messaging service like Kafka or Pulsar. [Processors](/docs/v0.5/cli/riff-streaming-processor-create) connect functions with gateways.
 
 ![Streaming architecture diagram](assets/streaming.png)
 
