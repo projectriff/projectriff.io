@@ -15,7 +15,7 @@ The Core runtime is not installed with riff by default. See the [getting started
 You can then install the Core runtime using the following:
 
 ```sh
-kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-core-runtime.yaml
+kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-core-runtime.yaml
 ```
 
 ## Deployers
