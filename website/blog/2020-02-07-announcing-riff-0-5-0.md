@@ -2,11 +2,11 @@
 title: "Announcing riff v0.5.0"
 ---
 
-We are happy to announce riff v0.5.0. Thanks to all riff, Cloud Native Buildpack, Knative, Liiklus, KEDA, Contour, and other contributors.
+We are happy to announce riff v0.5.0. Thanks to all riff, Cloud Native Buildpack, Knative, Liiklus, KEDA, Contour, k14s, and other contributors.
 
 The riff CLI can be downloaded from our [releases page](https://github.com/projectriff/cli/releases/tag/v0.5.0) on GitHub. The [getting started](/docs/v0.5/getting-started) guides will help you to run your first function.
 
-![Cambridge UK bridge](assets/cam-bridge.jpg)
+![riff v0.5 Streaming Architecture](assets/riff-v0.5-streaming.png)
 
 ## Streaming
 
@@ -27,15 +27,14 @@ module.exports.$interactionModel = 'node-streams';
 
 [Gateways](docs/v0.5/cli/riff-streaming-gateway) connect streams to a messaging service like Kafka or Pulsar. [Processors](/docs/v0.5/cli/riff-streaming-processor-create) connect functions with gateways.
 
-![Streaming architecture diagram](assets/streaming.png)
-
-This release includes Gateways for Kafka and Pulsar, and a non-production in-memory gateway. All three are based on [Liiklus](https://github.com/bsideup/liiklus).
-
-#### Streaming Next Steps
-
-We are discussing this streaming model with the community, and exploring ways to enable streaming for other types of workloads beyond streaming functions.
+This release includes gateways for Kafka and Pulsar, and a non-production in-memory gateway. All three are based on [Liiklus](https://github.com/bsideup/liiklus).
 
 ## Other Highlights of v0.5.0
+
+- [kapp](https://get-kapp.io/) is used for installs instead of helm.
+- Each runtime (core, knative, streaming) can be installed or uninstalled independently.
+- Deployers and processors now consistently use PodTemplateSpec to define containers and volumes.
+- CRD status now favor object references instead of resource names.
 
 ### Knative Runtime
 
@@ -49,6 +48,6 @@ We are discussing this streaming model with the community, and exploring ways to
 
 - We added Ingress support to the Core Runtime, allowing external HTTP requests to target functions, apps, and containers.
 
-### Build
+## Next Steps
 
-- Container images managed by `riff container create` are now resolved into image digests, and the controller polls the registry to detect image updates and propagate the changes to deployed workloads.
+We are discussing this streaming model with the community, and exploring ways to enable streaming for other types of workloads beyond streaming functions.
