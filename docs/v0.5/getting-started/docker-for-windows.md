@@ -119,18 +119,18 @@ Version: 0.23.0
 
 ## Install a snapshot build of the riff CLI
 
-A recent snapshot build of the riff [CLI for Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-windows-amd64.zip) can be downloaded from our [GCS].
+A recent snapshot build of the riff [CLI for Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-windows-amd64.zip) can be downloaded from our [GCS].
 
 Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install).
 
-Check that the riff CLI version is 0.5.0-snapshot.
+Check that the riff CLI version is 0.5.0.
 
 ```powershell
 riff --version
 ```
 
 ```
-riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
+riff version 0.5.0 (f96cf2f5ca6fddfaf4716c0045f5f142da2d3828)
 ```
 
 ## Install riff Using kapp
@@ -150,19 +150,19 @@ kubectl create ns apps
 To install riff build and it's dependencies:
 
 ```powershell
-kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/cert-manager.yaml
+kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.5.0/cert-manager.yaml
 ```
 
 ```powershell
-kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kpack.yaml
+kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.5.0/kpack.yaml
 ```
 
 ```powershell
-kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-builders.yaml
+kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-builders.yaml
 ```
 
 ```powershell
-kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-build.yaml
+kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-build.yaml
 ```
 
 ### install Contour ingress controller
@@ -171,7 +171,7 @@ The Contour ingress controller can be used by both Knative and Core runtimes.
 
 ```powershell
 # ytt is used to convert the ingress service to NodePort because Docker for Widows does not support `LoadBalancer` services.
-ytt -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
+ytt -f https://storage.googleapis.com/projectriff/release/0.5.0/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
 ```
 
 ### install riff Knative Runtime
@@ -179,11 +179,11 @@ ytt -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/contour
 To install riff Knative Runtime and it's dependencies:
 
 ```powershell
-kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/knative.yaml
+kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0/knative.yaml
 ```
 
 ```powershell
-kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-knative-runtime.yaml
+kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-knative-runtime.yaml
 ```
 
 ### verify riff installation
