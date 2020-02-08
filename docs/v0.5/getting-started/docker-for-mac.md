@@ -96,7 +96,7 @@ ytt version
 Version: 0.23.0
 ```
 
-## Install a snapshot build of the riff CLI
+## Install the riff CLI
 
 A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-darwin-amd64.tgz) can be downloaded from GCS.
 
