@@ -98,7 +98,7 @@ Version: 0.23.0
 
 ## Install a snapshot build of the riff CLI
 
-A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-darwin-amd64.tgz) can be downloaded from GCS.
+A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-darwin-amd64.tgz) can be downloaded from GCS.
 
 Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
 
