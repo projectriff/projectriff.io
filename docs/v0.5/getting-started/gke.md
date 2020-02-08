@@ -168,7 +168,7 @@ Client Version: 0.18.0
 Succeeded
 ```
 
-## Install a snapshot build of the riff CLI
+## Install the riff CLI
 
 Recent snapshot builds of the riff CLI for [macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-darwin-amd64.tgz), [Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-windows-amd64.zip), or [Linux](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0/riff-linux-amd64.tgz), can be downloaded from GCS.
 
