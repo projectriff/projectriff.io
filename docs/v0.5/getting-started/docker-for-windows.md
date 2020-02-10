@@ -307,7 +307,7 @@ riff function delete square
 
 You can reset the Kubernetes cluster (this will remove all state including riff).
 
-![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)
+![reset Kubernetes](/img/docker-for-win-reset-kubernetes.png)
 
 Alternatively, you can use the following commands to uninstall riff:
 
