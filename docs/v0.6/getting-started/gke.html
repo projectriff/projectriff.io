@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Getting started on GKE · riff is for functions</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The following will help you get started running a riff function on GKE."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Getting started on GKE · riff is for functions"/><meta property="og:type" content="website"/><meta property="og:url" content="https://projectriff.io/"/><meta property="og:description" content="The following will help you get started running a riff function on GKE."/><meta property="og:image" content="https://projectriff.io/img/riff.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://projectriff.io/img/riff.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://projectriff.io/blog/atom.xml" title="riff is for functions Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://projectriff.io/blog/feed.xml" title="riff is for functions Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/riff-white.svg" alt="riff is for functions"/><h2 class="headerTitleWithLogo">riff is for functions</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/v0.5/getting-started" target="_self">Docs</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://github.com/projectriff" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Install</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Version (v0.6 snapshot)<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.6/versions/v0.5">v0.5.x</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/versions/v0.4">v0.4.x</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/versions/v0.3">v0.3.x</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Getting Started<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Install</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/getting-started">Pick your environment</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/v0.6/getting-started/gke">GKE</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/getting-started/minikube">Minikube</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/getting-started/docker-for-mac">Docker for Mac</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/getting-started/docker-for-windows">Docker for Windows</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Runtimes<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.6/runtimes/core">Core</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/runtimes/knative">Knative</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/runtimes/streaming">Streaming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">Function Invokers<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.6/invokers/java">Java</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/invokers/node">Node.js</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/invokers/command">Command</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle collapsible">CLI Reference<span class="arrow"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="#565656" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg></span></h3><ul class="hide"><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff">riff</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-doctor">riff doctor</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-completion">riff completion</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Credential</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-credential">riff credential</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-credential-apply">riff credential apply</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-credential-delete">riff credential delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-credential-list">riff credential list</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Build</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function">riff function</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function-create">riff function create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function-delete">riff function delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function-list">riff function list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function-status">riff function status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-function-tail">riff function tail</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application">riff application</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application-create">riff application create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application-delete">riff application delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application-list">riff application list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application-status">riff application status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-application-tail">riff application tail</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-container">riff container</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-container-create">riff container create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-container-delete">riff container delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-container-list">riff container list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-container-status">riff container status</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Knative Runtime</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative">riff knative</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-adapter">riff knative adapter</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-adapter-create">riff knative adapter create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-adapter-delete">riff knative adapter delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-adapter-list">riff knative adapter list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-adapter-status">riff knative adapter status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer">riff knative deployer</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer-create">riff knative deployer create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer-delete">riff knative deployer delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer-list">riff knative deployer list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer-status">riff knative deployer status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-knative-deployer-tail">riff knative deployer tail</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Core Runtime</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core">riff core</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer">riff core deployer</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer-create">riff core deployer create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer-delete">riff core deployer delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer-list">riff core deployer list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer-status">riff core deployer status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-core-deployer-tail">riff core deployer tail</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Streaming Runtime</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming">riff streaming</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-stream">riff streaming stream</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-stream-create">riff streaming stream create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-stream-delete">riff streaming stream delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-stream-list">riff streaming stream list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-stream-status">riff streaming stream status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor">riff streaming processor</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor-create">riff streaming processor create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor-delete">riff streaming processor delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor-list">riff streaming processor list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor-status">riff streaming processor status</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-processor-tail">riff streaming processor tail</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-gateway">riff streaming gateway</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-gateway-list">riff streaming gateway list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-gateway-status">riff streaming gateway status</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">In-memory Gateway</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-inmemory-gateway">inmemory-gateway</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-inmemory-gateway-create">inmemory-gateway create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-inmemory-gateway-delete">inmemory-gateway delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-inmemory-gateway-list">inmemory-gateway list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-inmemory-gateway-status">inmemory-gateway status</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Kafka Gateway</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-kafka-gateway">kafka-gateway</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-kafka-gateway-create">kafka-gateway create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-kafka-gateway-delete">kafka-gateway delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-kafka-gateway-list">kafka-gateway list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-kafka-gateway-status">kafka-gateway status</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">Pulsar Gateway</h4><ul><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-pulsar-gateway">pulsar-gateway</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-pulsar-gateway-create">pulsar-gateway create</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-pulsar-gateway-delete">pulsar-gateway delete</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-pulsar-gateway-list">pulsar-gateway list</a></li><li class="navListItem"><a class="navItem" href="/docs/v0.6/cli/riff-streaming-pulsar-gateway-status">pulsar-gateway status</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/projectriff/projectriff.io/blob/master/docs/v0.6/getting-started/gke.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Getting started on GKE</h1></header><article><div><span><p>The following will help you get started running a riff function on GKE.</p>
+<h2><a class="anchor" aria-hidden="true" id="create-a-google-cloud-project"></a><a href="#create-a-google-cloud-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Google Cloud project</h2>
+<p>A project is required to consume any Google Cloud services, including GKE clusters. When you log into the <a href="https://console.cloud.google.com/">console</a> you can select or create a project from the dropdown at the top.</p>
+<h3><a class="anchor" aria-hidden="true" id="install-gcloud"></a><a href="#install-gcloud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install gcloud</h3>
+<p>Follow the <a href="https://cloud.google.com/sdk/docs/quickstarts">quickstart instructions</a> to install the <a href="https://cloud.google.com/sdk/">Google Cloud SDK</a> which includes the <code>gcloud</code> CLI. You may need to add the <code>google-cloud-sdk/bin</code> directory to your path. Once installed, <code>gcloud init</code> will open a browser to start an oauth flow and configure gcloud to use your project.</p>
+<pre><code class="hljs css language-sh">gcloud init
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-kubectl"></a><a href="#install-kubectl" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install kubectl</h3>
+<p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubectl</a> is the Kubernetes CLI. If you don't already have kubectl on your machine, you can use gcloud to install it.</p>
+<pre><code class="hljs css language-sh">gcloud components install kubectl
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="configure-gcloud"></a><a href="#configure-gcloud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>configure gcloud</h3>
+<p>Create an environment variable, replacing ??? with your project ID (not to be confused with your project name; use <code>gcloud projects list</code> to find your project ID).</p>
+<pre><code class="hljs css language-sh">GCP_PROJECT_ID=???
+</code></pre>
+<p>Check your default project.</p>
+<pre><code class="hljs css language-sh">gcloud config list
+</code></pre>
+<p>If necessary change the default project.</p>
+<pre><code class="hljs css language-sh">gcloud config <span class="hljs-built_in">set</span> project <span class="hljs-variable">$GCP_PROJECT_ID</span>
+</code></pre>
+<p>List the available compute zones and also regions with quotas.</p>
+<pre><code class="hljs css language-sh">gcloud compute zones list
+gcloud compute regions list
+</code></pre>
+<p>Choose a zone, preferably in a region with higher CPU quota.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">export</span> GCP_ZONE=us-central1-b
+</code></pre>
+<p>Confirm that the zone offers Kubernetes v1.15 or later.</p>
+<pre><code class="hljs css language-sh">gcloud container get-server-config --zone <span class="hljs-variable">$GCP_ZONE</span> | head -n 10
+</code></pre>
+<pre><code class="hljs">Fetching server config for us-central1-b
+defaultClusterVersion: 1.13.11-gke.23
+...
+validMasterVersions:
+- 1.15.8-gke.2
+- 1.15.7-gke.23
+</code></pre>
+<p>Enable the necessary APIs for gcloud. You also need to <a href="https://cloud.google.com/billing/docs/how-to/manage-billing-account">enable billing</a> for your new project.</p>
+<pre><code class="hljs css language-sh">gcloud services <span class="hljs-built_in">enable</span> \
+  cloudapis.googleapis.com \
+  container.googleapis.com \
+  containerregistry.googleapis.com
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-gke-cluster"></a><a href="#create-a-gke-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a GKE cluster</h2>
+<p>Choose a new unique lowercase cluster name and create the cluster. For this demo, three nodes should be sufficient. Use the <code>latest</code> cluster-version.</p>
+<pre><code class="hljs css language-sh"><span class="hljs-comment"># replace ??? below with your own cluster name</span>
+<span class="hljs-built_in">export</span> CLUSTER_NAME=???
+</code></pre>
+<pre><code class="hljs css language-sh">gcloud container clusters create <span class="hljs-variable">$CLUSTER_NAME</span> \
+  --cluster-version=latest \
+  --machine-type=n1-standard-2 \
+  --<span class="hljs-built_in">enable</span>-autoscaling --min-nodes=1 --max-nodes=3 \
+  --<span class="hljs-built_in">enable</span>-autorepair \
+  --scopes=cloud-platform \
+  --num-nodes=3 \
+  --zone=<span class="hljs-variable">$GCP_ZONE</span>
+</code></pre>
+<p>For additional details see <a href="https://knative.dev/docs/install/knative-with-gke/">Knative Install on Google Kubernetes Engine</a>.</p>
+<p>Confirm that your kubectl context is pointing to the new cluster</p>
+<pre><code class="hljs css language-sh">kubectl config current-context
+</code></pre>
+<p>To list contexts:</p>
+<pre><code class="hljs css language-sh">kubectl config get-contexts
+</code></pre>
+<p>You should also be able to find the cluster the <a href="https://console.cloud.google.com/kubernetes/">Kubernetes Engine</a> console.</p>
+<h3><a class="anchor" aria-hidden="true" id="monitor-your-cluster"></a><a href="#monitor-your-cluster" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>monitor your cluster</h3>
+<p>At this point it is useful to monitor your cluster using a utility like <code>watch</code>. To install on a Mac</p>
+<pre><code class="hljs css language-sh">brew install watch
+</code></pre>
+<p>Watch pods in a separate terminal.</p>
+<pre><code class="hljs css language-sh">watch -n 1 kubectl get pod --all-namespaces
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="grant-yourself-cluster-admin-permissions"></a><a href="#grant-yourself-cluster-admin-permissions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>grant yourself cluster-admin permissions</h3>
+<pre><code class="hljs css language-sh">kubectl create clusterrolebinding cluster-admin-binding \
+--clusterrole=cluster-admin \
+--user=$(gcloud config get-value core/account)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-kapp"></a><a href="#install-kapp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install kapp</h2>
+<p><a href="https://get-kapp.io/">kapp</a> is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.</p>
+<p>You can find install kapp using Homebrew on MacOS</p>
+<pre><code class="hljs css language-sh">brew tap k14s/tap
+brew install kapp
+</code></pre>
+<p>Alternatively, Download a recent binary for your platform from <a href="https://github.com/k14s/kapp/releases">github</a>.
+Move it into a directory on your path, and make it executable.
+Complete kapp installation instructions can be found <a href="https://k14s.io/#install-from-github-release">here</a></p>
+<p>Validate the installation.</p>
+<pre><code class="hljs css language-sh">kapp version
+</code></pre>
+<pre><code class="hljs">Client Version: 0.18.0
+
+Succeeded
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-a-snapshot-build-of-the-riff-cli"></a><a href="#install-a-snapshot-build-of-the-riff-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install a snapshot build of the riff CLI</h2>
+<p>Recent snapshot builds of the riff CLI for <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-darwin-amd64.tgz">macOS</a>, <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-windows-amd64.zip">Windows</a>, or <a href="https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-linux-amd64.tgz">Linux</a>, can be downloaded from GCS.</p>
+<p>Alternatively, clone the <a href="https://github.com/projectriff/cli/">riff CLI repo</a>, and run <code>make build install</code>. This will require a recent <a href="https://golang.org/doc/install#install">go build environment</a>. On macOS you can use <code>brew install go</code>.</p>
+<p>Check that the riff CLI version is 0.6.0-snapshot.</p>
+<pre><code class="hljs css language-sh">riff --version
+</code></pre>
+<pre><code class="hljs">riff version 0.6.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="install-riff-using-kapp"></a><a href="#install-riff-using-kapp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install riff Using kapp</h2>
+<p>riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.</p>
+<blockquote>
+<p>NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See <a href="/docs/v0.4/getting-started/gke#uninstalling">instructions</a> in the v0.4.0 documentation.</p>
+</blockquote>
+<p>Create a namespace for kapp to store configuration:</p>
+<pre><code class="hljs">kubectl create ns apps
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-riff-build"></a><a href="#install-riff-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Build</h3>
+<p>To install riff build and it's dependencies:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/cert-manager.yaml
+</code></pre>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/kpack.yaml
+</code></pre>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-builders.yaml
+</code></pre>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-build.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-contour-ingress-controller"></a><a href="#install-contour-ingress-controller" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install Contour ingress controller</h3>
+<p>The Contour ingress controller can be used by both Knative and Core runtimes.</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a contour -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/contour.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="install-riff-knative-runtime"></a><a href="#install-riff-knative-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>install riff Knative Runtime</h3>
+<p>To optionally install riff Knative Runtime and it's dependencies:</p>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/knative.yaml
+</code></pre>
+<pre><code class="hljs css language-sh">kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-knative-runtime.yaml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="verify-riff-installation"></a><a href="#verify-riff-installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>verify riff installation</h3>
+<p>Resources may be missing if the corresponding runtime was not installed.</p>
+<pre><code class="hljs css language-sh">riff doctor
+</code></pre>
+<pre><code class="hljs">NAMESPACE     STATUS
+default       ok
+riff-system   ok
+
+RESOURCE                                     NAMESPACE     NAME       READ      WRITE
+configmaps                                   riff-system   builders   allowed   n/a
+configmaps                                   default       *          allowed   allowed
+secrets                                      default       *          allowed   allowed
+pods                                         default       *          allowed   n/a
+pods/log                                     default       *          allowed   n/a
+applications.build.projectriff.io            default       *          allowed   allowed
+containers.build.projectriff.io              default       *          allowed   allowed
+functions.build.projectriff.io               default       *          allowed   allowed
+deployers.core.projectriff.io                default       *          missing   missing
+processors.streaming.projectriff.io          default       *          missing   missing
+streams.streaming.projectriff.io             default       *          missing   missing
+inmemoryproviders.streaming.projectriff.io   default       *          missing   missing
+kafkaproviders.streaming.projectriff.io      default       *          missing   missing
+pulsarproviders.streaming.projectriff.io     default       *          missing   missing
+adapters.knative.projectriff.io              default       *          allowed   allowed
+deployers.knative.projectriff.io             default       *          allowed   allowed
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="create-a-kubernetes-secret-for-pushing-images-to-gcr"></a><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>create a Kubernetes secret for pushing images to GCR</h3>
+<p>Create a <a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts">GCP Service Account</a> in the GCP console or using the gcloud CLI</p>
+<pre><code class="hljs css language-sh">gcloud iam service-accounts create push-image
+</code></pre>
+<p>Grant the service account a &quot;storage.admin&quot; role using the <a href="https://cloud.google.com/iam/docs/granting-roles-to-service-accounts">IAM manager</a> or using gcloud.</p>
+<pre><code class="hljs css language-sh">gcloud projects add-iam-policy-binding <span class="hljs-variable">$GCP_PROJECT_ID</span> \
+    --member serviceAccount:push-image@<span class="hljs-variable">$GCP_PROJECT_ID</span>.iam.gserviceaccount.com \
+    --role roles/storage.admin
+</code></pre>
+<p>Create a new <a href="https://cloud.google.com/container-registry/docs/advanced-authentication#json_key_file">authentication key</a> for the service account and save it in <code>gcr-storage-admin.json</code>.</p>
+<pre><code class="hljs css language-sh">gcloud iam service-accounts keys create \
+  --iam-account <span class="hljs-string">"push-image@<span class="hljs-variable">$GCP_PROJECT_ID</span>.iam.gserviceaccount.com"</span> \
+  gcr-storage-admin.json
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="apply-build-credentials"></a><a href="#apply-build-credentials" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>apply build credentials</h3>
+<p>Use the riff CLI to apply credentials to a container registry (if you plan on using a namespace other than <code>default</code> add the <code>--namespace</code> flag).</p>
+<pre><code class="hljs css language-sh">riff credential apply my-creds --gcr gcr-storage-admin.json --<span class="hljs-built_in">set</span>-default-image-prefix
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-function"></a><a href="#create-a-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a function</h2>
+<p>This step will pull the source code for a function from a GitHub repo, build a container image based on the node function invoker, and push the resulting image to GCR. The function resource represents a build plan that will report the latest built image.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> create square \
+  --git-repo https://github.com/projectriff-samples/node-square \
+  --artifact square.js \
+  --tail
+</code></pre>
+<p>After the function is created, you can get the built image by listing functions.</p>
+<pre><code class="hljs css language-sh">riff <span class="hljs-keyword">function</span> list
+</code></pre>
+<pre><code class="hljs">NAME     LATEST IMAGE                                                                                         ARTIFACT    HANDLER   INVOKER   STATUS   AGE
+square   gcr.io/$GCP_PROJECT/square@sha256:ac089ca183368aa831597f94a2dbb462a157ccf7bbe0f3868294e15a24308f68   square.js   &lt;empty&gt;   &lt;empty&gt;   Ready    1m13s
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-knative-deployer"></a><a href="#create-a-knative-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Knative deployer</h2>
+<p>The <a href="/docs/v0.6/runtimes/knative">Knative Runtime</a> is only available on clusters with Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.</p>
+<pre><code class="hljs css language-sh">riff knative deployer create knative-square --<span class="hljs-keyword">function</span>-ref square --ingress-policy External --tail
+</code></pre>
+<p>After the deployer is created, you can see the hostname by listing deployers.</p>
+<pre><code class="hljs css language-sh">riff knative deployer list
+</code></pre>
+<pre><code class="hljs">NAME             TYPE       REF      HOST                                 STATUS   AGE
+knative-square   function   square   knative-square.default.example.com   Ready    28s
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="invoke-the-function"></a><a href="#invoke-the-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>invoke the function</h3>
+<p>Knative configures HTTP routes on the ingress controller. Requests are routed by hostname.</p>
+<p>Look up the Loadbalancer IP for the ingress gateway; you should see a value like <code>35.205.114.86</code>.</p>
+<pre><code class="hljs css language-sh">INGRESS_IP=$(kubectl get svc envoy-external --namespace projectcontour --output <span class="hljs-string">'jsonpath={.status.loadBalancer.ingress[0].ip}'</span>)
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$INGRESS_IP</span>
+</code></pre>
+<p>Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.</p>
+<pre><code class="hljs css language-sh">curl http://<span class="hljs-variable">$INGRESS_IP</span>/ -w <span class="hljs-string">'\n'</span> \
+-H <span class="hljs-string">'Host: knative-square.default.example.com'</span> \
+-H <span class="hljs-string">'Content-Type: application/json'</span> \
+-d 7
+</code></pre>
+<pre><code class="hljs">49
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="delete-the-function-and-deployer"></a><a href="#delete-the-function-and-deployer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delete the function and deployer</h2>
+<pre><code class="hljs css language-sh">riff knative deployer delete knative-square
+riff <span class="hljs-keyword">function</span> delete square
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="uninstalling-riff"></a><a href="#uninstalling-riff" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uninstalling riff</h2>
+<p>Use the following commands to uninstall riff:</p>
+<h3><a class="anchor" aria-hidden="true" id="remove-any-riff-resources"></a><a href="#remove-any-riff-resources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove any riff resources</h3>
+<pre><code class="hljs css language-sh">kubectl delete riff --all-namespaces --all
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="remove-riff-streaming-runtime"></a><a href="#remove-riff-streaming-runtime" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove riff Streaming Runtime</h3>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a riff-streaming-runtime
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a keda
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="remove-riff-core-runtime-if-installed"></a><a href="#remove-riff-core-runtime-if-installed" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove riff Core Runtime (if installed)</h3>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a riff-core-runtime
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="remove-riff-knative-runtime-if-installed"></a><a href="#remove-riff-knative-runtime-if-installed" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove riff Knative Runtime (if installed)</h3>
+<pre><code class="hljs css language-sh">kubectl delete knative --all-namespaces --all
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a riff-knative-runtime
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a knative
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="remove-contour"></a><a href="#remove-contour" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove Contour</h3>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a contour
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="remove-riff-build"></a><a href="#remove-riff-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remove riff Build</h3>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a riff-build
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a riff-builders
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a kpack
+</code></pre>
+<pre><code class="hljs css language-sh">kapp delete -n apps -a cert-manager
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/v0.6/getting-started"><span class="arrow-prev">← </span><span>Pick your environment</span></a><a class="docs-next button" href="/docs/v0.6/getting-started/minikube"><span>Minikube</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#create-a-google-cloud-project">Create a Google Cloud project</a><ul class="toc-headings"><li><a href="#install-gcloud">install gcloud</a></li><li><a href="#install-kubectl">install kubectl</a></li><li><a href="#configure-gcloud">configure gcloud</a></li></ul></li><li><a href="#create-a-gke-cluster">Create a GKE cluster</a><ul class="toc-headings"><li><a href="#monitor-your-cluster">monitor your cluster</a></li><li><a href="#grant-yourself-cluster-admin-permissions">grant yourself cluster-admin permissions</a></li></ul></li><li><a href="#install-kapp">Install kapp</a></li><li><a href="#install-a-snapshot-build-of-the-riff-cli">Install a snapshot build of the riff CLI</a></li><li><a href="#install-riff-using-kapp">Install riff Using kapp</a><ul class="toc-headings"><li><a href="#install-riff-build">install riff Build</a></li><li><a href="#install-contour-ingress-controller">install Contour ingress controller</a></li><li><a href="#install-riff-knative-runtime">install riff Knative Runtime</a></li><li><a href="#verify-riff-installation">verify riff installation</a></li><li><a href="#create-a-kubernetes-secret-for-pushing-images-to-gcr">create a Kubernetes secret for pushing images to GCR</a></li><li><a href="#apply-build-credentials">apply build credentials</a></li></ul></li><li><a href="#create-a-function">Create a function</a></li><li><a href="#create-a-knative-deployer">Create a Knative deployer</a><ul class="toc-headings"><li><a href="#invoke-the-function">invoke the function</a></li></ul></li><li><a href="#delete-the-function-and-deployer">Delete the function and deployer</a></li><li><a href="#uninstalling-riff">Uninstalling riff</a><ul class="toc-headings"><li><a href="#remove-any-riff-resources">remove any riff resources</a></li><li><a href="#remove-riff-streaming-runtime">remove riff Streaming Runtime</a></li><li><a href="#remove-riff-core-runtime-if-installed">remove riff Core Runtime (if installed)</a></li><li><a href="#remove-riff-knative-runtime-if-installed">remove riff Knative Runtime (if installed)</a></li><li><a href="#remove-contour">remove Contour</a></li><li><a href="#remove-riff-build">remove riff Build</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/riff-white.svg" alt="riff is for functions" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/">Versions</a></div><div><h5>Community</h5><a href="https://github.com/projectriff/">GitHub</a><a href="https://twitter.com/projectriff" target="_blank" rel="noreferrer noopener">Twitter</a><a href="/blog">Blog</a></div><div><h5>More</h5><a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a><a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a><a href="https://pivotal.io/legal" target="_blank">Terms of Use</a><a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a></div></section><section class="copyright"><a href="https://www.netlify.com">Deployed by Netlify</a></section><section class="copyright">Copyright © 2020 Pivotal Software, Inc. All Rights Reserved.</section></footer></div></body></html>

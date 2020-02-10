@@ -4,7 +4,7 @@
         <title>riff is for functions Blog</title>
         <link>https://projectriff.io/blog</link>
         <description>The best place to stay up-to-date with the latest riff is for functions news and events.</description>
-        <lastBuildDate>Wed, 09 Oct 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 10 Feb 2020 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -12,6 +12,26 @@
             <url>https://projectriff.io/img/riff-white.svg</url>
             <link>https://projectriff.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[Announcing riff v0.5.0]]></title>
+            <link>https://projectriff.io/blog/2020/02/10/announcing-riff-0-5-0.html</link>
+            <guid>https://projectriff.io/blog/2020/02/10/announcing-riff-0-5-0.html</guid>
+            <pubDate>Mon, 10 Feb 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>We are happy to announce riff v0.5.0. Thanks to all riff, Cloud Native Buildpack, Knative, Liiklus, KEDA, Contour, k14s, and other contributors.</p>
+<p>The riff CLI can be downloaded from our <a href="https://github.com/projectriff/cli/releases/tag/v0.5.0">releases page</a> on GitHub. The <a href="/docs/v0.5/getting-started">getting started</a> guides will help you to run your first function.</p>
+<p><img src="/blog/assets/riff-v0.5-streaming.png" alt="riff v0.5 Streaming Architecture"></p>
+<h2><a class="anchor" aria-hidden="true" id="streaming"></a><a href="#streaming" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Streaming</h2>
+<p>This release introduces a new experimental streaming capability. Functions deployed using the <a href="/docs/v0.5/runtimes/streaming">Streaming Runtime</a> are able to consume and produce streams of events. The Node and Java function invokers have been extended to support a new <a href="https://github.com/projectriff/invoker-specification/blob/master/streaming.md">streaming invoker specification</a>.</p>
+<p>Here is an example of a JavaScript streaming function interface with 2 input and 1 output stream, using the <a href="">node function invoker</a>.</p>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">inputStreams, outputStreams</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> { impressions, orders } = inputStreams;
+    <span class="hljs-keyword">const</span> { conversions } = outputStreams;
+    <span class="hljs-comment">// do something</span>
+};
+<span class="hljs-built_in">module</span>.exports.$interactionModel = <span class="hljs-string">'node-streams'</span>;
+</code></pre>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[From Monolith to riff Functions at SpringOne Platform 2019]]></title>
             <link>https://projectriff.io/blog/2019/10/09/springone-platform-2019-from-monolith-to-riff-functions.html</link>
