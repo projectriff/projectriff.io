@@ -12,8 +12,6 @@ v0.6 of riff requires Kubernetes v1.15 or later.
 
 Download the latest _stable_ release from [Docker](https://store.docker.com/editions/community/docker-ce-desktop-mac). Kubernetes and the kubectl CLI are included.
 
-![download Docker for Mac](/img/docker-for-mac-download.png)
-
 ### resize the VM
 
 Once Docker is installed and running, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with 5GB of memory and 4 CPUs. Click on Apply & Restart.

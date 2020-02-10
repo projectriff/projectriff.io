@@ -12,25 +12,23 @@ v0.6 of riff requires Kubernetes v1.15 or later. Docker Desktop requires [Hyper-
 
 Download the latest _stable_ release from [Docker](https://docs.docker.com/docker-for-windows/install/). Kubernetes and the kubectl CLI are included.
 
-![download Docker for Windows](/img/docker-for-windows-download.png)
-
 ### resize the VM
 
 Once Docker is installed and running, open Settings by right-clicking the Docker tray icon and configure your VM with 5GB of memory and 4 CPUs in the Advanced settings tab. Click on Apply.
 
-![configure Docker VM](/img/docker-vm-config-windows.png)
+![configure Docker VM](/img/docker-for-win-vm-config-5gb.png)
 
 ### allow sharing of the C: drive
 
-In the Shared Drives settings, enable sharing for the C drive, and enter your Windows password when prompted. This will be used for persistent volume claims to provide cache storage during function builds.
+In the File Sharing settings under Resources, enable sharing for the C drive, and enter your Windows password if prompted. This will be used for persistent volume claims to provide cache storage during function builds.
 
-![configure Docker VM](/img/docker-windows-shared-drives.png)
+![configure Docker VM](/img/docker-for-win-shared-drives.png)
 
 ### enable Kubernetes
 
 Enable Kubernetes in the Kubernetes tab, click on Apply, and wait for the installation to complete and the cluster to start. If there is no Kubernetes tab, you may need to [switch to Linux containers](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers) first.
 
-![enable Kubernetes](/img/docker-kubernetes-windows.png)
+![enable Kubernetes](/img/docker-for-win-kubernetes.png)
 
 Confirm that your kubectl context is pointing to "docker-desktop".
 
@@ -313,7 +311,7 @@ riff function delete square
 
 You can reset the Kubernetes cluster (this will remove all state including riff).
 
-![reset Kubernetes](/img/docker-kubernetes-reset-windows.png)
+![reset Kubernetes](/img/docker-for-win-reset-kubernetes.png)
 
 Alternatively, you can use the following commands to uninstall riff:
 
