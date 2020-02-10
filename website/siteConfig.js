@@ -24,13 +24,14 @@ const siteConfig = {
 
   // used only in pages/en/versions.js
   versions: [
-    { name:'v0.5.x (snapshots)', url:'docs/v0.5/getting-started' },
+    { name:'v0.6.x (snapshots)', url:'docs/v0.6/getting-started' },
+    { name:'v0.5.x', url:'docs/v0.5/getting-started' },
     { name:'v0.4.x', url:'docs/v0.4/getting-started' },
     { name:'v0.3.x', url:'docs/v0.3/getting-started' }
   ],
 
   headerLinks: [
-    {doc: 'v0.4/getting-started', label: 'Docs'},
+    {doc: 'v0.5/getting-started', label: 'Docs'},
     {blog: true, label: 'Blog'},
     {href: 'https://github.com/projectriff', label: 'GitHub', external: true},
   ],

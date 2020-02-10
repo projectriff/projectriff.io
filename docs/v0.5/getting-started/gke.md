@@ -168,20 +168,16 @@ Client Version: 0.18.0
 Succeeded
 ```
 
-## Install a snapshot build of the riff CLI
+## Install the riff CLI
 
-Recent snapshot builds of the riff CLI for [macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-darwin-amd64.tgz), [Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-windows-amd64.zip), or [Linux](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.5.0-snapshot/riff-linux-amd64.tgz), can be downloaded from GCS.
-
-Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
-
-Check that the riff CLI version is 0.5.0-snapshot.
+The [riff CLI](https://github.com/projectriff/cli/) is available to download from our GitHub [releases](https://github.com/projectriff/cli/releases) page. Once installed, check that the riff CLI version is 0.5.0.
 
 ```sh
 riff --version
 ```
 
 ```
-riff version 0.5.0-snapshot (443fc9125dd6d8eecd1f7e1a13fa93b88fd4f972)
+riff version 0.5.0 (f96cf2f5ca6fddfaf4716c0045f5f142da2d3828)
 ```
 
 ## Install riff Using kapp
@@ -198,22 +194,22 @@ kubectl create ns apps
 
 ### install riff Build
 
-To install riff build and it's dependencies:
+Each `kapp` command below will display a list of changes and then prompt for confirmation. Press `y` to proceed. To auto-confirm, append a `-y` flag to the command.
 
 ```sh
-kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/cert-manager.yaml
+kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.5.0/cert-manager.yaml
 ```
 
 ```sh
-kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/kpack.yaml
+kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.5.0/kpack.yaml
 ```
 
 ```sh
-kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-builders.yaml
+kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-builders.yaml
 ```
 
 ```sh
-kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-build.yaml
+kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-build.yaml
 ```
 
 ### install Contour ingress controller
@@ -221,7 +217,7 @@ kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/
 The Contour ingress controller can be used by both Knative and Core runtimes.
 
 ```sh
-kapp deploy -n apps -a contour -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/contour.yaml
+kapp deploy -n apps -a contour -f https://storage.googleapis.com/projectriff/release/0.5.0/contour.yaml
 ```
 
 ### install riff Knative Runtime
@@ -229,11 +225,11 @@ kapp deploy -n apps -a contour -f https://storage.googleapis.com/projectriff/rel
 To optionally install riff Knative Runtime and it's dependencies:
 
 ```sh
-kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/knative.yaml
+kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.5.0/knative.yaml
 ```
 
 ```sh
-kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0-snapshot/riff-knative-runtime.yaml
+kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.5.0/riff-knative-runtime.yaml
 ```
 
 ### verify riff installation
