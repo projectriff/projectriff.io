@@ -25,7 +25,7 @@ module.exports.$interactionModel = 'node-streams';
 
 #### Gateways and Processors
 
-[Gateways](docs/v0.5/cli/riff-streaming-gateway) connect streams to a messaging service like Kafka or Pulsar. [Processors](/docs/v0.5/cli/riff-streaming-processor-create) connect functions with gateways.
+[Gateways](/docs/v0.5/cli/riff-streaming-gateway) connect streams to a messaging service like Kafka or Pulsar. [Processors](/docs/v0.5/cli/riff-streaming-processor-create) connect functions with gateways.
 
 This release includes gateways for Kafka and Pulsar, and a non-production in-memory gateway. All three are based on [Liiklus](https://github.com/bsideup/liiklus).
 
