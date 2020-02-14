@@ -20,7 +20,7 @@ kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/proje
 
 ## Deployers
 
-### create a deployer
+### Create a deployer
 
 We need a function to use for the deployer. We create a function named `square` that can be used for our deployer.
 
@@ -55,9 +55,9 @@ NAME     TYPE       REF      URL                                       STATUS   
 square   function   square   http://square.default.svc.cluster.local   Ready    75s
 ```
 
-### call the workload
+### Call the workload
 
-How to invoke the function depends on the type of cluster and how it was configured. After getting the host set it as `HOST` and then pick the `INGRESS` definition that is appropriate for the cluster.
+Set `HOST`, and `INGRESS` as appropriate for the cluster.
 
 ```sh
 # from URL shown with `riff knative deployer list`
@@ -66,16 +66,19 @@ HOST=square.default.example.com
 # for clusters with a custom domain
 INGRESS=$HOST
 
-# for clusters with LoadBalancer services (like GKE)
+# for clusters with LoadBalancer services like GKE
 INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-# for clusters with NodePort services (like Minikube and Docker Desktop)
-INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+# for Minikube
+INGRESS=$(minikube ip):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+
+# for Docker Desktop
+INGRESS=localhost:$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
 
-#### make the request
+#### Make the request
 
 ```sh
 curl $INGRESS -v -w '\n' -H "Host: $HOST" \
@@ -109,7 +112,7 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 
 When done invoking the deployer, terminate the port-forward tunnel.
 
-### cleanup
+### Cleanup
 
 Delete the deployer when done with the function. Since the core runtime does not scale-to-zero, the workload will continue running until deleted.
 

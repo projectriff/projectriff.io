@@ -14,7 +14,7 @@ If the cluster supports LoadBalancer services, it is recommended to [setup a cus
 
 ## Deployers
 
-### create a deployer
+### Create a deployer
 
 Assuming a function named `square` is available, create a knative deployer referencing the square function.
 
@@ -40,9 +40,9 @@ NAME     TYPE       REF      URL                                 STATUS   AGE
 square   function   square   http://square.default.example.com   Ready    57s
 ```
 
-### call the workload
+### Call the workload
 
-How to invoke the function depends on the type of cluster and how it was configured. After getting the host set it as `HOST` and then pick the `INGRESS` definition that is appropriate for the cluster.
+Set `HOST`, and `INGRESS` as appropriate for the cluster.
 
 ```sh
 # from URL shown with `riff knative deployer list`
@@ -51,16 +51,19 @@ HOST=square.default.example.com
 # for clusters with a custom domain
 INGRESS=$HOST
 
-# for clusters with LoadBalancer services (like GKE)
+# for clusters with LoadBalancer services like GKE
 INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-# for clusters with NodePort services (like Minikube and Docker Desktop)
-INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+# for Minikube
+INGRESS=$(minikube ip):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+
+# for Docker Desktop
+INGRESS=localhost:$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
 
-#### make the request
+#### Make the request
 
 ```sh
 curl $INGRESS -v -w '\n' -H "Host: $HOST" \
@@ -92,7 +95,7 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 49
 ```
 
-### cleanup
+### Cleanup
 
 Delete the deployer when done with the function. While Knative will automatically scale the workload to zero after a period of inactivity, it's still a good idea to cleanup resources when no longer needed.
 
