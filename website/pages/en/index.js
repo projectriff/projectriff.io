@@ -59,7 +59,7 @@ class Index extends React.Component {
             content: `
 riff is an Open Source platform for building and running Functions, Applications, and Containers on [Kubernetes](https://kubernetes.io/). To get started running your own functions on riff, see our [Docs](/docs).
 
-This project is sponsored by [Pivotal](https://pivotal.io)
+This project is sponsored by [VMware](https://www.vmware.com)
 `,
             image: `${baseUrl}img/riff-logo.png`,
             imageAlign: 'left'
