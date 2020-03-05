@@ -64,7 +64,7 @@ class Footer extends React.Component {
           <a href="https://www.netlify.com">Deployed by Netlify</a>
         </section>
         <section className="copyright">
-          Copyright © {new Date().getFullYear()} Pivotal Software, Inc. All Rights Reserved.
+          Copyright © {new Date().getFullYear()} VMware, Inc
         </section>
       </footer>
     );
