@@ -43,28 +43,28 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>Community</h5>
+            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
             <a href="https://github.com/projectriff/">GitHub</a>
+            <a href="https://knative.dev/" target="_blank" rel="noopener">Knative</a>
             <a
               href="https://twitter.com/projectriff"
               target="_blank"
               rel="noreferrer noopener">
               Twitter
             </a>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
           </div>
           <div>
             <h5>More</h5>
-            <a href="https://pivotal.io/platform/pivotal-function-service" target="_blank">Pivotal Function Service</a>
-            <a href="https://pivotal.io/privacy-policy" target="_blank">Privacy Policy</a>
-            <a href="https://pivotal.io/legal" target="_blank">Terms of Use</a>
-            <a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank">Code of Conduct</a>
+            <a href="https://www.vmware.com/help/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+            <a href="https://www.vmware.com/help/legal.html" target="_blank" rel="noopener">Terms of Use</a>
+            <a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank" rel="noopener">Code of Conduct</a>
           </div>
         </section>
         <section className="copyright">
           <a href="https://www.netlify.com">Deployed by Netlify</a>
         </section>
         <section className="copyright">
-          Copyright © {new Date().getFullYear()} Pivotal Software, Inc. All Rights Reserved.
+          Copyright © {new Date().getFullYear()} VMware, Inc
         </section>
       </footer>
     );
