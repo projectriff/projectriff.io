@@ -6,6 +6,8 @@ sidebar_label: Docker for Windows
 
 The following will help you get started running a riff function with Knative on Docker Community Edition for Windows.
 
+To get started with streaming or with the core runtime, follow these steps first, and then continue with the [Streaming](../runtimes/streaming) or [Core](../runtimes/core) runtime docs. Runtimes can be used separately or together.
+
 ## Install Docker
 
 v0.5 of riff requires Kubernetes v1.15 or later. Docker Desktop requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings) on Windows 10 Pro.

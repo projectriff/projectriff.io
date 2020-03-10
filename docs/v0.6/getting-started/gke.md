@@ -6,6 +6,8 @@ sidebar_label: GKE
 
 The following will help you get started running a riff function on GKE.
 
+To get started with streaming or with the core runtime, follow these steps first, and then continue with the [Streaming](../runtimes/streaming) or [Core](../runtimes/core) runtime docs. Runtimes can be used separately or together.
+
 ## Create a Google Cloud project
 
 A project is required to consume any Google Cloud services, including GKE clusters. When you log into the [console](https://console.cloud.google.com/) you can select or create a project from the dropdown at the top. 
