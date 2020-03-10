@@ -6,6 +6,8 @@ sidebar_label: Docker for Mac
 
 The following will help you get started running a riff function with Knative on Docker Desktop for Mac.
 
+To get started with streaming or with the core runtime, follow these steps first, and then continue with the [Streaming](../runtimes/streaming) or [Core](../runtimes/core) runtime docs. Runtimes can be used separately or together.
+
 ## Install Docker
 
 v0.6 of riff requires Kubernetes v1.15 or later.

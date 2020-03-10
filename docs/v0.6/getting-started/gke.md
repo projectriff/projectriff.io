@@ -4,7 +4,9 @@ title: Getting started on GKE
 sidebar_label: GKE
 ---
 
-The following will help you get started running a riff function on GKE.
+The following will help you get started running a riff function with Knative on GKE.
+
+To get started with streaming or with the core runtime, follow these steps first, and then continue with the [Streaming](../runtimes/streaming) or [Core](../runtimes/core) runtime docs. Runtimes can be used separately or together.
 
 ## Create a Google Cloud project
 
