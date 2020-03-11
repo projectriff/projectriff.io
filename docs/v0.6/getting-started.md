@@ -4,7 +4,8 @@ title: Pick your environment
 sidebar_label: Pick your environment
 ---
 
-> To get started with riff [release v0.5.x](../v0.5/getting-started), use the version picker in the navbar on the left.
+> This is the documentation for v0.6.x (snapshot).
+> See [v0.5.x](../v0.5/getting-started) or earlier versions in the navigation bar.
 
 While riff should work in any certified Kubernetes environment, we actively test with these environments:
 
