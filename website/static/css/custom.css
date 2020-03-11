@@ -86,7 +86,8 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
   padding-bottom: 0;
 }
 #blogTopPost .postContent {
-  padding-left: 2em;
+  max-width: 800px;
+  margin: auto;
 }
 #blogTopPost h1 a {
   font-size: 24px;
@@ -97,4 +98,9 @@ from https://github.com/facebook/flux/blob/abb5c0c43fa6d7c017ebef613776c3fd91db5
 .navGroups > .navGroup:first-of-type > .navGroupCategoryTitle {
   font-size: 15px;
   border-bottom:solid 1px #555;
+}
+
+/* hide weird v0.3 "previous" button on getting-started pages */
+.docs-prev[href$="v0.3"] {
+  display: none;
 }

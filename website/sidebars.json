@@ -6,17 +6,11 @@
       "v0.6/versions/v0.3"
     ],
     "Getting Started": [
-      {
-        "type": "subcategory",
-        "label": "Install",
-        "ids": [
-          "v0.6/getting-started",
-          "v0.6/getting-started/gke",
-          "v0.6/getting-started/minikube",
-          "v0.6/getting-started/docker-for-mac",
-          "v0.6/getting-started/docker-for-windows"
-        ]
-      }
+      "v0.6/getting-started",
+      "v0.6/getting-started/gke",
+      "v0.6/getting-started/minikube",
+      "v0.6/getting-started/docker-for-mac",
+      "v0.6/getting-started/docker-for-windows"
     ],
     "Runtimes": [
       "v0.6/runtimes/core",
@@ -159,17 +153,11 @@
       "v0.5/versions/v0.3"
     ],
     "Getting Started": [
-      {
-        "type": "subcategory",
-        "label": "Install",
-        "ids": [
-          "v0.5/getting-started",
-          "v0.5/getting-started/gke",
-          "v0.5/getting-started/minikube",
-          "v0.5/getting-started/docker-for-mac",
-          "v0.5/getting-started/docker-for-windows"
-        ]
-      }
+      "v0.5/getting-started",
+      "v0.5/getting-started/gke",
+      "v0.5/getting-started/minikube",
+      "v0.5/getting-started/docker-for-mac",
+      "v0.5/getting-started/docker-for-windows"
     ],
     "Runtimes": [
       "v0.5/runtimes/core",
@@ -312,17 +300,11 @@
       "v0.4/versions/v0.3"
     ],
     "Getting Started": [
-      {
-        "type": "subcategory",
-        "label": "Install",
-        "ids": [
-          "v0.4/getting-started",
-          "v0.4/getting-started/gke",
-          "v0.4/getting-started/minikube",
-          "v0.4/getting-started/docker-for-mac",
-          "v0.4/getting-started/docker-for-windows"
-        ]
-      }
+      "v0.4/getting-started",
+      "v0.4/getting-started/gke",
+      "v0.4/getting-started/minikube",
+      "v0.4/getting-started/docker-for-mac",
+      "v0.4/getting-started/docker-for-windows"
     ],
     "Runtimes": [
       "v0.4/runtimes/core",
@@ -410,17 +392,11 @@
       "v0.3/versions/v0.4"
     ],
     "Getting Started": [
-      {
-        "type": "subcategory",
-        "label": "Install",
-        "ids": [
-          "v0.3/getting-started",
-          "v0.3/getting-started/gke",
-          "v0.3/getting-started/minikube",
-          "v0.3/getting-started/docker-for-mac",
-          "v0.3/getting-started/docker-for-windows"
-        ]
-      }
+      "v0.3/getting-started",
+      "v0.3/getting-started/gke",
+      "v0.3/getting-started/minikube",
+      "v0.3/getting-started/docker-for-mac",
+      "v0.3/getting-started/docker-for-windows"
     ],
     "CLI Reference": [
       "v0.3/cli/riff",
