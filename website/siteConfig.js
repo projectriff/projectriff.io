@@ -34,6 +34,7 @@ const siteConfig = {
     {doc: 'v0.5/getting-started', label: 'Docs'},
     {blog: true, label: 'Blog'},
     {href: 'https://github.com/projectriff', label: 'GitHub', external: true},
+    {href: 'https://slack.projectriff.io', label: 'Slack', external: true},
   ],
 
   headerIcon: 'img/riff-white.svg',

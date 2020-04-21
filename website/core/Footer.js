@@ -45,6 +45,7 @@ class Footer extends React.Component {
             <h5>Community</h5>
             <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
             <a href="https://github.com/projectriff/">GitHub</a>
+            <a href="https://slack.projectriff.io">Slack</a>
             <a href="https://knative.dev/" target="_blank" rel="noopener">Knative</a>
             <a
               href="https://twitter.com/projectriff"
