@@ -4,65 +4,71 @@ title: Getting started on kind
 sidebar_label: kind
 ---
 
-The following will help you get started running a riff function with Knative on [kind](https://kind.sigs.k8s.io/), a tool for running local Kubernetes clusters using Docker container “nodes”. 
+The following will help you get started running a riff function with Knative on [kind](https://kind.sigs.k8s.io/), a tool for running local Kubernetes clusters using Docker container “nodes”.
+
+To get started with streaming or with the core runtime, follow these steps first, and then continue with the [Streaming](../runtimes/streaming) or [Core](../runtimes/core) runtime docs. Runtimes can be used separately or together.
 
 ### Prerequisites
-These instructions assume that you are running recent versions of [go](https://golang.org/) and [docker](https://docs.docker.com/install/).
-You will also need a version of the kubectl CLI at least as recent as the kind node (v1.15.3).
 
-To install from released builds, see the [kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start).
+These instructions assume that you are running recent versions of [docker](https://docs.docker.com/install/) and [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+### Install
+
+Install kind using one of the methods in the [kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start) docs.
 
 ### Resize the VM and disable built-in Kubernetes
 
 If you are running Docker on macOS or Windows, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with at least 5GB of memory and 4 CPUs. Also, make sure that you don't have Kubernetes enabled. Click on Apply & Restart.
 
-### Install kind
+### kind-config.yaml
 
-```sh
-GO111MODULE="on" go get sigs.k8s.io/kind@v0.5.1 && kind create cluster
+Create a `kind-config.yaml` file for your kind cluster with extra port mappings as described in the [kind Ingress](https://kind.sigs.k8s.io/docs/user/ingress/#create-cluster) docs.
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+        authorization-mode: "AlwaysAllow"
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 443
+    protocol: TCP
 ```
-
-This will download dependencies and build the kind CLI.
 
 ### Create a cluster
 
+Use the `kind-config.yaml` to create a cluster. This will download the required images, run the components, and set your kubectl context to `kind-kind`.
+
 ```sh
-kind create cluster
+kind create cluster --config=kind-config.yaml
 ```
 ```
 Creating cluster "kind" ...
- ✓ Ensuring node image (kindest/node:v1.15.3) 🖼 
- ✓ Preparing nodes 📦 
- ✓ Creating kubeadm config 📜 
+ ✓ Ensuring node image (kindest/node:v1.17.0) 🖼 
+ ✓ Preparing nodes 📦  
+ ✓ Writing configuration 📜 
  ✓ Starting control-plane 🕹️ 
  ✓ Installing CNI 🔌 
  ✓ Installing StorageClass 💾 
-Cluster creation complete. You can now use the cluster with:
-
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl cluster-info
+Set kubectl context to "kind-kind"
 ```
 
-### Configure kubectl
-
-```sh
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-kubectl cluster-info
-```
-```
-Kubernetes master is running at https://127.0.0.1:56252
-KubeDNS is running at https://127.0.0.1:56252/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-```
-
-Confirm that your kubectl context is pointing to the kind cluster  
-
+Confirm that your kubectl context is pointing to the kind cluster
 ```sh
 kubectl config current-context
 ```
 ```
-kubernetes-admin@kind
+kind-kind
 ```
 
 ### Monitor your cluster
@@ -79,74 +85,130 @@ Watch pods in a separate terminal.
 watch -n 1 kubectl get pod --all-namespaces
 ```
 
-## Install Helm
+## Install kapp
 
-[Helm](https://helm.sh) is a popular package manager for Kubernetes. The riff runtime and its dependencies are provided as Helm charts.
+[kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
-Download a recent release of the [Helm v2 CLI](https://github.com/helm/helm/releases/) for your platform.
-(Download version 2.13 or later, Helm v3 is currently pre-release and has not been tested for compatibility with riff).
-Unzip and copy the Helm CLI executable to a directory on your path.
+You install kapp using Homebrew:
 
-Initialize the Helm Tiller server in your cluster.
 ```sh
-kubectl create serviceaccount tiller -n kube-system
-kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount kube-system:tiller
-helm init --wait --service-account tiller
+brew tap k14s/tap
+brew install kapp
 ```
+
+Alternatively, Download a recent binary for your platform from [github](https://github.com/k14s/kapp/releases).
+Move it into a directory on your path, and make it executable.
+Complete kapp installation instructions can be found [here](https://k14s.io/#install-from-github-release)
 
 Validate the installation.
+
 ```sh
-helm version
-```
-```
-Client: &version.Version{SemVer:"v2.16.1", GitCommit:"bbdfe5e7803a12bbdf97e94cd847859890cf4050", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.16.1", GitCommit:"bbdfe5e7803a12bbdf97e94cd847859890cf4050", GitTreeState:"clean"}
+kapp version
 ```
 
-> NOTE: Please see the [Helm documentation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) for additional Helm security configuration.
+```
+Client Version: 0.24.0
 
-## Build the riff CLI
+Succeeded
+```
 
-Clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will also require a recent [go](https://golang.org/doc/install#install) build environment.
+## Install ytt
 
-Check that the riff CLI version is 0.5.0-snapshot.
+[ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
+
+You install ytt using Homebrew:
+
+```sh
+brew tap k14s/tap
+brew install ytt
+```
+
+Alternatively, Download a recent binary for your platform from [github](https://github.com/k14s/ytt/releases).
+Move it into a directory on your path, and make it executable.
+Complete ytt installation instructions can be found [here](https://k14s.io/#install-from-github-release)
+
+Validate the installation.
+
+```sh
+ytt version
+```
+
+```
+Version: 0.27.1
+```
+
+## Install a snapshot build of the riff CLI
+
+A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-darwin-amd64.tgz) can be downloaded from GCS.
+
+Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
+
+Check that the riff CLI version is 0.6.0-snapshot.
+
 ```sh
 riff --version
 ```
+
 ```
-riff version 0.5.0-snapshot (bc2a320058560d08b5b4681240ca1a02d4599017)
+riff version 0.6.0-snapshot (9e28d51979dcff085ea6e219de5933ff5f0fc93c)
 ```
 
-## Install riff using Helm
-
-Load the projectriff charts
-
-```sh
-helm repo add projectriff https://projectriff.storage.googleapis.com/charts/releases
-helm repo update
-```
+## Install riff Using kapp
 
 riff can be installed with optional runtimes. The riff build system is always installed, and is required by each runtime.
 
-If using the Knative runtime, first install Istio:
+> NOTE: If you have riff v0.4.0 installed then you must first uninstall that version. See [instructions](../../v0.4/getting-started/docker-for-mac.md#uninstalling) in the v0.4.0 documentation.
+
+Create a namespace for kapp to store configuration:
 
 ```sh
-helm install projectriff/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.type=NodePort --wait --devel
+kubectl create ns apps
 ```
 
-Install riff with both the Core and Knative runtimes. To omit or include other runtimes, edit the relevant lines below.
+### install riff Build
+
+To install riff build and it's dependencies:
 
 ```sh
-helm install projectriff/riff --name riff \
-  --set tags.core-runtime=true \
-  --set tags.knative-runtime=true \
-  --set tags.streaming-runtime=false \
-  --wait --devel
+kapp deploy -n apps -a cert-manager -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/cert-manager.yaml
 ```
 
-> NOTE: After installing the Streaming runtime, configure Kafka with a [KafkaProvider](/docs/v0.5/runtimes/streaming#kafkaprovider).
+```sh
+kapp deploy -n apps -a kpack -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/kpack.yaml
+```
 
-Verify the riff install. Resources may be missing if the corresponding runtime was not installed.
+```sh
+kapp deploy -n apps -a riff-builders -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-builders.yaml
+```
+
+```sh
+kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-build.yaml
+```
+
+### install Contour ingress controller
+
+The Contour ingress controller can be used by both Knative and Core runtimes.
+
+```sh
+# ytt is used to convert the ingress service to NodePort because Docker for Mac does not support `LoadBalancer` services.
+ytt -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
+```
+
+### install riff Knative Runtime
+
+To install riff Knative Runtime and it's dependencies:
+
+```sh
+kapp deploy -n apps -a knative -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/knative.yaml
+```
+
+```sh
+kapp deploy -n apps -a riff-knative-runtime -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/riff-knative-runtime.yaml
+```
+
+### verify riff installation
+
+Resources may be missing if the corresponding runtime was not installed.
 
 ```sh
 riff doctor
@@ -154,21 +216,26 @@ riff doctor
 
 ```
 NAMESPACE     STATUS
+default       ok
 riff-system   ok
 
-RESOURCE                              READ      WRITE
-configmaps                            allowed   allowed
-secrets                               allowed   allowed
-pods                                  allowed   n/a
-pods/log                              allowed   n/a
-applications.build.projectriff.io     allowed   allowed
-containers.build.projectriff.io       allowed   allowed
-functions.build.projectriff.io        allowed   allowed
-deployers.core.projectriff.io         allowed   allowed
-processors.streaming.projectriff.io   allowed   allowed
-streams.streaming.projectriff.io      allowed   allowed
-adapters.knative.projectriff.io       allowed   allowed
-deployers.knative.projectriff.io      allowed   allowed
+RESOURCE                                    NAMESPACE     NAME       READ      WRITE
+configmaps                                  riff-system   builders   allowed   n/a
+configmaps                                  default       *          allowed   allowed
+secrets                                     default       *          allowed   allowed
+pods                                        default       *          allowed   n/a
+pods/log                                    default       *          allowed   n/a
+applications.build.projectriff.io           default       *          allowed   allowed
+containers.build.projectriff.io             default       *          allowed   allowed
+functions.build.projectriff.io              default       *          allowed   allowed
+deployers.core.projectriff.io               default       *          allowed   allowed
+processors.streaming.projectriff.io         default       *          missing   missing
+streams.streaming.projectriff.io            default       *          missing   missing
+inmemorygateways.streaming.projectriff.io   default       *          missing   missing
+kafkagateways.streaming.projectriff.io      default       *          missing   missing
+pulsargateways.streaming.projectriff.io     default       *          missing   missing
+adapters.knative.projectriff.io             default       *          allowed   allowed
+deployers.knative.projectriff.io            default       *          allowed   allowed
 ```
 
 ### apply build credentials
@@ -209,10 +276,10 @@ square   index.docker.io/$DOCKER_ID/square@sha256:ac089ca183368aa831597f94a2dbb4
 
 ## Create a Knative deployer
 
-The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Istio and Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
+The [Knative Runtime](../runtimes/knative.md) is only available on clusters with Knative installed. Knative deployers run riff workloads using Knative resources which provide auto-scaling (including scale-to-zero) based on HTTP request traffic, and routing.
 
 ```sh
-riff knative deployer create knative-square --function-ref square --tail
+riff knative deployer create knative-square --function-ref square --ingress-policy External --tail
 ```
 
 After the deployer is created, you can see the hostname by listing deployers.
@@ -220,6 +287,7 @@ After the deployer is created, you can see the hostname by listing deployers.
 ```sh
 riff knative deployer list
 ```
+
 ```
 NAME             TYPE       REF      HOST                                 STATUS   AGE
 knative-square   function   square   knative-square.default.example.com   Ready    28s
@@ -227,81 +295,95 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 
 ### invoke the function
 
-Knative configures HTTP routes on the istio-ingressgateway. Requests are routed by hostname.
+Knative uses HTTP routes via the ingress controller. Requests are routed by hostname.
 
-Look up the IP address for the kind node; you should see an address like `172.17.0.3`.
-
-```sh
-KIND_NODE_IP=$(kubectl get node -o jsonpath='{$.items[0].status.addresses[?(@.type=="InternalIP")].address}')
-echo $KIND_NODE_IP
-```
-
-Look up the nodePort for the ingressgateway; you should see a port value like `30195`.
+Look up the nodePort for the ingress gateway; you should see a port value like `30195`.
 
 ```sh
-INGRESS_PORT=$(kubectl get svc istio-ingressgateway --namespace istio-system --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+INGRESS_PORT=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_PORT
 ```
 
-Invoke the function by POSTing to the ingressgateway, passing the hostname and content-type as headers.
+Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.
 
 ```sh
-curl http://$KIND_NODE_IP:$INGRESS_PORT/ -w '\n' \
+curl http://localhost:$INGRESS_PORT/ -w '\n' \
 -H 'Host: knative-square.default.example.com' \
 -H 'Content-Type: application/json' \
 -d 7
 ```
+
 ```
 49
 ```
 
-## Create a Core deployer
-
-The [Core runtime](../runtimes/core.md) deploys riff workloads as "vanilla" Kubernetes deployments and services.
-
-```sh
-riff core deployer create k8s-square --function-ref square --tail
-```
-
-After the deployer is created, you can see the service name by listing deployers.
-
-```sh
-riff core deployers list
-```
-```
-NAME         TYPE       REF      SERVICE               STATUS   AGE
-k8s-square   function   square   k8s-square-deployer   Ready    16s
-```
-
-### invoke the function
-
-In a separate terminal, start port-forwarding to the ClusterIP service created by the deployer.
-
-```sh
-kubectl port-forward service/k8s-square-deployer 8080:80
-```
-```
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
-
-Make a POST request to invoke the function using the port assigned above.
-
-```sh
-curl http://localhost:8080/ -w '\n' \
--H 'Content-Type: application/json' \
--d 8
-```
-```
-64
-```
-
-> NOTE: unlike Knative, the Core runtime will not scale deployments down to zero.
-
-## Cleanup
+## Delete the function and deployer
 
 ```sh
 riff knative deployer delete knative-square
-riff core deployer delete k8s-square
 riff function delete square
+```
+
+## Uninstalling riff
+
+You can use the following commands to uninstall riff:
+
+### remove any riff resources
+
+```sh
+kubectl delete riff --all-namespaces --all
+```
+
+### remove riff Streaming Runtime
+
+```sh
+kapp delete -n apps -a riff-streaming-runtime
+```
+
+```sh
+kapp delete -n apps -a keda
+```
+
+### remove riff Core Runtime (if installed)
+
+```sh
+kapp delete -n apps -a riff-core-runtime
+```
+
+### remove riff Knative Runtime (if installed)
+
+```sh
+kubectl delete knative --all-namespaces --all
+```
+
+```sh
+kapp delete -n apps -a riff-knative-runtime
+```
+
+```sh
+kapp delete -n apps -a knative
+```
+
+### remove Contour
+
+```sh
+kapp delete -n apps -a contour
+```
+
+### remove riff Build
+
+```sh
+kapp delete -n apps -a riff-build
+```
+
+```sh
+kapp delete -n apps -a riff-builders
+```
+
+```sh
+kapp delete -n apps -a kpack
+```
+
+```sh
+kapp delete -n apps -a cert-manager
 ```
