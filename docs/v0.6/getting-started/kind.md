@@ -16,9 +16,9 @@ These instructions assume that you are running recent versions of [docker](https
 
 Install kind using one of the methods in the [kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start) docs.
 
-### Resize the VM and disable built-in Kubernetes
+### Resize the VM
 
-If you are running Docker on macOS or Windows, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with at least 5GB of memory and 4 CPUs. Also, make sure that you don't have Kubernetes enabled. Click on Apply & Restart.
+If you are running Docker on macOS or Windows, use the Preferences feature in the Docker menu to open Advanced settings and configure your VM with at least 5GB of memory and 4 CPUs. Click on Apply & Restart.
 
 ### kind-config.yaml
 
@@ -63,14 +63,6 @@ Creating cluster "kind" ...
 Set kubectl context to "kind-kind"
 ```
 
-Confirm that your kubectl context is pointing to the kind cluster
-```sh
-kubectl config current-context
-```
-```
-kind-kind
-```
-
 ### Monitor your cluster
 
 At this point it is useful to monitor your cluster using a utility like `watch`. To install on a Mac
@@ -89,7 +81,7 @@ watch -n 1 kubectl get pod --all-namespaces
 
 [kapp](https://get-kapp.io/) is a simple deployment tool for Kubernetes. The riff runtime and its dependencies are provided as standard Kubernetes yaml files, that can be installed with kapp.
 
-You install kapp using Homebrew:
+You install kapp using Homebrew on MacOS:
 
 ```sh
 brew tap k14s/tap
@@ -116,7 +108,7 @@ Succeeded
 
 [ytt](https://get-ytt.io/) is a tool for templating yaml. It can be used to apply changes to the distributed Kubernetes yamls files used to install riff.
 
-You install ytt using Homebrew:
+You install ytt using Homebrew on MacOS:
 
 ```sh
 brew tap k14s/tap
@@ -139,7 +131,7 @@ Version: 0.27.1
 
 ## Install a snapshot build of the riff CLI
 
-A recent snapshot build of the riff [CLI for macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-darwin-amd64.tgz) can be downloaded from GCS.
+Recent snapshot builds of the riff CLI for [macOS](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-darwin-amd64.tgz), [Windows](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-windows-amd64.zip), or [Linux](https://storage.cloud.google.com/projectriff/riff-cli/releases/v0.6.0-snapshot/riff-linux-amd64.tgz), can be downloaded from GCS.
 
 Alternatively, clone the [riff CLI repo](https://github.com/projectriff/cli/), and run `make build install`. This will require a recent [go build environment](https://golang.org/doc/install#install). On macOS you can use `brew install go`.
 
@@ -190,7 +182,7 @@ kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/
 The Contour ingress controller can be used by both Knative and Core runtimes.
 
 ```sh
-# ytt is used to convert the ingress service to NodePort because Docker for Mac does not support `LoadBalancer` services.
+# ytt is used to convert the ingress service to NodePort because kind does not support `LoadBalancer` services.
 ytt -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
 ```
 
@@ -300,7 +292,7 @@ Knative uses HTTP routes via the ingress controller. Requests are routed by host
 Look up the nodePort for the ingress gateway; you should see a port value like `30195`.
 
 ```sh
-INGRESS_PORT=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+INGRESS_PORT=$(kubectl get svc envoy --namespace contour-external --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_PORT
 ```
 
@@ -308,9 +300,9 @@ Invoke the function by POSTing to the ingress gateway, passing the hostname and 
 
 ```sh
 curl http://localhost:$INGRESS_PORT/ -w '\n' \
--H 'Host: knative-square.default.example.com' \
--H 'Content-Type: application/json' \
--d 7
+  -H 'Host: knative-square.default.example.com' \
+  -H 'Content-Type: application/json' \
+  -d 7
 ```
 
 ```
