@@ -350,7 +350,7 @@ Knative configures HTTP routes on the ingress controller. Requests are routed by
 Look up the Loadbalancer IP for the ingress gateway; you should see a value like `35.205.114.86`.
 
 ```sh
-INGRESS_IP=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
+INGRESS_IP=$(kubectl get svc envoy --namespace contour-external --output 'jsonpath={.status.loadBalancer.ingress[0].ip}')
 echo $INGRESS_IP
 ```
 
