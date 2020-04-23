@@ -14,7 +14,7 @@ If the cluster supports LoadBalancer services, it is recommended to [setup a cus
 
 ## Deployers
 
-### Create a deployer
+### create a deployer
 
 Assuming a function named `square` is available, create a knative deployer referencing the square function.
 
@@ -40,7 +40,7 @@ NAME     TYPE       REF      URL                                 STATUS   AGE
 square   function   square   http://square.default.example.com   Ready    57s
 ```
 
-### Call the workload
+### call the workload
 
 Set `HOST`, and `INGRESS` as appropriate for the cluster.
 
@@ -63,7 +63,7 @@ INGRESS=localhost:$(kubectl get svc -n projectcontour envoy-external -ojsonpath=
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
 
-#### Make the request
+#### make the request
 
 ```sh
 curl $INGRESS -v -w '\n' -H "Host: $HOST" \
@@ -95,7 +95,7 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 49
 ```
 
-### Cleanup
+### cleanup
 
 Delete the deployer when done with the function. While Knative will automatically scale the workload to zero after a period of inactivity, it's still a good idea to cleanup resources when no longer needed.
 
