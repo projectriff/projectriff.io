@@ -208,7 +208,7 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 <p>Knative configures HTTP routes on the ingress controller. Requests are routed by hostname.</p>
 <p>Look up the nodePort for the ingress gateway; you should see a port value like <code>30195</code>.</p>
 <pre><code class="hljs css language-sh">MINIKUBE_IP=$(minikube ip)
-INGRESS_PORT=$(kubectl get svc envoy-external  --namespace projectcontour --output <span class="hljs-string">'jsonpath={.spec.ports[?(@.port==80)].nodePort}'</span>)
+INGRESS_PORT=$(kubectl get svc envoy  --namespace contour-external --output <span class="hljs-string">'jsonpath={.spec.ports[?(@.port==80)].nodePort}'</span>)
 <span class="hljs-built_in">echo</span> <span class="hljs-variable">$MINIKUBE_IP</span>:<span class="hljs-variable">$INGRESS_PORT</span>
 </code></pre>
 <p>Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.</p>
