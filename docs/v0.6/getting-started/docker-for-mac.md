@@ -259,7 +259,7 @@ Knative uses HTTP routes via the ingress controller. Requests are routed by host
 Look up the nodePort for the ingress gateway; you should see a port value like `30195`.
 
 ```sh
-INGRESS_PORT=$(kubectl get svc envoy-external --namespace projectcontour --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+INGRESS_PORT=$(kubectl get svc envoy --namespace contour-external --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $INGRESS_PORT
 ```
 

@@ -67,10 +67,10 @@ HOST=square.default.example.com
 INGRESS=$HOST
 
 # for clusters with LoadBalancer services (like GKE)
-INGRESS=$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
+INGRESS=$(kubectl get svc -n contour-external envoy -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 # for clusters with NodePort services (like Minikube and Docker Desktop)
-INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n projectcontour envoy-external -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+INGRESS=$(kubectl get nodes -ojsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}'):$(kubectl get svc -n contour-external envoy -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
 ```
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.

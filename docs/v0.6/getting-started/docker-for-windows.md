@@ -280,7 +280,7 @@ Knative configures HTTP routes on the ingress controller. Requests are routed by
 Look up the nodePort for the ingress gateway; you should see a port value like `30086`.
 
 ```powershell
-$INGRESS_PORT = kubectl get svc envoy-external --namespace projectcontour `
+$INGRESS_PORT = kubectl get svc envoy --namespace contour-external `
   --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}'
 
 $INGRESS_PORT

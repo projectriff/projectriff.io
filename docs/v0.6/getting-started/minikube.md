@@ -271,7 +271,7 @@ Look up the nodePort for the ingress gateway; you should see a port value like `
 
 ```sh
 MINIKUBE_IP=$(minikube ip)
-INGRESS_PORT=$(kubectl get svc envoy-external  --namespace projectcontour --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+INGRESS_PORT=$(kubectl get svc envoy  --namespace contour-external --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
 echo $MINIKUBE_IP:$INGRESS_PORT
 ```
 
