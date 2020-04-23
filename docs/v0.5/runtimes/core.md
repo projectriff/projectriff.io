@@ -20,7 +20,7 @@ kapp deploy -n apps -a riff-core-runtime -f https://storage.googleapis.com/proje
 
 ## Deployers
 
-### Create a deployer
+### create a deployer
 
 We need a function to use for the deployer. We create a function named `square` that can be used for our deployer.
 
@@ -55,7 +55,7 @@ NAME     TYPE       REF      URL                                       STATUS   
 square   function   square   http://square.default.svc.cluster.local   Ready    75s
 ```
 
-### Call the workload
+### call the workload
 
 Set `HOST`, and `INGRESS` as appropriate for the cluster.
 
@@ -78,7 +78,7 @@ INGRESS=localhost:$(kubectl get svc -n projectcontour envoy-external -ojsonpath=
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.
 
-#### Make the request
+#### make the request
 
 ```sh
 curl $INGRESS -v -w '\n' -H "Host: $HOST" \
@@ -112,7 +112,7 @@ curl $INGRESS -v -w '\n' -H "Host: $HOST" \
 
 When done invoking the deployer, terminate the port-forward tunnel.
 
-### Cleanup
+### cleanup
 
 Delete the deployer when done with the function. Since the core runtime does not scale-to-zero, the workload will continue running until deleted.
 
