@@ -199,7 +199,7 @@ Create a file called `contour-hostport.yaml` with the following content:
 
 ```yaml
 #@ load("@ytt:overlay", "overlay")
-#@overlay/match by=overlay.subset({"metadata":{"name":"envoy", "namespace": "contour-external"}})
+#@overlay/match by=overlay.subset({ "apiVersion": "apps/v1", "kind": "DaemonSet", "metadata":{"name":"envoy", "namespace": "contour-external"}})
 ---
 spec:
   template:
