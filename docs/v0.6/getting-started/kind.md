@@ -351,7 +351,7 @@ riff function delete square
 
 ## Uninstalling riff
 
-You can use the following commands to uninstall riff:
+You can use the following commands to uninstall riff. Alternatively you can delete the whole cluster with `kind delete cluster`.
 
 ### remove any riff resources
 
