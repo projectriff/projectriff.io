@@ -71,10 +71,22 @@ At this point it is useful to monitor your cluster using a utility like `watch`.
 brew install watch
 ```
 
-Watch pods in a separate terminal.
+Watch pods in a separate terminal, and make sure all the services are running.
 
 ```sh
 watch -n 1 kubectl get pod --all-namespaces
+```
+```
+NAMESPACE            NAME                                         READY   STATUS    RESTARTS   AGE
+kube-system          coredns-6955765f44-8gprj                     1/1     Running   0          75s
+kube-system          coredns-6955765f44-mmddv                     1/1     Running   0          75s
+kube-system          etcd-kind-control-plane                      1/1     Running   0          90s
+kube-system          kindnet-4wjrg                                1/1     Running   0          75s
+kube-system          kube-apiserver-kind-control-plane            1/1     Running   0          90s
+kube-system          kube-controller-manager-kind-control-plane   1/1     Running   0          90s
+kube-system          kube-proxy-ltb8c                             1/1     Running   0          75s
+kube-system          kube-scheduler-kind-control-plane            1/1     Running   0          90s
+local-path-storage   local-path-provisioner-7745554f7f-hmpx4      1/1     Running   0          75s
 ```
 
 ## Install kapp
@@ -181,9 +193,38 @@ kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/
 
 The Contour ingress controller can be used by both Knative and Core runtimes.
 
+`ytt` is used to convert the ingress service to NodePort because kind does not support `LoadBalancer` services. An additional change to the configuration enables on `hostPort` networking for the `envoy` DaemonSet in the `contour-external` namespace.
+
+Create a file called `contour-hostport.yaml` with the following content:
+
+```yaml
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.subset({"metadata":{"name":"envoy", "namespace": "contour-external"}})
+---
+spec:
+  template:
+    spec:
+      containers:
+      #@overlay/match by=overlay.subset({"name":"envoy"})
+      - ports:
+        #@overlay/match by=overlay.subset({"name":"http"})
+        -
+          #@overlay/match missing_ok=True
+          hostPort: 80
+        #@overlay/match by=overlay.subset({"name":"https"})
+        -
+          #@overlay/match missing_ok=True
+          hostPort: 443
+```
+
+Run `ytt` to apply the 2 overlays (one is downloaded, one uses `contour-hostport.yaml`) and pipe the output to deploy Contour using `kapp`.
+
 ```sh
-# ytt is used to convert the ingress service to NodePort because kind does not support `LoadBalancer` services.
-ytt -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/contour.yaml -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml --file-mark contour.yaml:type=yaml-plain | kapp deploy -n apps -a contour -f - -y
+ytt -f https://storage.googleapis.com/projectriff/release/0.6.0-snapshot/contour.yaml \
+  --file-mark contour.yaml:type=yaml-plain \
+  -f https://storage.googleapis.com/projectriff/charts/overlays/service-nodeport.yaml \
+  -f contour-hostport.yaml \
+  | kapp deploy -n apps -a contour -f - -y
 ```
 
 ### install riff Knative Runtime
@@ -288,18 +329,10 @@ knative-square   function   square   knative-square.default.example.com   Ready 
 ### invoke the function
 
 Knative uses HTTP routes via the ingress controller. Requests are routed by hostname.
-
-Look up the nodePort for the ingress gateway; you should see a port value like `30195`.
-
-```sh
-INGRESS_PORT=$(kubectl get svc envoy --namespace contour-external --output 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-echo $INGRESS_PORT
-```
-
-Invoke the function by POSTing to the ingress gateway, passing the hostname and content-type as headers.
+The ingress gateway should be running on localhost port 80. Invoke the function passing the hostname and content-type as headers.
 
 ```sh
-curl http://localhost:$INGRESS_PORT/ -w '\n' \
+curl http://localhost/ -w '\n' \
   -H 'Host: knative-square.default.example.com' \
   -H 'Content-Type: application/json' \
   -d 7
