@@ -24,3 +24,7 @@ How to run riff on Docker Community Edition for Mac
 ## [Docker for Windows](getting-started/docker-for-windows.md)
 
 How to run riff on Docker Community Edition for Windows
+
+## [kind](getting-started/kind.md)
+
+How to run riff on kind

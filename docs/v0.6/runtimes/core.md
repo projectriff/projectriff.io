@@ -74,6 +74,9 @@ INGRESS=$(minikube ip):$(kubectl get svc -n contour-external envoy -ojsonpath='{
 
 # for Docker Desktop
 INGRESS=localhost:$(kubectl get svc -n contour-external envoy -ojsonpath='{.spec.ports[?(@.port==80)].nodePort}')
+
+# for kind
+INGRESS=localhost
 ```
 
 The value of `INGRESS` will be constant for the life of the cluster. Change the `HOST` value to match the deployer being targeted.

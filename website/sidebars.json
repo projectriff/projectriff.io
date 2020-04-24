@@ -10,7 +10,8 @@
       "v0.6/getting-started/gke",
       "v0.6/getting-started/minikube",
       "v0.6/getting-started/docker-for-mac",
-      "v0.6/getting-started/docker-for-windows"
+      "v0.6/getting-started/docker-for-windows",
+      "v0.6/getting-started/kind"
     ],
     "Runtimes": [
       "v0.6/runtimes/core",
