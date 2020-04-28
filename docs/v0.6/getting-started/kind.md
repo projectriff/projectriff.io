@@ -193,7 +193,7 @@ kapp deploy -n apps -a riff-build -f https://storage.googleapis.com/projectriff/
 
 The Contour ingress controller can be used by both Knative and Core runtimes.
 
-`ytt` is used to convert the ingress service to NodePort because kind does not support `LoadBalancer` services. An additional change to the configuration enables on `hostPort` networking for the `envoy` DaemonSet in the `contour-external` namespace.
+`ytt` is used to convert the ingress service to NodePort because kind does not support `LoadBalancer` services. An additional change to the configuration enables `hostPort` networking for the `envoy` DaemonSet in the `contour-external` namespace.
 
 Create a file called `contour-hostport.yaml` with the following content:
 
