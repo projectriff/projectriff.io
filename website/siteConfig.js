@@ -20,7 +20,7 @@ const siteConfig = {
   docsUrl: 'docs',
   customDocsPath: 'docs',
   docsSideNavCollapsible: true,
-  editUrl: 'https://github.com/projectriff/projectriff.io/blob/master/docs/',
+  editUrl: 'https://github.com/projectriff/projectriff.io/blob/main/docs/',
 
   // used only in pages/en/versions.js
   versions: [
