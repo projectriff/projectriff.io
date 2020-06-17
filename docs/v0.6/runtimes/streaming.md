@@ -77,7 +77,7 @@ riff streaming stream create out --gateway franz --content-type application/json
 
 Upon creation of a processor, a deployment is created that hosts both the function (with its dedicated invoker) and a sidecar container running the [streaming processor](https://github.com/projectriff).
 
-The role of the sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming [rpc protocol](https://github.com/projectriff/invoker-specification/blob/master/streaming.md). The function is invoked once per window. It is the responsibility of the _streaming processor_ sidecar to chop inputs into windows.
+The role of the sidecar is to connect to each stream, using a reactive API and invoke the function using the riff streaming [rpc protocol](https://github.com/projectriff/invoker-specification/blob/main/streaming.md). The function is invoked once per window. It is the responsibility of the _streaming processor_ sidecar to chop inputs into windows.
 
 > NOTE: The windowing function implemented by the streaming processor is currently hardcoded to create windows every minute.
 

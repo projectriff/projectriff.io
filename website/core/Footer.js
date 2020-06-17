@@ -58,7 +58,7 @@ class Footer extends React.Component {
             <h5>More</h5>
             <a href="https://www.vmware.com/help/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
             <a href="https://www.vmware.com/help/legal.html" target="_blank" rel="noopener">Terms of Use</a>
-            <a href="https://github.com/projectriff/riff/blob/master/CODE_OF_CONDUCT.adoc" target="_blank" rel="noopener">Code of Conduct</a>
+            <a href="https://github.com/projectriff/riff/blob/main/CODE_OF_CONDUCT.adoc" target="_blank" rel="noopener">Code of Conduct</a>
           </div>
         </section>
         <section className="copyright">

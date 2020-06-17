@@ -10,7 +10,7 @@ The riff CLI can be downloaded from our [releases page](https://github.com/proje
 
 ## Streaming
 
-This release introduces a new experimental streaming capability. Functions deployed using the [Streaming Runtime](/docs/v0.5/runtimes/streaming) are able to consume and produce streams of events. The Node and Java function invokers have been extended to support a new [streaming invoker specification](https://github.com/projectriff/invoker-specification/blob/master/streaming.md).
+This release introduces a new experimental streaming capability. Functions deployed using the [Streaming Runtime](/docs/v0.5/runtimes/streaming) are able to consume and produce streams of events. The Node and Java function invokers have been extended to support a new [streaming invoker specification](https://github.com/projectriff/invoker-specification/blob/main/streaming.md).
 
 Here is an example of a JavaScript streaming function interface with 2 input and 1 output stream, using the [node function invoker]().
 ```js
