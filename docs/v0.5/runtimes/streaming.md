@@ -106,7 +106,7 @@ To run dev-utils in a pod called `riff-dev` in the `default` namespace:
 ```bash
 kubectl create serviceaccount riff-dev
 kubectl create rolebinding riff-dev-edit --clusterrole=edit --serviceaccount=default:riff-dev
-kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils
+kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils:0.5.0
 ```
 
 Using separate terminal windows, subscribe to the `in` and `out` streams to observe messages on those streams.
