@@ -117,7 +117,7 @@ riff streaming stream create out --gateway franz --content-type application/json
 <p>To run dev-utils in a pod called <code>riff-dev</code> in the <code>default</code> namespace:</p>
 <pre><code class="hljs css language-bash">kubectl create serviceaccount riff-dev
 kubectl create rolebinding riff-dev-edit --clusterrole=edit --serviceaccount=default:riff-dev
-kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils
+kubectl run riff-dev --serviceaccount=riff-dev --generator=run-pod/v1 --image=projectriff/dev-utils:0.5.0
 </code></pre>
 <p>Using separate terminal windows, subscribe to the <code>in</code> and <code>out</code> streams to observe messages on those streams.</p>
 <pre><code class="hljs css language-bash">kubectl <span class="hljs-built_in">exec</span> riff-dev -it -- subscribe <span class="hljs-keyword">in</span> --payload-encoding raw
