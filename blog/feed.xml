@@ -4,7 +4,7 @@
         <title>riff is for functions Blog</title>
         <link>https://projectriff.io/blog</link>
         <description>The best place to stay up-to-date with the latest riff is for functions news and events.</description>
-        <lastBuildDate>Mon, 10 Feb 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 13 Mar 2021 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://projectriff.io/img/riff-white.svg</url>
             <link>https://projectriff.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[👋]]></title>
+            <link>https://projectriff.io/blog/2021/03/13/goodbye.html</link>
+            <guid>https://projectriff.io/blog/2021/03/13/goodbye.html</guid>
+            <pubDate>Sat, 13 Mar 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Project riff is complete. So Long, and Thanks for All the Fish</p> ]]></description>
+        </item>
         <item>
             <title><![CDATA[Announcing riff v0.5.0]]></title>
             <link>https://projectriff.io/blog/2020/02/10/announcing-riff-0-5-0.html</link>
@@ -80,18 +87,18 @@
             <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/eZ4dKU0tZEk" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
         </item>
         <item>
-            <title><![CDATA[Introduction to Knative at SpringOne Platform 2018]]></title>
-            <link>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</link>
-            <guid>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</guid>
-            <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/CylT5O6IfkU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
-        </item>
-        <item>
             <title><![CDATA[Knative and riff for Spring Developers at SpringOne Platform 2018]]></title>
             <link>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</link>
             <guid>https://projectriff.io/blog/2018/09/26/knative-and-riff-for-spring-developers.html</guid>
             <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/zCObFAhrhJM" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Introduction to Knative at SpringOne Platform 2018]]></title>
+            <link>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</link>
+            <guid>https://projectriff.io/blog/2018/09/26/introduction-to-knative.html</guid>
+            <pubDate>Wed, 26 Sep 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<figure class="video-container"> <iframe src="//www.youtube.com/embed/CylT5O6IfkU" frameborder="0" allowfullscreen width="100%"></iframe> </figure>]]></description>
         </item>
         <item>
             <title><![CDATA[Mark Fisher's Keynote at SpringOne Platform 2018]]></title>
